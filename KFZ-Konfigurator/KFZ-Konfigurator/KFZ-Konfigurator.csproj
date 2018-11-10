@@ -195,82 +195,31 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Accessory.cs">
-      <DependentUpon>AccessoryModel.tt</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccessoryCategory.cs">
-      <DependentUpon>AccessoryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccessoryModel.Context.cs">
+    <Compile Include="Models\CarConfiguratorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AccessoryModel.Context.tt</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccessoryModel.cs">
+    <Compile Include="Models\CarConfiguratorModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AccessoryModel.tt</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccessoryModel.Designer.cs">
+    <Compile Include="Models\CarConfiguratorModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AccessoryModel.edmx</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Engine.cs">
-      <DependentUpon>EngineModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EngineModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EngineModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EngineModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EngineModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EngineModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EngineModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FuelKind.cs">
-      <DependentUpon>EngineModel.tt</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Paint.cs">
-      <DependentUpon>PaintModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PaintModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PaintModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PaintModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PaintModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PaintModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PaintModel.edmx</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rim.cs">
-      <DependentUpon>RimModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RimModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RimModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RimModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RimModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RimModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RimModel.edmx</DependentUpon>
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -283,45 +232,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\AccessoryModel.Context.tt">
+    <Content Include="Models\CarConfiguratorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AccessoryModel.edmx</DependentUpon>
-      <LastGenOutput>AccessoryModel.Context.cs</LastGenOutput>
+      <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
+      <LastGenOutput>CarConfiguratorModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AccessoryModel.tt">
+    <Content Include="Models\CarConfiguratorModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AccessoryModel.edmx</DependentUpon>
-      <LastGenOutput>AccessoryModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EngineModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EngineModel.edmx</DependentUpon>
-      <LastGenOutput>EngineModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EngineModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EngineModel.edmx</DependentUpon>
-      <LastGenOutput>EngineModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PaintModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PaintModel.edmx</DependentUpon>
-      <LastGenOutput>PaintModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PaintModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PaintModel.edmx</DependentUpon>
-      <LastGenOutput>PaintModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RimModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RimModel.edmx</DependentUpon>
-      <LastGenOutput>RimModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RimModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RimModel.edmx</DependentUpon>
-      <LastGenOutput>RimModel.cs</LastGenOutput>
+      <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
+      <LastGenOutput>CarConfiguratorModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -347,33 +266,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\EngineModel.edmx">
+    <EntityDeploy Include="Models\CarConfiguratorModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EngineModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CarConfiguratorModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EngineModel.edmx.diagram">
-      <DependentUpon>EngineModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\PaintModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PaintModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PaintModel.edmx.diagram">
-      <DependentUpon>PaintModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\RimModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RimModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\RimModel.edmx.diagram">
-      <DependentUpon>RimModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\AccessoryModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AccessoryModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AccessoryModel.edmx.diagram">
-      <DependentUpon>AccessoryModel.edmx</DependentUpon>
+    <Content Include="Models\CarConfiguratorModel.edmx.diagram">
+      <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
