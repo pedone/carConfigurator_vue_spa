@@ -1,0 +1,20 @@
+Aufgabenstellung:
+Sie wurden damit beauftragt einen KFZ-Konfigurator zu entwickeln, welcher die Konfiguration eines Autos mit den folgenden Optionen ermöglicht:
+
+•             Motorleistung
+•             Lackierung
+•             Felgen
+•             Sonderausstattungen (max. 5 Stück, z.B. Klimaanlage, Soundsystem, Fahrsicherheitssysteme etc.)
+
+Jede Veränderung an der Konfiguration soll sich unmittelbar und ohne einen Page-Refresh auf den angezeigten Preis auswirken (Umsetzung nach Möglichkeit mit Knockout.js). Am Ende der Konfiguration soll eine Zusammenfassung angezeigt und die Bestellung abgesendet werden können. Zudem soll eine Url generiert werden, mit dem der Benutzer jederzeit Zugriff auf die gewählte Konfiguration hat. Sowohl die Konfigurationseigenschaften als auch die Bestellungen sind in einer SQL-Datenbank zu speichern. Als Hilfestellung zum Design und zur Benutzerführung können die zahlreichen am Markt verfügbaren Konfiguratoren als Orientierung dienen. Wünschenswert wäre eine korrekte Darstellung auf mobilen- wie auch auf Desktopgeräten (Responsive Design). Die Implementierung einer Authentifizierungs- bzw. Authorisierungslogik für Anwender ist nicht erforderlich.
+
+Technischer Rahmen:
+Entwicklung einer ASP.NET MVC Webanwendung mit Datenbankanbindung an Microsoft SQL Server.
+
+•             ASP.NET MVC / ASP.NET MVC Web API
+•             Entity Framework
+•             MSSQL Server
+•             Log4net als Logging-Komponente
+•             jQuery / Knockout.js / Underscore.js
+
+Am Ende soll die Anwendung auf Azure gehostet werden und über das Internet zur Verfügung stehen (z.B. als Azure Website). Einen Demo-Account für Azure gibt es kostenlos für 30 Tage. Darüber hinaus ist der Quellcode in Visual Studio Online zu hosten bzw. zu verwalten. Auch hierfür wird ein kostenloser Account von Microsoft angeboten.
