@@ -15,14 +15,14 @@ namespace KFZ_Konfigurator.Models
     public partial class Engine
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Performance { get; set; }
+        public int Performance { get; set; }
         public double Acceleration { get; set; }
         public double Consumption { get; set; }
         public double Price { get; set; }
         public double EngineSize { get; set; }
         public int TopSpeed { get; set; }
         public int Emission { get; set; }
-        public int FuelKind { get; set; }
+        public FuelKind FuelKind { get; set; }
+        public double Liter { get; set; }
     }
 }

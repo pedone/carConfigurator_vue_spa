@@ -12,12 +12,14 @@ namespace KFZ_Konfigurator.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Rim
+    public partial class Car
     {
         public int Id { get; set; }
-        public double Price { get; set; }
-        public RimBrandKind Brand { get; set; }
-        public int Size { get; set; }
-        public string Color { get; set; }
+        public string Model { get; set; }
+        public double BasePrice { get; set; }
+        public int Year { get; set; }
+        public CarBrandKind Brand { get; set; }
+        public WheelDriveKind WheelDrive { get; set; }
+        public BodyKind BodyType { get; set; }
     }
 }

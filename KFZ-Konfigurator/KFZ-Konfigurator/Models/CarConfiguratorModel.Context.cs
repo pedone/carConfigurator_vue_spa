@@ -13,10 +13,10 @@ namespace KFZ_Konfigurator.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CarConfiguratorEntities : DbContext
+    public partial class CarConfiguratorEntityContext : DbContext
     {
-        public CarConfiguratorEntities()
-            : base("name=CarConfiguratorEntities")
+        public CarConfiguratorEntityContext()
+            : base("name=CarConfiguratorEntityContext")
         {
         }
     
@@ -29,5 +29,6 @@ namespace KFZ_Konfigurator.Models
         public virtual DbSet<Engine> Engines { get; set; }
         public virtual DbSet<Paint> Paints { get; set; }
         public virtual DbSet<Rim> Rims { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
     }
 }

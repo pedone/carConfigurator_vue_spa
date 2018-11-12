@@ -10,14 +10,15 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Rim
+    public enum AccessoryCategory : int
     {
-        public int Id { get; set; }
-        public double Price { get; set; }
-        public RimBrandKind Brand { get; set; }
-        public int Size { get; set; }
-        public string Color { get; set; }
+        Transport = 0,
+        Interior = 1,
+        Exterior = 2,
+        Entertainment = 3,
+        Navigation = 4,
+        Assistence = 5,
+        Driving = 6
     }
 }

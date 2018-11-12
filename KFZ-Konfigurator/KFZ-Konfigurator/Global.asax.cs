@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KFZ_Konfigurator.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,9 @@ namespace KFZ_Konfigurator
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // init db
+            SeedData.Initialize();
         }
     }
 }

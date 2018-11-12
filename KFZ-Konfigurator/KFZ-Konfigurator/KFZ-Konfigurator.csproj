@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -194,7 +195,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Models\Accessory.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccessoryCategory.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BodyKind.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Car.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarBrandKind.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarConfiguratorModel.Context.cs">
@@ -215,10 +229,21 @@
     <Compile Include="Models\Engine.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FuelKind.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Paint.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Models\Rim.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RimBrandKind.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeedData.cs" />
+    <Compile Include="Models\WheelDriveKind.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,14 +10,14 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Rim
+    public enum BodyKind : int
     {
-        public int Id { get; set; }
-        public double Price { get; set; }
-        public RimBrandKind Brand { get; set; }
-        public int Size { get; set; }
-        public string Color { get; set; }
+        Saloon = 0,
+        Cabrio = 1,
+        Hatchback = 2,
+        Estate = 3,
+        Coupe = 4,
+        SUV = 5
     }
 }

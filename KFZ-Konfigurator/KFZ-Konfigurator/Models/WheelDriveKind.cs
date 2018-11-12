@@ -10,14 +10,11 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Rim
+    public enum WheelDriveKind : int
     {
-        public int Id { get; set; }
-        public double Price { get; set; }
-        public RimBrandKind Brand { get; set; }
-        public int Size { get; set; }
-        public string Color { get; set; }
+        Front = 0,
+        Rear = 1,
+        All = 2
     }
 }
