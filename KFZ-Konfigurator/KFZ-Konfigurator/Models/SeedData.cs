@@ -9,6 +9,9 @@ namespace KFZ_Konfigurator.Models
 {
     public static class SeedData
     {
+
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SeedData));
+
         private static class CarData
         {
             public static IntRange BasePriceRange { get; } = new IntRange { Min = 17500, Max = 42300 };
@@ -80,19 +83,34 @@ namespace KFZ_Konfigurator.Models
             using (var context = new CarConfiguratorEntityContext())
             {
                 if (!context.Cars.Any())
+                {
+                    Log.Info("adding car seed data");
                     context.Cars.AddRange(Generate(newCarFunc, 10).Distinct());
+                }
 
                 if (!context.Engines.Any())
+                {
+                    Log.Info("adding engine seed data");
                     context.Engines.AddRange(Generate(newEngineFunc, 15).Distinct());
+                }
 
                 if (!context.Rims.Any())
+                {
+                    Log.Info("adding rim seed data");
                     context.Rims.AddRange(Generate(newRimFunc, 15).Distinct());
+                }
 
                 if (!context.Paints.Any())
+                {
+                    Log.Info("adding paint seed data");
                     context.Paints.AddRange(GeneratePaints());
+                }
 
                 if (!context.Accessories.Any())
+                {
+                    Log.Info("adding accessory seed data");
                     context.Accessories.AddRange(GenerateAccessories());
+                }
 
                 if (context.ChangeTracker.HasChanges())
                     context.SaveChanges();
