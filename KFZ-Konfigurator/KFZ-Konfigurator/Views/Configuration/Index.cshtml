@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.CarViewModel>
+
+@{
+    Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
+    ViewBag.Title = "Configurator";
+}
+
+<h2>Choose your model</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-sm-4">
+            <div class="card-header">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Model)</h5>
+                <h6 class="card-subtitle">@Html.DisplayNameFor(model => model.BasePrice): @Html.DisplayFor(modelItem => item.BasePrice)</h6>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(modelItem => item.BodyType)
+                </div>
+                <div class="card-text">
+                    @Html.DisplayNameFor(model => model.WheelDrive): @Html.DisplayFor(modelItem => item.WheelDrive)
+                </div>
+                @Html.ActionLink("Select", "Model", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>

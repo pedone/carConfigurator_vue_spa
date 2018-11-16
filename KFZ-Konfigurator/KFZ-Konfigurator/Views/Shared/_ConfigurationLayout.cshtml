@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@RenderBody()
+
+@section configurationHeader{
+    <div class="bg-light">
+        <div class="container">
+            <img src="~/Resources/Images/carConfiguration.png" class="img-fluid" />
+        </div>
+    </div>
+    <nav class="navbar bg-dark navbar-dark navbar-expand-md">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle" aria-controls="">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarToggleContent">
+                <div class="navbar-nav">
+                    @Html.ActionLink("Model", "Index", null, new { @class = "nav-item nav-link active" })
+                    @Html.ActionLink("Home", "Index", null, new { @class = "nav-item nav-link" })
+                </div>
+            </div>
+        </div>
+    </nav>
+}
