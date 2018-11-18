@@ -7,9 +7,14 @@ using System.Web;
 
 namespace KFZ_Konfigurator.Models
 {
+
+    public abstract class BaseSeedData<T>
+    {
+        public abstract IEnumerable<T> GetData();
+    }
+
     public static class SeedData
     {
-
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SeedData));
 
         private static class CarData
@@ -52,7 +57,6 @@ namespace KFZ_Konfigurator.Models
             Year = CarData.YearRange.GetRandom(),
             BodyType = MathHelper.RandomEnum<BodyKind>(),
             Brand = MathHelper.RandomEnum<CarBrandKind>(),
-            WheelDrive = MathHelper.RandomEnum<WheelDriveKind>()
         };
 
         private static readonly Func<int, Engine> newEngineFunc = (int id) => new Engine
@@ -65,7 +69,6 @@ namespace KFZ_Konfigurator.Models
             Performance = EngineData.PerformanceRange.GetRandom(),
             Price = EngineData.PriceRange.GetRandom(),
             TopSpeed = EngineData.TopSpeedRange.GetRandom(),
-            FuelKind = MathHelper.RandomEnum<FuelKind>(),
             Liter = MathHelper.RandomItem(EngineData.LiterOptions)
         };
 
@@ -91,7 +94,7 @@ namespace KFZ_Konfigurator.Models
                 if (!context.Engines.Any())
                 {
                     Log.Info("adding engine seed data");
-                    context.Engines.AddRange(Generate(newEngineFunc, 15).Distinct());
+                    context.Engines.AddRange(EngineSeedData.Data);
                 }
 
                 if (!context.Rims.Any())

@@ -4,69 +4,70 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CarConfiguratorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Accessory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-          <Property Name="Category" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Car">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="BasePrice" Type="float" Nullable="false" />
-          <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="Brand" Type="int" Nullable="false" />
-          <Property Name="WheelDrive" Type="int" Nullable="false" />
-          <Property Name="BodyType" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Engine">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Liter" Type="float" Nullable="false" />
-          <Property Name="Performance" Type="int" Nullable="false" />
-          <Property Name="Acceleration" Type="float" Nullable="false" />
-          <Property Name="Consumption" Type="float" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-          <Property Name="EngineSize" Type="float" Nullable="false" />
-          <Property Name="TopSpeed" Type="int" Nullable="false" />
-          <Property Name="Emission" Type="int" Nullable="false" />
-          <Property Name="FuelKind" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Paint">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Rim">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-          <Property Name="Brand" Type="int" Nullable="false" />
-          <Property Name="Size" Type="int" Nullable="false" />
-          <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="CarConfiguratorModelStoreContainer">
-          <EntitySet Name="Accessory" EntityType="Self.Accessory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Engine" EntityType="Self.Engine" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Paint" EntityType="Self.Paint" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rim" EntityType="Self.Rim" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="CarConfiguratorModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CarConfiguratorModelStoreContainer">
+    <EntitySet Name="Accessories" EntityType="CarConfiguratorModel.Store.Accessories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Store.Engines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Paints" EntityType="CarConfiguratorModel.Store.Paints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rims" EntityType="CarConfiguratorModel.Store.Rims" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cars" EntityType="CarConfiguratorModel.Store.Cars" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Accessories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Category" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Engines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Performance" Type="int" Nullable="false" />
+    <Property Name="Acceleration" Type="float" Nullable="false" />
+    <Property Name="Consumption" Type="float" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="EngineSize" Type="float" Nullable="false" />
+    <Property Name="TopSpeed" Type="int" Nullable="false" />
+    <Property Name="Emission" Type="int" Nullable="false" />
+    <Property Name="Liter" Type="float" Nullable="false" />
+    <Property Name="EngineKind" Type="int" Nullable="false" />
+    <Property Name="Gears" Type="int" Nullable="false" />
+    <Property Name="WheelDrive" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Paints">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Brand" Type="int" Nullable="false" />
+    <Property Name="Size" Type="int" Nullable="false" />
+    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BasePrice" Type="float" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Brand" Type="int" Nullable="false" />
+    <Property Name="BodyType" Type="int" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarConfiguratorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -91,8 +92,10 @@
           <Property Name="EngineSize" Type="Double" Nullable="false" />
           <Property Name="TopSpeed" Type="Int32" Nullable="false" />
           <Property Name="Emission" Type="Int32" Nullable="false" />
-          <Property Name="FuelKind" Type="CarConfiguratorModel.FuelKind" Nullable="false" />
           <Property Name="Liter" Type="Double" Nullable="false" />
+          <Property Name="EngineKind" Type="CarConfiguratorModel.EngineKind" Nullable="false" />
+          <Property Name="Gears" Type="Int32" Nullable="false" />
+          <Property Name="WheelDrive" Type="CarConfiguratorModel.WheelDriveKind" Nullable="false" />
         </EntityType>
         <EntityType Name="Paint">
           <Key>
@@ -141,7 +144,6 @@
           <Property Name="BasePrice" Type="Double" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="Brand" Type="CarConfiguratorModel.CarBrandKind" Nullable="false" />
-          <Property Name="WheelDrive" Type="CarConfiguratorModel.WheelDriveKind" Nullable="false" />
           <Property Name="BodyType" Type="CarConfiguratorModel.BodyKind" Nullable="false" />
         </EntityType>
         <EnumType Name="WheelDriveKind">
@@ -186,74 +188,78 @@
           <Member Name="ION" />
           <Member Name="Oxgord" />
         </EnumType>
+        <EnumType Name="EngineKind">
+          <Member Name="TFSI" />
+          <Member Name="TDI" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CarConfiguratorModelStoreContainer" CdmEntityContainer="CarConfiguratorEntityContext">
-          <EntitySetMapping Name="Engines">
-            <EntityTypeMapping TypeName="CarConfiguratorModel.Engine">
-              <MappingFragment StoreEntitySet="Engine">
-                <ScalarProperty Name="Liter" ColumnName="Liter" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Performance" ColumnName="Performance" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Consumption" ColumnName="Consumption" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
-                <ScalarProperty Name="TopSpeed" ColumnName="TopSpeed" />
-                <ScalarProperty Name="Emission" ColumnName="Emission" />
-                <ScalarProperty Name="FuelKind" ColumnName="FuelKind" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Paints">
-            <EntityTypeMapping TypeName="CarConfiguratorModel.Paint">
-              <MappingFragment StoreEntitySet="Paint">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cars">
-            <EntityTypeMapping TypeName="CarConfiguratorModel.Car">
-              <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
-                <ScalarProperty Name="WheelDrive" ColumnName="WheelDrive" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Accessories">
-            <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Accessory)">
-              <MappingFragment StoreEntitySet="Accessory">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rims">
-            <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Rim)">
-              <MappingFragment StoreEntitySet="Rim">
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarConfiguratorModelStoreContainer" CdmEntityContainer="CarConfiguratorEntityContext">
+    <EntitySetMapping Name="Accessories">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Accessory)">
+        <MappingFragment StoreEntitySet="Accessories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Engines">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Engine)">
+        <MappingFragment StoreEntitySet="Engines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+          <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+          <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="TopSpeed" ColumnName="TopSpeed" />
+          <ScalarProperty Name="Emission" ColumnName="Emission" />
+          <ScalarProperty Name="Liter" ColumnName="Liter" />
+          <ScalarProperty Name="EngineKind" ColumnName="EngineKind" />
+          <ScalarProperty Name="Gears" ColumnName="Gears" />
+          <ScalarProperty Name="WheelDrive" ColumnName="WheelDrive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paints">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Paint)">
+        <MappingFragment StoreEntitySet="Paints">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rims">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Rim)">
+        <MappingFragment StoreEntitySet="Rims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Car)">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -267,7 +273,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

@@ -10,15 +10,10 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Car
+    public enum EngineKind : int
     {
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public double BasePrice { get; set; }
-        public int Year { get; set; }
-        public CarBrandKind Brand { get; set; }
-        public BodyKind BodyType { get; set; }
+        TFSI = 0,
+        TDI = 1
     }
 }

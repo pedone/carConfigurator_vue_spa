@@ -22,7 +22,9 @@ namespace KFZ_Konfigurator.Models
         public double EngineSize { get; set; }
         public int TopSpeed { get; set; }
         public int Emission { get; set; }
-        public FuelKind FuelKind { get; set; }
         public double Liter { get; set; }
+        public EngineKind EngineKind { get; set; }
+        public int Gears { get; set; }
+        public WheelDriveKind WheelDrive { get; set; }
     }
 }

@@ -15,6 +15,17 @@ namespace KFZ_Konfigurator
     {
         public static string ApplicationProductTitle { get; private set; }
 
+        public static Configuration ActiveConfiguration
+        {
+            get
+            {
+                if (HttpContext.Current.Session["Configuration"] == null)
+                    HttpContext.Current.Session["Configuration"] = new Configuration();
+                return (Configuration)HttpContext.Current.Session["Configuration"];
+            }
+            set => HttpContext.Current.Session["Configuration"] = value;
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

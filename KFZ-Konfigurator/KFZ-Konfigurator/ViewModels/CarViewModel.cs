@@ -12,7 +12,6 @@ namespace KFZ_Konfigurator.ViewModels
         public double BasePrice { get; }
         public BodyKind BodyType { get; }
         public CarBrandKind Brand { get; }
-        public WheelDriveKind WheelDrive { get; }
         public string Model { get; }
 
         public CarViewModel(Car model)
@@ -21,7 +20,6 @@ namespace KFZ_Konfigurator.ViewModels
             BasePrice = model.BasePrice;
             BodyType = model.BodyType;
             Brand = model.Brand;
-            WheelDrive = model.WheelDrive;
             Model = model.Model;
         }
     }

@@ -3,6 +3,7 @@
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = "Configurator";
+    ViewBag.BackgroundImage = "carConfiguration.png";
 }
 
 <h2>Choose your model</h2>
@@ -18,9 +19,6 @@
             <div class="card-body">
                 <div class="card-text">
                     @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(modelItem => item.BodyType)
-                </div>
-                <div class="card-text">
-                    @Html.DisplayNameFor(model => model.WheelDrive): @Html.DisplayFor(modelItem => item.WheelDrive)
                 </div>
                 @Html.ActionLink("Select", "Model", new { id = item.Id }, new { @class = "btn btn-primary" })
             </div>

@@ -7,7 +7,7 @@
 @section configurationHeader{
     <div class="bg-light">
         <div class="container">
-            <img src="~/Resources/Images/carConfiguration.png" class="img-fluid" />
+            <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
         </div>
     </div>
     <nav class="navbar bg-dark navbar-dark navbar-expand-md">
@@ -17,8 +17,8 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarToggleContent">
                 <div class="navbar-nav">
-                    @Html.ActionLink("Model", "Index", null, new { @class = "nav-item nav-link active" })
-                    @Html.ActionLink("Home", "Index", null, new { @class = "nav-item nav-link" })
+                    @Html.ActionLink("Model", "Index", "Configuration", null, new { @class = "nav-item nav-link active" })
+                    @Html.ActionLink("Engine", "Index", "Engine", null, new { @class = "nav-item nav-link" })
                 </div>
             </div>
         </div>
