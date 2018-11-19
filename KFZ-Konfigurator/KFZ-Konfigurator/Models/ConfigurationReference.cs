@@ -5,8 +5,8 @@ using System.Web;
 
 namespace KFZ_Konfigurator.Models
 {
-    public class Configuration
+    public class ConfigurationReference
     {
-        public CarModel CarModel { get; set; }
+        public int? CarModelId { get; set; }
     }
 }

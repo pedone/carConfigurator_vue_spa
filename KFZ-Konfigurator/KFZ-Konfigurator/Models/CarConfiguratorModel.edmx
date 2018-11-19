@@ -42,8 +42,8 @@
     <Property Name="Emission" Type="int" Nullable="false" />
     <Property Name="Gears" Type="int" Nullable="false" />
     <Property Name="WheelDrive" Type="int" Nullable="false" />
-    <Property Name="Engine_Id" Type="int" Nullable="true" />
-    <Property Name="CarModel_Id" Type="int" Nullable="true" />
+    <Property Name="Engine_Id" Type="int" Nullable="false" />
+    <Property Name="CarModel_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Paints">
     <Key>
@@ -83,7 +83,7 @@
     <Property Name="Performance" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="EngineEngineSettings">
-    <End Role="Engine" Type="CarConfiguratorModel.Store.Engines" Multiplicity="0..1" />
+    <End Role="Engine" Type="CarConfiguratorModel.Store.Engines" Multiplicity="1" />
     <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Engine">
@@ -95,7 +95,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CarModelEngineSettings">
-    <End Role="CarModel" Type="CarConfiguratorModel.Store.CarModels" Multiplicity="0..1" />
+    <End Role="CarModel" Type="CarConfiguratorModel.Store.CarModels" Multiplicity="1" />
     <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CarModel">
@@ -246,11 +246,11 @@
           <NavigationProperty Name="EngineSettings" Relationship="CarConfiguratorModel.EngineEngineSettings" FromRole="Engine" ToRole="EngineSettings" />
         </EntityType>
         <Association Name="EngineEngineSettings">
-          <End Type="CarConfiguratorModel.Engine" Role="Engine" Multiplicity="0..1" />
+          <End Type="CarConfiguratorModel.Engine" Role="Engine" Multiplicity="1" />
           <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="*" />
         </Association>
         <Association Name="CarModelEngineSettings">
-          <End Type="CarConfiguratorModel.CarModel" Role="CarModel" Multiplicity="0..1" />
+          <End Type="CarConfiguratorModel.CarModel" Role="CarModel" Multiplicity="1" />
           <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="*" />
         </Association>
       </Schema>
@@ -331,7 +331,6 @@
       <EndProperty Name="EngineSettings">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
-      <Condition ColumnName="Engine_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CarModelEngineSettings" TypeName="CarConfiguratorModel.CarModelEngineSettings" StoreEntitySet="EngineSettings">
       <EndProperty Name="CarModel">
@@ -340,7 +339,6 @@
       <EndProperty Name="EngineSettings">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
-      <Condition ColumnName="CarModel_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

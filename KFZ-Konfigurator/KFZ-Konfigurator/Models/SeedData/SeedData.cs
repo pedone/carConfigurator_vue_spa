@@ -21,22 +21,21 @@ namespace KFZ_Konfigurator.Models.SeedData
         {
             using (var context = new CarConfiguratorEntityContext())
             {
+                //ClearDB(context);
+
                 // let's assume for now that if there's no data in db.carModel, then there's no data yet at all
                 if (!context.CarModels.Any())
                 {
                     var settingsData = EngineSettingsSeedData.GetRawData();
-                    var carModels = CarModelSeedData.Data;
-                    var engines = EngineSeedData.Data;
+                    var carModels = CarModelSeedData.Data.ToList();
+                    var engines = EngineSeedData.Data.ToList();
                     var engineSettings = EngineSettingsSeedData.Initialize(engines, carModels);
 
                     Log.Info("adding database seed data");
 
-                    var existingEngines = context.Engines.ToList();
-                    var existingEngineSettings = context.EngineSettings.ToList();
-
-                    context.EngineSettings.AddRange(engineSettings);
-                    context.Engines.AddRange(engines);
                     context.CarModels.AddRange(carModels);
+                    context.Engines.AddRange(engines);
+                    context.EngineSettings.AddRange(engineSettings);
                 }
 
                 //if (!context.Rims.Any())
@@ -60,6 +59,18 @@ namespace KFZ_Konfigurator.Models.SeedData
                 if (context.ChangeTracker.HasChanges())
                     context.SaveChanges();
             }
+        }
+
+        private static void ClearDB(CarConfiguratorEntityContext context)
+        {
+            context.EngineSettings.RemoveRange(context.EngineSettings);
+            context.CarModels.RemoveRange(context.CarModels);
+            context.Engines.RemoveRange(context.Engines);
+            //context.Accessories.RemoveRange(context.Accessories);
+            //context.Paints.RemoveRange(context.Paints);
+            //context.Rims.RemoveRange(context.Rims);
+
+            context.SaveChanges();
         }
 
         //    private static IEnumerable<Accessory> GenerateAccessories()

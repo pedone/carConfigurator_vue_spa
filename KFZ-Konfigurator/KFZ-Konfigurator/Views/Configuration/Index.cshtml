@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.CarViewModel>
+﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.CarModelViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -13,12 +13,12 @@
     {
         <div class="card col-sm-4">
             <div class="card-header">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Model)</h5>
-                <h6 class="card-subtitle">@Html.DisplayNameFor(model => model.BasePrice): @Html.DisplayFor(modelItem => item.BasePrice)</h6>
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.Year)</h5>
+                <h6 class="card-subtitle">@Html.DisplayFor(_ => item.BaseSettings.Price) EUR</h6>
             </div>
             <div class="card-body">
                 <div class="card-text">
-                    @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(modelItem => item.BodyType)
+                    @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(_ => item.BodyType)
                 </div>
                 @Html.ActionLink("Select", "Model", new { id = item.Id }, new { @class = "btn btn-primary" })
             </div>

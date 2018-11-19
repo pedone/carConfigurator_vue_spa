@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.EngineViewModel>
+﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -14,14 +14,14 @@
     {
         <div class="list-group-item flex-column align-items-lg-start">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@($"{Html.DisplayFor(_ => item.Liter)} {Html.DisplayFor(_ => item.EngineKind)} {Html.DisplayFor(_ => item.Gears)}")</h5>
+                <h5 class="mb-1">@*@($"{Html.DisplayFor(_ => item.Liter)} {Html.DisplayFor(_ => item.EngineKind)} {Html.DisplayFor(_ => item.Gears)}")*@</h5>
                 <h5 class="mb-1">@Html.DisplayFor(_ => item.Price)</h5>
             </div>
             <div class="mt-2 w-100 d-flex justify-content-between">
-                <span>@Html.DisplayFor(_ => item.Performance)</span>
+                <span>@*@Html.DisplayFor(_ => item.Performance)*@</span>
                 <span>@Html.DisplayFor(_ => item.Acceleration)</span>
                 <span>@Html.DisplayFor(_ => item.Consumption)</span>
-                <span>@Html.DisplayFor(_ => item.EngineSize)</span>
+                <span>@*@Html.DisplayFor(_ => item.EngineSize)*@</span>
                 <span>@Html.DisplayFor(_ => item.TopSpeed)</span>
                 <span>@Html.DisplayFor(_ => item.Emission)</span>
             </div>

@@ -126,6 +126,12 @@ namespace KFZ_Konfigurator.Models.SeedData
                     CarModelId = CarModelId.A3Limousine2018,
                     EngineId = EngineId.TDI20
                 };
+                yield return new EngineSettingsContainer
+                {
+                    Settings = new EngineSettings { Id = 18, Gears = 7, Acceleration = 6.9, Consumption = 6.3, Emission = 144, TopSpeed = 242, Price = 42650 },
+                    CarModelId = CarModelId.A3Cabriolet2018,
+                    EngineId = EngineId.TFSI20
+                };
             }
         }
 
