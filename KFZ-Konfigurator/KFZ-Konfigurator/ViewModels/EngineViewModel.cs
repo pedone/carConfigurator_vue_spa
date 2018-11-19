@@ -24,17 +24,17 @@ namespace KFZ_Konfigurator.ViewModels
         public EngineViewModel(Engine model)
         {
             Id = model.Id;
-            Acceleration = model.Acceleration;
-            Consumption = model.Consumption;
-            Emission = model.Emission;
-            EngineSize = model.EngineSize;
-            Liter = model.Liter;
-            Performance = model.Performance;
-            Price = model.Price;
-            TopSpeed = model.TopSpeed;
-            EngineKind = model.EngineKind;
-            Gears = model.Gears;
-            WheelDrive = model.WheelDrive;
+            //Acceleration = model.Acceleration;
+            //Consumption = model.Consumption;
+            //Emission = model.Emission;
+            //EngineSize = model.EngineSize;
+            //Liter = model.Liter;
+            //Performance = model.Performance;
+            //Price = model.Price;
+            //TopSpeed = model.TopSpeed;
+            //EngineKind = model.EngineKind;
+            //Gears = model.Gears;
+            //WheelDrive = model.WheelDrive;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KFZ_Konfigurator.Models;
+using KFZ_Konfigurator.Models.SeedData;
 using System;
 using System.Collections.Generic;
 using System.Linq;

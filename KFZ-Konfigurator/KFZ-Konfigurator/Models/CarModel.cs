@@ -12,13 +12,20 @@ namespace KFZ_Konfigurator.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Car
+    public partial class CarModel
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CarModel()
+        {
+            this.EngineSettings = new HashSet<EngineSettings>();
+        }
+    
         public int Id { get; set; }
-        public string Model { get; set; }
-        public double BasePrice { get; set; }
-        public int Year { get; set; }
-        public CarBrandKind Brand { get; set; }
         public BodyKind BodyType { get; set; }
+        public int Year { get; set; }
+        public string Series { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EngineSettings> EngineSettings { get; set; }
     }
 }

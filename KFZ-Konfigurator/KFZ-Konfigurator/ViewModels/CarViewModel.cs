@@ -14,13 +14,13 @@ namespace KFZ_Konfigurator.ViewModels
         public CarBrandKind Brand { get; }
         public string Model { get; }
 
-        public CarViewModel(Car model)
+        public CarViewModel(CarModel model)
         {
             Id = model.Id;
-            BasePrice = model.BasePrice;
             BodyType = model.BodyType;
-            Brand = model.Brand;
-            Model = model.Model;
+            //Brand = model.Brand;
+            //Model = model.Model;
+            //BasePrice = model.Engines.Min(cur => cur.Price);
         }
     }
 }

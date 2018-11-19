@@ -14,17 +14,19 @@ namespace KFZ_Konfigurator.Models
     
     public partial class Engine
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Engine()
+        {
+            this.EngineSettings = new HashSet<EngineSettings>();
+        }
+    
         public int Id { get; set; }
-        public int Performance { get; set; }
-        public double Acceleration { get; set; }
-        public double Consumption { get; set; }
-        public double Price { get; set; }
-        public double EngineSize { get; set; }
-        public int TopSpeed { get; set; }
-        public int Emission { get; set; }
-        public double Liter { get; set; }
+        public int Liter { get; set; }
         public EngineKind EngineKind { get; set; }
-        public int Gears { get; set; }
-        public WheelDriveKind WheelDrive { get; set; }
+        public int Size { get; set; }
+        public int Performance { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EngineSettings> EngineSettings { get; set; }
     }
 }

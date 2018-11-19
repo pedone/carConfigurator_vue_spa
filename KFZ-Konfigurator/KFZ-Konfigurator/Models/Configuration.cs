@@ -7,6 +7,6 @@ namespace KFZ_Konfigurator.Models
 {
     public class Configuration
     {
-        public Car Car { get; set; }
+        public CarModel CarModel { get; set; }
     }
 }

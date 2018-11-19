@@ -7,10 +7,19 @@
     <Schema Namespace="CarConfiguratorModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="CarConfiguratorModelStoreContainer">
     <EntitySet Name="Accessories" EntityType="CarConfiguratorModel.Store.Accessories" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Store.Engines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EngineSettings" EntityType="CarConfiguratorModel.Store.EngineSettings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Paints" EntityType="CarConfiguratorModel.Store.Paints" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Rims" EntityType="CarConfiguratorModel.Store.Rims" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Cars" EntityType="CarConfiguratorModel.Store.Cars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CarModels" EntityType="CarConfiguratorModel.Store.CarModels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Store.Engines" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EngineEngineSettings" Association="CarConfiguratorModel.Store.EngineEngineSettings">
+      <End Role="Engine" EntitySet="Engines" />
+      <End Role="EngineSettings" EntitySet="EngineSettings" />
+    </AssociationSet>
+    <AssociationSet Name="CarModelEngineSettings" Association="CarConfiguratorModel.Store.CarModelEngineSettings">
+      <End Role="CarModel" EntitySet="CarModels" />
+      <End Role="EngineSettings" EntitySet="EngineSettings" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accessories">
     <Key>
@@ -21,22 +30,20 @@
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Category" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Engines">
+  <EntityType Name="EngineSettings">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Performance" Type="int" Nullable="false" />
     <Property Name="Acceleration" Type="float" Nullable="false" />
     <Property Name="Consumption" Type="float" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="EngineSize" Type="float" Nullable="false" />
     <Property Name="TopSpeed" Type="int" Nullable="false" />
     <Property Name="Emission" Type="int" Nullable="false" />
-    <Property Name="Liter" Type="float" Nullable="false" />
-    <Property Name="EngineKind" Type="int" Nullable="false" />
     <Property Name="Gears" Type="int" Nullable="false" />
     <Property Name="WheelDrive" Type="int" Nullable="false" />
+    <Property Name="Engine_Id" Type="int" Nullable="true" />
+    <Property Name="CarModel_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Paints">
     <Key>
@@ -56,17 +63,49 @@
     <Property Name="Size" Type="int" Nullable="false" />
     <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Cars">
+  <EntityType Name="CarModels">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BasePrice" Type="float" Nullable="false" />
-    <Property Name="Year" Type="int" Nullable="false" />
-    <Property Name="Brand" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BodyType" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Series" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Engines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Liter" Type="int" Nullable="false" />
+    <Property Name="EngineKind" Type="int" Nullable="false" />
+    <Property Name="Size" Type="int" Nullable="false" />
+    <Property Name="Performance" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EngineEngineSettings">
+    <End Role="Engine" Type="CarConfiguratorModel.Store.Engines" Multiplicity="0..1" />
+    <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Engine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EngineSettings">
+        <PropertyRef Name="Engine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarModelEngineSettings">
+    <End Role="CarModel" Type="CarConfiguratorModel.Store.CarModels" Multiplicity="0..1" />
+    <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EngineSettings">
+        <PropertyRef Name="CarModel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -80,22 +119,20 @@
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Category" Type="CarConfiguratorModel.AccessoryCategory" Nullable="false" />
         </EntityType>
-        <EntityType Name="Engine">
+        <EntityType Name="EngineSettings">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Performance" Type="Int32" Nullable="false" />
           <Property Name="Acceleration" Type="Double" Nullable="false" />
           <Property Name="Consumption" Type="Double" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="EngineSize" Type="Double" Nullable="false" />
           <Property Name="TopSpeed" Type="Int32" Nullable="false" />
           <Property Name="Emission" Type="Int32" Nullable="false" />
-          <Property Name="Liter" Type="Double" Nullable="false" />
-          <Property Name="EngineKind" Type="CarConfiguratorModel.EngineKind" Nullable="false" />
           <Property Name="Gears" Type="Int32" Nullable="false" />
           <Property Name="WheelDrive" Type="CarConfiguratorModel.WheelDriveKind" Nullable="false" />
+          <NavigationProperty Name="Engine" Relationship="CarConfiguratorModel.EngineEngineSettings" FromRole="EngineSettings" ToRole="Engine" />
+          <NavigationProperty Name="CarModel" Relationship="CarConfiguratorModel.CarModelEngineSettings" FromRole="EngineSettings" ToRole="CarModel" />
         </EntityType>
         <EntityType Name="Paint">
           <Key>
@@ -117,15 +154,20 @@
         </EntityType>
         <EntityContainer Name="CarConfiguratorEntityContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accessories" EntityType="Self.Accessory" />
-          <EntitySet Name="Engines" EntityType="Self.Engine" />
+          <EntitySet Name="EngineSettings" EntityType="CarConfiguratorModel.EngineSettings" />
           <EntitySet Name="Paints" EntityType="Self.Paint" />
           <EntitySet Name="Rims" EntityType="Self.Rim" />
-          <EntitySet Name="Cars" EntityType="CarConfiguratorModel.Car" />
+          <EntitySet Name="CarModels" EntityType="CarConfiguratorModel.CarModel" />
+          <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Engine" />
+          <AssociationSet Name="EngineEngineSettings" Association="CarConfiguratorModel.EngineEngineSettings">
+            <End Role="Engine" EntitySet="Engines" />
+            <End Role="EngineSettings" EntitySet="EngineSettings" />
+          </AssociationSet>
+          <AssociationSet Name="CarModelEngineSettings" Association="CarConfiguratorModel.CarModelEngineSettings">
+            <End Role="CarModel" EntitySet="CarModels" />
+            <End Role="EngineSettings" EntitySet="EngineSettings" />
+          </AssociationSet>
         </EntityContainer>
-        <EnumType Name="FuelKind">
-          <Member Name="Diesel" />
-          <Member Name="Petrol" />
-        </EnumType>
         <EnumType Name="AccessoryCategory">
           <Member Name="Transport" />
           <Member Name="Interior" />
@@ -135,29 +177,19 @@
           <Member Name="Assistence" />
           <Member Name="Driving" />
         </EnumType>
-        <EntityType Name="Car">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BasePrice" Type="Double" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Brand" Type="CarConfiguratorModel.CarBrandKind" Nullable="false" />
-          <Property Name="BodyType" Type="CarConfiguratorModel.BodyKind" Nullable="false" />
-        </EntityType>
         <EnumType Name="WheelDriveKind">
           <Member Name="Front" />
           <Member Name="Rear" />
           <Member Name="All" />
         </EnumType>
         <EnumType Name="BodyKind">
-          <Member Name="Saloon" />
-          <Member Name="Cabrio" />
-          <Member Name="Hatchback" />
-          <Member Name="Estate" />
-          <Member Name="Coupe" />
+          <Member Name="Sportback" />
+          <Member Name="Limousine" />
+          <Member Name="Cabriolet" />
+          <Member Name="Avant" />
+          <Member Name="Coupé" />
           <Member Name="SUV" />
+          <Member Name="Roadster" />
         </EnumType>
         <EnumType Name="CarBrandKind">
           <Member Name="BMW" />
@@ -192,6 +224,35 @@
           <Member Name="TFSI" />
           <Member Name="TDI" />
         </EnumType>
+        <EntityType Name="CarModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BodyType" Type="CarConfiguratorModel.BodyKind" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Series" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="EngineSettings" Relationship="CarConfiguratorModel.CarModelEngineSettings" FromRole="CarModel" ToRole="EngineSettings" />
+        </EntityType>
+        <EntityType Name="Engine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Liter" Type="Int32" Nullable="false" />
+          <Property Name="EngineKind" Type="CarConfiguratorModel.EngineKind" Nullable="false" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="Performance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EngineSettings" Relationship="CarConfiguratorModel.EngineEngineSettings" FromRole="Engine" ToRole="EngineSettings" />
+        </EntityType>
+        <Association Name="EngineEngineSettings">
+          <End Type="CarConfiguratorModel.Engine" Role="Engine" Multiplicity="0..1" />
+          <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="*" />
+        </Association>
+        <Association Name="CarModelEngineSettings">
+          <End Type="CarConfiguratorModel.CarModel" Role="CarModel" Multiplicity="0..1" />
+          <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -208,19 +269,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Engines">
-      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Engine)">
-        <MappingFragment StoreEntitySet="Engines">
+    <EntitySetMapping Name="EngineSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.EngineSettings)">
+        <MappingFragment StoreEntitySet="EngineSettings">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Performance" ColumnName="Performance" />
           <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
           <ScalarProperty Name="Consumption" ColumnName="Consumption" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="TopSpeed" ColumnName="TopSpeed" />
           <ScalarProperty Name="Emission" ColumnName="Emission" />
-          <ScalarProperty Name="Liter" ColumnName="Liter" />
-          <ScalarProperty Name="EngineKind" ColumnName="EngineKind" />
           <ScalarProperty Name="Gears" ColumnName="Gears" />
           <ScalarProperty Name="WheelDrive" ColumnName="WheelDrive" />
         </MappingFragment>
@@ -246,18 +303,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Cars">
-      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Car)">
-        <MappingFragment StoreEntitySet="Cars">
+    <EntitySetMapping Name="CarModels">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.CarModel)">
+        <MappingFragment StoreEntitySet="CarModels">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
           <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Engines">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Engine)">
+        <MappingFragment StoreEntitySet="Engines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Liter" ColumnName="Liter" />
+          <ScalarProperty Name="EngineKind" ColumnName="EngineKind" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EngineEngineSettings" TypeName="CarConfiguratorModel.EngineEngineSettings" StoreEntitySet="EngineSettings">
+      <EndProperty Name="Engine">
+        <ScalarProperty Name="Id" ColumnName="Engine_Id" />
+      </EndProperty>
+      <EndProperty Name="EngineSettings">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Engine_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CarModelEngineSettings" TypeName="CarConfiguratorModel.CarModelEngineSettings" StoreEntitySet="EngineSettings">
+      <EndProperty Name="CarModel">
+        <ScalarProperty Name="Id" ColumnName="CarModel_Id" />
+      </EndProperty>
+      <EndProperty Name="EngineSettings">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="CarModel_Id" IsNull="false" />
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

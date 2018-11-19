@@ -26,9 +26,10 @@ namespace KFZ_Konfigurator.Models
         }
     
         public virtual DbSet<Accessory> Accessories { get; set; }
-        public virtual DbSet<Engine> Engines { get; set; }
+        public virtual DbSet<EngineSettings> EngineSettings { get; set; }
         public virtual DbSet<Paint> Paints { get; set; }
         public virtual DbSet<Rim> Rims { get; set; }
-        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<CarModel> CarModels { get; set; }
+        public virtual DbSet<Engine> Engines { get; set; }
     }
 }

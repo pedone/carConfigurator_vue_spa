@@ -1,1 +1,2 @@
-- ui layout (padding, alignment, margin)
+1. - ui layout (padding, alignment, margin)
+2. - seeding the database only works with * to 1..0 when two relationships (Engine-EngineSettings/CarModel-EngineSettings)

@@ -13,11 +13,12 @@ namespace KFZ_Konfigurator.Models
     
     public enum BodyKind : int
     {
-        Saloon = 0,
-        Cabrio = 1,
-        Hatchback = 2,
-        Estate = 3,
-        Coupe = 4,
-        SUV = 5
+        Sportback = 0,
+        Limousine = 1,
+        Cabriolet = 2,
+        Avant = 3,
+        Coupé = 4,
+        SUV = 5,
+        Roadster = 6
     }
 }

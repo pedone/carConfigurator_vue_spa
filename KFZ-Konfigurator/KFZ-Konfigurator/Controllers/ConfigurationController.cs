@@ -18,7 +18,7 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                return View((await context.Cars.ToListAsync()).Select(cur => new CarViewModel(cur)));
+                return View((await context.CarModels.ToListAsync()).Select(cur => new CarViewModel(cur)));
             }
         }
 
@@ -26,7 +26,7 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                WebApiApplication.ActiveConfiguration.Car = context.Cars.First(cur => cur.Id == id);
+                WebApiApplication.ActiveConfiguration.CarModel = context.CarModels.First(cur => cur.Id == id);
             }
             return RedirectToAction("Index", "Engine");
         }
