@@ -21,7 +21,7 @@ namespace KFZ_Konfigurator.Models.SeedData
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                //ClearDB(context);
+                ClearDB(context);
 
                 // let's assume for now that if there's no data in db.carModel, then there's no data yet at all
                 if (!context.CarModels.Any())
