@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="530bb6e007644f4da8d93b6304ace583" Name="Diagram1">
-        <EntityTypeShape EntityType="CarConfiguratorModel.Accessory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Accessory" Width="1.5" PointX="1.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CarConfiguratorModel.EngineSettings" Width="2.375" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.Paint" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Paint" Width="1.5" PointX="5.5" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CarConfiguratorModel.Rim" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarConfiguratorModel.CarModel" Width="1.875" PointX="4.125" PointY="5" />
         <EntityTypeShape EntityType="CarConfiguratorModel.Engine" Width="1.5" PointX="10" PointY="1.125" />

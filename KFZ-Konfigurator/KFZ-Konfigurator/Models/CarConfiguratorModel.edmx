@@ -29,6 +29,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Category" Type="int" Nullable="false" />
+    <Property Name="SubCategory" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EngineSettings">
     <Key>
@@ -52,6 +53,8 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Category" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Rims">
     <Key>
@@ -118,6 +121,7 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Category" Type="CarConfiguratorModel.AccessoryCategory" Nullable="false" />
+          <Property Name="SubCategory" Type="CarConfiguratorModel.AccessorySubCategory" Nullable="false" />
         </EntityType>
         <EntityType Name="EngineSettings">
           <Key>
@@ -141,6 +145,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Category" Type="CarConfiguratorModel.PaintCategory" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Rim">
           <Key>
@@ -169,13 +175,10 @@
           </AssociationSet>
         </EntityContainer>
         <EnumType Name="AccessoryCategory">
-          <Member Name="Transport" />
-          <Member Name="Interior" />
-          <Member Name="Exterior" />
-          <Member Name="Entertainment" />
-          <Member Name="Navigation" />
-          <Member Name="Assistence" />
-          <Member Name="Driving" />
+          <Member Name="Comfort" />
+          <Member Name="Infotainment" />
+          <Member Name="AssistenceSystems" />
+          <Member Name="TechnologyAndSafety" />
         </EnumType>
         <EnumType Name="WheelDriveKind">
           <Member Name="Front" />
@@ -253,6 +256,20 @@
           <End Type="CarConfiguratorModel.CarModel" Role="CarModel" Multiplicity="1" />
           <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="*" />
         </Association>
+        <EnumType Name="AccessorySubCategory" >
+          <Member Name="None" />
+          <Member Name="Climate" />
+          <Member Name="Locksystems" />
+          <Member Name="Navigation" />
+          <Member Name="Entertainment" />
+          <Member Name="DrivingAndBrakes" />
+          <Member Name="Mirror" />
+        </EnumType>
+        <EnumType Name="PaintCategory">
+          <Member Name="Uni" />
+          <Member Name="Metalic" />
+          <Member Name="Pearlescent" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -266,6 +283,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -289,6 +307,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Color" ColumnName="Color" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

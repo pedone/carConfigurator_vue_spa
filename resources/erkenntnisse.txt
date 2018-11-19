@@ -1,0 +1,1 @@
+- async partial views only in asp.net core 2.1+

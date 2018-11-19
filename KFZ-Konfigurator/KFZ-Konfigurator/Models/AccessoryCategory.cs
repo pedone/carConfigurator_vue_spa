@@ -13,12 +13,9 @@ namespace KFZ_Konfigurator.Models
     
     public enum AccessoryCategory : int
     {
-        Transport = 0,
-        Interior = 1,
-        Exterior = 2,
-        Entertainment = 3,
-        Navigation = 4,
-        Assistence = 5,
-        Driving = 6
+        Comfort = 0,
+        Infotainment = 1,
+        AssistenceSystems = 2,
+        TechnologyAndSafety = 3
     }
 }

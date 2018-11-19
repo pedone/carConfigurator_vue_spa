@@ -21,7 +21,7 @@ namespace KFZ_Konfigurator.Models
         public int TopSpeed { get; set; }
         public int Emission { get; set; }
         public int Gears { get; set; }
-        public WheelDriveKind WheelDrive { get; set; } = WheelDriveKind.Front;
+        public WheelDriveKind WheelDrive { get; set; }
     
         public virtual Engine Engine { get; set; }
         public virtual CarModel CarModel { get; set; }

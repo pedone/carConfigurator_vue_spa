@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,6 +182,9 @@
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccessoryCategory.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccessorySubCategory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BodyKind.cs">
@@ -217,6 +221,10 @@
     <Compile Include="Models\EngineSettings.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaintCategory.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SeedData\AccessorySeedData.cs" />
     <Compile Include="Models\SeedData\CarModelSeedData.cs" />
     <Compile Include="Models\SeedData\EngineSeedData.cs" />
     <Compile Include="Models\Paint.cs">
@@ -229,11 +237,13 @@
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeedData\EngineSettingsSeedData.cs" />
+    <Compile Include="Models\SeedData\PaintSeedData.cs" />
     <Compile Include="Models\SeedData\SeedData.cs" />
     <Compile Include="Models\WheelDriveKind.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
@@ -333,6 +343,7 @@
     <Content Include="Views\Configuration\Index.cshtml" />
     <Content Include="Views\Shared\_ConfigurationLayout.cshtml" />
     <Content Include="Views\EngineSettings\Index.cshtml" />
+    <Content Include="Views\Accessories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

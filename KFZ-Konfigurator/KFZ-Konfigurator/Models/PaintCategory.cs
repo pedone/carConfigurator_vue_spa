@@ -10,14 +10,11 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Accessory
+    public enum PaintCategory : int
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public AccessoryCategory Category { get; set; }
-        public AccessorySubCategory SubCategory { get; set; }
+        Uni = 0,
+        Metalic = 1,
+        Pearlescent = 2
     }
 }

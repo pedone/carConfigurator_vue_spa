@@ -12,54 +12,24 @@
 
     @foreach (var item in Model)
     {
-        <div class="list-group-item flex-column align-items-lg-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@*@($"{Html.DisplayFor(_ => item.Liter)} {Html.DisplayFor(_ => item.EngineKind)} {Html.DisplayFor(_ => item.Gears)}")*@</h5>
-                <h5 class="mb-1">@Html.DisplayFor(_ => item.Price)</h5>
+        <div class="list-group-item d-flex align-items-lg-center">
+            <div>
+                <input type="radio"/>
             </div>
-            <div class="mt-2 w-100 d-flex justify-content-between">
-                <span>@*@Html.DisplayFor(_ => item.Performance)*@</span>
-                <span>@Html.DisplayFor(_ => item.Acceleration)</span>
-                <span>@Html.DisplayFor(_ => item.Consumption)</span>
-                <span>@*@Html.DisplayFor(_ => item.EngineSize)*@</span>
-                <span>@Html.DisplayFor(_ => item.TopSpeed)</span>
-                <span>@Html.DisplayFor(_ => item.Emission)</span>
+            <div class="flex-column w-100 align-items-lg-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@*@($"{Html.DisplayFor(_ => item.Liter)} {Html.DisplayFor(_ => item.EngineKind)} {Html.DisplayFor(_ => item.Gears)}")*@</h5>
+                    <h5 class="mb-1">@Html.DisplayFor(_ => item.Price)</h5>
+                </div>
+                <div class="mt-2 w-100 d-flex justify-content-between">
+                    <span>@*@Html.DisplayFor(_ => item.Performance)*@</span>
+                    <span>@Html.DisplayFor(_ => item.Acceleration)</span>
+                    <span>@Html.DisplayFor(_ => item.Consumption)</span>
+                    <span>@*@Html.DisplayFor(_ => item.EngineSize)*@</span>
+                    <span>@Html.DisplayFor(_ => item.TopSpeed)</span>
+                    <span>@Html.DisplayFor(_ => item.Emission)</span>
+                </div>
             </div>
         </div>
     }
 </div>
-
-
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Performance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Acceleration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Consumption)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EngineSize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TopSpeed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emission)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuelKind)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Liter)
-            </th>
-        </tr>
-
-
-    </table>*@

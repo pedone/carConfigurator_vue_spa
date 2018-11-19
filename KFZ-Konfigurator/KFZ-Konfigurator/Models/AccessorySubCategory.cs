@@ -10,14 +10,15 @@
 namespace KFZ_Konfigurator.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Accessory
+    public enum AccessorySubCategory : int
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public AccessoryCategory Category { get; set; }
-        public AccessorySubCategory SubCategory { get; set; }
+        None = 0,
+        Climate = 1,
+        Locksystems = 2,
+        Navigation = 3,
+        Entertainment = 4,
+        DrivingAndBrakes = 5,
+        Mirror = 6
     }
 }

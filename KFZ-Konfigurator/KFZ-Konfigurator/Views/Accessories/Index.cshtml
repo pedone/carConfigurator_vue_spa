@@ -1,0 +1,27 @@
+﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.AccessoriesViewModel>
+
+@{
+    Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
+    ViewBag.Title = "Accessories";
+    ViewBag.BackgroundImage = "accessories.png";
+}
+
+<h2>Accessories</h2>
+
+@*<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-sm-4">
+            <div class="card-header">
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.Year)</h5>
+                <h6 class="card-subtitle">@Html.DisplayFor(_ => item.BaseSettings.Price) EUR</h6>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(_ => item.BodyType)
+                </div>
+                @Html.ActionLink("Select", "Model", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>*@
