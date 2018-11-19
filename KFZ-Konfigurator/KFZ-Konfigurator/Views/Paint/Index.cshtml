@@ -1,12 +1,12 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.AccessoryViewModel>
+﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.PaintViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = "Accessories";
+    ViewBag.Title = "Paints";
     //ViewBag.BackgroundImage = "accessories.png";
 }
 
-<h2>Accessories</h2>
+<h2>Paints</h2>
 
 <div class="row">
     @foreach (var item in Model)
@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="card-text">
-                    @Html.DisplayFor(_ => item.SubCategory)
+                    @Html.DisplayFor(_ => item.Color)
                 </div>
             </div>
         </div>

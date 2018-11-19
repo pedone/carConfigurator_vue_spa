@@ -6,21 +6,21 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class AccessoryViewModel
+    public class PaintViewModel
     {
         public int Id { get; }
-        public AccessoryCategory Category { get; }
+        public PaintCategory Category { get; }
+        public string Color { get; }
         public string Name { get; }
         public double Price { get; }
-        public AccessorySubCategory SubCategory { get; }
 
-        public AccessoryViewModel(Accessory model)
+        public PaintViewModel(Paint model)
         {
             Id = model.Id;
             Category = model.Category;
+            Color = model.Color;
             Name = model.Name;
             Price = model.Price;
-            SubCategory = model.SubCategory;
         }
     }
 }

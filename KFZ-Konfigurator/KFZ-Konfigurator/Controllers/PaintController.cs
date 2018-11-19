@@ -12,13 +12,13 @@ using System.Web.Mvc;
 
 namespace KFZ_Konfigurator.Controllers
 {
-    public class AccessoriesController : Controller
+    public class PaintController : Controller
     {
         public ActionResult Index()
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                return View(context.Accessories.ToList().Select(cur => new AccessoryViewModel(cur)).ToList());
+                return View(context.Paints.ToList().Select(cur => new PaintViewModel(cur)).ToList());
             }
         }
     }
