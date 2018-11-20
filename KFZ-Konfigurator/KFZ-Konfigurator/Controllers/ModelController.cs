@@ -12,20 +12,15 @@ using System.Web.Mvc;
 
 namespace KFZ_Konfigurator.Controllers
 {
-    public class ConfigurationController : Controller
+    public class ModelController : Controller
     {
+        [Route("configuration/models", Name = Constants.Routes.ModelOverview)]
         public ActionResult Index()
         {
             using (var context = new CarConfiguratorEntityContext())
             {
                 return View(context.CarModels.ToList().Select(cur => new CarModelViewModel(cur)).ToList());
             }
-        }
-
-        public ActionResult Model(int id)
-        {
-            WebApiApplication.ActiveConfiguration.CarModelId = id;
-            return RedirectToAction("Index", "EngineSettings");
         }
     }
 }

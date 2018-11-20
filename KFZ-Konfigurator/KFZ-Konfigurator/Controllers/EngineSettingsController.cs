@@ -12,15 +12,12 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class EngineSettingsController : Controller
     {
-        public ActionResult Index()
+        [Route("configuration/models/model-{id}/enginesettings", Name = Constants.Routes.EngineSettings)]
+        public ActionResult Index(int id)
         {
-            if (WebApiApplication.ActiveConfiguration.CarModelId == null)
-                return RedirectToAction("Index", "Configuration");
-
             using (var context = new CarConfiguratorEntityContext())
             {
-                var selectedModelId = WebApiApplication.ActiveConfiguration.CarModelId;
-                return View(context.EngineSettings.ToList().Where(cur => cur.CarModel.Id == selectedModelId).Select(cur => new EngineSettingsViewModel(cur)).ToList());
+                return View(context.EngineSettings.ToList().Where(cur => cur.CarModel.Id == id).Select(cur => new EngineSettingsViewModel(cur)).ToList());
             }
         }
     }

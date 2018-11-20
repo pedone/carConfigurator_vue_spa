@@ -2,8 +2,9 @@
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = "Configurator";
+    ViewBag.Title = "Model";
     ViewBag.BackgroundImage = "carConfiguration.png";
+    ViewBag.HideConfigurationItems = true;
 }
 
 <h2>Choose your model</h2>
@@ -20,7 +21,7 @@
                 <div class="card-text">
                     @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(_ => item.BodyType)
                 </div>
-                @Html.ActionLink("Select", "Model", new { id = item.Id }, new { @class = "btn btn-primary" })
+                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" class="btn btn-primary">Select</a>
             </div>
         </div>
     }

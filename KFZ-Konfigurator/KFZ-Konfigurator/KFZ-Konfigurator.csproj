@@ -171,13 +171,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
-    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaintController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\HtmlHelper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Models\Accessory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
@@ -257,6 +258,12 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Less\basic.css">
+      <DependentUpon>basic.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\basic.min.css">
+      <DependentUpon>basic.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.Context.tt">
@@ -306,6 +313,11 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Less\basic.less" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -342,7 +354,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Configuration\Index.cshtml" />
+    <Content Include="Views\Model\Index.cshtml" />
     <Content Include="Views\Shared\_ConfigurationLayout.cshtml" />
     <Content Include="Views\EngineSettings\Index.cshtml" />
     <Content Include="Views\Accessories\Index.cshtml" />

@@ -14,6 +14,7 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class PaintController : Controller
     {
+        [Route("configuration/models/model-{id}/paint", Name = Constants.Routes.Paints)]
         public ActionResult Index()
         {
             using (var context = new CarConfiguratorEntityContext())

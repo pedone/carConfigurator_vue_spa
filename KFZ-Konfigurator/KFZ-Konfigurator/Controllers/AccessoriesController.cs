@@ -14,6 +14,7 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class AccessoriesController : Controller
     {
+        [Route("configuration/models/model-{id}/accessories", Name = Constants.Routes.Accessories)]
         public ActionResult Index()
         {
             using (var context = new CarConfiguratorEntityContext())

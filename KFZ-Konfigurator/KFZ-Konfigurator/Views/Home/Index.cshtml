@@ -2,6 +2,6 @@
     <div class="container">
         <h1>@WebApiApplication.ApplicationProductTitle</h1>
         <p class="lead">Design your individual car by configuring each and every part of it</p>
-        <p>@Html.ActionLink("Start Configuration", "Index", "Configuration", null, new { @class = "btn btn-primary btn-lg" })</p>
+        <p><a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" class="btn btn-primary btn-lg">Start Configuration</a>
     </div>
 </div>

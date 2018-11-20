@@ -1,4 +1,5 @@
-﻿@{
+﻿@using KFZ_Konfigurator.Helper;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,16 +12,15 @@
         </div>
     </div>
     <nav class="navbar bg-dark navbar-dark navbar-expand-md">
-        <div class="container">
+        <div class="container @Helper.If(ViewBag.HideConfigurationItems, "invisible")">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle" aria-controls="">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="navbarToggleContent">
                 <div class="navbar-nav">
-                    @Html.ActionLink("Model", "Index", "Configuration", null, new { @class = "nav-item nav-link active" })
-                    @Html.ActionLink("Engine", "Index", "EngineSettings", null, new { @class = "nav-item nav-link" })
-                    @Html.ActionLink("Accessories", "Index", "Accessories", null, new { @class = "nav-item nav-link" })
-                    @Html.ActionLink("Paint", "Index", "Paint", null, new { @class = "nav-item nav-link" })
+                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link">Engine</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link">Accessories</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link">Paint</a>
                 </div>
             </div>
         </div>
