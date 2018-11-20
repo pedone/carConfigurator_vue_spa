@@ -12,6 +12,8 @@
     <EntitySet Name="Rims" EntityType="CarConfiguratorModel.Store.Rims" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CarModels" EntityType="CarConfiguratorModel.Store.CarModels" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Store.Engines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Configurations" EntityType="CarConfiguratorModel.Store.Configurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConfigurationAccessory" EntityType="CarConfiguratorModel.Store.ConfigurationAccessory" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EngineEngineSettings" Association="CarConfiguratorModel.Store.EngineEngineSettings">
       <End Role="Engine" EntitySet="Engines" />
       <End Role="EngineSettings" EntitySet="EngineSettings" />
@@ -19,6 +21,22 @@
     <AssociationSet Name="CarModelEngineSettings" Association="CarConfiguratorModel.Store.CarModelEngineSettings">
       <End Role="CarModel" EntitySet="CarModels" />
       <End Role="EngineSettings" EntitySet="EngineSettings" />
+    </AssociationSet>
+    <AssociationSet Name="PaintConfiguration" Association="CarConfiguratorModel.Store.PaintConfiguration">
+      <End Role="Paint" EntitySet="Paints" />
+      <End Role="Configuration" EntitySet="Configurations" />
+    </AssociationSet>
+    <AssociationSet Name="EngineSettingsConfiguration" Association="CarConfiguratorModel.Store.EngineSettingsConfiguration">
+      <End Role="EngineSettings" EntitySet="EngineSettings" />
+      <End Role="Configuration" EntitySet="Configurations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConfigurationAccessory_Configuration" Association="CarConfiguratorModel.Store.FK_ConfigurationAccessory_Configuration">
+      <End Role="Configuration" EntitySet="Configurations" />
+      <End Role="ConfigurationAccessory" EntitySet="ConfigurationAccessory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConfigurationAccessory_Accessory" Association="CarConfiguratorModel.Store.FK_ConfigurationAccessory_Accessory">
+      <End Role="Accessory" EntitySet="Accessories" />
+      <End Role="ConfigurationAccessory" EntitySet="ConfigurationAccessory" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accessories">
@@ -85,6 +103,22 @@
     <Property Name="Size" Type="int" Nullable="false" />
     <Property Name="Performance" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Configurations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Paint_Id" Type="int" Nullable="false" />
+    <Property Name="EngineSetting_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConfigurationAccessory">
+    <Key>
+      <PropertyRef Name="ConfigurationAccessory_Accessory_Id" />
+      <PropertyRef Name="Accessories_Id" />
+    </Key>
+    <Property Name="ConfigurationAccessory_Accessory_Id" Type="int" Nullable="false" />
+    <Property Name="Accessories_Id" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="EngineEngineSettings">
     <End Role="Engine" Type="CarConfiguratorModel.Store.Engines" Multiplicity="1" />
     <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="*" />
@@ -106,6 +140,54 @@
       </Principal>
       <Dependent Role="EngineSettings">
         <PropertyRef Name="CarModel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaintConfiguration">
+    <End Role="Paint" Type="CarConfiguratorModel.Store.Paints" Multiplicity="1" />
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Configuration">
+        <PropertyRef Name="Paint_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EngineSettingsConfiguration">
+    <End Role="EngineSettings" Type="CarConfiguratorModel.Store.EngineSettings" Multiplicity="1" />
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EngineSettings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Configuration">
+        <PropertyRef Name="EngineSetting_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConfigurationAccessory_Configuration">
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="1" />
+    <End Role="ConfigurationAccessory" Type="CarConfiguratorModel.Store.ConfigurationAccessory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Configuration">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConfigurationAccessory">
+        <PropertyRef Name="ConfigurationAccessory_Accessory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConfigurationAccessory_Accessory">
+    <End Role="ConfigurationAccessory" Type="CarConfiguratorModel.Store.ConfigurationAccessory" Multiplicity="*" />
+    <End Role="Accessory" Type="CarConfiguratorModel.Store.Accessories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Accessory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConfigurationAccessory">
+        <PropertyRef Name="Accessories_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -172,6 +254,19 @@
           <AssociationSet Name="CarModelEngineSettings" Association="CarConfiguratorModel.CarModelEngineSettings">
             <End Role="CarModel" EntitySet="CarModels" />
             <End Role="EngineSettings" EntitySet="EngineSettings" />
+          </AssociationSet>
+          <EntitySet Name="Configurations" EntityType="CarConfiguratorModel.Configuration" />
+          <AssociationSet Name="PaintConfiguration" Association="CarConfiguratorModel.PaintConfiguration">
+            <End Role="Paint" EntitySet="Paints" />
+            <End Role="Configuration" EntitySet="Configurations" />
+          </AssociationSet>
+          <AssociationSet Name="EngineSettingsConfiguration" Association="CarConfiguratorModel.EngineSettingsConfiguration">
+            <End Role="EngineSettings" EntitySet="EngineSettings" />
+            <End Role="Configuration" EntitySet="Configurations" />
+          </AssociationSet>
+          <AssociationSet Name="ConfigurationAccessory" Association="CarConfiguratorModel.ConfigurationAccessory">
+            <End Role="Configuration" EntitySet="Configurations" />
+            <End Role="Accessory" EntitySet="Accessories" />
           </AssociationSet>
         </EntityContainer>
         <EnumType Name="AccessoryCategory">
@@ -270,6 +365,27 @@
           <Member Name="Metalic" />
           <Member Name="Pearlescent" />
         </EnumType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Paint" Relationship="CarConfiguratorModel.PaintConfiguration" FromRole="Configuration" ToRole="Paint" />
+          <NavigationProperty Name="EngineSetting" Relationship="CarConfiguratorModel.EngineSettingsConfiguration" FromRole="Configuration" ToRole="EngineSettings" />
+          <NavigationProperty Name="Accessories" Relationship="CarConfiguratorModel.ConfigurationAccessory" FromRole="Configuration" ToRole="Accessory" />
+        </EntityType>
+        <Association Name="PaintConfiguration">
+          <End Type="CarConfiguratorModel.Paint" Role="Paint" Multiplicity="1" />
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
+        </Association>
+        <Association Name="EngineSettingsConfiguration">
+          <End Type="CarConfiguratorModel.EngineSettings" Role="EngineSettings" Multiplicity="1" />
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
+        </Association>
+        <Association Name="ConfigurationAccessory">
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
+          <End Type="CarConfiguratorModel.Accessory" Role="Accessory" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -344,6 +460,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Configurations">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Configuration)">
+        <MappingFragment StoreEntitySet="Configurations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="EngineEngineSettings" TypeName="CarConfiguratorModel.EngineEngineSettings" StoreEntitySet="EngineSettings">
       <EndProperty Name="Engine">
         <ScalarProperty Name="Id" ColumnName="Engine_Id" />
@@ -358,6 +481,30 @@
       </EndProperty>
       <EndProperty Name="EngineSettings">
         <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PaintConfiguration" TypeName="CarConfiguratorModel.PaintConfiguration" StoreEntitySet="Configurations">
+      <EndProperty Name="Paint">
+        <ScalarProperty Name="Id" ColumnName="Paint_Id" />
+      </EndProperty>
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EngineSettingsConfiguration" TypeName="CarConfiguratorModel.EngineSettingsConfiguration" StoreEntitySet="Configurations">
+      <EndProperty Name="EngineSettings">
+        <ScalarProperty Name="Id" ColumnName="EngineSetting_Id" />
+      </EndProperty>
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConfigurationAccessory" TypeName="CarConfiguratorModel.ConfigurationAccessory" StoreEntitySet="ConfigurationAccessory">
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="ConfigurationAccessory_Accessory_Id" />
+      </EndProperty>
+      <EndProperty Name="Accessory">
+        <ScalarProperty Name="Id" ColumnName="Accessories_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

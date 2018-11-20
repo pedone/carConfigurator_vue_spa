@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>
+﻿@model KFZ_Konfigurator.ViewModels.ViewModelSelection<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -10,11 +10,11 @@
 
 <div class="list-group">
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Items)
     {
         <div class="list-group-item d-flex align-items-lg-center">
             <div>
-                <input type="radio"/>
+                <input type="radio" />
             </div>
             <div class="flex-column w-100 align-items-lg-start">
                 <div class="d-flex w-100 justify-content-between">

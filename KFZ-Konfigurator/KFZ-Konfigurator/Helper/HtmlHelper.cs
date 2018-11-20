@@ -7,9 +7,9 @@ namespace KFZ_Konfigurator.Helper
 {
     public static class Helper
     {
-        public static string If(bool? conditional, string data)
+        public static string If(bool conditional, string data)
         {
-            return conditional == true ? data : null;
+            return conditional ? data : null;
         }
     }
 }

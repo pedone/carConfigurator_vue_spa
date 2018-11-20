@@ -23,7 +23,7 @@ namespace KFZ_Konfigurator
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/Less/basic.css"));
+                      "~/Content/Less/styles.css"));
         }
     }
 }

@@ -20,10 +20,17 @@
         </div>
     </nav>
 
-    @RenderSection("configurationHeader", required: false)
+    @RenderSection("ConfigurationHeader", required: false)
 
     <div class="container body-content">
-        @RenderBody()
+        <div class="row align-items-start">
+            <div class="col">
+                @RenderBody()
+            </div>
+            <div class="col col-md-auto">
+                @RenderSection("CartOverview", required: false)
+            </div>
+        </div>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - @WebApiApplication.ApplicationProductTitle</p>

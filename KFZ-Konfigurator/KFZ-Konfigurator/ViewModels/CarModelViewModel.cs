@@ -6,9 +6,8 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class CarModelViewModel
+    public class CarModelViewModel : ViewModelBase
     {
-        public int Id { get; }
         public BodyKind BodyType { get; }
         public string Series { get; }
         public string Model { get; }
@@ -16,8 +15,8 @@ namespace KFZ_Konfigurator.ViewModels
         public EngineSettings BaseSettings { get; }
 
         public CarModelViewModel(CarModel model)
+            : base(model.Id)
         {
-            Id = model.Id;
             BodyType = model.BodyType;
             Series = model.Series;
             Year = model.Year;

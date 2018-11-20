@@ -15,9 +15,16 @@ namespace KFZ_Konfigurator.Controllers
         [Route("configuration/models/model-{id}/enginesettings", Name = Constants.Routes.EngineSettings)]
         public ActionResult Index(int id)
         {
+            var existingSelection = SessionData.ActiveConfiguration.Get<EngineSettingsViewModel>().FirstOrDefault();
             using (var context = new CarConfiguratorEntityContext())
             {
-                return View(context.EngineSettings.ToList().Where(cur => cur.CarModel.Id == id).Select(cur => new EngineSettingsViewModel(cur)).ToList());
+                var settings = context.EngineSettings.ToList()
+                    .Where(cur => cur.CarModel.Id == id)
+                    .Select(cur => new EngineSettingsViewModel(cur))
+                    .OrderBy(cur => cur.Price)
+                    .ToList();
+                var itemSelectionSource = new ViewModelSelection<EngineSettingsViewModel>(settings, new[] { existingSelection ?? settings.First() });
+                return View(itemSelectionSource);
             }
         }
     }

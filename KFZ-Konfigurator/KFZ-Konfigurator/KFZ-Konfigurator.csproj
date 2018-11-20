@@ -213,7 +213,9 @@
     <Compile Include="Models\CarModel.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConfigurationReference.cs" />
+    <Compile Include="Models\Configuration.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Engine.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
@@ -245,11 +247,15 @@
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionData.cs" />
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
     <Compile Include="ViewModels\PaintViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelConfiguration.cs" />
+    <Compile Include="ViewModels\ViewModelSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -258,11 +264,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Less\basic.css">
-      <DependentUpon>basic.less</DependentUpon>
+    <Content Include="Content\Less\styles.css">
+      <DependentUpon>styles.less</DependentUpon>
     </Content>
-    <Content Include="Content\Less\basic.min.css">
-      <DependentUpon>basic.css</DependentUpon>
+    <Content Include="Content\Less\styles.min.css">
+      <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -313,7 +319,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\Less\basic.less" />
+    <Content Include="Content\Less\styles.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

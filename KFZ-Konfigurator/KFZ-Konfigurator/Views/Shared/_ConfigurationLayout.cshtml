@@ -5,14 +5,22 @@
 
 @RenderBody()
 
-@section configurationHeader{
+@if (ViewBag.IsModelSelection != true)
+{
+    @section CartOverview {
+        <h1>Cart</h1>
+    }
+}
+
+@section ConfigurationHeader {
     <div class="bg-light">
-        <div class="container">
+        <div class="container text-overlap-container">
             <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
+            <h2 class="overlap-top-left" @Helper.If(ViewBag.IsModelSelection == true, "hidden")>Model</h2>
         </div>
     </div>
     <nav class="navbar bg-dark navbar-dark navbar-expand-md">
-        <div class="container @Helper.If(ViewBag.HideConfigurationItems, "invisible")">
+        <div class="container @Helper.If(ViewBag.IsModelSelection == true, "invisible")">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle" aria-controls="">
                 <span class="navbar-toggler-icon"></span>
             </button>

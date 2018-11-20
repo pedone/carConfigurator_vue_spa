@@ -4,15 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="530bb6e007644f4da8d93b6304ace583" Name="Diagram1">
-        <EntityTypeShape EntityType="CarConfiguratorModel.Accessory" Width="1.5" PointX="1.875" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.EngineSettings" Width="2.375" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.Paint" Width="1.5" PointX="5.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.Rim" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.CarModel" Width="1.875" PointX="4.125" PointY="5" />
-        <EntityTypeShape EntityType="CarConfiguratorModel.Engine" Width="1.5" PointX="10" PointY="1.125" />
+      <Diagram DiagramId="530bb6e007644f4da8d93b6304ace583" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CarConfiguratorModel.Accessory" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.EngineSettings" Width="2" PointX="7.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Paint" Width="1.5" PointX="3.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.CarModel" Width="1.625" PointX="11" PointY="4.5" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Engine" Width="1.625" PointX="11" PointY="1.375" />
         <AssociationConnector Association="CarConfiguratorModel.EngineEngineSettings" />
         <AssociationConnector Association="CarConfiguratorModel.CarModelEngineSettings" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Configuration" Width="1.5" PointX="4" PointY="3.125" />
+        <AssociationConnector Association="CarConfiguratorModel.PaintConfiguration" />
+        <AssociationConnector Association="CarConfiguratorModel.EngineSettingsConfiguration" />
+        <AssociationConnector Association="CarConfiguratorModel.ConfigurationAccessory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

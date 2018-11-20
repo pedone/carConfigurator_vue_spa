@@ -1,22 +1,17 @@
 ﻿using KFZ_Konfigurator.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class EngineViewModel
+    public class EngineViewModel : ViewModelBase
     {
-        public int Id { get; }
-        public double Liter { get; }
+        public EngineKind EngineKind { get; }
+        public int Liter { get; }
         public int Performance { get; }
         public int Size { get; }
-        public EngineKind EngineKind { get; }
 
         public EngineViewModel(Engine model)
+            : base(model.Id)
         {
-            Id = model.Id;
             EngineKind = model.EngineKind;
             Liter = model.Liter;
             Performance = model.Performance;
