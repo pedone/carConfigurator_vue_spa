@@ -7,6 +7,8 @@ namespace KFZ_Konfigurator
 {
     public static class Constants
     {
+        public const double KW_to_PS = 1.35962f;
+
         public static class Routes
         {
             public const string ModelOverview = nameof(ModelOverview);

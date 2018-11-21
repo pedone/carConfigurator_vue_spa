@@ -1,7 +1,9 @@
-﻿.invisible {
-  visibility: hidden;
+﻿.indicatior-icon {
+  opacity: 0.5;
+  height: 1.5em;
+  width: auto;
+  margin-right: 0.5em;
 }
-/*Container holding the image and the text*/
 .text-overlap-container {
   position: relative;
   text-align: center;

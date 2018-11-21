@@ -1,8 +1,10 @@
-﻿namespace KFZ_Konfigurator.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KFZ_Konfigurator.ViewModels
 {
     public abstract class ViewModelBase
     {
-
+        [DisplayFormat(DataFormatString = "{0:N0} EUR")]
         public double Price { get; }
         public int Id { get; }
 

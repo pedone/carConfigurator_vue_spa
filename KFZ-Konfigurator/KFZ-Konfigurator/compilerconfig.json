@@ -1,9 +1,5 @@
 ﻿[
   {
-    "outputFile": "Content/Less/basic.css",
-    "inputFile": "Content/Less/basic.less"
-  },
-  {
     "outputFile": "Content/Less/styles.css",
     "inputFile": "Content/Less/styles.less"
   }

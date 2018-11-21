@@ -12,7 +12,7 @@ namespace KFZ_Konfigurator.ViewModels
         public string Series { get; }
         public string Model { get; }
         public int Year { get; }
-        public EngineSettings BaseSettings { get; }
+        public EngineSettingsViewModel BaseSettings { get; }
 
         public CarModelViewModel(CarModel model)
             : base(model.Id)
@@ -20,7 +20,7 @@ namespace KFZ_Konfigurator.ViewModels
             BodyType = model.BodyType;
             Series = model.Series;
             Year = model.Year;
-            BaseSettings = GetBaseSettings(model.EngineSettings);
+            BaseSettings = new EngineSettingsViewModel(GetBaseSettings(model.EngineSettings));
         }
 
         private EngineSettings GetBaseSettings(IEnumerable<EngineSettings> settings)

@@ -14,7 +14,6 @@ namespace KFZ_Konfigurator
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        public static string ApplicationProductTitle { get; private set; }
 
         protected void Application_Start()
         {
@@ -26,9 +25,6 @@ namespace KFZ_Konfigurator
 
             // init db
             SeedData.Initialize();
-
-            var productTitleAttribute = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), true).First();
-            ApplicationProductTitle = ((AssemblyProductAttribute)productTitleAttribute).Product;
         }
     }
 }
