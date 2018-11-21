@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using KFZ_Konfigurator.Resources.Localization;
+@{ 
+    var productTitle = LocalizationManager.Localize("ProductTitle");
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,7 +15,7 @@
 <body>
     <nav class="navbar bg-light navbar-light navbar-expand-sm fixed-top">
         <div class="container">
-            @Html.ActionLink(WebApiApplication.ApplicationProductTitle, "Index", "Home", null, new { @class = "navbar-brand" })
+            @Html.ActionLink(productTitle, "Index", "Home", null, new { @class = "navbar-brand" })
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle" aria-controls="">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,7 +38,7 @@
         </div>
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - @WebApiApplication.ApplicationProductTitle</p>
+            <p>&copy; @DateTime.Now.Year - @productTitle</p>
         </footer>
     </div>
 

@@ -1,4 +1,5 @@
 ﻿@using KFZ_Konfigurator.Helper;
+@using KFZ_Konfigurator.Resources.Localization;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,7 +17,9 @@
     <div class="bg-light">
         <div class="container text-overlap-container">
             <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
-            <h2 class="overlap-top-left" @Helper.If(ViewBag.IsModelSelection == true, "hidden")>Model</h2>
+            <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" @Helper.If(ViewBag.IsModelSelection == true, "hidden")>
+                <h2 class="overlap-top-left">Model</h2>
+            </a>
         </div>
     </div>
     <nav class="navbar bg-dark navbar-dark navbar-expand-md">
@@ -26,9 +29,9 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarToggleContent">
                 <div class="navbar-nav">
-                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link">Engine</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link">Accessories</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link">Paint</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link">@LocalizationManager.Localize("EngineSettingsHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link">@LocalizationManager.Localize("AccessoriesHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link">@LocalizationManager.Localize("PaintsHeader")</a>
                 </div>
             </div>
         </div>

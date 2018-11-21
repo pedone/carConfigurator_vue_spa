@@ -178,7 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Models\Accessory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
@@ -247,6 +247,12 @@
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Localization\en-US.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Localization\LocalizationManager.cs" />
     <Compile Include="SessionData.cs" />
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
@@ -295,8 +301,14 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\acceleration.svg" />
     <Content Include="Resources\Images\carConfiguration.png" />
+    <Content Include="Resources\Images\consumption.svg" />
+    <Content Include="Resources\Images\emissions.svg" />
     <Content Include="Resources\Images\engine.png" />
+    <Content Include="Resources\Images\engineSize.svg" />
+    <Content Include="Resources\Images\performance.svg" />
+    <Content Include="Resources\Images\topSpeed.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -381,6 +393,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Localization\en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

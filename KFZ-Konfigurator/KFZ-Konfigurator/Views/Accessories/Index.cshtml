@@ -1,19 +1,33 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.AccessoryViewModel>
+﻿@using KFZ_Konfigurator.Models;
+@using KFZ_Konfigurator.Resources.Localization;
+
+@model KFZ_Konfigurator.ViewModels.ViewModelSelection<KFZ_Konfigurator.ViewModels.AccessoryViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = "Accessories";
-    //ViewBag.BackgroundImage = "accessories.png";
+    ViewBag.Title = LocalizationManager.Localize("AccessoriesTitle");
+    ViewBag.BackgroundImage = "engine.png";
+
+    var categories = Enum.GetNames(typeof(AccessoryCategory));
 }
 
-<h2>Accessories</h2>
+<h2>@LocalizationManager.Localize("AccessoriesHeader")</h2>
 
-<div class="row">
-    @foreach (var item in Model)
+<div>
+    <nav>
+        <div class="nav nav-tabs" role="tablist">
+            @foreach (var item in categories)
+            {
+                <a class="nav-item nav-link" data-toggle="tab">@(LocalizationManager.LocalizeEnum<AccessoryCategory>(item))</a>
+            }
+        </div>
+    </nav>
+
+    @foreach (var item in Model.Items)
     {
         <div class="card col-sm-4">
             <div class="card-header">
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Category): @Html.DisplayFor(_ => item.Name)</h5>
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
                 <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price) EUR</h6>
             </div>
             <div class="card-body">

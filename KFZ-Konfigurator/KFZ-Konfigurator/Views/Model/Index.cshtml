@@ -1,4 +1,6 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.CarModelViewModel>
+﻿@using KFZ_Konfigurator.Resources.Localization;
+
+@model IEnumerable<KFZ_Konfigurator.ViewModels.CarModelViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -7,21 +9,26 @@
     ViewBag.IsModelSelection = true;
 }
 
-<h2>Choose your model</h2>
+<h2>@LocalizationManager.Localize("ModelHeader")</h2>
 
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="card col-sm-4">
             <div class="card-header">
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.Year)</h5>
-                <h6 class="card-subtitle">@Html.DisplayFor(_ => item.BaseSettings.Price) EUR</h6>
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
+                <h6 class="card-subtitle">@LocalizationManager.Localize("from") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
             </div>
             <div class="card-body">
                 <div class="card-text">
-                    @Html.DisplayNameFor(model => model.BodyType): @Html.DisplayFor(_ => item.BodyType)
+                    <div class="row">
+                        @LocalizationManager.Localize(nameof(item.BaseSettings.Consumption)): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
+                    </div>
+                    <div class="row">
+                        @LocalizationManager.Localize(nameof(item.BaseSettings.Emission)): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
+                    </div>
                 </div>
-                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" class="btn btn-primary">Select</a>
+                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
             </div>
         </div>
     }

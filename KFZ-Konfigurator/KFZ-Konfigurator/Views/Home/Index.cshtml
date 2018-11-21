@@ -1,7 +1,9 @@
-﻿<div class="jumbotron jumbotron-fluid">
+﻿@using KFZ_Konfigurator.Resources.Localization;
+
+<div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1>@WebApiApplication.ApplicationProductTitle</h1>
-        <p class="lead">Design your individual car by configuring each and every part of it</p>
-        <p><a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" class="btn btn-primary btn-lg">Start Configuration</a>
+        <h1>@LocalizationManager.Localize("ProductTitle")</h1>
+        <p class="lead">@LocalizationManager.Localize("ConfigurationDescription")</p>
+        <p><a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" class="btn btn-primary btn-lg">@LocalizationManager.Localize("StartConfiguration")</a>
     </div>
 </div>
