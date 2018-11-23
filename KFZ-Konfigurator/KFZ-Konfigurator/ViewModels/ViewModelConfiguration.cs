@@ -17,6 +17,17 @@ namespace KFZ_Konfigurator.ViewModels
             get => _items.Select(cur => cur.Price).Aggregate((next, result) => result + next);
         }
 
+        public CarModelViewModel CarModel
+        {
+            get => Get<CarModelViewModel>().FirstOrDefault();
+            set => Add(value);
+        }
+        public EngineSettingsViewModel EngineSettings
+        {
+            get => Get<EngineSettingsViewModel>().FirstOrDefault();
+            set => Add(value);
+        }
+
         public IEnumerable<T> Get<T>()
         {
             return _items.OfType<T>();

@@ -6,21 +6,18 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class PaintViewModel
+    public class PaintViewModel: ViewModelBase
     {
-        public int Id { get; }
         public PaintCategory Category { get; }
         public string Color { get; }
         public string Name { get; }
-        public double Price { get; }
 
         public PaintViewModel(Paint model)
+            : base(model.Id, model.Price)
         {
-            Id = model.Id;
             Category = model.Category;
             Color = model.Color;
             Name = model.Name;
-            Price = model.Price;
         }
     }
 }

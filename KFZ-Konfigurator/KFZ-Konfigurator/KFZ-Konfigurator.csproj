@@ -256,6 +256,7 @@
     <Compile Include="SessionData.cs" />
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
+    <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
     <Compile Include="ViewModels\PaintViewModel.cs" />

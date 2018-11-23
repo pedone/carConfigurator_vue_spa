@@ -18,23 +18,36 @@
         <div class="nav nav-tabs" role="tablist">
             @foreach (var item in categories)
             {
-                <a class="nav-item nav-link" data-toggle="tab">@(LocalizationManager.LocalizeEnum<AccessoryCategory>(item))</a>
+                bool isActive = item == categories.First();
+                var activeClassesString = isActive ? "active" : null;
+                var selectedValueString = isActive ? "true" : "false";
+                <a class="nav-item nav-link @activeClassesString" data-toggle="tab" role="tab" href="@($"#nav-{item}")">
+                    @(LocalizationManager.LocalizeEnum<AccessoryCategory>(item))
+                </a>
             }
         </div>
     </nav>
 
-    @foreach (var item in Model.Items)
-    {
-        <div class="card col-sm-4">
-            <div class="card-header">
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
-                <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price) EUR</h6>
+    <div class="tab-content">
+        @foreach (var curCategory in categories)
+        {
+            string activeClassesString = curCategory == categories.First() ? "show active" : null;
+            <div class="tab-pane fade @activeClassesString" role="tabpanel" id="@($"nav-{curCategory}")">
+                @foreach (var item in Model.Items.Where(cur => cur.Category.ToString() == curCategory))
+                {
+                    <div class="card col-sm-4 rounded-0">
+                        <div class="card-header">
+                            <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
+                            <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price) EUR</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                @Html.DisplayFor(_ => item.SubCategory)
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="card-body">
-                <div class="card-text">
-                    @Html.DisplayFor(_ => item.SubCategory)
-                </div>
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>

@@ -1,15 +1,53 @@
 ﻿@using KFZ_Konfigurator.Helper;
+@using KFZ_Konfigurator.ViewModels;
 @using KFZ_Konfigurator.Resources.Localization;
+@using KFZ_Konfigurator.Views;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ConfigurationViewKind viewKind = ConfigurationViewKind.ModelSelection;
+    var modelType = Model.GetType();
+    if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>))
+    {
+        viewKind = ConfigurationViewKind.EngineSettings;
+    }
+    else if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.AccessoryViewModel>))
+    {
+        viewKind = ConfigurationViewKind.Accessories;
+    }
+    else if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.PaintViewModel>))
+    {
+        viewKind = ConfigurationViewKind.Paint;
+    }
+
+    bool isModelSelection = viewKind == ConfigurationViewKind.ModelSelection;
+    string modelHeader = null;
+    if (!isModelSelection)
+    {
+        var activeModel = SessionData.ActiveConfiguration.CarModel;
+        if (activeModel == null)
+        {
+            throw new Exception("Model is not set");
+        }
+        modelHeader = $"{activeModel.Series} {activeModel.BodyType.ToString()} {activeModel.Year}";
+    }
+
+
 }
 
 @RenderBody()
 
-@if (ViewBag.IsModelSelection != true)
+@if (!isModelSelection)
 {
+    var activeModel = SessionData.ActiveConfiguration.CarModel;
+    //var engineHeader =
     @section CartOverview {
-        <h1>Cart</h1>
+        <div class="card rounded-0">
+            @*<img class="card-img-top" alt=""*@
+            <div class="card-body">
+                <h5 class="card-title">@modelHeader</h5>
+            </div>
+        </div>
     }
 }
 
@@ -17,21 +55,24 @@
     <div class="bg-light">
         <div class="container text-overlap-container">
             <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
-            <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" @Helper.If(ViewBag.IsModelSelection == true, "hidden")>
-                <h2 class="overlap-top-left">Model</h2>
-            </a>
+            @if (!isModelSelection)
+            {
+                <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
+                    <h2 class="overlap-top-left">@modelHeader</h2>
+                </a>
+            }
         </div>
     </div>
     <nav class="navbar bg-dark navbar-dark navbar-expand-md">
-        <div class="container @Helper.If(ViewBag.IsModelSelection == true, "invisible")">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle" aria-controls="">
+        <div class="container @Helper.If(isModelSelection, "invisible")">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="navbarToggleContent">
                 <div class="navbar-nav">
-                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link">@LocalizationManager.Localize("EngineSettingsHeader")</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link">@LocalizationManager.Localize("AccessoriesHeader")</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link">@LocalizationManager.Localize("PaintsHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.EngineSettings, "active")">@LocalizationManager.Localize("EngineSettingsHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.Accessories, "active")">@LocalizationManager.Localize("AccessoriesHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.Paint, "active")">@LocalizationManager.Localize("PaintsHeader")</a>
                 </div>
             </div>
         </div>

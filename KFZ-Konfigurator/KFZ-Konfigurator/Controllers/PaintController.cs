@@ -19,7 +19,11 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                return View(context.Paints.ToList().Select(cur => new PaintViewModel(cur)).ToList());
+                var settings = context.Paints.ToList()
+                    .Select(cur => new PaintViewModel(cur))
+                    .ToList();
+                var itemSelectionSource = new ViewModelSelection<PaintViewModel>(settings);
+                return View(itemSelectionSource);
             }
         }
     }
