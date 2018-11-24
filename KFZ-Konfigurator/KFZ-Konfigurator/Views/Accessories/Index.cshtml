@@ -1,7 +1,7 @@
 ﻿@using KFZ_Konfigurator.Models;
 @using KFZ_Konfigurator.Resources.Localization;
 
-@model KFZ_Konfigurator.ViewModels.ViewModelSelection<KFZ_Konfigurator.ViewModels.AccessoryViewModel>
+@model IEnumerable<KFZ_Konfigurator.ViewModels.AccessoryViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -33,7 +33,7 @@
         {
             string activeClassesString = curCategory == categories.First() ? "show active" : null;
             <div class="tab-pane fade @activeClassesString" role="tabpanel" id="@($"nav-{curCategory}")">
-                @foreach (var item in Model.Items.Where(cur => cur.Category.ToString() == curCategory))
+                @foreach (var item in Model.Where(cur => cur.Category.ToString() == curCategory))
                 {
                     <div class="card col-sm-4 rounded-0">
                         <div class="card-header">

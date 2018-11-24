@@ -1,5 +1,5 @@
 ﻿@using KFZ_Konfigurator.Resources.Localization;
-@model KFZ_Konfigurator.ViewModels.ViewModelSelection<KFZ_Konfigurator.ViewModels.PaintViewModel>
+@model IEnumerable<KFZ_Konfigurator.ViewModels.PaintViewModel>
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -10,7 +10,7 @@
 <h2>@LocalizationManager.Localize("PaintsHeader")</h2>
 
 <div class="row">
-    @foreach (var item in Model.Items)
+    @foreach (var item in Model)
     {
         <div class="card col-sm-4 rounded-0">
             <div class="card-header">

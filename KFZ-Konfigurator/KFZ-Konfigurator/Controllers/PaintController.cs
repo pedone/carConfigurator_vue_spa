@@ -22,8 +22,7 @@ namespace KFZ_Konfigurator.Controllers
                 var settings = context.Paints.ToList()
                     .Select(cur => new PaintViewModel(cur))
                     .ToList();
-                var itemSelectionSource = new ViewModelSelection<PaintViewModel>(settings);
-                return View(itemSelectionSource);
+                return View(settings);
             }
         }
     }

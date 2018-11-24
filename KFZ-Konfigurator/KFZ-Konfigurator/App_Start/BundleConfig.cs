@@ -16,14 +16,16 @@ namespace KFZ_Konfigurator
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapKnockout").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/knockout-{version}.js",
+                      "~/Scripts/underscore-{version}.js",
                       "~/Scripts/popper.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/Less/styles.css"));
+                      "~/Content/app/styles.css"));
         }
     }
 }

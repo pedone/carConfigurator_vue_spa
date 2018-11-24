@@ -23,8 +23,7 @@ namespace KFZ_Konfigurator.Controllers
                     .Select(cur => new AccessoryViewModel(cur))
                     .OrderBy(cur => cur.Price)
                     .ToList();
-                var itemSelectionSource = new ViewModelSelection<AccessoryViewModel>(settings);
-                return View(itemSelectionSource);
+                return View(settings);
             }
         }
     }

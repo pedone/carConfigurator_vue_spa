@@ -7,6 +7,7 @@ namespace KFZ_Konfigurator.ViewModels
         [DisplayFormat(DataFormatString = "{0:N0} EUR")]
         public double Price { get; }
         public int Id { get; }
+        public bool IsSelected { get; set; }
 
         protected ViewModelBase(int id, double price = 0)
         {

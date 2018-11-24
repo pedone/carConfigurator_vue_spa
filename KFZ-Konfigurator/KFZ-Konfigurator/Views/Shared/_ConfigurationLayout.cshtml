@@ -6,16 +6,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ConfigurationViewKind viewKind = ConfigurationViewKind.ModelSelection;
-    var modelType = Model.GetType();
-    if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>))
+    Type modelType = Model.GetType();
+    if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.EngineSettings;
     }
-    else if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.AccessoryViewModel>))
+    else if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.AccessoryViewModel>).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.Accessories;
     }
-    else if (modelType == typeof(ViewModelSelection<KFZ_Konfigurator.ViewModels.PaintViewModel>))
+    else if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.PaintViewModel>).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.Paint;
     }
@@ -31,8 +31,6 @@
         }
         modelHeader = $"{activeModel.Series} {activeModel.BodyType.ToString()} {activeModel.Year}";
     }
-
-
 }
 
 @RenderBody()
@@ -77,4 +75,8 @@
             </div>
         </div>
     </nav>
+}
+
+@section scripts {
+    @RenderSection("scripts", required: false)
 }
