@@ -9,6 +9,7 @@
     ViewBag.BackgroundImage = "engine.png";
 }
 
+@Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("EngineSettingsHeader")</h2>
 <div data-bind="text: enginePrice"></div>
 
@@ -18,7 +19,7 @@
     {
         <a class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center @Helper.If(item.IsSelected, "active")"
            data-toggle="list"
-           data-bind="click: function() { selectSettings(@item.Id) } ">
+           data-bind="click: function() { settingsSelectedClick(@item.Id) } ">
             <div class="flex-column w-100 align-items-lg-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">@($"{Html.DisplayFor(_ => item.Engine.Liter)} {Html.DisplayFor(_ => item.Engine.EngineKind)} {Html.DisplayFor(_ => item.Gears)}-{LocalizationManager.Localize("Gears")}")</h5>
@@ -56,13 +57,27 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript" src="@Url.Content("/Js/ConfigurationViewModel.js")"></script>
     <script type="text/javascript">
         var engineSettings = @Html.Raw(Json.Encode(Model));
         var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
+        });
+
+        $(window).on("beforeunload", function () {
+            var antiForgeryToken = $("[name='__RequestVerificationToken']").val();
+            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.getSelectedEngine(), antiForgeryToken)
+                .done((data) => {
+                    console.log("success: " + JSON.stringify(data));
+                    //alert("worked");
+                    //TODO
+                })
+                .fail((data) => {
+                    console.log("fail: " + JSON.stringify(data));
+                    //alert("failed");
+                    //TODO
+                });
         });
     </script>
 }

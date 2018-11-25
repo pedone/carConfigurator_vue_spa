@@ -33,14 +33,16 @@ namespace KFZ_Konfigurator.ViewModels
             return _items.OfType<T>();
         }
 
-        public void Reset()
+        public void Reset(bool keepCarModel = false)
         {
+            var selectedCarModel = keepCarModel ? CarModel : null;
             _items.Clear();
+            CarModel = selectedCarModel;
         }
 
         public void Add(ViewModelBase item)
         {
-            if (!Contains(item))
+            if (item != null && !Contains(item))
                 _items.Add(item);
         }
 

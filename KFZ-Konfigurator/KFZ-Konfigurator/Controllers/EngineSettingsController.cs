@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -44,6 +45,34 @@ namespace KFZ_Konfigurator.Controllers
 
                 return View(settings);
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetSelectedEngineSettings(int id)
+        {
+            if (!Request.IsAjaxRequest())
+                throw new InvalidOperationException("This action must be called with ajax");
+
+            // engine settings already selected
+            if (SessionData.ActiveConfiguration.EngineSettings?.Id == id)
+                return new EmptyResult();
+
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var settings = context.EngineSettings.FirstOrDefault(cur => cur.Id == id);
+                if (settings == null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    return Json(new { Success = "false", Message = $"EngineSettings with id {id} not found" });
+                }
+
+                if (SessionData.ActiveConfiguration.EngineSettings != null)
+                    SessionData.ActiveConfiguration.Reset(true);
+
+                SessionData.ActiveConfiguration.EngineSettings = new EngineSettingsViewModel(settings);
+            }
+            return new EmptyResult();
         }
     }
 }

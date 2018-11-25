@@ -279,6 +279,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Js\ConfigurationViewModel.js" />
+    <Content Include="Js\AjaxHelper.js" />
     <Content Include="Models\CarConfiguratorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
