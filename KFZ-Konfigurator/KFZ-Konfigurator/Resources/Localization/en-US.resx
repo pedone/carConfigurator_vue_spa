@@ -159,11 +159,11 @@
   <data name="ModelHeader" xml:space="preserve">
     <value>Choose your model</value>
   </data>
-  <data name="PaintsHeader" xml:space="preserve">
-    <value>Paints</value>
+  <data name="ExteriorHeader" xml:space="preserve">
+    <value>Exterior</value>
   </data>
-  <data name="PaintsTitle" xml:space="preserve">
-    <value>Paint</value>
+  <data name="ExteriorTitle" xml:space="preserve">
+    <value>Exterior</value>
   </data>
   <data name="ProductTitle" xml:space="preserve">
     <value>Car Configurator</value>

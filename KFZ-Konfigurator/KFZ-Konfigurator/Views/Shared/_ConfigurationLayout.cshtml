@@ -15,9 +15,9 @@
     {
         viewKind = ConfigurationViewKind.Accessories;
     }
-    else if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.PaintViewModel>).IsAssignableFrom(modelType))
+    else if (typeof(KFZ_Konfigurator.ViewModels.ExteriorPageViewModel).IsAssignableFrom(modelType))
     {
-        viewKind = ConfigurationViewKind.Paint;
+        viewKind = ConfigurationViewKind.Exterior;
     }
 
     bool isModelSelection = viewKind == ConfigurationViewKind.ModelSelection;
@@ -67,7 +67,7 @@
                 <div class="navbar-nav">
                     <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.EngineSettings, "active")">@LocalizationManager.Localize("EngineSettingsHeader")</a>
                     <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.Accessories, "active")">@LocalizationManager.Localize("AccessoriesHeader")</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Paints)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.Paint, "active")">@LocalizationManager.Localize("PaintsHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Exterior)" class="nav-item nav-link @Helper.If(viewKind == ConfigurationViewKind.Exterior, "active")">@LocalizationManager.Localize("ExteriorHeader")</a>
                 </div>
             </div>
         </div>

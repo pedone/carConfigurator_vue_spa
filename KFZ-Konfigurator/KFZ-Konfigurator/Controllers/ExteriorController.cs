@@ -12,17 +12,20 @@ using System.Web.Mvc;
 
 namespace KFZ_Konfigurator.Controllers
 {
-    public class PaintController : Controller
+    public class ExteriorController : Controller
     {
-        [Route("configuration/models/model-{id}/paint", Name = Constants.Routes.Paints)]
+        [Route("configuration/models/model-{id}/exterior", Name = Constants.Routes.Exterior)]
         public ActionResult Index()
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                var settings = context.Paints.ToList()
+                var paints = context.Paints.ToList()
                     .Select(cur => new PaintViewModel(cur))
                     .ToList();
-                return View(settings);
+                return View(new ExteriorPageViewModel
+                {
+                    Paints = paints
+                });
             }
         }
     }

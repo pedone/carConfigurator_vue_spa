@@ -160,6 +160,24 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exterior.
+        /// </summary>
+        internal static string ExteriorHeader {
+            get {
+                return ResourceManager.GetString("ExteriorHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exterior.
+        /// </summary>
+        internal static string ExteriorTitle {
+            get {
+                return ResourceManager.GetString("ExteriorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to from.
         /// </summary>
         internal static string from {
@@ -183,24 +201,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string ModelHeader {
             get {
                 return ResourceManager.GetString("ModelHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Paints.
-        /// </summary>
-        internal static string PaintsHeader {
-            get {
-                return ResourceManager.GetString("PaintsHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Paint.
-        /// </summary>
-        internal static string PaintsTitle {
-            get {
-                return ResourceManager.GetString("PaintsTitle", resourceCulture);
             }
         }
         

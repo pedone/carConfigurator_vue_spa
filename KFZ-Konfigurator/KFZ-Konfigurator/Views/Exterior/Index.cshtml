@@ -1,16 +1,16 @@
 ﻿@using KFZ_Konfigurator.Resources.Localization;
-@model IEnumerable<KFZ_Konfigurator.ViewModels.PaintViewModel>
+@model KFZ_Konfigurator.ViewModels.ExteriorPageViewModel
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = LocalizationManager.Localize("PaintsTitle");
+    ViewBag.Title = LocalizationManager.Localize("ExteriorTitle");
     //ViewBag.BackgroundImage = "accessories.png";
 }
 
-<h2>@LocalizationManager.Localize("PaintsHeader")</h2>
+<h2>@LocalizationManager.Localize("ExteriorHeader")</h2>
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Paints)
     {
         <div class="card col-sm-4 rounded-0">
             <div class="card-header">

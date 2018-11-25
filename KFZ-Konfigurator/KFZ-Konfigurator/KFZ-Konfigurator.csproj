@@ -171,10 +171,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
+    <Compile Include="Controllers\ExteriorController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PaintController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,6 +258,7 @@
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
@@ -383,7 +384,7 @@
     <Content Include="Views\Shared\_ConfigurationLayout.cshtml" />
     <Content Include="Views\EngineSettings\Index.cshtml" />
     <Content Include="Views\Accessories\Index.cshtml" />
-    <Content Include="Views\Paint\Index.cshtml" />
+    <Content Include="Views\Exterior\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
