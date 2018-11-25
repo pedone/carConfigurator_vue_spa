@@ -9,23 +9,23 @@ namespace KFZ_Konfigurator
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/lib/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Scripts/lib/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapKnockout").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/knockout-{version}.js",
-                      "~/Scripts/underscore-{version}.js",
-                      "~/Scripts/popper.js"));
+                      "~/Scripts/lib/bootstrap.js",
+                      "~/Scripts/lib/knockout-{version}.js",
+                      "~/Scripts/lib/underscore-{version}.js",
+                      "~/Scripts/lib/popper.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/app/styles.css"));
+                      "~/Content/lib/bootstrap.css",
+                      "~/Content/lib/site.css",
+                      "~/Content/lib/app/styles.css"));
         }
     }
 }

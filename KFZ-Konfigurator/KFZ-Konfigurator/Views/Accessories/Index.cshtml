@@ -61,7 +61,6 @@
         var selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
         var viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting });
 
-        console.log("viewModel: " + JSON.stringify(viewModel));
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });

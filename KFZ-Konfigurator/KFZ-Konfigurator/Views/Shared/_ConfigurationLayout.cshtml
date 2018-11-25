@@ -38,7 +38,6 @@
 @if (!isModelSelection)
 {
     var activeModel = SessionData.ActiveConfiguration.CarModel;
-    //var engineHeader =
     @section CartOverview {
         <div class="card rounded-0">
             @*<img class="card-img-top" alt=""*@
@@ -76,7 +75,7 @@
 }
 
 @section scripts {
-    <script type="text/javascript" src="@Url.Content("/Js/ConfigurationViewModel.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Js/AjaxHelper.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
     @RenderSection("scripts", required: false)
 }
