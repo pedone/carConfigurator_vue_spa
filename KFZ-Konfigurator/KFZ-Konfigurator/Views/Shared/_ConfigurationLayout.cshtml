@@ -7,11 +7,11 @@
 
     ConfigurationViewKind viewKind = ConfigurationViewKind.ModelSelection;
     Type modelType = Model.GetType();
-    if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>).IsAssignableFrom(modelType))
+    if (typeof(KFZ_Konfigurator.ViewModels.EngineSettingsPageViewModel).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.EngineSettings;
     }
-    else if (typeof(IEnumerable<KFZ_Konfigurator.ViewModels.AccessoryViewModel>).IsAssignableFrom(modelType))
+    else if (typeof(KFZ_Konfigurator.ViewModels.AccessoriesPageViewModel).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.Accessories;
     }
@@ -55,9 +55,7 @@
             <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
             @if (!isModelSelection)
             {
-                <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
-                    <h2 class="overlap-top-left">@modelHeader</h2>
-                </a>
+                <h2 class="overlap-top-left">@modelHeader</h2>
             }
         </div>
     </div>

@@ -1,22 +1,29 @@
 ﻿/**
  * @param {string} url
- * @param {ViewModel|Array.<ViewModel>} viewModel
+ * @param {string} data
  * @param {string} antiForgeryToken
  * @returns {jqXHR}
  */
-function saveViewModel(url, viewModel, antiForgeryToken) {
+function saveViewModel(url, data, antiForgeryToken) {
     //TODO handle viewModel list
     /** @type {Object} */
-    var data = {
-        id: viewModel.id
+    var dataObject = {
+        data: data
     };
     if (antiForgeryToken) {
-        data.__RequestVerificationToken = antiForgeryToken;
+        dataObject.__RequestVerificationToken = antiForgeryToken;
     }
     return $.ajax({
         type: "Post",
         url: url,
-        data: data,
+        data: dataObject,
         contentType: "application/x-www-form-urlencoded"
     });
+}
+/**
+ * @param {Document} document
+ * @returns {string}
+ */
+function getAntiForgeryToken(document) {
+    return document.find("[name='__RequestVerificationToken']").val();
 }

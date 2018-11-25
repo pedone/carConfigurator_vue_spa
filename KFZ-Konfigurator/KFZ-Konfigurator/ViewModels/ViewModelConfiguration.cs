@@ -17,38 +17,18 @@ namespace KFZ_Konfigurator.ViewModels
             get => _items.Select(cur => cur.Price).Aggregate((next, result) => result + next);
         }
 
-        public CarModelViewModel CarModel
-        {
-            get => Get<CarModelViewModel>().FirstOrDefault();
-            set => Add(value);
-        }
-        public EngineSettingsViewModel EngineSettings
-        {
-            get => Get<EngineSettingsViewModel>().FirstOrDefault();
-            set => Add(value);
-        }
+        public CarModelViewModel CarModel { get; set; }
+        public int EngineSettingsId { get; set; } = -1;
 
-        public IEnumerable<T> Get<T>()
-        {
-            return _items.OfType<T>();
-        }
+        public int[] AccessoryIds { get; set; }
 
-        public void Reset(bool keepCarModel = false)
+        /// <summary>
+        /// Reset everything except for the car model
+        /// </summary>
+        public void Reset()
         {
-            var selectedCarModel = keepCarModel ? CarModel : null;
-            _items.Clear();
-            CarModel = selectedCarModel;
-        }
-
-        public void Add(ViewModelBase item)
-        {
-            if (item != null && !Contains(item))
-                _items.Add(item);
-        }
-
-        private bool Contains(ViewModelBase item)
-        {
-            return _items.Any(cur => cur.GetType() == item.GetType() && cur.Id == item.Id);
+            EngineSettingsId = -1;
+            AccessoryIds = null;
         }
     }
 }

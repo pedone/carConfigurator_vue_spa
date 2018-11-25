@@ -34,44 +34,43 @@ namespace KFZ_Konfigurator.Controllers
                     SessionData.ActiveConfiguration.CarModel = new CarModelViewModel(selectedCarModel);
                 }
 
-                var selectedId = SessionData.ActiveConfiguration.EngineSettings?.Id ?? -1;
+                var selectedId = SessionData.ActiveConfiguration.EngineSettingsId;
                 var settings = context.EngineSettings.ToList()
                     .Where(cur => cur.CarModel.Id == id)
                     .Select(cur => new EngineSettingsViewModel(cur) { IsSelected = (cur.Id == selectedId) })
                     .OrderBy(cur => cur.Price)
                     .ToList();
                 if (selectedId == -1)
+                {
                     settings.First().IsSelected = true;
+                    SessionData.ActiveConfiguration.EngineSettingsId = settings.First().Id;
+                }
 
-                return View(settings);
+                //get selected accessories
+                var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
+                IEnumerable<AccessoryViewModel> selectedAccessories = null;
+                if (accessoryIds != null && accessoryIds.Any())
+                    selectedAccessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
+                        .ToList()
+                        .Select(cur => new AccessoryViewModel(cur))
+                        .ToList();
+
+                return View(new EngineSettingsPageViewModel
+                {
+                    EngineSettings = settings,
+                    SelectedAccessories = selectedAccessories
+                });
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedEngineSettings(int id)
+        public ActionResult SetSelectedEngineSettings(int data)
         {
             if (!Request.IsAjaxRequest())
                 throw new InvalidOperationException("This action must be called with ajax");
 
-            // engine settings already selected
-            if (SessionData.ActiveConfiguration.EngineSettings?.Id == id)
-                return new EmptyResult();
-
-            using (var context = new CarConfiguratorEntityContext())
-            {
-                var settings = context.EngineSettings.FirstOrDefault(cur => cur.Id == id);
-                if (settings == null)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.NotFound;
-                    return Json(new { Success = "false", Message = $"EngineSettings with id {id} not found" });
-                }
-
-                if (SessionData.ActiveConfiguration.EngineSettings != null)
-                    SessionData.ActiveConfiguration.Reset(true);
-
-                SessionData.ActiveConfiguration.EngineSettings = new EngineSettingsViewModel(settings);
-            }
+            SessionData.ActiveConfiguration.EngineSettingsId = data;
             return new EmptyResult();
         }
     }

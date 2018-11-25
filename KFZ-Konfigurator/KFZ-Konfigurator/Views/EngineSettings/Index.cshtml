@@ -1,7 +1,7 @@
 ﻿@using KFZ_Konfigurator.Helper;
 @using KFZ_Konfigurator.Resources.Localization;
 
-@model IEnumerable<KFZ_Konfigurator.ViewModels.EngineSettingsViewModel>
+@model KFZ_Konfigurator.ViewModels.EngineSettingsPageViewModel
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -11,11 +11,11 @@
 
 @Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("EngineSettingsHeader")</h2>
-<div data-bind="text: enginePrice"></div>
+<div data-bind="text: fullPrice"></div>
 
 <div class="list-group">
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.EngineSettings)
     {
         <a class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center @Helper.If(item.IsSelected, "active")"
            data-toggle="list"
@@ -58,16 +58,17 @@
 
 @section scripts {
     <script type="text/javascript">
-        var engineSettings = @Html.Raw(Json.Encode(Model));
-        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings });
+        var engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
+        var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
+        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });
 
         $(window).on("beforeunload", function () {
-            var antiForgeryToken = $("[name='__RequestVerificationToken']").val();
-            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.getSelectedEngine(), antiForgeryToken)
+            var antiForgeryToken = getAntiForgeryToken($(document));
+            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.getSelectedEngineId(), antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

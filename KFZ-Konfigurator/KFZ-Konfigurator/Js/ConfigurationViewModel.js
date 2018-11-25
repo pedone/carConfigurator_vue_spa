@@ -30,20 +30,53 @@ class ConfigurationViewModel {
         this.accessoriesPrice = ko.computed(calculatePriceFactory(self.accessoriesById));
 
         /** @type {number} */
+        this.selectedEnginePrice = (data.selectedEngineSetting && data.selectedEngineSetting.Price) || 0;
+
+        /** @type {number} */
+        this.selectedAccessoriesPrice = calculatePrice(data.selectedAccessories);
+
+        /** @type {number} */
         this.fullPrice = ko.computed(function () {
-            return self.enginePrice() + self.accessoriesPrice();
+            /** @type {number} */
+            var enginePrice = self.selectedEnginePrice || self.enginePrice();
+            /** @type {number} */
+            var accessoriesPrice = self.selectedAccessoriesPrice || self.accessoriesPrice();
+
+            return enginePrice + accessoriesPrice;
         });
 
         /**
-         * @param {Array.<ViewModel>} items
+         * @param {Array.<ViewModelData>} items
+         * @returns {number}
+         */
+        function calculatePrice(items) {
+            if (!items) {
+                return 0;
+            }
+
+            return _.chain(items)
+                .map((cur) => cur.Price)
+                .reduce((memo, cur) => memo + cur, 0);
+        }
+
+        /**
+         * @param {Array.<ViewModelData>} items
          * @returns {Object.<ViewModel>}
          */
         function toViewModelDictionary(items) {
             /** @type {Object.<ViewModel>} */
             var result = {};
 
-            _.each(items, (cur) => { result[cur.Id] = new ViewModel(cur) });
+            _.each(items, (cur) => { result[cur.Id] = new ViewModel(cur); });
             return result;
+        }
+
+        /**
+         * @param {Array.<ViewModelData>} items
+         * @returns {Array.<ViewModel>}
+         */
+        function toViewModelArray(items) {
+            return _.map(items, (cur) => new ViewModel(cur));
         }
 
         /** 
@@ -52,26 +85,29 @@ class ConfigurationViewModel {
          */
         function calculatePriceFactory(items) {
             return function () {
-                var i;
-                /** @type {number} */
-                var result = 0;
-
-                var values = _.values(items);
-                for (i = 0; i < values.length; i += 1) {
-                    if (values[i].isSelected()) {
-                        result += values[i].price;
-                    }
-                }
-                return result;
+                return _.chain(items)
+                    .filter((cur) => cur.isSelected())
+                    .map((cur) => cur.price)
+                    .reduce((memo, cur) => memo + cur, 0);
             }
         }
 
-        /** @returns {ViewModel} */
-        this.getSelectedEngine = function () {
+        /** @returns {number|null} */
+        this.getSelectedEngineId = function () {
             /** @type {Array.<ViewModel>} */
             var engineSettings = _.values(self.engineSettingsById);
 
-            return _.find(engineSettings, (cur) => { return cur.isSelected(); });
+            var selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
+            return selectedEngine && selectedEngine.id;
+        };
+
+        /** @returns {Array.<number>} */
+        this.getSelectedAccessoryIds = function () {
+            /** @type {Array.<ViewModel>} */
+            var accessories = _.values(self.accessoriesById);
+
+            var selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
+            return _.map(selectedItems, (cur) => cur.id);
         };
 
         /** @param {number} settingsId */
@@ -92,6 +128,8 @@ class ConfigurationViewModel {
 
 /**
  * @typedef {Object} ConfigurationData
- * @property {Array.<ViewModel>} engineSettings
- * @property {Array.<ViewModel>} accessories
+ * @property {Array.<ViewModelData>} engineSettings
+ * @property {Array.<ViewModelData>} accessories
+ * @property {Array.<ViewModelData>} selectedAccessories
+ * @property {ViewModelData} selectedEngineSetting
  */

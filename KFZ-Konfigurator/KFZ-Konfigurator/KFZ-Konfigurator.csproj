@@ -254,8 +254,10 @@
     </Compile>
     <Compile Include="Resources\Localization\LocalizationManager.cs" />
     <Compile Include="SessionData.cs" />
+    <Compile Include="ViewModels\AccessoriesPageViewModel.cs" />
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
+    <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
