@@ -19,6 +19,7 @@ namespace KFZ_Konfigurator.ViewModels
 
         public CarModelViewModel CarModel { get; set; }
         public int EngineSettingsId { get; set; } = -1;
+        public int PaintId { get; set; } = -1;
 
         public int[] AccessoryIds { get; set; }
 
@@ -28,6 +29,7 @@ namespace KFZ_Konfigurator.ViewModels
         public void Reset()
         {
             EngineSettingsId = -1;
+            PaintId = -1;
             AccessoryIds = null;
         }
     }

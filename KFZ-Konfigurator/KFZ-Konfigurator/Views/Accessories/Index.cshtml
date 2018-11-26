@@ -1,6 +1,4 @@
 ﻿@using KFZ_Konfigurator.Models;
-@using KFZ_Konfigurator.Resources.Localization;
-
 @model KFZ_Konfigurator.ViewModels.AccessoriesPageViewModel
 
 @{
@@ -41,7 +39,7 @@
                         <div class="card-header">
                             <input type="checkbox" data-bind="checked: $root.accessoriesById[@item.Id].isSelected" />
                             <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
-                            <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price) EUR</h6>
+                            <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price)</h6>
                         </div>
                         <div class="card-body">
                             <div class="card-text">
@@ -59,7 +57,8 @@
     <script type="text/javascript">
         var accessories = @Html.Raw(Json.Encode(Model.Accessories));
         var selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
-        var viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting });
+        var selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
+        var viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting, selectedPaint: selectedPaint });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);

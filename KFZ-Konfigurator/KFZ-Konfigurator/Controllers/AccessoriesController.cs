@@ -23,17 +23,26 @@ namespace KFZ_Konfigurator.Controllers
 
             using (var context = new CarConfiguratorEntityContext())
             {
+                //accessories
                 var selectedIds = SessionData.ActiveConfiguration.AccessoryIds;
                 var accessories = context.Accessories.ToList()
                     .Select(cur => new AccessoryViewModel(cur) { IsSelected = selectedIds?.Contains(cur.Id) ?? false })
                     .OrderBy(cur => cur.Price)
                     .ToList();
 
+                //engine
                 var selectedEngineSetting = new EngineSettingsViewModel(context.EngineSettings.First(cur => cur.Id == SessionData.ActiveConfiguration.EngineSettingsId));
+
+                //paint
+                PaintViewModel selectedPaint = null;
+                if (SessionData.ActiveConfiguration.PaintId != -1)
+                    selectedPaint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
+
                 return View(new AccessoriesPageViewModel
                 {
                     Accessories = accessories,
-                    SelectedEngineSetting = selectedEngineSetting
+                    SelectedEngineSetting = selectedEngineSetting,
+                    SelectedPaint = selectedPaint
                 });
             }
         }

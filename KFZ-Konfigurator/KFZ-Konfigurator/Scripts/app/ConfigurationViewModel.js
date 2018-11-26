@@ -23,6 +23,12 @@ class ConfigurationViewModel {
         /** @type {Object.<ViewModel>} */
         this.accessoriesById = toViewModelDictionary(data.accessories);
 
+        /** @type {Object.<ViewModel>} */
+        this.paintById = toViewModelDictionary(data.paints);
+
+        /** @type {string} */
+        this.selectedPaintId = ko.observable(getInitialSelectedId(data.paints));
+
         /** @type {number} */
         this.enginePrice = ko.computed(calculatePriceFactory(self.engineSettingsById));
 
@@ -30,7 +36,13 @@ class ConfigurationViewModel {
         this.accessoriesPrice = ko.computed(calculatePriceFactory(self.accessoriesById));
 
         /** @type {number} */
+        this.paintPrice = ko.computed(calculatePaintPrice);
+
+        /** @type {number} */
         this.selectedEnginePrice = (data.selectedEngineSetting && data.selectedEngineSetting.Price) || 0;
+
+        /** @type {number} */
+        this.selectedPaintPrice = (data.selectedPaint && data.selectedPaint.Price) || 0;
 
         /** @type {number} */
         this.selectedAccessoriesPrice = calculatePrice(data.selectedAccessories);
@@ -41,9 +53,35 @@ class ConfigurationViewModel {
             var enginePrice = self.selectedEnginePrice || self.enginePrice();
             /** @type {number} */
             var accessoriesPrice = self.selectedAccessoriesPrice || self.accessoriesPrice();
+            /** @type {number} */
+            var paintPrice = self.selectedPaintPrice || self.paintPrice();
 
-            return enginePrice + accessoriesPrice;
+            return enginePrice + accessoriesPrice + paintPrice;
         });
+
+        /**
+         * @param {Array.<ViewModelData>} items
+         * @returns {string}
+         */
+        function getInitialSelectedId(items) {
+            if (!items || items.length === 0) {
+                return -1;
+            }
+
+            /** @type {ViewModelData} */
+            var selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
+            return selectedItem.Id.toString();
+        }
+
+        /**
+         * @returns {number}
+         */
+        function calculatePaintPrice() {
+            /** @type {ViewModel} */
+            var selectedPaint = self.paintById[self.selectedPaintId()];
+
+            return (selectedPaint && selectedPaint.price) || 0;
+        }
 
         /**
          * @param {Array.<ViewModelData>} items
@@ -71,14 +109,6 @@ class ConfigurationViewModel {
             return result;
         }
 
-        /**
-         * @param {Array.<ViewModelData>} items
-         * @returns {Array.<ViewModel>}
-         */
-        function toViewModelArray(items) {
-            return _.map(items, (cur) => new ViewModel(cur));
-        }
-
         /** 
          *  @param {Object.<ViewModel>} items
          *  @returns {function() : number}
@@ -99,6 +129,11 @@ class ConfigurationViewModel {
 
             var selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
             return selectedEngine && selectedEngine.id;
+        };
+
+        /** @returns {number|null} */
+        this.getSelectedPaintId = function () {
+            return self.selectedPaintId();
         };
 
         /** @returns {Array.<number>} */
@@ -130,6 +165,8 @@ class ConfigurationViewModel {
  * @typedef {Object} ConfigurationData
  * @property {Array.<ViewModelData>} engineSettings
  * @property {Array.<ViewModelData>} accessories
+ * @property {Array.<ViewModelData>} paints
  * @property {Array.<ViewModelData>} selectedAccessories
  * @property {ViewModelData} selectedEngineSetting
+ * @property {ViewModelData} selectedPaint
  */

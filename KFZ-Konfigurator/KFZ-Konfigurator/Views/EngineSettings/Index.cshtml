@@ -1,6 +1,4 @@
 ﻿@using KFZ_Konfigurator.Helper;
-@using KFZ_Konfigurator.Resources.Localization;
-
 @model KFZ_Konfigurator.ViewModels.EngineSettingsPageViewModel
 
 @{
@@ -60,7 +58,8 @@
     <script type="text/javascript">
         var engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
         var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
-        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories });
+        var selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
+        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);

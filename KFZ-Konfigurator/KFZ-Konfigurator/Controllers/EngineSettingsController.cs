@@ -46,19 +46,27 @@ namespace KFZ_Konfigurator.Controllers
                     SessionData.ActiveConfiguration.EngineSettingsId = settings.First().Id;
                 }
 
-                //get selected accessories
+                //accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
                 IEnumerable<AccessoryViewModel> selectedAccessories = null;
                 if (accessoryIds != null && accessoryIds.Any())
+                {
                     selectedAccessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
                         .ToList()
                         .Select(cur => new AccessoryViewModel(cur))
                         .ToList();
+                }
+
+                //paint
+                PaintViewModel selectedPaint = null;
+                if (SessionData.ActiveConfiguration.PaintId != -1)
+                    selectedPaint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
 
                 return View(new EngineSettingsPageViewModel
                 {
                     EngineSettings = settings,
-                    SelectedAccessories = selectedAccessories
+                    SelectedAccessories = selectedAccessories,
+                    SelectedPaint = selectedPaint
                 });
             }
         }

@@ -1,6 +1,4 @@
 ﻿@using KFZ_Konfigurator.Helper;
-@using KFZ_Konfigurator.ViewModels;
-@using KFZ_Konfigurator.Resources.Localization;
 @using KFZ_Konfigurator.Views;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,7 +40,9 @@
         <div class="card rounded-0">
             @*<img class="card-img-top" alt=""*@
             <div class="card-body">
-                <h5 class="card-title">@modelHeader</h5>
+                <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
+                    <h5 class="card-title">@modelHeader</h5>
+                </a>
             </div>
         </div>
     }
