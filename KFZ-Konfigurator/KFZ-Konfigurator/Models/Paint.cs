@@ -19,5 +19,6 @@ namespace KFZ_Konfigurator.Models
         public double Price { get; set; }
         public PaintCategory Category { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
     }
 }

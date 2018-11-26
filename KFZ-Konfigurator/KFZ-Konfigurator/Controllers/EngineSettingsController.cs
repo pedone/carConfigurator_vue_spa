@@ -13,39 +13,26 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class EngineSettingsController : Controller
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(EngineSettingsController));
+
         [Route("configuration/models/model-{id}/enginesettings", Name = Constants.Routes.EngineSettings)]
         public ActionResult Index(int id)
         {
+            if (!SessionData.ActiveConfiguration.IsValid(id, out string error))
+            {
+                Log.Error(error);
+                return RedirectToRoute(Constants.Routes.ModelOverview);
+            }
+
             using (var context = new CarConfiguratorEntityContext())
             {
-                var selectedCarModel = context.CarModels.FirstOrDefault(cur => cur.Id == id);
-                if (selectedCarModel == null)
-                    throw new ArgumentException($"Car model with id {id} was not found in database");
-
-                var existingCarModel = SessionData.ActiveConfiguration.CarModel;
-                if (existingCarModel == null)
-                {
-                    SessionData.ActiveConfiguration.CarModel = new CarModelViewModel(selectedCarModel);
-                }
-                else if (existingCarModel.Id != selectedCarModel.Id)
-                {
-                    // if the car model changed, clear the last configuration
-                    SessionData.ActiveConfiguration.Reset();
-                    SessionData.ActiveConfiguration.CarModel = new CarModelViewModel(selectedCarModel);
-                }
-
+                var carModel = context.CarModels.First(cur => cur.Id == id);
                 //engine settings
                 var selectedId = SessionData.ActiveConfiguration.EngineSettingsId;
-                var settings = context.EngineSettings.ToList()
-                    .Where(cur => cur.CarModel.Id == id)
+                var settings = carModel.EngineSettings.ToList()
                     .Select(cur => new EngineSettingsViewModel(cur) { IsSelected = (cur.Id == selectedId) })
                     .OrderBy(cur => cur.Price)
                     .ToList();
-                if (selectedId == -1)
-                {
-                    settings.First().IsSelected = true;
-                    SessionData.ActiveConfiguration.EngineSettingsId = settings.First().Id;
-                }
 
                 //accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
@@ -59,14 +46,10 @@ namespace KFZ_Konfigurator.Controllers
                 }
 
                 //paint
-                PaintViewModel selectedPaint = null;
-                if (SessionData.ActiveConfiguration.PaintId != -1)
-                    selectedPaint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
+                PaintViewModel selectedPaint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
 
                 //rims
-                RimViewModel selectedRims = null;
-                if (SessionData.ActiveConfiguration.RimId != -1)
-                    selectedRims = new RimViewModel(context.Rims.First(cur => cur.Id == SessionData.ActiveConfiguration.RimId));
+                RimViewModel selectedRims = new RimViewModel(context.Rims.First(cur => cur.Id == SessionData.ActiveConfiguration.RimId));
 
                 return View(new EngineSettingsPageViewModel
                 {
@@ -80,12 +63,12 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedEngineSettings(int data)
+        public ActionResult SetSelectedEngineSettings(int id)
         {
             if (!Request.IsAjaxRequest())
                 throw new InvalidOperationException("This action must be called with ajax");
 
-            SessionData.ActiveConfiguration.EngineSettingsId = data;
+            SessionData.ActiveConfiguration.EngineSettingsId = id;
             return new EmptyResult();
         }
     }

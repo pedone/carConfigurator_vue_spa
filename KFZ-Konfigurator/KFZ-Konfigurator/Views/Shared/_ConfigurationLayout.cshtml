@@ -43,6 +43,15 @@
                 <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
                     <h5 class="card-title">@modelHeader</h5>
                 </a>
+                <div>
+                    base price: <span data-bind="text: basePrice"></span>
+                </div>
+                <div>
+                    extras: <span data-bind="text: extrasPrice"></span>
+                </div>
+                <div>
+                    price: <span data-bind="text: fullPrice"></span>
+                </div>
             </div>
         </div>
     }

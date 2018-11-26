@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/26/2018 01:48:05
+-- Date Created: 11/26/2018 18:58:00
 -- Generated from EDMX file: D:\Documents\Projects\CC-KFZ-Generator\git\KFZ-Konfigurator\KFZ-Konfigurator\Models\CarConfiguratorModel.edmx
 -- --------------------------------------------------
 
@@ -34,6 +34,9 @@ IF OBJECT_ID(N'[dbo].[FK_ConfigurationAccessory_Configuration]', 'F') IS NOT NUL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ConfigurationAccessory_Accessory]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ConfigurationAccessory] DROP CONSTRAINT [FK_ConfigurationAccessory_Accessory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RimConfiguration]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Configurations] DROP CONSTRAINT [FK_RimConfiguration];
 GO
 
 -- --------------------------------------------------
@@ -100,7 +103,8 @@ CREATE TABLE [dbo].[Paints] (
     [Color] nvarchar(max)  NOT NULL,
     [Price] float  NOT NULL,
     [Category] int  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [IsDefault] bit  NULL
 );
 GO
 
@@ -108,7 +112,8 @@ GO
 CREATE TABLE [dbo].[Rims] (
     [Id] int  NOT NULL,
     [Price] float  NOT NULL,
-    [Size] int  NOT NULL
+    [Size] int  NOT NULL,
+    [IsDefault] bit  NULL
 );
 GO
 

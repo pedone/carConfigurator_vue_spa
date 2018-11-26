@@ -22,5 +22,39 @@ namespace KFZ_Konfigurator.Controllers
                 return View(context.CarModels.ToList().Select(cur => new CarModelViewModel(cur)).ToList());
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetCarModel(int id)
+        {
+            if (!Request.IsAjaxRequest())
+                throw new InvalidOperationException("This action must be called with ajax");
+
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var selectedCarModel = context.CarModels.FirstOrDefault(cur => cur.Id == id);
+                if (selectedCarModel == null)
+                    throw new ArgumentException($"Car model with id {id} was not found in database");
+
+                SessionData.ActiveConfiguration.Reset();
+
+                //set model
+                SessionData.ActiveConfiguration.CarModel = new CarModelViewModel(selectedCarModel);
+
+                //set default engine settings
+                var cheapestSettings = selectedCarModel.EngineSettings
+                    .OrderBy(cur => cur.Price)
+                    .First();
+                SessionData.ActiveConfiguration.EngineSettingsId = cheapestSettings.Id;
+
+                //set default paint
+                SessionData.ActiveConfiguration.PaintId = context.Paints.First(cur => cur.IsDefault == true).Id;
+
+                //set default rims
+                SessionData.ActiveConfiguration.RimId = context.Rims.First(cur => cur.IsDefault == true).Id;
+
+                return new EmptyResult();
+            }
+        }
     }
 }

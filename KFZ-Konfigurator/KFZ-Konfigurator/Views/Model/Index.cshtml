@@ -6,6 +6,7 @@
     ViewBag.BackgroundImage = "carConfiguration.png";
 }
 
+@Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("ModelHeader")</h2>
 
 <div class="row">
@@ -25,8 +26,26 @@
                         @LocalizationManager.Localize(nameof(item.BaseSettings.Emission)): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
                     </div>
                 </div>
-                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
+                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" onclick="setCarModel(@item.Id, this.href, event)" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
             </div>
         </div>
     }
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        function setCarModel(id, targetUrl, e) {
+            e.preventDefault();
+            var antiForgeryToken = getAntiForgeryToken($(document));
+            saveViewModel("/Model/SetCarModel", id, antiForgeryToken)
+                .done((data) => {
+                    window.location.href = targetUrl;
+                })
+                .fail((data) => {
+                    console.log("fail: " + JSON.stringify(data));
+                    //alert("failed");
+                    //TODO
+                });
+        };
+    </script>
+}

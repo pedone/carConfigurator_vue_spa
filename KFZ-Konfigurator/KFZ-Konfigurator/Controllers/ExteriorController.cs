@@ -14,12 +14,16 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class ExteriorController : Controller
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(EngineSettingsController));
+
         [Route("configuration/models/model-{id}/exterior", Name = Constants.Routes.Exterior)]
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            //TODO select default engine settings or redirect to engine settings view
-            if (SessionData.ActiveConfiguration.EngineSettingsId == -1)
-                throw new InvalidOperationException("Engine settings are not set");
+            if (!SessionData.ActiveConfiguration.IsValid(id, out string error))
+            {
+                Log.Error(error);
+                return RedirectToRoute(Constants.Routes.ModelOverview);
+            }
 
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -29,22 +33,12 @@ namespace KFZ_Konfigurator.Controllers
                     .Select(cur => new PaintViewModel(cur) { IsSelected = (cur.Id == selectedId) })
                     .OrderBy(cur => cur.Category)
                     .ToList();
-                if (selectedId == -1)
-                {
-                    paints.First().IsSelected = true;
-                    SessionData.ActiveConfiguration.PaintId = paints.First().Id;
-                }
 
                 // rims
                 selectedId = SessionData.ActiveConfiguration.RimId;
                 var rims = context.Rims.ToList()
                     .Select(cur => new RimViewModel(cur) { IsSelected = (cur.Id == selectedId) })
                     .ToList();
-                if (selectedId == -1)
-                {
-                    rims.First().IsSelected = true;
-                    SessionData.ActiveConfiguration.RimId = rims.First().Id;
-                }
 
                 // accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;

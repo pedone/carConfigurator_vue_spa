@@ -14,12 +14,16 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class AccessoriesController : Controller
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(EngineSettingsController));
+
         [Route("configuration/models/model-{id}/accessories", Name = Constants.Routes.Accessories)]
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            //TODO select default engine settings or redirect to engine settings view
-            if (SessionData.ActiveConfiguration.EngineSettingsId == -1)
-                throw new InvalidOperationException("Engine settings are not set");
+            if (!SessionData.ActiveConfiguration.IsValid(id, out string error))
+            {
+                Log.Error(error);
+                return RedirectToRoute(Constants.Routes.ModelOverview);
+            }
 
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -55,13 +59,20 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedAccessories(string data)
+        public ActionResult SetSelectedAccessories(string id)
         {
             if (!Request.IsAjaxRequest())
                 throw new InvalidOperationException("This action must be called with ajax");
 
-            var ids = data.Trim('[', ']').Split(',').Select(cur => int.Parse(cur)).ToList();
-            SessionData.ActiveConfiguration.AccessoryIds = ids.ToArray();
+            if (id == null)
+            {
+                SessionData.ActiveConfiguration.AccessoryIds = null;
+            }
+            else
+            {
+                var ids = id.Trim('[', ']').Split(',').Select(cur => int.Parse(cur)).ToList();
+                SessionData.ActiveConfiguration.AccessoryIds = ids.ToArray();
+            }
             return new EmptyResult();
         }
     }

@@ -12,7 +12,7 @@ namespace KFZ_Konfigurator.Models.SeedData
         {
             get
             {
-                yield return new Paint { Id = 0, Category = PaintCategory.Uni, Name = "Black", Color = "#040203", Price = 0 };
+                yield return new Paint { Id = 0, Category = PaintCategory.Uni, Name = "Black", Color = "#040203", Price = 0, IsDefault = true };
                 yield return new Paint { Id = 1, Category = PaintCategory.Uni, Name = "White", Color = "#EFEFE7", Price = 0 };
                 yield return new Paint { Id = 2, Category = PaintCategory.Metalic, Name = "Silver", Color = "#A6AAAD", Price = 900 };
                 yield return new Paint { Id = 3, Category = PaintCategory.Metalic, Name = "White", Color = "#CACFCB", Price = 900 };

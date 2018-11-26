@@ -127,11 +127,13 @@ class ConfigurationViewModel {
         });
 
         /** @type {number} */
-        this.fullPrice = ko.computed(function () {
-            /** @type {number} */
-            var enginePrice = self._setEnginePrice || self._computedEnginePrice();
+        this.basePrice = ko.computed(function () {
+            return self._setEnginePrice || self._computedEnginePrice();
+        });
 
-            return enginePrice + self.extrasPrice();
+        /** @type {number} */
+        this.fullPrice = ko.computed(function () {
+            return self.basePrice() + self.extrasPrice();
         });
     }
 

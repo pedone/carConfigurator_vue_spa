@@ -7,16 +7,6 @@ namespace KFZ_Konfigurator.ViewModels
 {
     public class ViewModelConfiguration
     {
-        private List<ViewModelBase> _items = new List<ViewModelBase>();
-
-        /// <summary>
-        /// Get the accumulated price of all items
-        /// </summary>
-        public double Price
-        {
-            get => _items.Select(cur => cur.Price).Aggregate((next, result) => result + next);
-        }
-
         public CarModelViewModel CarModel { get; set; }
         public int EngineSettingsId { get; set; } = -1;
         public int PaintId { get; set; } = -1;
@@ -24,15 +14,39 @@ namespace KFZ_Konfigurator.ViewModels
 
         public int[] AccessoryIds { get; set; }
 
-        /// <summary>
-        /// Reset everything except for the car model
-        /// </summary>
         public void Reset()
         {
+            CarModel = null;
             EngineSettingsId = -1;
             PaintId = -1;
             RimId = -1;
             AccessoryIds = null;
+        }
+
+        public bool IsValid(int id, out string error)
+        {
+            error = null;
+            if (SessionData.ActiveConfiguration.CarModel == null)
+            {
+                error = "car model is not set";
+            }
+            else if (SessionData.ActiveConfiguration.CarModel.Id != id)
+            {
+                error = "selected car model does not match requested model";
+            }
+            else if (EngineSettingsId == -1)
+            {
+                error = "engine settings id not set";
+            }
+            else if (PaintId == -1)
+            {
+                error = "paint id not set";
+            }
+            else if (RimId == -1)
+            {
+                error = "rim id not set";
+            }
+            return error == null;
         }
     }
 }

@@ -8,7 +8,6 @@
 
 @Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("PaintsHeader")</h2>
-<div data-bind="text: fullPrice"></div>
 
 <div class="row">
     @foreach (var item in Model.Paints)
@@ -61,7 +60,7 @@
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
             var sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
-            saveViewModel("/Exterior/SetSelectedPaintAndRim", sendData, antiForgeryToken)
+            saveViewModel("/Exterior/SetSelectedPaintAndRim", null, antiForgeryToken, sendData)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

@@ -11,7 +11,6 @@
 
 @Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("AccessoriesHeader")</h2>
-<div data-bind="text: fullPrice"></div>
 
 <div>
     <nav>
@@ -67,7 +66,8 @@
 
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/Accessories/SetSelectedAccessories", ko.toJSON(viewModel.selectedAccessoryIds), antiForgeryToken)
+            var selectedAccessories = viewModel.selectedAccessoryIds;
+            saveViewModel("/Accessories/SetSelectedAccessories", selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

@@ -17,5 +17,6 @@ namespace KFZ_Konfigurator.Models
         public int Id { get; set; }
         public double Price { get; set; }
         public int Size { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
     }
 }
