@@ -68,7 +68,7 @@
 
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.getSelectedEngineId(), antiForgeryToken)
+            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.selectedEngineId, antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

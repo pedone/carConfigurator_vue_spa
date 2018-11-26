@@ -67,7 +67,7 @@
 
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/Accessories/SetSelectedAccessories", ko.toJSON(viewModel.getSelectedAccessoryIds()), antiForgeryToken)
+            saveViewModel("/Accessories/SetSelectedAccessories", ko.toJSON(viewModel.selectedAccessoryIds), antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

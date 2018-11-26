@@ -60,7 +60,7 @@
 
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
-            var sendData = { paintId: viewModel.getSelectedPaintId(), rimId: viewModel.getSelectedRimsId() };
+            var sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
             saveViewModel("/Exterior/SetSelectedPaintAndRim", sendData, antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));

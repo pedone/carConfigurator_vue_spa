@@ -34,6 +34,7 @@ namespace KFZ_Konfigurator.Controllers
                     SessionData.ActiveConfiguration.CarModel = new CarModelViewModel(selectedCarModel);
                 }
 
+                //engine settings
                 var selectedId = SessionData.ActiveConfiguration.EngineSettingsId;
                 var settings = context.EngineSettings.ToList()
                     .Where(cur => cur.CarModel.Id == id)
