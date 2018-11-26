@@ -159,8 +159,8 @@
   <data name="ModelHeader" xml:space="preserve">
     <value>Choose your model</value>
   </data>
-  <data name="ExteriorHeader" xml:space="preserve">
-    <value>Exterior</value>
+  <data name="PaintsHeader" xml:space="preserve">
+    <value>Paint</value>
   </data>
   <data name="ExteriorTitle" xml:space="preserve">
     <value>Exterior</value>
@@ -173,5 +173,11 @@
   </data>
   <data name="StartConfiguration" xml:space="preserve">
     <value>Start Configuration</value>
+  </data>
+  <data name="ExteriorHeader" xml:space="preserve">
+    <value>Exterior</value>
+  </data>
+  <data name="RimsHeader" xml:space="preserve">
+    <value>Rims</value>
   </data>
 </root>

@@ -26,5 +26,6 @@ namespace KFZ_Konfigurator.Models
         public virtual EngineSettings EngineSetting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Accessory> Accessories { get; set; }
+        public virtual Rim Rims { get; set; }
     }
 }

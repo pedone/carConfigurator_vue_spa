@@ -26,8 +26,14 @@ class ConfigurationViewModel {
         /** @type {Object.<ViewModel>} */
         this.paintById = toViewModelDictionary(data.paints);
 
+        /** @type {Object.<ViewModel>} */
+        this.rimsById = toViewModelDictionary(data.rims);
+
         /** @type {string} */
         this.selectedPaintId = ko.observable(getInitialSelectedId(data.paints));
+
+        /** @type {string} */
+        this.selectedRimsId = ko.observable(getInitialSelectedId(data.rims));
 
         /** @type {number} */
         this.enginePrice = ko.computed(calculatePriceFactory(self.engineSettingsById));
@@ -39,10 +45,16 @@ class ConfigurationViewModel {
         this.paintPrice = ko.computed(calculatePaintPrice);
 
         /** @type {number} */
+        this.rimsPrice = ko.computed(calculateRimsPrice);
+
+        /** @type {number} */
         this.selectedEnginePrice = (data.selectedEngineSetting && data.selectedEngineSetting.Price) || 0;
 
         /** @type {number} */
         this.selectedPaintPrice = (data.selectedPaint && data.selectedPaint.Price) || 0;
+
+        /** @type {number} */
+        this.selectedRimsPrice = (data.selectedRims && data.selectedRims.Price) || 0;
 
         /** @type {number} */
         this.selectedAccessoriesPrice = calculatePrice(data.selectedAccessories);
@@ -55,8 +67,10 @@ class ConfigurationViewModel {
             var accessoriesPrice = self.selectedAccessoriesPrice || self.accessoriesPrice();
             /** @type {number} */
             var paintPrice = self.selectedPaintPrice || self.paintPrice();
+            /** @type {number} */
+            var rimsPrice = self.selectedRimsPrice || self.rimsPrice();
 
-            return enginePrice + accessoriesPrice + paintPrice;
+            return enginePrice + accessoriesPrice + paintPrice + rimsPrice;
         });
 
         /**
@@ -81,6 +95,16 @@ class ConfigurationViewModel {
             var selectedPaint = self.paintById[self.selectedPaintId()];
 
             return (selectedPaint && selectedPaint.price) || 0;
+        }
+
+        /**
+         * @returns {number}
+         */
+        function calculateRimsPrice() {
+            /** @type {ViewModel} */
+            var selectedRims = self.rimsById[self.selectedRimsId()];
+
+            return (selectedRims && selectedRims.price) || 0;
         }
 
         /**
@@ -136,6 +160,11 @@ class ConfigurationViewModel {
             return self.selectedPaintId();
         };
 
+        /** @returns {number|null} */
+        this.getSelectedRimsId = function () {
+            return self.selectedRimsId();
+        };
+
         /** @returns {Array.<number>} */
         this.getSelectedAccessoryIds = function () {
             /** @type {Array.<ViewModel>} */
@@ -169,4 +198,5 @@ class ConfigurationViewModel {
  * @property {Array.<ViewModelData>} selectedAccessories
  * @property {ViewModelData} selectedEngineSetting
  * @property {ViewModelData} selectedPaint
+ * @property {ViewModelData} selectedRims
  */

@@ -37,6 +37,7 @@ namespace KFZ_Konfigurator.Models.SeedData
                     context.Engines.AddRange(engines);
                     context.EngineSettings.AddRange(engineSettings);
 
+                    context.Rims.AddRange(RimSeedData.Data);
                     context.Paints.AddRange(PaintSeedData.Data);
                     context.Accessories.AddRange(AccessorySeedData.Data);
                 }
@@ -53,6 +54,7 @@ namespace KFZ_Konfigurator.Models.SeedData
             context.Engines.RemoveRange(context.Engines);
             context.Accessories.RemoveRange(context.Accessories);
             context.Paints.RemoveRange(context.Paints);
+            context.Rims.RemoveRange(context.Rims);
 
             context.SaveChanges();
         }

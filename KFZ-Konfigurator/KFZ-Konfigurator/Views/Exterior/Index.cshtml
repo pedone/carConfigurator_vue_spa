@@ -7,7 +7,7 @@
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("ExteriorHeader")</h2>
+<h2>@LocalizationManager.Localize("PaintsHeader")</h2>
 <div data-bind="text: fullPrice"></div>
 
 <div class="row">
@@ -28,14 +28,31 @@
     }
 </div>
 
+<h2>@LocalizationManager.Localize("RimsHeader")</h2>
+<div class="row">
+    @foreach (var item in Model.Rims)
+    {
+        <div class="card col-sm-4 rounded-0">
+            <div class="card-header">
+                <input type="radio" name="rimOptions" value="@item.Id" data-bind="checked: $root.selectedRimsId" />
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Size)</h5>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    @Html.DisplayFor(_ => item.Price)
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 @section scripts {
     <script type="text/javascript">
         var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
         var selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
         var paints = @Html.Raw(Json.Encode(Model.Paints));
-        var viewModel = new ConfigurationViewModel({ paints: paints, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
-
-        console.log(viewModel);
+        var rims = @Html.Raw(Json.Encode(Model.Rims));
+        var viewModel = new ConfigurationViewModel({ paints: paints, rims: rims, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
@@ -43,7 +60,8 @@
 
         $(window).on("beforeunload", function () {
             var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/Exterior/SetSelectedPaint", viewModel.getSelectedPaintId(), antiForgeryToken)
+            var sendData = { paintId: viewModel.getSelectedPaintId(), rimId: viewModel.getSelectedRimsId() };
+            saveViewModel("/Exterior/SetSelectedPaintAndRim", sendData, antiForgeryToken)
                 .done((data) => {
                     console.log("success: " + JSON.stringify(data));
                     //alert("worked");

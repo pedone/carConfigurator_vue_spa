@@ -23,6 +23,7 @@ namespace KFZ_Konfigurator.Controllers
 
             using (var context = new CarConfiguratorEntityContext())
             {
+                // paint
                 var selectedId = SessionData.ActiveConfiguration.PaintId;
                 var paints = context.Paints.ToList()
                     .Select(cur => new PaintViewModel(cur) { IsSelected = (cur.Id == selectedId) })
@@ -34,7 +35,18 @@ namespace KFZ_Konfigurator.Controllers
                     SessionData.ActiveConfiguration.PaintId = paints.First().Id;
                 }
 
-                //accessories
+                // rims
+                selectedId = SessionData.ActiveConfiguration.RimId;
+                var rims = context.Rims.ToList()
+                    .Select(cur => new RimViewModel(cur) { IsSelected = (cur.Id == selectedId) })
+                    .ToList();
+                if (selectedId == -1)
+                {
+                    rims.First().IsSelected = true;
+                    SessionData.ActiveConfiguration.RimId = rims.First().Id;
+                }
+
+                // accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
                 IEnumerable<AccessoryViewModel> selectedAccessories = null;
                 if (accessoryIds != null && accessoryIds.Any())
@@ -51,6 +63,7 @@ namespace KFZ_Konfigurator.Controllers
                 return View(new ExteriorPageViewModel
                 {
                     Paints = paints,
+                    Rims = rims,
                     SelectedAccessories = selectedAccessories,
                     SelectedEngineSetting = selectedEngineSetting
                 });
@@ -59,12 +72,13 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedPaint(int data)
+        public ActionResult SetSelectedPaintAndRim([Bind(Include = "PaintId")] int paintId, [Bind(Include = "RimId")] int rimId)
         {
             if (!Request.IsAjaxRequest())
                 throw new InvalidOperationException("This action must be called with ajax");
 
-            SessionData.ActiveConfiguration.PaintId = data;
+            SessionData.ActiveConfiguration.PaintId = paintId;
+            SessionData.ActiveConfiguration.RimId = rimId;
             return new EmptyResult();
         }
     }

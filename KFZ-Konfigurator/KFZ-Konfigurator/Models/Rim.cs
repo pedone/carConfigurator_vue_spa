@@ -16,8 +16,6 @@ namespace KFZ_Konfigurator.Models
     {
         public int Id { get; set; }
         public double Price { get; set; }
-        public RimBrandKind Brand { get; set; }
         public int Size { get; set; }
-        public string Color { get; set; }
     }
 }

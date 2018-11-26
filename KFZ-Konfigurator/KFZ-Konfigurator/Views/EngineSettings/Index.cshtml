@@ -59,7 +59,8 @@
         var engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
         var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
         var selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
-        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint });
+        var selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
+        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint, selectedRims: selectedRims });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);

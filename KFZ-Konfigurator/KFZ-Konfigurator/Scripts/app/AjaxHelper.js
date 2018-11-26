@@ -1,15 +1,23 @@
 ﻿/**
  * @param {string} url
- * @param {string} data
+ * @param {string|Object} data
  * @param {string} antiForgeryToken
  * @returns {jqXHR}
  */
 function saveViewModel(url, data, antiForgeryToken) {
-    //TODO handle viewModel list
+    var i;
     /** @type {Object} */
-    var dataObject = {
-        data: data
-    };
+    var dataObject = {};
+
+    if (typeof data === 'object') {
+        for (i in data) {
+            if (data.hasOwnProperty(i)) {
+                dataObject[i] = data[i];
+            }
+        }
+    } else {
+        dataObject.data = data;
+    }
     if (antiForgeryToken) {
         dataObject.__RequestVerificationToken = antiForgeryToken;
     }

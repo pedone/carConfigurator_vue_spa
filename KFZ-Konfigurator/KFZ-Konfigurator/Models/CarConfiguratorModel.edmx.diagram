@@ -16,6 +16,8 @@
         <AssociationConnector Association="CarConfiguratorModel.PaintConfiguration" />
         <AssociationConnector Association="CarConfiguratorModel.EngineSettingsConfiguration" />
         <AssociationConnector Association="CarConfiguratorModel.ConfigurationAccessory" />
+        <EntityTypeShape EntityType="CarConfiguratorModel.Rim" Width="1.5" PointX="4" PointY="6.125" />
+        <AssociationConnector Association="CarConfiguratorModel.RimConfiguration" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

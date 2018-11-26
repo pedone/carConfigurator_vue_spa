@@ -62,11 +62,17 @@ namespace KFZ_Konfigurator.Controllers
                 if (SessionData.ActiveConfiguration.PaintId != -1)
                     selectedPaint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
 
+                //rims
+                RimViewModel selectedRims = null;
+                if (SessionData.ActiveConfiguration.RimId != -1)
+                    selectedRims = new RimViewModel(context.Rims.First(cur => cur.Id == SessionData.ActiveConfiguration.RimId));
+
                 return View(new EngineSettingsPageViewModel
                 {
                     EngineSettings = settings,
                     SelectedAccessories = selectedAccessories,
-                    SelectedPaint = selectedPaint
+                    SelectedPaint = selectedPaint,
+                    SelectedRims = selectedRims
                 });
             }
         }

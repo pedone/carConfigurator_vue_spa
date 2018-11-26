@@ -242,6 +242,7 @@
     </Compile>
     <Compile Include="Models\SeedData\EngineSettingsSeedData.cs" />
     <Compile Include="Models\SeedData\PaintSeedData.cs" />
+    <Compile Include="Models\SeedData\RimSeedData.cs" />
     <Compile Include="Models\SeedData\SeedData.cs" />
     <Compile Include="Models\WheelDriveKind.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
@@ -259,6 +260,7 @@
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
+    <Compile Include="ViewModels\RimViewModel.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
@@ -281,6 +283,7 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />
     <Content Include="Scripts\app\AjaxHelper.js" />
     <Content Include="Models\CarConfiguratorModel.Context.tt">

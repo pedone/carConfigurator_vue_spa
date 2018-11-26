@@ -38,6 +38,10 @@
       <End Role="Accessory" EntitySet="Accessories" />
       <End Role="ConfigurationAccessory" EntitySet="ConfigurationAccessory" />
     </AssociationSet>
+    <AssociationSet Name="RimConfiguration" Association="CarConfiguratorModel.Store.RimConfiguration">
+      <End Role="Rim" EntitySet="Rims" />
+      <End Role="Configuration" EntitySet="Configurations" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accessories">
     <Key>
@@ -80,9 +84,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="Brand" Type="int" Nullable="false" />
     <Property Name="Size" Type="int" Nullable="false" />
-    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CarModels">
     <Key>
@@ -110,6 +112,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Paint_Id" Type="int" Nullable="false" />
     <Property Name="EngineSetting_Id" Type="int" Nullable="false" />
+    <Property Name="Rims_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ConfigurationAccessory">
     <Key>
@@ -164,6 +167,18 @@
       </Principal>
       <Dependent Role="Configuration">
         <PropertyRef Name="EngineSetting_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RimConfiguration">
+    <End Role="Rim" Type="CarConfiguratorModel.Store.Rims" Multiplicity="1" />
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rim">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Configuration">
+        <PropertyRef Name="Rims_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -236,9 +251,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="Brand" Type="CarConfiguratorModel.RimBrandKind" Nullable="false" />
           <Property Name="Size" Type="Int32" Nullable="false" />
-          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CarConfiguratorEntityContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accessories" EntityType="Self.Accessory" />
@@ -267,6 +280,10 @@
           <AssociationSet Name="ConfigurationAccessory" Association="CarConfiguratorModel.ConfigurationAccessory">
             <End Role="Configuration" EntitySet="Configurations" />
             <End Role="Accessory" EntitySet="Accessories" />
+          </AssociationSet>
+          <AssociationSet Name="RimConfiguration" Association="CarConfiguratorModel.RimConfiguration">
+            <End Role="Rim" EntitySet="Rims" />
+            <End Role="Configuration" EntitySet="Configurations" />
           </AssociationSet>
         </EntityContainer>
         <EnumType Name="AccessoryCategory">
@@ -373,6 +390,7 @@
           <NavigationProperty Name="Paint" Relationship="CarConfiguratorModel.PaintConfiguration" FromRole="Configuration" ToRole="Paint" />
           <NavigationProperty Name="EngineSetting" Relationship="CarConfiguratorModel.EngineSettingsConfiguration" FromRole="Configuration" ToRole="EngineSettings" />
           <NavigationProperty Name="Accessories" Relationship="CarConfiguratorModel.ConfigurationAccessory" FromRole="Configuration" ToRole="Accessory" />
+          <NavigationProperty Name="Rims" Relationship="CarConfiguratorModel.RimConfiguration" FromRole="Configuration" ToRole="Rim" />
         </EntityType>
         <Association Name="PaintConfiguration">
           <End Type="CarConfiguratorModel.Paint" Role="Paint" Multiplicity="1" />
@@ -385,6 +403,10 @@
         <Association Name="ConfigurationAccessory">
           <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
           <End Type="CarConfiguratorModel.Accessory" Role="Accessory" Multiplicity="*" />
+        </Association>
+        <Association Name="RimConfiguration">
+          <End Type="CarConfiguratorModel.Rim" Role="Rim" Multiplicity="1" />
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -433,9 +455,7 @@
         <MappingFragment StoreEntitySet="Rims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
           <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -505,6 +525,14 @@
       </EndProperty>
       <EndProperty Name="Accessory">
         <ScalarProperty Name="Id" ColumnName="Accessories_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RimConfiguration" TypeName="CarConfiguratorModel.RimConfiguration" StoreEntitySet="Configurations">
+      <EndProperty Name="Rim">
+        <ScalarProperty Name="Id" ColumnName="Rims_Id" />
+      </EndProperty>
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

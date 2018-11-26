@@ -205,11 +205,29 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paint.
+        /// </summary>
+        internal static string PaintsHeader {
+            get {
+                return ResourceManager.GetString("PaintsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car Configurator.
         /// </summary>
         internal static string ProductTitle {
             get {
                 return ResourceManager.GetString("ProductTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rims.
+        /// </summary>
+        internal static string RimsHeader {
+            get {
+                return ResourceManager.GetString("RimsHeader", resourceCulture);
             }
         }
         
