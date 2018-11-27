@@ -30,7 +30,7 @@ namespace KFZ_Konfigurator.Controllers
                 //accessories
                 var selectedIds = SessionData.ActiveConfiguration.AccessoryIds;
                 var accessories = context.Accessories.ToList()
-                    .Select(cur => new AccessoryViewModel(cur) { IsSelected = selectedIds?.Contains(cur.Id) ?? false })
+                    .Select(cur => new AccessoryViewModel(cur) { IsSelected = selectedIds.Contains(cur.Id) })
                     .OrderBy(cur => cur.Price)
                     .ToList();
 

@@ -49,10 +49,15 @@ namespace KFZ_Konfigurator.Models.SeedData
 
         private static void ClearDB(CarConfiguratorEntityContext context)
         {
+            //remove many to many relationships first
+            foreach (var cur in context.Configurations)
+                cur.Accessories.Clear();
+
+            context.Configurations.RemoveRange(context.Configurations);
+            context.Accessories.RemoveRange(context.Accessories);
             context.EngineSettings.RemoveRange(context.EngineSettings);
             context.CarModels.RemoveRange(context.CarModels);
             context.Engines.RemoveRange(context.Engines);
-            context.Accessories.RemoveRange(context.Accessories);
             context.Paints.RemoveRange(context.Paints);
             context.Rims.RemoveRange(context.Rims);
 

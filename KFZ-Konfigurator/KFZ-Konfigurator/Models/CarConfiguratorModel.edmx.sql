@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/26/2018 18:58:00
+-- Date Created: 11/27/2018 02:35:51
 -- Generated from EDMX file: D:\Documents\Projects\CC-KFZ-Generator\git\KFZ-Konfigurator\KFZ-Konfigurator\Models\CarConfiguratorModel.edmx
 -- --------------------------------------------------
 
@@ -139,6 +139,7 @@ GO
 -- Creating table 'Configurations'
 CREATE TABLE [dbo].[Configurations] (
     [Id] int IDENTITY(1,1) NOT NULL,
+    [Guid] nvarchar(max)  NOT NULL,
     [Paint_Id] int  NOT NULL,
     [EngineSetting_Id] int  NOT NULL,
     [Rims_Id] int  NOT NULL

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KFZ_Konfigurator.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,13 @@ namespace KFZ_Konfigurator.ViewModels
         public int PaintId { get; set; } = -1;
         public int RimId { get; set; } = -1;
 
-        public int[] AccessoryIds { get; set; }
+        private IEnumerable<int> _AccessoryIds;
+        public IEnumerable<int> AccessoryIds
+        {
+            get => _AccessoryIds ?? Enumerable.Empty<int>();
+            set => _AccessoryIds = value;
+        }
+        public string ConfigurationLink { get; set; }
 
         public void Reset()
         {
@@ -21,16 +28,17 @@ namespace KFZ_Konfigurator.ViewModels
             PaintId = -1;
             RimId = -1;
             AccessoryIds = null;
+            ConfigurationLink = null;
         }
 
-        public bool IsValid(int id, out string error)
+        public bool IsValid(int? id, out string error)
         {
             error = null;
             if (SessionData.ActiveConfiguration.CarModel == null)
             {
                 error = "car model is not set";
             }
-            else if (SessionData.ActiveConfiguration.CarModel.Id != id)
+            else if (id.HasValue && SessionData.ActiveConfiguration.CarModel.Id != id.Value)
             {
                 error = "selected car model does not match requested model";
             }

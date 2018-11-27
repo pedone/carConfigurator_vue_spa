@@ -179,8 +179,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\MathHelper.cs" />
+    <Compile Include="Helper\MiscHelper.cs" />
     <Compile Include="Models\Accessory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
@@ -226,13 +226,10 @@
     <Compile Include="Models\EngineSettings.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaintCategory.cs">
+    <Compile Include="Models\Paint.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SeedData\AccessorySeedData.cs" />
-    <Compile Include="Models\SeedData\CarModelSeedData.cs" />
-    <Compile Include="Models\SeedData\EngineSeedData.cs" />
-    <Compile Include="Models\Paint.cs">
+    <Compile Include="Models\PaintCategory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rim.cs">
@@ -241,6 +238,9 @@
     <Compile Include="Models\RimBrandKind.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SeedData\AccessorySeedData.cs" />
+    <Compile Include="Models\SeedData\CarModelSeedData.cs" />
+    <Compile Include="Models\SeedData\EngineSeedData.cs" />
     <Compile Include="Models\SeedData\EngineSettingsSeedData.cs" />
     <Compile Include="Models\SeedData\PaintSeedData.cs" />
     <Compile Include="Models\SeedData\RimSeedData.cs" />

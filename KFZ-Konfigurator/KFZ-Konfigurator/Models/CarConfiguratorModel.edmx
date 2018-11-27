@@ -112,6 +112,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Paint_Id" Type="int" Nullable="false" />
     <Property Name="EngineSetting_Id" Type="int" Nullable="false" />
     <Property Name="Rims_Id" Type="int" Nullable="false" />
@@ -395,6 +396,7 @@
           <NavigationProperty Name="EngineSetting" Relationship="CarConfiguratorModel.EngineSettingsConfiguration" FromRole="Configuration" ToRole="EngineSettings" />
           <NavigationProperty Name="Accessories" Relationship="CarConfiguratorModel.ConfigurationAccessory" FromRole="Configuration" ToRole="Accessory" />
           <NavigationProperty Name="Rims" Relationship="CarConfiguratorModel.RimConfiguration" FromRole="Configuration" ToRole="Rim" />
+          <Property Name="Guid" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="PaintConfiguration">
           <End Type="CarConfiguratorModel.Paint" Role="Paint" Multiplicity="1" />
@@ -405,7 +407,8 @@
           <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
         </Association>
         <Association Name="ConfigurationAccessory">
-          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" >
+          </End>
           <End Type="CarConfiguratorModel.Accessory" Role="Accessory" Multiplicity="*" />
         </Association>
         <Association Name="RimConfiguration">
@@ -490,6 +493,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Configuration)">
         <MappingFragment StoreEntitySet="Configurations">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

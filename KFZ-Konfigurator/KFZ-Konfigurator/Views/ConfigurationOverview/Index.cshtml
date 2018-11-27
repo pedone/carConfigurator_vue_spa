@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_FuelType")</th>
-            <td>@(LocalizationManager.LocalizeEnum<FuelKind>(Helper.EngineKindToFuelKind(Model.EngineSetting.Engine.EngineKind).ToString()))</td>
+            <td>@(LocalizationManager.LocalizeEnum<FuelKind>(MiscHelper.EngineKindToFuelKind(Model.EngineSetting.Engine.EngineKind).ToString()))</td>
         </tr>
     </tbody>
 </table>
@@ -54,11 +54,11 @@
     <div class="input-group-prepend">
         <button class="btn btn-outline-secondary" id="generateLinkButton" type="button">@LocalizationManager.Localize("GenerateConfigurationLink_Label")</button>
     </div>
-    <input type="text" class="form-control" readonly="readonly" />
+    <input type="text" class="form-control" readonly="readonly" id="configurationLink" value="@Model.ConfigurationLink" />
 </div>
 
 @section scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
         let accessories = @Html.Raw(Json.Encode(Model.Accessories));
         let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
         let paint = @Html.Raw(Json.Encode(Model.Paint));
@@ -68,7 +68,17 @@
         $(document).ready(function () {
             ko.applyBindings(viewModel);
 
-            $('#generateLinkButton')
+            $('#generateLinkButton').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ConfigurationOverview/GenerateConfigurationLink',
+                    dataType: 'text'
+                }).done(function (data) {
+                    $('#configurationLink').val(data);
+                }).fail(function () {
+                    //TODO
+                });
+            });
         });
-</script>
+    </script>
 }

@@ -1,4 +1,5 @@
-﻿using KFZ_Konfigurator.Models;
+﻿using KFZ_Konfigurator.Helper;
+using KFZ_Konfigurator.Models;
 using KFZ_Konfigurator.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace KFZ_Konfigurator.Controllers
                 //accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
                 IEnumerable<AccessoryViewModel> selectedAccessories = null;
-                if (accessoryIds != null && accessoryIds.Any())
+                if (accessoryIds.Any())
                 {
                     selectedAccessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
                         .ToList()
@@ -70,6 +71,28 @@ namespace KFZ_Konfigurator.Controllers
 
             SessionData.ActiveConfiguration.EngineSettingsId = id;
             return new EmptyResult();
+        }
+
+        [Route("configuration/load/{guid}", Name = Constants.Routes.LoadConfiguration)]
+        public ActionResult LoadConfiguration(string guid)
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var configuration = context.Configurations.FirstOrDefault(cur => cur.Guid == guid);
+                if (configuration == null)
+                    throw new ArgumentException("configuration not found");
+
+                var activeConfig = SessionData.ActiveConfiguration;
+                activeConfig.Reset();
+                activeConfig.CarModel = new CarModelViewModel(configuration.EngineSetting.CarModel);
+                activeConfig.EngineSettingsId = configuration.EngineSetting.Id;
+                activeConfig.PaintId = configuration.Paint.Id;
+                activeConfig.RimId = configuration.Rims.Id;
+                activeConfig.AccessoryIds = configuration.Accessories.Select(cur => cur.Id).ToList();
+                activeConfig.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, guid);
+            }
+
+            return RedirectToRoute(Constants.Routes.EngineSettings, new { id = SessionData.ActiveConfiguration.CarModel.Id });
         }
     }
 }
