@@ -55,27 +55,27 @@
 
 @section scripts {
     <script type="text/javascript">
-        var engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
-        var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
-        var selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
-        var selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
-        var viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint, selectedRims: selectedRims });
+        let engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
+        let selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
+        let selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
+        let selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
+        let viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint, selectedRims: selectedRims });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });
 
-        $(window).on("beforeunload", function () {
-            var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/EngineSettings/SetSelectedEngineSettings", viewModel.selectedEngineId, antiForgeryToken)
+        $(window).on('beforeunload', function () {
+            let antiForgeryToken = getAntiForgeryToken($(document));
+            saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineId, antiForgeryToken)
                 .done((data) => {
-                    console.log("success: " + JSON.stringify(data));
-                    //alert("worked");
+                    console.log('success: ' + JSON.stringify(data));
+                    //alert('worked');
                     //TODO
                 })
                 .fail((data) => {
-                    console.log("fail: " + JSON.stringify(data));
-                    //alert("failed");
+                    console.log('fail: ' + JSON.stringify(data));
+                    //alert('failed');
                     //TODO
                 });
         });

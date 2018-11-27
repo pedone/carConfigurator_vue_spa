@@ -47,28 +47,28 @@
 
 @section scripts {
     <script type="text/javascript">
-        var selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
-        var selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
-        var paints = @Html.Raw(Json.Encode(Model.Paints));
-        var rims = @Html.Raw(Json.Encode(Model.Rims));
-        var viewModel = new ConfigurationViewModel({ paints: paints, rims: rims, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
+        let selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
+        let selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
+        let paints = @Html.Raw(Json.Encode(Model.Paints));
+        let rims = @Html.Raw(Json.Encode(Model.Rims));
+        let viewModel = new ConfigurationViewModel({ paints: paints, rims: rims, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });
 
-        $(window).on("beforeunload", function () {
-            var antiForgeryToken = getAntiForgeryToken($(document));
-            var sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
-            saveViewModel("/Exterior/SetSelectedPaintAndRim", null, antiForgeryToken, sendData)
+        $(window).on('beforeunload', function () {
+            let antiForgeryToken = getAntiForgeryToken($(document));
+            let sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
+            saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
                 .done((data) => {
-                    console.log("success: " + JSON.stringify(data));
-                    //alert("worked");
+                    console.log('success: ' + JSON.stringify(data));
+                    //alert('worked');
                     //TODO
                 })
                 .fail((data) => {
-                    console.log("fail: " + JSON.stringify(data));
-                    //alert("failed");
+                    console.log('fail: ' + JSON.stringify(data));
+                    //alert('failed');
                     //TODO
                 });
         });

@@ -1,4 +1,4 @@
-﻿"use strict";
+﻿'use strict';
 
 class ViewModel {
     /** @param {ViewModelData} data */
@@ -117,11 +117,11 @@ class ConfigurationViewModel {
          */
         this.extrasPrice = ko.computed(function () {
             /** @type {number} */
-            var accessoriesPrice = self._setAccessoriesPrice || self._computedAccessoriesPrice();
+            let accessoriesPrice = self._setAccessoriesPrice || self._computedAccessoriesPrice();
             /** @type {number} */
-            var paintPrice = self._setPaintPrice || self._computedPaintPrice();
+            let paintPrice = self._setPaintPrice || self._computedPaintPrice();
             /** @type {number} */
-            var rimsPrice = self._setRimsPrice || self._computedRimsPrice();
+            let rimsPrice = self._setRimsPrice || self._computedRimsPrice();
 
             return accessoriesPrice + paintPrice + rimsPrice;
         });
@@ -148,7 +148,7 @@ class ConfigurationViewModel {
         }
 
         /** @type {ViewModelData} */
-        var selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
+        let selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
         return selectedItem.Id.toString();
     }
 
@@ -161,7 +161,7 @@ class ConfigurationViewModel {
     _calculatePriceBySelectedIdFactory(items, selectedId) {
         return function () {
             /** @type {ViewModel} */
-            var selectedItem = items[selectedId()];
+            let selectedItem = items[selectedId()];
             return (selectedItem && selectedItem.price) || 0;
         };
     }
@@ -209,18 +209,18 @@ class ConfigurationViewModel {
     /** @returns {number|null} */
     get selectedEngineId() {
         /** @type {Array.<ViewModel>} */
-        var engineSettings = _.values(self._engineSettingsById);
+        let engineSettings = _.values(self._engineSettingsById);
 
-        var selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
+        let selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
         return selectedEngine && selectedEngine.id;
     }
 
     /** @returns {Array.<number>} */
     get selectedAccessoryIds() {
         /** @type {Array.<ViewModel>} */
-        var accessories = _.values(self.accessoriesById);
+        let accessories = _.values(self.accessoriesById);
 
-        var selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
+        let selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
         return _.map(selectedItems, (cur) => cur.id);
     }
 

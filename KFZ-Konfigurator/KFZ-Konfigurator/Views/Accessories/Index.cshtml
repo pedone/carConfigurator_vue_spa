@@ -53,31 +53,31 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript">
-        var accessories = @Html.Raw(Json.Encode(Model.Accessories));
-        var selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
-        var selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
-        var selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
-        var viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting, selectedPaint: selectedPaint, selectedRims: selectedRims });
+<script type="text/javascript">
+        let accessories = @Html.Raw(Json.Encode(Model.Accessories));
+        let selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
+        let selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
+        let selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
+        let viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting, selectedPaint: selectedPaint, selectedRims: selectedRims });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });
 
-        $(window).on("beforeunload", function () {
-            var antiForgeryToken = getAntiForgeryToken($(document));
-            var selectedAccessories = viewModel.selectedAccessoryIds;
-            saveViewModel("/Accessories/SetSelectedAccessories", selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
+        $(window).on('beforeunload', function () {
+            let antiForgeryToken = getAntiForgeryToken($(document));
+            let selectedAccessories = viewModel.selectedAccessoryIds;
+            saveViewModel('/Accessories/SetSelectedAccessories', selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
                 .done((data) => {
-                    console.log("success: " + JSON.stringify(data));
-                    //alert("worked");
+                    console.log('success: ' + JSON.stringify(data));
+                    //alert('worked');
                     //TODO
                 })
                 .fail((data) => {
-                    console.log("fail: " + JSON.stringify(data));
-                    //alert("failed");
+                    console.log('fail: ' + JSON.stringify(data));
+                    //alert('failed');
                     //TODO
                 });
         });
-    </script>
+</script>
 }

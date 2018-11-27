@@ -52,21 +52,23 @@
 
 <div class="input-group mb-3">
     <div class="input-group-prepend">
-        <button class="btn btn-outline-secondary" type="button">@LocalizationManager.Localize("GenerateConfigurationLink_Label")</button>
+        <button class="btn btn-outline-secondary" id="generateLinkButton" type="button">@LocalizationManager.Localize("GenerateConfigurationLink_Label")</button>
     </div>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" readonly="readonly" />
 </div>
 
 @section scripts {
-    <script type="text/javascript">
-        var accessories = @Html.Raw(Json.Encode(Model.Accessories));
-        var engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
-        var paint = @Html.Raw(Json.Encode(Model.Paint));
-        var rims = @Html.Raw(Json.Encode(Model.Rims));
-        var viewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
+<script type="text/javascript">
+        let accessories = @Html.Raw(Json.Encode(Model.Accessories));
+        let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
+        let paint = @Html.Raw(Json.Encode(Model.Paint));
+        let rims = @Html.Raw(Json.Encode(Model.Rims));
+        let viewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
 
         $(document).ready(function () {
             ko.applyBindings(viewModel);
+
+            $('#generateLinkButton')
         });
-    </script>
+</script>
 }

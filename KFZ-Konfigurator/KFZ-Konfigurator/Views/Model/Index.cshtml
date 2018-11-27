@@ -33,20 +33,20 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript">
+    <script type='text/javascript'>
         $(document).ready(function () {
-            $("a.btn[data-id]").click(function (event) {
+            $('a.btn[data-id]').click(function (event) {
                 event.preventDefault();
-                let targetUrl = $(this).attr("href");
-                let id = $(this).data("id");
+                let targetUrl = $(this).attr('href');
+                let id = $(this).data('id');
                 let antiForgeryToken = getAntiForgeryToken($(document));
-                saveViewModel("/Model/SetCarModel", id, antiForgeryToken)
+                saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
                     .done(() => {
                         window.location.href = targetUrl;
                     })
                     .fail((data) => {
-                        console.log("fail: " + JSON.stringify(data));
-                        //alert("failed");
+                        console.log('fail: ' + JSON.stringify(data));
+                        //alert('failed');
                         //TODO
                     });
             });

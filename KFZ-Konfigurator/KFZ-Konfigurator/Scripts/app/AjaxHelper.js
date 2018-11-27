@@ -6,9 +6,9 @@
  * @returns {jqXHR}
  */
 function saveViewModel(url, id, antiForgeryToken, additionalData) {
-    var i;
+    let i;
     /** @type {Object} */
-    var dataObject = {};
+    let dataObject = {};
 
     if (id) {
         dataObject.id = id;
@@ -24,10 +24,10 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
         dataObject.__RequestVerificationToken = antiForgeryToken;
     }
     return $.ajax({
-        type: "Post",
+        type: 'Post',
         url: url,
         data: dataObject,
-        contentType: "application/x-www-form-urlencoded"
+        contentType: 'application/x-www-form-urlencoded'
     });
 }
 /**
@@ -35,5 +35,5 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
  * @returns {string}
  */
 function getAntiForgeryToken(document) {
-    return document.find("[name='__RequestVerificationToken']").val();
+    return document.find('[name='__RequestVerificationToken']').val();
 }
