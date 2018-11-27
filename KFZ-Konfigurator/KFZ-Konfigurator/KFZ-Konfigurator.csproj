@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
+    <Compile Include="Controllers\ConfigurationOverviewController.cs" />
     <Compile Include="Controllers\ExteriorController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
@@ -258,8 +259,10 @@
     <Compile Include="ViewModels\AccessoriesPageViewModel.cs" />
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationOverviewPageViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
+    <Compile Include="ViewModels\FuelKind.cs" />
     <Compile Include="ViewModels\RimViewModel.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
@@ -388,6 +391,7 @@
     <Content Include="Views\EngineSettings\Index.cshtml" />
     <Content Include="Views\Accessories\Index.cshtml" />
     <Content Include="Views\Exterior\Index.cshtml" />
+    <Content Include="Views\ConfigurationOverview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

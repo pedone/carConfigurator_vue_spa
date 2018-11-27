@@ -1,0 +1,72 @@
+﻿@using KFZ_Konfigurator.Models;
+@using KFZ_Konfigurator.ViewModels;
+@using KFZ_Konfigurator.Helper;
+@model KFZ_Konfigurator.ViewModels.ConfigurationOverviewPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
+    ViewBag.Title = LocalizationManager.Localize("ConfigurationOverviewTitle");
+    ViewBag.BackgroundImage = "carConfiguration.png";
+}
+
+@Html.AntiForgeryToken()
+<h2>@LocalizationManager.Localize("ConfigurationOverviewHeader")</h2>
+
+<h4>@LocalizationManager.Localize("ConfigurationOverview_TechnicalData_Header")</h4>
+<table class="table">
+    <tbody>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_Transmission")</th>
+            <td>@(Model.EngineSetting.Gears + LocalizationManager.Localize("TechnicalData_Transmission_LabelSuffix"))</td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_Acceleration")</th>
+            <td>@Model.EngineSetting.Acceleration s</td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_TopSpeed")</th>
+            <td>@Model.EngineSetting.TopSpeed km/h</td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_Consumption")</th>
+            <td>@Model.EngineSetting.Consumption l/100 km</td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_Performance")</th>
+            <td>@Model.EngineSetting.Engine.Performance kW (@Model.EngineSetting.Engine.PerformancePS PS)</td>
+        </tr>
+        <tr>
+            <th scope="row">CO<sub>2</sub>-@LocalizationManager.Localize("TechnicalData_Emissions")</th>
+            <td>@Model.EngineSetting.Emission g/km</td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_EngineSize")</th>
+            <td>@Model.EngineSetting.Engine.Size cm<sup>3</sup></td>
+        </tr>
+        <tr>
+            <th scope="row">@LocalizationManager.Localize("TechnicalData_FuelType")</th>
+            <td>@(LocalizationManager.LocalizeEnum<FuelKind>(Helper.EngineKindToFuelKind(Model.EngineSetting.Engine.EngineKind).ToString()))</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="button">@LocalizationManager.Localize("GenerateConfigurationLink_Label")</button>
+    </div>
+    <input type="text" class="form-control" />
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var accessories = @Html.Raw(Json.Encode(Model.Accessories));
+        var engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
+        var paint = @Html.Raw(Json.Encode(Model.Paint));
+        var rims = @Html.Raw(Json.Encode(Model.Rims));
+        var viewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
+
+        $(document).ready(function () {
+            ko.applyBindings(viewModel);
+        });
+    </script>
+}

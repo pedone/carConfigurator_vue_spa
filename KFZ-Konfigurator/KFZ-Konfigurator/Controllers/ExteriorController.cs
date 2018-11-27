@@ -14,7 +14,7 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class ExteriorController : Controller
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(EngineSettingsController));
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ExteriorController));
 
         [Route("configuration/models/model-{id}/exterior", Name = Constants.Routes.Exterior)]
         public ActionResult Index(int id)

@@ -14,7 +14,7 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class AccessoriesController : Controller
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(EngineSettingsController));
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AccessoriesController));
 
         [Route("configuration/models/model-{id}/accessories", Name = Constants.Routes.Accessories)]
         public ActionResult Index(int id)

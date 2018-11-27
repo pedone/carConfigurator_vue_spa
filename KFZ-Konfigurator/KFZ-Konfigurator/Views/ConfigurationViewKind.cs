@@ -10,6 +10,7 @@ namespace KFZ_Konfigurator.Views
         ModelSelection,
         EngineSettings,
         Accessories,
-        Exterior
+        Exterior,
+        Overview
     }
 }

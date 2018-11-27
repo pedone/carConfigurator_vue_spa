@@ -138,12 +138,6 @@
   <data name="ConfigurationDescription" xml:space="preserve">
     <value>Design your individual car by configuring each and every part of it</value>
   </data>
-  <data name="Consumption" xml:space="preserve">
-    <value>Consumption</value>
-  </data>
-  <data name="Emission" xml:space="preserve">
-    <value>Emission</value>
-  </data>
   <data name="EngineSettingsHeader" xml:space="preserve">
     <value>Engines</value>
   </data>
@@ -179,5 +173,53 @@
   </data>
   <data name="RimsHeader" xml:space="preserve">
     <value>Rims</value>
+  </data>
+  <data name="Configuration_GoToOverview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ConfigurationOverviewHeader" xml:space="preserve">
+    <value>Your Configuration</value>
+  </data>
+  <data name="ConfigurationOverviewTitle" xml:space="preserve">
+    <value>Configuration Overview</value>
+  </data>
+  <data name="ConfigurationOverview_TechnicalData_Header" xml:space="preserve">
+    <value>Technical Data</value>
+  </data>
+  <data name="TechnicalData_Acceleration" xml:space="preserve">
+    <value>Acceleration 0-100 km/h</value>
+  </data>
+  <data name="TechnicalData_Consumption" xml:space="preserve">
+    <value>Consumption</value>
+  </data>
+  <data name="TechnicalData_Emissions" xml:space="preserve">
+    <value>Emissions</value>
+  </data>
+  <data name="TechnicalData_EngineSize" xml:space="preserve">
+    <value>Engine Size</value>
+  </data>
+  <data name="TechnicalData_FuelType" xml:space="preserve">
+    <value>Fuel Type</value>
+  </data>
+  <data name="TechnicalData_Performance" xml:space="preserve">
+    <value>Max. Performance</value>
+  </data>
+  <data name="TechnicalData_TopSpeed" xml:space="preserve">
+    <value>Top Speed</value>
+  </data>
+  <data name="TechnicalData_Transmission" xml:space="preserve">
+    <value>Transmission</value>
+  </data>
+  <data name="FuelKind_Diesel" xml:space="preserve">
+    <value>Diesel</value>
+  </data>
+  <data name="FuelKind_Petrol" xml:space="preserve">
+    <value>Petrol</value>
+  </data>
+  <data name="GenerateConfigurationLink_Label" xml:space="preserve">
+    <value>Generate Link To Your Configuration</value>
+  </data>
+  <data name="TechnicalData_Transmission_LabelSuffix" xml:space="preserve">
+    <value>-Gear Transmission</value>
   </data>
 </root>

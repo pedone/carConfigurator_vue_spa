@@ -1,21 +1,26 @@
 ﻿@using KFZ_Konfigurator.Helper;
+@using KFZ_Konfigurator.ViewModels;
 @using KFZ_Konfigurator.Views;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ConfigurationViewKind viewKind = ConfigurationViewKind.ModelSelection;
     Type modelType = Model.GetType();
-    if (typeof(KFZ_Konfigurator.ViewModels.EngineSettingsPageViewModel).IsAssignableFrom(modelType))
+    if (typeof(EngineSettingsPageViewModel).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.EngineSettings;
     }
-    else if (typeof(KFZ_Konfigurator.ViewModels.AccessoriesPageViewModel).IsAssignableFrom(modelType))
+    else if (typeof(AccessoriesPageViewModel).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.Accessories;
     }
-    else if (typeof(KFZ_Konfigurator.ViewModels.ExteriorPageViewModel).IsAssignableFrom(modelType))
+    else if (typeof(ExteriorPageViewModel).IsAssignableFrom(modelType))
     {
         viewKind = ConfigurationViewKind.Exterior;
+    }
+    else if (typeof(ConfigurationOverviewPageViewModel).IsAssignableFrom(modelType))
+    {
+        viewKind = ConfigurationViewKind.Overview;
     }
 
     bool isModelSelection = viewKind == ConfigurationViewKind.ModelSelection;
@@ -43,15 +48,21 @@
                 <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
                     <h5 class="card-title">@modelHeader</h5>
                 </a>
-                <div>
-                    base price: <span data-bind="text: basePrice"></span>
+                <div class="card-text">
+                    <div>
+                        base price: <span data-bind="text: basePrice"></span>
+                    </div>
+                    <div>
+                        extras: <span data-bind="text: extrasPrice"></span>
+                    </div>
+                    <div>
+                        price: <span data-bind="text: fullPrice"></span>
+                    </div>
                 </div>
-                <div>
-                    extras: <span data-bind="text: extrasPrice"></span>
-                </div>
-                <div>
-                    price: <span data-bind="text: fullPrice"></span>
-                </div>
+                @if (viewKind != ConfigurationViewKind.Overview)
+                {
+                    <a href="@Url.RouteUrl(Constants.Routes.ConfigurationOverview)" class="btn btn-primary">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
+                }
             </div>
         </div>
     }

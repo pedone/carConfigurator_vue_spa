@@ -15,6 +15,7 @@ namespace KFZ_Konfigurator
             public const string EngineSettings = nameof(EngineSettings);
             public const string Exterior = nameof(Exterior);
             public const string Accessories = nameof(Accessories);
+            public const string ConfigurationOverview = nameof(ConfigurationOverview);
         }
         public static class SubSeries
         {

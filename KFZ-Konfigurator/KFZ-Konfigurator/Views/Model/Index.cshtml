@@ -20,13 +20,13 @@
             <div class="card-body">
                 <div class="card-text">
                     <div class="row">
-                        @LocalizationManager.Localize(nameof(item.BaseSettings.Consumption)): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
+                        @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
                     </div>
                     <div class="row">
-                        @LocalizationManager.Localize(nameof(item.BaseSettings.Emission)): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
+                        @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
                     </div>
                 </div>
-                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" onclick="setCarModel(@item.Id, this.href, event)" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
+                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" data-id="@item.Id" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
             </div>
         </div>
     }
@@ -34,18 +34,22 @@
 
 @section scripts {
     <script type="text/javascript">
-        function setCarModel(id, targetUrl, e) {
-            e.preventDefault();
-            var antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel("/Model/SetCarModel", id, antiForgeryToken)
-                .done((data) => {
-                    window.location.href = targetUrl;
-                })
-                .fail((data) => {
-                    console.log("fail: " + JSON.stringify(data));
-                    //alert("failed");
-                    //TODO
-                });
-        };
+        $(document).ready(function () {
+            $("a.btn[data-id]").click(function (event) {
+                event.preventDefault();
+                let targetUrl = $(this).attr("href");
+                let id = $(this).data("id");
+                let antiForgeryToken = getAntiForgeryToken($(document));
+                saveViewModel("/Model/SetCarModel", id, antiForgeryToken)
+                    .done(() => {
+                        window.location.href = targetUrl;
+                    })
+                    .fail((data) => {
+                        console.log("fail: " + JSON.stringify(data));
+                        //alert("failed");
+                        //TODO
+                    });
+            });
+        });
     </script>
 }

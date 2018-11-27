@@ -115,6 +115,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        internal static string Configuration_GoToOverview {
+            get {
+                return ResourceManager.GetString("Configuration_GoToOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it.
         /// </summary>
         internal static string ConfigurationDescription {
@@ -124,20 +133,29 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consumption.
+        ///   Looks up a localized string similar to Technical Data.
         /// </summary>
-        internal static string Consumption {
+        internal static string ConfigurationOverview_TechnicalData_Header {
             get {
-                return ResourceManager.GetString("Consumption", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverview_TechnicalData_Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Emission.
+        ///   Looks up a localized string similar to Your Configuration.
         /// </summary>
-        internal static string Emission {
+        internal static string ConfigurationOverviewHeader {
             get {
-                return ResourceManager.GetString("Emission", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuration Overview.
+        /// </summary>
+        internal static string ConfigurationOverviewTitle {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewTitle", resourceCulture);
             }
         }
         
@@ -187,11 +205,38 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diesel.
+        /// </summary>
+        internal static string FuelKind_Diesel {
+            get {
+                return ResourceManager.GetString("FuelKind_Diesel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Petrol.
+        /// </summary>
+        internal static string FuelKind_Petrol {
+            get {
+                return ResourceManager.GetString("FuelKind_Petrol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gears.
         /// </summary>
         internal static string Gears {
             get {
                 return ResourceManager.GetString("Gears", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate Link To Your Configuration.
+        /// </summary>
+        internal static string GenerateConfigurationLink_Label {
+            get {
+                return ResourceManager.GetString("GenerateConfigurationLink_Label", resourceCulture);
             }
         }
         
@@ -246,6 +291,87 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string StartConfiguration {
             get {
                 return ResourceManager.GetString("StartConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acceleration 0-100 km/h.
+        /// </summary>
+        internal static string TechnicalData_Acceleration {
+            get {
+                return ResourceManager.GetString("TechnicalData_Acceleration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consumption.
+        /// </summary>
+        internal static string TechnicalData_Consumption {
+            get {
+                return ResourceManager.GetString("TechnicalData_Consumption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emissions.
+        /// </summary>
+        internal static string TechnicalData_Emissions {
+            get {
+                return ResourceManager.GetString("TechnicalData_Emissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Engine Size.
+        /// </summary>
+        internal static string TechnicalData_EngineSize {
+            get {
+                return ResourceManager.GetString("TechnicalData_EngineSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fuel Type.
+        /// </summary>
+        internal static string TechnicalData_FuelType {
+            get {
+                return ResourceManager.GetString("TechnicalData_FuelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max. Performance.
+        /// </summary>
+        internal static string TechnicalData_Performance {
+            get {
+                return ResourceManager.GetString("TechnicalData_Performance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top Speed.
+        /// </summary>
+        internal static string TechnicalData_TopSpeed {
+            get {
+                return ResourceManager.GetString("TechnicalData_TopSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transmission.
+        /// </summary>
+        internal static string TechnicalData_Transmission {
+            get {
+                return ResourceManager.GetString("TechnicalData_Transmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -Gear Transmission.
+        /// </summary>
+        internal static string TechnicalData_Transmission_LabelSuffix {
+            get {
+                return ResourceManager.GetString("TechnicalData_Transmission_LabelSuffix", resourceCulture);
             }
         }
     }
