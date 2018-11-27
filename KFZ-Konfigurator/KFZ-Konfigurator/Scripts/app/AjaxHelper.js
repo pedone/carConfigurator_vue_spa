@@ -24,16 +24,17 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
         dataObject.__RequestVerificationToken = antiForgeryToken;
     }
     return $.ajax({
-        type: 'Post',
+        type: 'POST',
         url: url,
         data: dataObject,
         contentType: 'application/x-www-form-urlencoded'
     });
 }
+
 /**
  * @param {Document} document
  * @returns {string}
  */
 function getAntiForgeryToken(document) {
-    return document.find('[name='__RequestVerificationToken']').val();
+    return document.find('[name="__RequestVerificationToken"]').val();
 }

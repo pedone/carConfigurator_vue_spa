@@ -21,6 +21,7 @@ namespace KFZ_Konfigurator.Models
         }
     
         public int Id { get; set; }
+        public string Guid { get; set; }
     
         public virtual Paint Paint { get; set; }
         public virtual EngineSettings EngineSetting { get; set; }

@@ -43,7 +43,7 @@ namespace KFZ_Konfigurator.Controllers
                 // accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
                 IEnumerable<AccessoryViewModel> selectedAccessories = null;
-                if (accessoryIds != null && accessoryIds.Any())
+                if (accessoryIds.Any())
                 {
                     selectedAccessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
                         .ToList()

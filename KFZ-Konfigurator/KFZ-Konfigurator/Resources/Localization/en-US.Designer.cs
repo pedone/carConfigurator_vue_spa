@@ -160,6 +160,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Engines.
         /// </summary>
         internal static string EngineSettingsHeader {
@@ -232,7 +241,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate Link To Your Configuration.
+        ///   Looks up a localized string similar to Get Link To Your Configuration.
         /// </summary>
         internal static string GenerateConfigurationLink_Label {
             get {

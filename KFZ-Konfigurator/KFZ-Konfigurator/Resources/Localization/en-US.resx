@@ -217,9 +217,12 @@
     <value>Petrol</value>
   </data>
   <data name="GenerateConfigurationLink_Label" xml:space="preserve">
-    <value>Generate Link To Your Configuration</value>
+    <value>Get Link To Your Configuration</value>
   </data>
   <data name="TechnicalData_Transmission_LabelSuffix" xml:space="preserve">
     <value>-Gear Transmission</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
   </data>
 </root>

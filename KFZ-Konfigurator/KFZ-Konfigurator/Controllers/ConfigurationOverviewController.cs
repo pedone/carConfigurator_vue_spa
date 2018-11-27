@@ -1,4 +1,5 @@
-﻿using KFZ_Konfigurator.Models;
+﻿using KFZ_Konfigurator.Helper;
+using KFZ_Konfigurator.Models;
 using KFZ_Konfigurator.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace KFZ_Konfigurator.Controllers
                 //accessories
                 var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
                 IEnumerable<AccessoryViewModel> accessories = null;
-                if (accessoryIds != null && accessoryIds.Any())
+                if (accessoryIds.Any())
                 {
                     accessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
                         .ToList()
@@ -50,9 +51,42 @@ namespace KFZ_Konfigurator.Controllers
                     EngineSetting = engineSettings,
                     Accessories = accessories,
                     Paint = paint,
-                    Rims = rims
+                    Rims = rims,
+                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink
                 });
             }
+        }
+
+        [HttpPost]
+        public string GenerateConfigurationLink()
+        {
+            if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
+            {
+                Log.Error(error);
+                return error;
+            }
+            if (!string.IsNullOrEmpty(SessionData.ActiveConfiguration.ConfigurationLink))
+            {
+                return SessionData.ActiveConfiguration.ConfigurationLink;
+            }
+
+            var guid = MiscHelper.GenerateShortGuid();
+            var config = SessionData.ActiveConfiguration;
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var configuration = context.Configurations.Create();
+                configuration.Guid = guid;
+                configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == config.EngineSettingsId);
+                configuration.Paint = context.Paints.First(cur => cur.Id == config.PaintId);
+                configuration.Rims = context.Rims.First(cur => cur.Id == config.RimId);
+                configuration.Accessories = context.Accessories.Where(cur => config.AccessoryIds.Contains(cur.Id)).ToList();
+
+                context.Configurations.Add(configuration);
+                context.SaveChanges();
+            }
+
+            config.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, guid);
+            return config.ConfigurationLink;
         }
     }
 }
