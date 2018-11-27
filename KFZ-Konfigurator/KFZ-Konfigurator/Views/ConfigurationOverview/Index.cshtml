@@ -109,7 +109,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/GenerateConfigurationLink',
-                    data: { configurationName: configurationNameElement.val() },
+                    data: { configurationName: configurationNameElement.val() || 'empty' },
                     dataType: 'text'
                 }).done(function (data) {
                     generateLinkButtonElement.attr('disabled', true);
@@ -129,17 +129,17 @@
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/PlaceOrder',
-                    data: { configurationName: configurationNameElement.val() },
+                    data: { configurationName: configurationNameElement.val() || 'empty' },
                     dataType: 'text'
                 }).done(function (data) {
                     generateLinkButtonElement.attr("disabled", true);
                     configurationNameElement.attr('hidden', true);
                     configurationLinkElement.val(data);
-                    $('#orderSuccessAlert').attr('hidden', true);
-                    $('#orderFailedAlert').attr('hidden', false);
-                }).fail(function () {
                     $('#orderSuccessAlert').attr('hidden', false);
                     $('#orderFailedAlert').attr('hidden', true);
+                }).fail(function () {
+                    $('#orderSuccessAlert').attr('hidden', true);
+                    $('#orderFailedAlert').attr('hidden', false);
                 });
             });
         });

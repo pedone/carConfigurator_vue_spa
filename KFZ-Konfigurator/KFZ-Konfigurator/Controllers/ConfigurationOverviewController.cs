@@ -4,6 +4,7 @@ using KFZ_Konfigurator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -104,10 +105,11 @@ namespace KFZ_Konfigurator.Controllers
 
         private double CalculateConfigurationPrice(Configuration config)
         {
+            var accessoryPrices = config.Accessories.Select(cur => cur.Price).ToList();
             return config.EngineSetting.Price +
                 config.Paint.Price +
                 config.Rims.Price +
-                config.Accessories.Select(cur => cur.Price).Aggregate((result, next) => result + next);
+                (accessoryPrices.Count > 0 ? accessoryPrices.Aggregate((result, next) => result + next) : 0);
         }
 
         [HttpPost]
@@ -116,6 +118,7 @@ namespace KFZ_Konfigurator.Controllers
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 return error;
             }
 
@@ -138,7 +141,9 @@ namespace KFZ_Konfigurator.Controllers
                     //TODO update the current configuration
                     //the configuration was already generated, get the existing one
                     var activeConfigId = SessionData.ActiveConfiguration.ConfigurationLink.Id;
-                    configuration = context.Configurations.First(cur => cur.Id == activeConfigId);
+                    configuration = context.Configurations.FirstOrDefault(cur => cur.Id == activeConfigId);
+                    if (configuration == null)
+                        throw new Exception("the active configuration was not found in the database");
                 }
 
                 var newOrder = context.Orders.Create();
@@ -147,6 +152,7 @@ namespace KFZ_Konfigurator.Controllers
                 context.SaveChanges();
             }
 
+            Response.StatusCode = (int)HttpStatusCode.OK;
             return SessionData.ActiveConfiguration.ConfigurationLink.Url;
         }
     }
