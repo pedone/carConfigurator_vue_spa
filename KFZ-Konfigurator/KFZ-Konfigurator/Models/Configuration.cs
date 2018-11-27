@@ -18,15 +18,20 @@ namespace KFZ_Konfigurator.Models
         public Configuration()
         {
             this.Accessories = new HashSet<Accessory>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int Id { get; set; }
         public string Guid { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
     
         public virtual Paint Paint { get; set; }
         public virtual EngineSettings EngineSetting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Accessory> Accessories { get; set; }
         public virtual Rim Rims { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

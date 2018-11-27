@@ -13,6 +13,7 @@
     <EntitySet Name="CarModels" EntityType="CarConfiguratorModel.Store.CarModels" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Engines" EntityType="CarConfiguratorModel.Store.Engines" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Configurations" EntityType="CarConfiguratorModel.Store.Configurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="CarConfiguratorModel.Store.Orders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ConfigurationAccessory" EntityType="CarConfiguratorModel.Store.ConfigurationAccessory" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EngineEngineSettings" Association="CarConfiguratorModel.Store.EngineEngineSettings">
       <End Role="Engine" EntitySet="Engines" />
@@ -41,6 +42,10 @@
     <AssociationSet Name="RimConfiguration" Association="CarConfiguratorModel.Store.RimConfiguration">
       <End Role="Rim" EntitySet="Rims" />
       <End Role="Configuration" EntitySet="Configurations" />
+    </AssociationSet>
+    <AssociationSet Name="ConfigurationOrder" Association="CarConfiguratorModel.Store.ConfigurationOrder">
+      <End Role="Configuration" EntitySet="Configurations" />
+      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accessories">
@@ -113,9 +118,18 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Paint_Id" Type="int" Nullable="false" />
     <Property Name="EngineSetting_Id" Type="int" Nullable="false" />
     <Property Name="Rims_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Configuration_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ConfigurationAccessory">
     <Key>
@@ -182,6 +196,18 @@
       </Principal>
       <Dependent Role="Configuration">
         <PropertyRef Name="Rims_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConfigurationOrder">
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="1" />
+    <End Role="Order" Type="CarConfiguratorModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Configuration">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Configuration_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -290,6 +316,11 @@
             <End Role="Rim" EntitySet="Rims" />
             <End Role="Configuration" EntitySet="Configurations" />
           </AssociationSet>
+          <EntitySet Name="Orders" EntityType="CarConfiguratorModel.Order" />
+          <AssociationSet Name="ConfigurationOrder" Association="CarConfiguratorModel.ConfigurationOrder">
+            <End Role="Configuration" EntitySet="Configurations" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EnumType Name="AccessoryCategory">
           <Member Name="Comfort" />
@@ -397,6 +428,9 @@
           <NavigationProperty Name="Accessories" Relationship="CarConfiguratorModel.ConfigurationAccessory" FromRole="Configuration" ToRole="Accessory" />
           <NavigationProperty Name="Rims" Relationship="CarConfiguratorModel.RimConfiguration" FromRole="Configuration" ToRole="Rim" />
           <Property Name="Guid" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="CarConfiguratorModel.ConfigurationOrder" FromRole="Configuration" ToRole="Order" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="PaintConfiguration">
           <End Type="CarConfiguratorModel.Paint" Role="Paint" Multiplicity="1" />
@@ -414,6 +448,17 @@
         <Association Name="RimConfiguration">
           <End Type="CarConfiguratorModel.Rim" Role="Rim" Multiplicity="1" />
           <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Configuration" Relationship="CarConfiguratorModel.ConfigurationOrder" FromRole="Order" ToRole="Configuration" />
+        </EntityType>
+        <Association Name="ConfigurationOrder">
+          <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="1" />
+          <End Type="CarConfiguratorModel.Order" Role="Order" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -494,6 +539,15 @@
         <MappingFragment StoreEntitySet="Configurations">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -542,6 +596,14 @@
         <ScalarProperty Name="Id" ColumnName="Rims_Id" />
       </EndProperty>
       <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConfigurationOrder" TypeName="CarConfiguratorModel.ConfigurationOrder" StoreEntitySet="Orders">
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="Id" ColumnName="Configuration_Id" />
+      </EndProperty>
+      <EndProperty Name="Order">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

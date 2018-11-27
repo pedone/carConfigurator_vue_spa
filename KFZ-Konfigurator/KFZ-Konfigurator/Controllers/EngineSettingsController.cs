@@ -89,7 +89,11 @@ namespace KFZ_Konfigurator.Controllers
                 activeConfig.PaintId = configuration.Paint.Id;
                 activeConfig.RimId = configuration.Rims.Id;
                 activeConfig.AccessoryIds = configuration.Accessories.Select(cur => cur.Id).ToList();
-                activeConfig.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, guid);
+                activeConfig.ConfigurationLink = new ConfigurationLink
+                {
+                    Url = MiscHelper.GenerateConfigurationLink(Request, Url, guid),
+                    Id = configuration.Id
+                };
             }
 
             return RedirectToRoute(Constants.Routes.EngineSettings, new { id = SessionData.ActiveConfiguration.CarModel.Id });

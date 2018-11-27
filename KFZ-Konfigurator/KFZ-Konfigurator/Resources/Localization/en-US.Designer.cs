@@ -133,6 +133,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration Name.
+        /// </summary>
+        internal static string ConfigurationName_Placeholder {
+            get {
+                return ResourceManager.GetString("ConfigurationName_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Technical Data.
         /// </summary>
         internal static string ConfigurationOverview_TechnicalData_Header {
@@ -241,7 +250,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Link To Your Configuration.
+        ///   Looks up a localized string similar to Get a link to your configuration.
         /// </summary>
         internal static string GenerateConfigurationLink_Label {
             get {
@@ -264,6 +273,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string PaintsHeader {
             get {
                 return ResourceManager.GetString("PaintsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place Order.
+        /// </summary>
+        internal static string PlaceOrder {
+            get {
+                return ResourceManager.GetString("PlaceOrder", resourceCulture);
             }
         }
         

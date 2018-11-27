@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +225,9 @@
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EngineSettings.cs">
+      <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Paint.cs">
@@ -392,6 +396,7 @@
     <Content Include="Views\Accessories\Index.cshtml" />
     <Content Include="Views\Exterior\Index.cshtml" />
     <Content Include="Views\ConfigurationOverview\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

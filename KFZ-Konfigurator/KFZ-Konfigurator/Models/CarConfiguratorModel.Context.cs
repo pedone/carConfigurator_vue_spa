@@ -32,5 +32,6 @@ namespace KFZ_Konfigurator.Models
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<Engine> Engines { get; set; }
         public virtual DbSet<Configuration> Configurations { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

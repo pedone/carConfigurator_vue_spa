@@ -17,6 +17,7 @@ namespace KFZ_Konfigurator
             public const string Accessories = nameof(Accessories);
             public const string ConfigurationOverview = nameof(ConfigurationOverview);
             public const string LoadConfiguration = nameof(LoadConfiguration);
+            public const string OrderOverview = nameof(OrderOverview);
         }
         public static class SubSeries
         {

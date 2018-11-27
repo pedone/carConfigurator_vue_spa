@@ -52,41 +52,102 @@ namespace KFZ_Konfigurator.Controllers
                     Accessories = accessories,
                     Paint = paint,
                     Rims = rims,
-                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink
+                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink?.Url
                 });
             }
         }
 
         [HttpPost]
-        public string GenerateConfigurationLink()
+        public string GenerateConfigurationLink(string configurationName)
         {
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
                 return error;
             }
-            if (!string.IsNullOrEmpty(SessionData.ActiveConfiguration.ConfigurationLink))
+            if (SessionData.ActiveConfiguration.HasConfiguration)
             {
-                return SessionData.ActiveConfiguration.ConfigurationLink;
+                return SessionData.ActiveConfiguration.ConfigurationLink.Url;
             }
 
-            var guid = MiscHelper.GenerateShortGuid();
-            var config = SessionData.ActiveConfiguration;
+            Configuration configuration;
             using (var context = new CarConfiguratorEntityContext())
             {
-                var configuration = context.Configurations.Create();
-                configuration.Guid = guid;
-                configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == config.EngineSettingsId);
-                configuration.Paint = context.Paints.First(cur => cur.Id == config.PaintId);
-                configuration.Rims = context.Rims.First(cur => cur.Id == config.RimId);
-                configuration.Accessories = context.Accessories.Where(cur => config.AccessoryIds.Contains(cur.Id)).ToList();
-
+                configuration = InitConfiguration(context, configurationName);
                 context.Configurations.Add(configuration);
                 context.SaveChanges();
             }
 
-            config.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, guid);
-            return config.ConfigurationLink;
+            SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
+            {
+                Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
+                Id = configuration.Id
+            };
+            return SessionData.ActiveConfiguration.ConfigurationLink.Url;
+        }
+
+        private Configuration InitConfiguration(CarConfiguratorEntityContext context, string name)
+        {
+            var configViewModel = SessionData.ActiveConfiguration;
+
+            var configuration = context.Configurations.Create();
+            configuration.Name = name;
+            configuration.Guid = MiscHelper.GenerateShortGuid();
+            configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == configViewModel.EngineSettingsId);
+            configuration.Paint = context.Paints.First(cur => cur.Id == configViewModel.PaintId);
+            configuration.Rims = context.Rims.First(cur => cur.Id == configViewModel.RimId);
+            configuration.Accessories = context.Accessories.Where(cur => configViewModel.AccessoryIds.Contains(cur.Id)).ToList();
+            configuration.Price = CalculateConfigurationPrice(configuration);
+
+            return configuration;
+        }
+
+        private double CalculateConfigurationPrice(Configuration config)
+        {
+            return config.EngineSetting.Price +
+                config.Paint.Price +
+                config.Rims.Price +
+                config.Accessories.Select(cur => cur.Price).Aggregate((result, next) => result + next);
+        }
+
+        [HttpPost]
+        public string PlaceOrder(string configurationName)
+        {
+            if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
+            {
+                Log.Error(error);
+                return error;
+            }
+
+            Configuration configuration;
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                if (!SessionData.ActiveConfiguration.HasConfiguration)
+                {
+                    //store the current configuration
+                    configuration = InitConfiguration(context, configurationName);
+                    context.Configurations.Add(configuration);
+                    SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
+                    {
+                        Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
+                        Id = configuration.Id
+                    };
+                }
+                else
+                {
+                    //TODO update the current configuration
+                    //the configuration was already generated, get the existing one
+                    var activeConfigId = SessionData.ActiveConfiguration.ConfigurationLink.Id;
+                    configuration = context.Configurations.First(cur => cur.Id == activeConfigId);
+                }
+
+                var newOrder = context.Orders.Create();
+                newOrder.Configuration = configuration;
+                context.Orders.Add(newOrder);
+                context.SaveChanges();
+            }
+
+            return SessionData.ActiveConfiguration.ConfigurationLink.Url;
         }
     }
 }

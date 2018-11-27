@@ -52,11 +52,33 @@
 
 <div class="input-group mb-3">
     <div class="input-group-prepend">
-        <button class="btn btn-outline-secondary" id="generateLinkButton" type="button">@LocalizationManager.Localize("GenerateConfigurationLink_Label")</button>
+        <button class="btn btn-outline-secondary" id="generateLinkButton" type="button" disabled>
+            @LocalizationManager.Localize("GenerateConfigurationLink_Label")
+        </button>
     </div>
+    @if (string.IsNullOrEmpty(Model.ConfigurationLink))
+    {
+        <input type="text" class="form-control" id="configurationName" placeholder="@LocalizationManager.Localize("ConfigurationName_Placeholder")" />
+    }
     <input type="text" class="form-control" readonly="readonly" id="configurationLink" value="@Model.ConfigurationLink" />
     <div class="input-group-append">
         <button class="btn btn-outline-secondary" id="copyLinkButton" type="button">@LocalizationManager.Localize("Copy")</button>
+    </div>
+</div>
+
+<div>
+    <button class="btn btn-primary mb-3" id="placeOrderButton" type="button">@LocalizationManager.Localize("PlaceOrder")</button>
+    <div class="alert alert-success alert-dismissible fade show" id="orderSuccessAlert" role="alert" hidden>
+        Your order was successfully placed
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" id="orderFailedAlert" role="alert" hidden>
+        Your order could not be placed
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
     </div>
 </div>
 
@@ -68,17 +90,30 @@
         let rims = @Html.Raw(Json.Encode(Model.Rims));
         let viewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
 
+        //TODO use second viewmodel instead of jquery
+
         $(document).ready(function () {
             ko.applyBindings(viewModel);
             let configurationLinkElement = $('#configurationLink');
             let copyLinkButtonElement = $('#copyLinkButton');
+            let generateLinkButtonElement = $('#generateLinkButton');
+            let configurationNameElement = $('#configurationName');
 
-            $('#generateLinkButton').click(function () {
+            if (configurationNameElement) {
+                configurationNameElement.on('keyup change', function () {
+                    generateLinkButtonElement.attr('disabled', $(this).val().length === 0)
+                });
+            }
+
+            generateLinkButtonElement.click(function () {
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/GenerateConfigurationLink',
+                    data: { configurationName: configurationNameElement.val() },
                     dataType: 'text'
                 }).done(function (data) {
+                    generateLinkButtonElement.attr('disabled', true);
+                    configurationNameElement.attr('hidden', true);
                     configurationLinkElement.val(data);
                 }).fail(function () {
                     //TODO
@@ -88,6 +123,24 @@
             copyLinkButtonElement.click(function () {
                 configurationLinkElement.select();
                 document.execCommand('copy');
+            });
+
+            $('#placeOrderButton').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ConfigurationOverview/PlaceOrder',
+                    data: { configurationName: configurationNameElement.val() },
+                    dataType: 'text'
+                }).done(function (data) {
+                    generateLinkButtonElement.attr("disabled", true);
+                    configurationNameElement.attr('hidden', true);
+                    configurationLinkElement.val(data);
+                    $('#orderSuccessAlert').attr('hidden', true);
+                    $('#orderFailedAlert').attr('hidden', false);
+                }).fail(function () {
+                    $('#orderSuccessAlert').attr('hidden', false);
+                    $('#orderFailedAlert').attr('hidden', true);
+                });
             });
         });
     </script>

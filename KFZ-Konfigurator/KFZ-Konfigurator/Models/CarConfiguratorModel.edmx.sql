@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/27/2018 02:35:51
+-- Date Created: 11/27/2018 20:13:45
 -- Generated from EDMX file: D:\Documents\Projects\CC-KFZ-Generator\git\KFZ-Konfigurator\KFZ-Konfigurator\Models\CarConfiguratorModel.edmx
 -- --------------------------------------------------
 
@@ -38,6 +38,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RimConfiguration]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Configurations] DROP CONSTRAINT [FK_RimConfiguration];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ConfigurationOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_ConfigurationOrder];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -63,6 +66,9 @@ IF OBJECT_ID(N'[dbo].[Engines]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Configurations]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Configurations];
+GO
+IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Orders];
 GO
 IF OBJECT_ID(N'[dbo].[ConfigurationAccessory]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ConfigurationAccessory];
@@ -140,9 +146,18 @@ GO
 CREATE TABLE [dbo].[Configurations] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Guid] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Price] float  NOT NULL,
     [Paint_Id] int  NOT NULL,
     [EngineSetting_Id] int  NOT NULL,
     [Rims_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Orders'
+CREATE TABLE [dbo].[Orders] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Configuration_Id] int  NOT NULL
 );
 GO
 
@@ -196,6 +211,12 @@ GO
 -- Creating primary key on [Id] in table 'Configurations'
 ALTER TABLE [dbo].[Configurations]
 ADD CONSTRAINT [PK_Configurations]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Orders'
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT [PK_Orders]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -306,6 +327,21 @@ GO
 CREATE INDEX [IX_FK_RimConfiguration]
 ON [dbo].[Configurations]
     ([Rims_Id]);
+GO
+
+-- Creating foreign key on [Configuration_Id] in table 'Orders'
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT [FK_ConfigurationOrder]
+    FOREIGN KEY ([Configuration_Id])
+    REFERENCES [dbo].[Configurations]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ConfigurationOrder'
+CREATE INDEX [IX_FK_ConfigurationOrder]
+ON [dbo].[Orders]
+    ([Configuration_Id]);
 GO
 
 -- --------------------------------------------------
