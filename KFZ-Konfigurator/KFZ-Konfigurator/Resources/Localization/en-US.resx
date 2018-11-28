@@ -220,7 +220,7 @@
     <value>Get a link to your configuration</value>
   </data>
   <data name="TechnicalData_Transmission_LabelSuffix" xml:space="preserve">
-    <value>-Gear Transmission</value>
+    <value>-Gear</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>

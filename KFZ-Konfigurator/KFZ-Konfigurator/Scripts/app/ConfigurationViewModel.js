@@ -111,6 +111,13 @@ class ConfigurationViewModel {
             }
         });
 
+        /** @type {boolean} */
+        this.isAccessoryLimitReached = ko.computed(function () {
+            /** @type {number} */
+            const accessoryLimit = 5;
+            return _.filter(_.values(self.accessoriesById), (cur) => cur.isSelected()).length >= accessoryLimit;
+        });
+
         /**
          * Calculates the combined price of everything but the engine
          * @type {number}

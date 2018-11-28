@@ -394,7 +394,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -Gear Transmission.
+        ///   Looks up a localized string similar to -Gear.
         /// </summary>
         internal static string TechnicalData_Transmission_LabelSuffix {
             get {

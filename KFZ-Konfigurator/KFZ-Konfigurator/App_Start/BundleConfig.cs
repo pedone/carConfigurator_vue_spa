@@ -19,8 +19,7 @@ namespace KFZ_Konfigurator
             bundles.Add(new ScriptBundle("~/bundles/bootstrapKnockout").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/knockout-{version}.js",
-                      "~/Scripts/underscore-{version}.js",
-                      "~/Scripts/popper.js"));
+                      "~/Scripts/underscore-{version}.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
