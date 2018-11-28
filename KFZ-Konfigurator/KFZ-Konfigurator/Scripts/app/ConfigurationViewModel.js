@@ -80,12 +80,12 @@ class ConfigurationViewModel {
                 enumerable: false
             },
             _computedPaintPrice: {
-                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._paintById, () => self.selectedPaintId())),
+                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._paintById, () => this.selectedPaintId())),
                 writable: false,
                 enumerable: false
             },
             _computedRimsPrice: {
-                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._rimsById, () => self.selectedRimsId())),
+                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._rimsById, () => this.selectedRimsId())),
                 writable: false,
                 enumerable: false
             },
@@ -216,7 +216,7 @@ class ConfigurationViewModel {
     /** @returns {number|null} */
     get selectedEngineId() {
         /** @type {Array.<ViewModel>} */
-        let engineSettings = _.values(self._engineSettingsById);
+        let engineSettings = _.values(this._engineSettingsById);
 
         let selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
         return selectedEngine && selectedEngine.id;
@@ -225,7 +225,7 @@ class ConfigurationViewModel {
     /** @returns {Array.<number>} */
     get selectedAccessoryIds() {
         /** @type {Array.<ViewModel>} */
-        let accessories = _.values(self.accessoriesById);
+        let accessories = _.values(this.accessoriesById);
 
         let selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
         return _.map(selectedItems, (cur) => cur.id);
@@ -234,8 +234,8 @@ class ConfigurationViewModel {
     /** @param {number} settingsId */
     settingsSelectedClick(settingsId) {
         //deselect all settings, because deselection doesn't work with binding
-        _.each(self._engineSettingsById, (cur) => { cur.isSelected(false) });
-        self._engineSettingsById[settingsId].isSelected(true);
+        _.each(this._engineSettingsById, (cur) => { cur.isSelected(false) });
+        this._engineSettingsById[settingsId].isSelected(true);
     }
 }
 

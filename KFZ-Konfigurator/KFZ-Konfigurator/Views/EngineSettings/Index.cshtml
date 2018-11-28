@@ -62,7 +62,7 @@
         let viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint, selectedRims: selectedRims });
 
         $(document).ready(function () {
-            ko.applyBindings(viewModel);
+            ko.applyBindings({ configViewModel: viewModel });
         });
 
         $(window).on('beforeunload', function () {

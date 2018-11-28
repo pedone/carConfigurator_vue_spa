@@ -50,13 +50,13 @@
                 </a>
                 <div class="card-text">
                     <div>
-                        base price: <span data-bind="text: basePrice"></span>
+                        base price: <span data-bind="text: configViewModel.basePrice"></span>
                     </div>
                     <div>
-                        extras: <span data-bind="text: extrasPrice"></span>
+                        extras: <span data-bind="text: configViewModel.extrasPrice"></span>
                     </div>
                     <div>
-                        price: <span data-bind="text: fullPrice"></span>
+                        price: <span data-bind="text: configViewModel.fullPrice"></span>
                     </div>
                 </div>
                 @if (viewKind != ConfigurationViewKind.Overview)
@@ -95,6 +95,7 @@
 }
 
 @section scripts {
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
     @RenderSection("scripts", required: false)

@@ -54,7 +54,7 @@
         let viewModel = new ConfigurationViewModel({ paints: paints, rims: rims, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
 
         $(document).ready(function () {
-            ko.applyBindings(viewModel);
+            ko.applyBindings({ configViewModel: viewModel });
         });
 
         $(window).on('beforeunload', function () {
