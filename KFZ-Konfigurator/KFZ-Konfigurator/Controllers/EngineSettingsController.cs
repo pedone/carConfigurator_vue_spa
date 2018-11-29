@@ -61,5 +61,16 @@ namespace KFZ_Konfigurator.Controllers
                 });
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetSelectedEngineSettings(int id)
+        {
+            if (!Request.IsAjaxRequest())
+                throw new InvalidOperationException("This action must be called with ajax");
+
+            SessionData.ActiveConfiguration.EngineSettingsId = id;
+            return new EmptyResult();
+        }
     }
 }

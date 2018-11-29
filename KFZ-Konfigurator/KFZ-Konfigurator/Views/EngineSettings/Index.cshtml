@@ -65,7 +65,13 @@
             ko.applyBindings({ configViewModel: viewModel });
         });
 
+        let selectedEngineId = viewModel.selectedEngineId;
         $(window).on('beforeunload', function () {
+            if (selectedEngineId == viewModel.selectedEngineId) {
+                //skip if the selected engine didn't change
+                return;
+            }
+
             let antiForgeryToken = getAntiForgeryToken($(document));
             saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineId, antiForgeryToken)
                 .done((data) => {
