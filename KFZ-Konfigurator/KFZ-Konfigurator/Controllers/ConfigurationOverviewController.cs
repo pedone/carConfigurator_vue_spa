@@ -64,6 +64,7 @@ namespace KFZ_Konfigurator.Controllers
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 return error;
             }
             if (SessionData.ActiveConfiguration.HasConfiguration)
@@ -74,9 +75,18 @@ namespace KFZ_Konfigurator.Controllers
             Configuration configuration;
             using (var context = new CarConfiguratorEntityContext())
             {
-                configuration = InitConfiguration(context, configurationName);
-                context.Configurations.Add(configuration);
-                context.SaveChanges();
+                try
+                {
+                    configuration = InitConfiguration(context, configurationName);
+                    context.Configurations.Add(configuration);
+                    context.SaveChanges();
+                }
+                catch (ArgumentException)
+                {
+                    //TODO log
+                    Response.StatusCode = (int)HttpStatusCode.Conflict;
+                    throw;
+                }
             }
 
             SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
@@ -84,13 +94,16 @@ namespace KFZ_Konfigurator.Controllers
                 Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
                 Id = configuration.Id
             };
+            Response.StatusCode = (int)HttpStatusCode.OK;
             return SessionData.ActiveConfiguration.ConfigurationLink.Url;
         }
 
         private Configuration InitConfiguration(CarConfiguratorEntityContext context, string name)
         {
-            var configViewModel = SessionData.ActiveConfiguration;
+            if (context.Configurations.Any(cur => cur.Name == name))
+                throw new ArgumentException($"a configuration with the name {name} already exists");
 
+            var configViewModel = SessionData.ActiveConfiguration;
             var configuration = context.Configurations.Create();
             configuration.Name = name;
             configuration.Guid = MiscHelper.GenerateShortGuid();
@@ -127,14 +140,23 @@ namespace KFZ_Konfigurator.Controllers
             {
                 if (!SessionData.ActiveConfiguration.HasConfiguration)
                 {
-                    //store the current configuration
-                    configuration = InitConfiguration(context, configurationName);
-                    context.Configurations.Add(configuration);
-                    SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
+                    try
                     {
-                        Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
-                        Id = configuration.Id
-                    };
+                        //store the current configuration
+                        configuration = InitConfiguration(context, configurationName);
+                        context.Configurations.Add(configuration);
+                        SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
+                        {
+                            Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
+                            Id = configuration.Id
+                        };
+                    }
+                    catch (ArgumentException)
+                    {
+                        //TODO log
+                        Response.StatusCode = (int)HttpStatusCode.Conflict;
+                        throw;
+                    }
                 }
                 else
                 {

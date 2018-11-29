@@ -98,7 +98,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/GenerateConfigurationLink',
-                    data: { configurationName: configOverviewViewModel.configurationLinkUrl },
+                    data: { configurationName: configOverviewViewModel.configurationName() },
                     dataType: 'text'
                 }).done(function (data) {
                     configOverviewViewModel.configurationLinkUrl(data);
@@ -127,13 +127,13 @@
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/PlaceOrder',
-                    data: { configurationName: configOverviewViewModel.configurationLinkUrl },
+                    data: { configurationName: configOverviewViewModel.configurationName() },
                     dataType: 'text'
                 }).done(function (data) {
                     configOverviewViewModel.configurationLinkUrl(data);
                     showSuccessAlert();
                 }).fail(function (data) {
-                    console.log("error: " + data);
+                    console.log("error: " + JSON.stringify(data));
                     showFailedAlert();
                 });
             });
