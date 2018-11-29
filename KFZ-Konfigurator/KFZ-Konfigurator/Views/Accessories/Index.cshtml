@@ -37,7 +37,7 @@
                     <div class="card col-sm-4 rounded-0">
                         <div class="card-header">
                             <input type="checkbox"
-                                   data-bind="checked: accessoriesById[@item.Id].isSelected, disable: isAccessoryLimitReached() && !accessoriesById[@item.Id].isSelected()" />
+                                   data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
                             <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
                             <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price)</h6>
                         </div>

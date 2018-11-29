@@ -14,7 +14,7 @@
     {
         <div class="card col-sm-4 rounded-0">
             <div class="card-header">
-                <input type="radio" name="paintOptions" value="@item.Id" data-bind="checked: $root.selectedPaintId" />
+                <input type="radio" name="paintOptions" value="@item.Id" data-bind="checked: configViewModel.selectedPaintId" />
                 <h5 class="card-title">@Html.DisplayFor(_ => item.Category): @Html.DisplayFor(_ => item.Name)</h5>
                 <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price)</h6>
             </div>
@@ -33,7 +33,7 @@
     {
         <div class="card col-sm-4 rounded-0">
             <div class="card-header">
-                <input type="radio" name="rimOptions" value="@item.Id" data-bind="checked: $root.selectedRimsId" />
+                <input type="radio" name="rimOptions" value="@item.Id" data-bind="checked: configViewModel.selectedRimsId" />
                 <h5 class="card-title">@Html.DisplayFor(_ => item.Size)</h5>
             </div>
             <div class="card-body">
