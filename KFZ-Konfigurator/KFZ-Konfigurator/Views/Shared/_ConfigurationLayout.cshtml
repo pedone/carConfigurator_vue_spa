@@ -61,7 +61,7 @@
                 </div>
                 @if (viewKind != ConfigurationViewKind.Overview)
                 {
-                    <a href="@Url.RouteUrl(Constants.Routes.ConfigurationOverview)" class="btn btn-primary">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)" class="btn btn-primary">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
                 }
             </div>
         </div>
@@ -95,7 +95,6 @@
 }
 
 @section scripts {
-    <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
     @RenderSection("scripts", required: false)

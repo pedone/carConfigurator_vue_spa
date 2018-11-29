@@ -133,6 +133,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configurations.
+        /// </summary>
+        internal static string ConfigurationList {
+            get {
+                return ResourceManager.GetString("ConfigurationList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuration Name.
         /// </summary>
         internal static string ConfigurationName_Placeholder {
@@ -174,6 +183,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string Copy {
             get {
                 return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
@@ -259,11 +277,29 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        internal static string Load {
+            get {
+                return ResourceManager.GetString("Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose your model.
         /// </summary>
         internal static string ModelHeader {
             get {
                 return ResourceManager.GetString("ModelHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orders.
+        /// </summary>
+        internal static string OrderList {
+            get {
+                return ResourceManager.GetString("OrderList", resourceCulture);
             }
         }
         

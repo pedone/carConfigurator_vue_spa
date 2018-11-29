@@ -61,42 +61,5 @@ namespace KFZ_Konfigurator.Controllers
                 });
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedEngineSettings(int id)
-        {
-            if (!Request.IsAjaxRequest())
-                throw new InvalidOperationException("This action must be called with ajax");
-
-            SessionData.ActiveConfiguration.EngineSettingsId = id;
-            return new EmptyResult();
-        }
-
-        [Route("configuration/load/{guid}", Name = Constants.Routes.LoadConfiguration)]
-        public ActionResult LoadConfiguration(string guid)
-        {
-            using (var context = new CarConfiguratorEntityContext())
-            {
-                var configuration = context.Configurations.FirstOrDefault(cur => cur.Guid == guid);
-                if (configuration == null)
-                    throw new ArgumentException("configuration not found");
-
-                var activeConfig = SessionData.ActiveConfiguration;
-                activeConfig.Reset();
-                activeConfig.CarModel = new CarModelViewModel(configuration.EngineSetting.CarModel);
-                activeConfig.EngineSettingsId = configuration.EngineSetting.Id;
-                activeConfig.PaintId = configuration.Paint.Id;
-                activeConfig.RimId = configuration.Rims.Id;
-                activeConfig.AccessoryIds = configuration.Accessories.Select(cur => cur.Id).ToList();
-                activeConfig.ConfigurationLink = new ConfigurationLink
-                {
-                    Url = MiscHelper.GenerateConfigurationLink(Request, Url, guid),
-                    Id = configuration.Id
-                };
-            }
-
-            return RedirectToRoute(Constants.Routes.EngineSettings, new { id = SessionData.ActiveConfiguration.CarModel.Id });
-        }
     }
 }

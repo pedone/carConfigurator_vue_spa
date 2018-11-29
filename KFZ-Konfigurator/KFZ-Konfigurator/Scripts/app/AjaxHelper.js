@@ -8,7 +8,9 @@
 function saveViewModel(url, id, antiForgeryToken, additionalData) {
     let i;
     /** @type {Object} */
-    let dataObject = {};
+    let dataObject = {
+        __RequestVerificationToken: antiForgeryToken
+    };
 
     if (id) {
         dataObject.id = id;
@@ -19,9 +21,6 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
                 dataObject[i] = additionalData[i];
             }
         }
-    }
-    if (antiForgeryToken) {
-        dataObject.__RequestVerificationToken = antiForgeryToken;
     }
     return $.ajax({
         type: 'POST',

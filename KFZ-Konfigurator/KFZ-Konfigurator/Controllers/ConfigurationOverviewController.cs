@@ -14,7 +14,7 @@ namespace KFZ_Konfigurator.Controllers
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ConfigurationOverviewController));
 
-        [Route("configuration/models/model-{id}/overview", Name = Constants.Routes.ConfigurationOverview)]
+        [Route("configuration/models/model-{id}/overview", Name = Constants.Routes.CurrentConfigurationOverview)]
         public ActionResult Index(int id)
         {
             if (!SessionData.ActiveConfiguration.IsValid(id, out string error))

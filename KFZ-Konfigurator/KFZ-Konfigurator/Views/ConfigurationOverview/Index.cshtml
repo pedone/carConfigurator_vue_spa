@@ -79,6 +79,7 @@
 </div>
 
 @section scripts {
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
     <script type="text/javascript">
         let accessories = @Html.Raw(Json.Encode(Model.Accessories));
         let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
@@ -124,6 +125,7 @@
             }
 
             $('#placeOrderButton').click(function () {
+                //TODO use anti forgery validation
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/PlaceOrder',

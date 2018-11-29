@@ -31,7 +31,7 @@ class ConfigurationViewModel {
      * @param {ConfigurationData} data
      */
     constructor(data) {
-        self = this;
+        var self = this;
 
         /**
          * observable
@@ -216,7 +216,7 @@ class ConfigurationViewModel {
     /** @returns {number|null} */
     get selectedEngineId() {
         /** @type {Array.<ViewModel>} */
-        let engineSettings = _.values(this._engineSettingsById);
+        let engineSettings = _.values(_engineSettingsById);
 
         let selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
         return selectedEngine && selectedEngine.id;
@@ -225,7 +225,7 @@ class ConfigurationViewModel {
     /** @returns {Array.<number>} */
     get selectedAccessoryIds() {
         /** @type {Array.<ViewModel>} */
-        let accessories = _.values(this.accessoriesById);
+        let accessories = _.values(accessoriesById);
 
         let selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
         return _.map(selectedItems, (cur) => cur.id);
@@ -234,8 +234,8 @@ class ConfigurationViewModel {
     /** @param {number} settingsId */
     settingsSelectedClick(settingsId) {
         //deselect all settings, because deselection doesn't work with binding
-        _.each(this._engineSettingsById, (cur) => { cur.isSelected(false) });
-        this._engineSettingsById[settingsId].isSelected(true);
+        _.each(_engineSettingsById, (cur) => { cur.isSelected(false) });
+        _engineSettingsById[settingsId].isSelected(true);
     }
 }
 

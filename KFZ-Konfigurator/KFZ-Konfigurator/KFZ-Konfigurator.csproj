@@ -172,6 +172,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\ConfigurationOverviewController.cs" />
+    <Compile Include="Controllers\ConfigurationsController.cs" />
     <Compile Include="Controllers\ExteriorController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\ConfigurationOverviewPageViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\FuelKind.cs" />
@@ -291,6 +293,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
+    <Content Include="Scripts\app\ConfigurationListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />
     <Content Include="Scripts\app\AjaxHelper.js" />
@@ -401,6 +404,7 @@
     <Content Include="Views\Exterior\Index.cshtml" />
     <Content Include="Views\ConfigurationOverview\Index.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Configurations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

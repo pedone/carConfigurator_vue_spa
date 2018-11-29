@@ -20,7 +20,8 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarToggleContent">
                 @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-item nav-link active" })
-                <a href="@Url.RouteUrl(Constants.Routes.OrderOverview)" class="nav-item nav-link active">Orders</a>
+                <a href="@Url.RouteUrl(Constants.Routes.ConfigurationList)" class="nav-item nav-link active">@LocalizationManager.Localize("ConfigurationList")</a>
+                <a href="@Url.RouteUrl(Constants.Routes.OrderOverview)" class="nav-item nav-link active">@LocalizationManager.Localize("OrderList")</a>
             </div>
         </div>
     </nav>

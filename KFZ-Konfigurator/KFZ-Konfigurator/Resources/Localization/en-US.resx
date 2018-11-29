@@ -231,4 +231,16 @@
   <data name="ConfigurationName_Placeholder" xml:space="preserve">
     <value>Configuration Name</value>
   </data>
+  <data name="ConfigurationList" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="OrderList" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
 </root>

@@ -1,2 +1,3 @@
 1. - ui layout (padding, alignment, margin)
 2. - seeding the database only works with * to 1..0 when two relationships (Engine-EngineSettings/CarModel-EngineSettings)
+3. - observableArray not accessable as such in function in class, had to move remove to constructor
