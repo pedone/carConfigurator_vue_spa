@@ -14,6 +14,8 @@
         this.guid = data.Guid;
         /** @type {boolean} */
         this.hasOrders = data.HasOrders;
+        /** @type {number} */
+        this.orderCount = data.OrderCount;
         /** @type {string} */
         this.linkUrl = linkTemplate.replace("Placeholder", data.Guid);
     }
@@ -77,4 +79,5 @@ class ConfigurationListViewModel {
  * @property {string} Name
  * @property {string} Guid
  * @property {string} HasOrders
+ * @property {number} OrderCount
  */

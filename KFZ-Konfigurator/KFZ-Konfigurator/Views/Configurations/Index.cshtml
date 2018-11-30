@@ -16,6 +16,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderCount)
+        </th>
         <th></th>
     </tr>
 
@@ -23,6 +26,7 @@
         <tr>
             <td data-bind="text: name"></td>
             <td data-bind="text: formatCurrency(price)"></td>
+            <td data-bind="text: orderCount"></td>
             <td>
                 <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("Load")</a>
                 <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }, visible: !hasOrders">
