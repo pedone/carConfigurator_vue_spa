@@ -139,10 +139,6 @@
         let paint = @Html.Raw(Json.Encode(Model.Paint));
         let rims = @Html.Raw(Json.Encode(Model.Rims));
 
-        function formatCurrency(amount) {
-            return amount.toFixed(2) + ' EUR';
-        }
-
         $(document).ready(function () {
             let options = {
                 antiForgeryToken: getAntiForgeryToken($(document)),

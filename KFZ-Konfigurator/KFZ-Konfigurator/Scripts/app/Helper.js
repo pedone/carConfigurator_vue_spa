@@ -37,3 +37,7 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
 function getAntiForgeryToken(document) {
     return document.find('[name="__RequestVerificationToken"]').val();
 }
+
+function formatCurrency(amount) {
+    return amount.toLocaleString() + ' EUR';
+}

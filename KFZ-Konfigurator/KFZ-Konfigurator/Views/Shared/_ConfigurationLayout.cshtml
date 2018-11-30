@@ -97,11 +97,6 @@
 
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
-    <script type="text/javascript">
-        function formatCurrency(amount) {
-            return amount.toFixed(2) + ' EUR';
-        }
-    </script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/Helper.js")"></script>
     @RenderSection("scripts", required: false)
 }

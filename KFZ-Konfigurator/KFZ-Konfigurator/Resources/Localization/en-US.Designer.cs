@@ -376,7 +376,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Metalic.
+        ///   Looks up a localized string similar to Metallic.
         /// </summary>
         internal static string PaintCategory_Metalic {
             get {

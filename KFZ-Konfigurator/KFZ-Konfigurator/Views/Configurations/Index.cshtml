@@ -35,15 +35,12 @@
 
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationListViewModel.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/Helper.js")"></script>
     <script type="text/javascript">
         let configurations = @Html.Raw(Json.Encode(Model));
         let loadConfigurationRouteTemplate = "@Url.RouteUrl(Constants.Routes.LoadConfiguration, new { guid = "Placeholder" })";
         let viewModel = new ConfigurationListViewModel(configurations, loadConfigurationRouteTemplate);
 
-        function formatCurrency(amount) {
-            return amount.toFixed(2) + ' EUR';
-        }
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });

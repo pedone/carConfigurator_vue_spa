@@ -295,7 +295,7 @@
     <Content Include="Scripts\app\ConfigurationListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />
-    <Content Include="Scripts\app\AjaxHelper.js" />
+    <Content Include="Scripts\app\Helper.js" />
     <Content Include="Models\CarConfiguratorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CarConfiguratorModel.edmx</DependentUpon>
