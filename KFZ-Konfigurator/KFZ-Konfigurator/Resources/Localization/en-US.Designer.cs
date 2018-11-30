@@ -376,6 +376,33 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metalic.
+        /// </summary>
+        internal static string PaintCategory_Metalic {
+            get {
+                return ResourceManager.GetString("PaintCategory_Metalic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pearlescent.
+        /// </summary>
+        internal static string PaintCategory_Pearlescent {
+            get {
+                return ResourceManager.GetString("PaintCategory_Pearlescent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uni.
+        /// </summary>
+        internal static string PaintCategory_Uni {
+            get {
+                return ResourceManager.GetString("PaintCategory_Uni", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paint.
         /// </summary>
         internal static string PaintsHeader {

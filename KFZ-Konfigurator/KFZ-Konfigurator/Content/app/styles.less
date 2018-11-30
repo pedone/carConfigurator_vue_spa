@@ -15,3 +15,48 @@
     top: 8px;
     left: 16px;
 }
+
+.card.car-model-link {
+    text-decoration: none;
+    color: inherit;
+    border-bottom-width: 3px;
+
+    &:hover {
+        border-bottom: 3px solid red;
+    }
+}
+
+.configurationNameLink {
+    min-width: 10em;
+}
+
+// paint radio button
+.paintContainer {
+    // hide default radio button
+    > input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    > figure {
+        border-width: 0px 0px 3px 0px;
+        border-style: solid;
+        border-color: transparent;
+
+        &:hover {
+            border-color: red;
+        }
+
+        > img {
+            width: 7em;
+            height: 7em;
+        }
+    }
+
+    > input.checked + figure {
+        border-color: red;
+    }
+}

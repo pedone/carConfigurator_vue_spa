@@ -270,4 +270,13 @@
   <data name="RimSizeUnit" xml:space="preserve">
     <value>inch</value>
   </data>
+  <data name="PaintCategory_Metalic" xml:space="preserve">
+    <value>Metalic</value>
+  </data>
+  <data name="PaintCategory_Pearlescent" xml:space="preserve">
+    <value>Pearlescent</value>
+  </data>
+  <data name="PaintCategory_Uni" xml:space="preserve">
+    <value>Uni</value>
+  </data>
 </root>

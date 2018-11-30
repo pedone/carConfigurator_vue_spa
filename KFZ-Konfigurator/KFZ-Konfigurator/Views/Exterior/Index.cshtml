@@ -1,49 +1,66 @@
-﻿@model KFZ_Konfigurator.ViewModels.ExteriorPageViewModel
+﻿@using KFZ_Konfigurator.Models;
+@model KFZ_Konfigurator.ViewModels.ExteriorPageViewModel
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("ExteriorTitle");
     //ViewBag.BackgroundImage = "accessories.png";
+
+    var paintCategories = Enum.GetNames(typeof(PaintCategory));
 }
 
 @Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("PaintsHeader")</h2>
 
-<div class="row">
-    @foreach (var item in Model.Paints)
+<div class="container">
+    @foreach (var category in paintCategories)
     {
-        <div class="card col-sm-4 rounded-0">
-            <div class="card-header">
-                <input type="radio" name="paintOptions" value="@item.Id" data-bind="checked: configViewModel.selectedPaintId" />
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Category): @Html.DisplayFor(_ => item.Name)</h5>
-                <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price)</h6>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    @Html.DisplayFor(_ => item.Color)
+        var currentPaints = Model.Paints.Where(cur => cur.Category.ToString() == category).ToList();
+        <div class="row mt-3">
+            <h5>@(LocalizationManager.LocalizeEnum<PaintCategory>(category)) (@Html.DisplayFor(_ => @currentPaints.First().Price))</h5>
+        </div>
+        <div class="row">
+            @foreach (var item in currentPaints)
+            {
+                <div class="paintContainer" data-bind="click: function() { configViewModel.selectPaint(@item.Id) }">
+                    <input type="radio" name="paintOptions" value="@item.Id"
+                           data-bind="checked: configViewModel.selectedPaintId, css: { checked: configViewModel.selectedPaintId() == @item.Id }" />
+                    <figure class="figure m-1">
+                        <img style="background: @item.Color" class="border-0" />
+                        <figcaption class="figure-caption">@Html.DisplayFor(_ => item.Name)</figcaption>
+                    </figure>
                 </div>
-            </div>
+            }
         </div>
     }
 </div>
-
+<p />
 <h2>@LocalizationManager.Localize("RimsHeader")</h2>
-<div class="row">
+<table class="table">
     @foreach (var item in Model.Rims)
     {
-        <div class="card col-sm-4 rounded-0">
-            <div class="card-header">
-                <input type="radio" name="rimOptions" value="@item.Id" data-bind="checked: configViewModel.selectedRimsId" />
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Size)</h5>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    @Html.DisplayFor(_ => item.Price)
+        <tr>
+            <th>
+                <input type="radio" name="rimOptions" class="mr-2" value="@item.Id" data-bind="checked: configViewModel.selectedRimsId" />
+                <label>@Html.DisplayFor(_ => item.Size) @LocalizationManager.Localize("RimSizeUnit")</label>
+            </th>
+            <td>
+                @Html.DisplayFor(_ => item.Price)
+            </td>
+        </tr>
+        @*<div class="card col-sm-4 rounded-0">
+                <div class="card-header">
+                    <input type="radio" name="rimOptions"  />
+                    <h5 class="card-title">@Html.DisplayFor(_ => item.Size)</h5>
                 </div>
-            </div>
-        </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        @Html.DisplayFor(_ => item.Price)
+                    </div>
+                </div>
+            </div>*@
     }
-</div>
+</table>
 
 @section scripts {
     <script type="text/javascript">

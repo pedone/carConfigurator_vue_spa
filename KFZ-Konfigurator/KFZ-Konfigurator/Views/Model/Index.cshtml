@@ -9,33 +9,30 @@
 @Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("ModelHeader")</h2>
 
-<div class="row">
+<div class="row container">
     @foreach (var item in Model)
     {
-        <div class="card col-sm-4 rounded-0">
-            <div class="card-header">
+        <a class="card mb-2 col-md-4 rounded-0 car-model-link" data-id="@item.Id" href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})">
+            <div class="card-body">
                 <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
                 <h6 class="card-subtitle">@LocalizationManager.Localize("from") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <div class="row">
+                <div class="card-text mt-3">
+                    <div>
                         @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
                     </div>
-                    <div class="row">
+                    <div>
                         @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
                     </div>
                 </div>
-                <a href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})" data-id="@item.Id" class="btn btn-primary">@LocalizationManager.Localize("Select")</a>
             </div>
-        </div>
+        </a>
     }
 </div>
 
 @section scripts {
     <script type='text/javascript'>
         $(document).ready(function () {
-            $('a.btn[data-id]').click(function (event) {
+            $('.car-model-link').click(function () {
                 event.preventDefault();
                 let targetUrl = $(this).attr('href');
                 let id = $(this).data('id');

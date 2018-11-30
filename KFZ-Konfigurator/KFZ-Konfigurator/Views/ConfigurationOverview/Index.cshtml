@@ -85,7 +85,7 @@
     <tbody>
         <tr>
             <th scope="row">@LocalizationManager.Localize("ConfigurationOverview_Paint_Header")</th>
-            <td>@Html.DisplayFor(_ => Model.Paint.Name)</td>
+            <td>@(LocalizationManager.LocalizeEnum<PaintCategory>(Model.Paint.Category.ToString())) @Html.DisplayFor(_ => Model.Paint.Name)</td>
             <td>@Html.DisplayFor(_ => Model.Paint.Price)</td>
         </tr>
         <tr>
@@ -106,10 +106,12 @@
                 @LocalizationManager.Localize("GenerateConfigurationLink_Label")
             </button>
         </div>
-        <input type="text" class="form-control"
+        <input type="text"
+               class="form-control configurationNameLink"
                placeholder="@LocalizationManager.Localize("ConfigurationName_Placeholder")"
                data-bind="visible: (configOVW.configurationLinkUrl().length == 0), textInput: configOVW.configurationName" />
-        <input type="text" class="form-control" readonly="readonly" id="configurationLink" data-bind="value: configOVW.configurationLinkUrl" />
+        <input type="text" class="form-control configurationNameLink" readonly="readonly" id="configurationLink"
+               data-bind="visible: (configOVW.configurationLinkUrl().length > 0), value: configOVW.configurationLinkUrl" />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" id="copyLinkButton" type="button">@LocalizationManager.Localize("Copy")</button>
         </div>

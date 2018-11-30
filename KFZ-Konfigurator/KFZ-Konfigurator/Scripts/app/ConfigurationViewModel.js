@@ -250,6 +250,11 @@ class ConfigurationViewModel {
         _.each(this._engineSettingsById, (cur) => { cur.isSelected(false) });
         this._engineSettingsById[settingsId].isSelected(true);
     }
+
+    /** @param {string} id */
+    selectPaint(id) {
+        this.selectedPaintId(id);
+    }
 }
 
 /**

@@ -13,48 +13,39 @@
 <h2>@LocalizationManager.Localize("AccessoriesHeader")</h2>
 
 <div>
-    <nav>
-        <div class="nav nav-tabs" role="tablist">
-            @foreach (var item in categories)
-            {
-                bool isActive = item == categories.First();
-                var activeClassString = isActive ? "active" : null;
-                var selectedValueString = isActive ? "true" : "false";
-                <a class="nav-item nav-link @activeClassString" data-toggle="tab" role="tab" href="@($"#nav-{item}")">
-                    @(LocalizationManager.LocalizeEnum<AccessoryCategory>(item))
-                </a>
-            }
-        </div>
-    </nav>
-
-    <div class="tab-content">
+    <div class="accordion" id="accessoriesAccordion">
         @foreach (var curCategory in categories)
         {
-            string activeClassesString = curCategory == categories.First() ? "show active" : null;
-            <div class="tab-pane fade @activeClassesString" role="tabpanel" id="@($"nav-{curCategory}")">
-                @foreach (var item in Model.Accessories.Where(cur => cur.Category.ToString() == curCategory))
-                {
-                    <div class="card col-sm-4 rounded-0">
-                        <div class="card-header">
-                            <input type="checkbox"
-                                   data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
-                            <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
-                            <h6 class="card-subtitle">@Html.DisplayFor(_ => item.Price)</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                @Html.DisplayFor(_ => item.SubCategory)
+            <div class="card">
+                <div class="card-header btn d-flex align-items-start" role="button" data-target="@string.Format($"#collapse{curCategory}")" data-toggle="collapse">
+                    <h5>@(LocalizationManager.LocalizeEnum<AccessoryCategory>(curCategory))</h5>
+                </div>
+                <div class="collapse" data-parent="#accessoriesAccordion" id="@string.Format($"collapse{curCategory}")">
+                    <div class="card-body list-group list-group-flush pr-0">
+                        @foreach (var item in Model.Accessories.Where(cur => cur.Category.ToString() == curCategory))
+                        {
+                            <div class="list-group-item">
+                                <div class="row">
+                                    <div class="col-auto align-items-center d-flex">
+                                        <input type="checkbox"
+                                               data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
+                                        <h6 class="card-text">@Html.DisplayFor(_ => item.Price)</h6>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
         }
     </div>
 </div>
 
 @section scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
         let accessories = @Html.Raw(Json.Encode(Model.Accessories));
         let selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
         let selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
@@ -74,5 +65,5 @@
                     //TODO show alert?
                 });
         });
-</script>
+    </script>
 }

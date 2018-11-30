@@ -4,3 +4,7 @@
 - daten von audi verwenden
 - check ajax reload von partial views
 - ueber kudu lernen
+
+Zeiten
+- backend ca. 7 tage
+- layout ca. 2 tage

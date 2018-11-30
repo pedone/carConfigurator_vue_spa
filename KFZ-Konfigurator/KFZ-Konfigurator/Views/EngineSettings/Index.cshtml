@@ -22,28 +22,28 @@
                     <h5 class="mb-1">@($"{Html.DisplayFor(_ => item.Engine.Liter)} {Html.DisplayFor(_ => item.Engine.EngineKind)} {Html.DisplayFor(_ => item.Gears)}-{LocalizationManager.Localize("Gears")}")</h5>
                     <h5 class="mb-1">@Html.DisplayFor(_ => item.Price)</h5>
                 </div>
-                <div class="mt-2 w-100 d-flex justify-content-between">
-                    <span>
+                <div class="mt-2 row">
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/acceleration.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_Acceleration")" />
                         @Html.DisplayFor(_ => item.Acceleration) s
                     </span>
-                    <span>
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/consumption.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_Consumption")" />
                         @Html.DisplayFor(_ => item.Consumption) l/100 km
                     </span>
-                    <span>
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/performance.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_Performance")" />
                         @Html.DisplayFor(_ => item.Engine.Performance) kW (@Html.DisplayFor(_ => item.Engine.PerformancePS) PS)
                     </span>
-                    <span>
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/emissions.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_Emissions")" />
                         @Html.DisplayFor(_ => item.Emission) g/km
                     </span>
-                    <span>
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/topSpeed.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_TopSpeed")" />
                         @Html.DisplayFor(_ => item.TopSpeed) km/h
                     </span>
-                    <span>
+                    <span class="col-sm-4">
                         <img src="~/Resources/Images/engineSize.svg" class="indicatior-icon" title="@LocalizationManager.Localize("TechnicalData_EngineSize")" />
                         @Html.DisplayFor(_ => item.Engine.Size) cm<sup>3</sup>
                     </span>
