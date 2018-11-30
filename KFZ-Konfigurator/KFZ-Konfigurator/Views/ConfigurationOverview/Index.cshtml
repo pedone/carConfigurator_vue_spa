@@ -54,21 +54,24 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <button class="btn btn-outline-secondary" id="generateLinkButton" type="button"
-                    data-bind="disable: (configOverviewViewModel.configurationLinkUrl().length > 0 || configOverviewViewModel.configurationName().length == 0)">
+                    data-bind="click: configOVW.generateConfigurationLink, disable: (configOVW.configurationLinkUrl().length > 0 || configOVW.configurationName().length === 0)">
                 @LocalizationManager.Localize("GenerateConfigurationLink_Label")
             </button>
         </div>
         <input type="text" class="form-control"
-                placeholder="@LocalizationManager.Localize("ConfigurationName_Placeholder")"
-                data-bind="visible: (configOverviewViewModel.configurationLinkUrl().length == 0), textInput: configOverviewViewModel.configurationName"/>
-        <input type="text" class="form-control" readonly="readonly" id="configurationLink" data-bind="value: configOverviewViewModel.configurationLinkUrl" />
+               placeholder="@LocalizationManager.Localize("ConfigurationName_Placeholder")"
+               data-bind="visible: (configOVW.configurationLinkUrl().length == 0), textInput: configOVW.configurationName" />
+        <input type="text" class="form-control" readonly="readonly" id="configurationLink" data-bind="value: configOVW.configurationLinkUrl" />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" id="copyLinkButton" type="button">@LocalizationManager.Localize("Copy")</button>
         </div>
     </div>
 
     <div>
-        <button class="btn btn-primary mb-3" id="placeOrderButton" type="button">@LocalizationManager.Localize("PlaceOrder")</button>
+        <button class="btn btn-primary mb-3" id="placeOrderButton" type="button"
+                data-bind="click: configOVW.placeOrder, disable: (configOVW.configurationLinkUrl().length === 0 && configOVW.configurationName().length === 0)">
+            @LocalizationManager.Localize("PlaceOrder")
+        </button>
         <div class="alert alert-success fade show" id="orderSuccessAlert" role="alert" hidden>
             Your order was successfully placed
         </div>
@@ -86,26 +89,24 @@
         let paint = @Html.Raw(Json.Encode(Model.Paint));
         let rims = @Html.Raw(Json.Encode(Model.Rims));
 
-        let configViewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
-        let configOverviewViewModel = new ConfigurationOverviewViewModel("@Html.Encode(Model.ConfigurationLink)");
-
         $(document).ready(function () {
+            let options = {
+                antiForgeryToken: getAntiForgeryToken($(document)),
+                placeOrderSuccess: function () {
+                    showSuccessAlert();
+                    $('#placeOrderButton').attr('disable', true);
+                },
+                placeOrderFailure: function () {
+                    alert("placeOrderFailure");
+                    showFailedAlert();
+                }
+            };
+            let configOverviewViewModel = new ConfigurationOverviewViewModel("@Html.Encode(Model.ConfigurationLink)", options);
+            let configViewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
+
             ko.applyBindings({
                 configViewModel: configViewModel,
-                configOverviewViewModel: configOverviewViewModel
-            });
-
-            $('#generateLinkButton').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '/ConfigurationOverview/GenerateConfigurationLink',
-                    data: { configurationName: configOverviewViewModel.configurationName() },
-                    dataType: 'text'
-                }).done(function (data) {
-                    configOverviewViewModel.configurationLinkUrl(data);
-                }).fail(function () {
-                    //TODO
-                });
+                configOVW: configOverviewViewModel
             });
 
             $('#copyLinkButton').click(function () {
@@ -123,22 +124,6 @@
                 $('#orderSuccessAlert').attr('hidden', true);
                 $('#orderFailedAlert').attr('hidden', false);
             }
-
-            $('#placeOrderButton').click(function () {
-                //TODO use anti forgery validation
-                $.ajax({
-                    type: 'POST',
-                    url: '/ConfigurationOverview/PlaceOrder',
-                    data: { configurationName: configOverviewViewModel.configurationName() },
-                    dataType: 'text'
-                }).done(function (data) {
-                    configOverviewViewModel.configurationLinkUrl(data);
-                    showSuccessAlert();
-                }).fail(function (data) {
-                    console.log("error: " + JSON.stringify(data));
-                    showFailedAlert();
-                });
-            });
         });
     </script>
 }
