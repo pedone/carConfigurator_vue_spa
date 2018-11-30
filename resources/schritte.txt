@@ -3,3 +3,4 @@
 - ueberarbeitung der db mit model -> db
 - daten von audi verwenden
 - check ajax reload von partial views
+- ueber kudu lernen

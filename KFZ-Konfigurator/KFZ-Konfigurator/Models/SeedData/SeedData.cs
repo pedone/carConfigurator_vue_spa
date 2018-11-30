@@ -62,6 +62,7 @@ namespace KFZ_Konfigurator.Models.SeedData
             context.Rims.RemoveRange(context.Rims);
 
             context.SaveChanges();
+            Log.Info("db data was reset");
         }
     }
 }

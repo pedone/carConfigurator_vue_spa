@@ -66,14 +66,18 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedPaintAndRim([Bind(Include = "PaintId")] int paintId, [Bind(Include = "RimId")] int rimId)
+        public string SetSelectedPaintAndRim([Bind(Include = "PaintId")] int paintId, [Bind(Include = "RimId")] int rimId)
         {
             if (!Request.IsAjaxRequest())
-                throw new InvalidOperationException("This action must be called with ajax");
+            {
+                Log.Error("SetSelectedPaintAndRim was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
 
             SessionData.ActiveConfiguration.PaintId = paintId;
             SessionData.ActiveConfiguration.RimId = rimId;
-            return new EmptyResult();
+            return string.Empty;
         }
     }
 }

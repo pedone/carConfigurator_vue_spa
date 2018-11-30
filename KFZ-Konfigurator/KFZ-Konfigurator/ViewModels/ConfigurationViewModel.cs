@@ -10,12 +10,14 @@ namespace KFZ_Konfigurator.ViewModels
     {
         public string Name { get; }
         public string Guid { get; }
+        public bool HasOrders { get; }
 
         public ConfigurationViewModel(Configuration model)
             : base(model.Id, model.Price)
         {
             Name = model.Name;
             Guid = model.Guid;
+            HasOrders = model.Orders.Count > 0;
         }
     }
 }

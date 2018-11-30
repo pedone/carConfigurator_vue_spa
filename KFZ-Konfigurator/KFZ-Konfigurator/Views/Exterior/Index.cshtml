@@ -61,15 +61,9 @@
             let antiForgeryToken = getAntiForgeryToken($(document));
             let sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
             saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
-                .done((data) => {
-                    console.log('success: ' + JSON.stringify(data));
-                    //alert('worked');
-                    //TODO
-                })
-                .fail((data) => {
-                    console.log('fail: ' + JSON.stringify(data));
-                    //alert('failed');
-                    //TODO
+                .fail((error) => {
+                    console.log('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
+                    //TODO show alert?
                 });
         });
     </script>

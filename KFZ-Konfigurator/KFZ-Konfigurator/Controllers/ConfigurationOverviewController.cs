@@ -59,8 +59,15 @@ namespace KFZ_Konfigurator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public string GenerateConfigurationLink(string configurationName)
         {
+            if (!Request.IsAjaxRequest())
+            {
+                Log.Error("GenerateConfigurationLink was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
@@ -80,12 +87,13 @@ namespace KFZ_Konfigurator.Controllers
                     configuration = InitConfiguration(context, configurationName);
                     context.Configurations.Add(configuration);
                     context.SaveChanges();
+                    Log.Info($"configuration {configurationName} ({configuration.Id}) was created");
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
-                    //TODO log
+                    Log.Error(ex);
                     Response.StatusCode = (int)HttpStatusCode.Conflict;
-                    throw;
+                    return ex.Message;
                 }
             }
 
@@ -94,7 +102,6 @@ namespace KFZ_Konfigurator.Controllers
                 Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
                 Id = configuration.Id
             };
-            Response.StatusCode = (int)HttpStatusCode.OK;
             return SessionData.ActiveConfiguration.ConfigurationLink.Url;
         }
 
@@ -126,8 +133,15 @@ namespace KFZ_Konfigurator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public string PlaceOrder(string configurationName)
         {
+            if (!Request.IsAjaxRequest())
+            {
+                Log.Error("PlaceOrder was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
@@ -145,17 +159,13 @@ namespace KFZ_Konfigurator.Controllers
                         //store the current configuration
                         configuration = InitConfiguration(context, configurationName);
                         context.Configurations.Add(configuration);
-                        SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
-                        {
-                            Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
-                            Id = configuration.Id
-                        };
+
                     }
-                    catch (ArgumentException)
+                    catch (ArgumentException ex)
                     {
-                        //TODO log
+                        Log.Error(ex);
                         Response.StatusCode = (int)HttpStatusCode.Conflict;
-                        throw;
+                        return ex.Message;
                     }
                 }
                 else
@@ -165,16 +175,29 @@ namespace KFZ_Konfigurator.Controllers
                     var activeConfigId = SessionData.ActiveConfiguration.ConfigurationLink.Id;
                     configuration = context.Configurations.FirstOrDefault(cur => cur.Id == activeConfigId);
                     if (configuration == null)
-                        throw new Exception("the active configuration was not found in the database");
+                    {
+                        var message = "the active configuration was not found in the database";
+                        Log.Error(message);
+                        Response.StatusCode = (int)HttpStatusCode.NotFound;
+                        return message;
+                    }
                 }
 
                 var newOrder = context.Orders.Create();
                 newOrder.Configuration = configuration;
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
+
+                Log.Info($"configuration {configurationName} ({configuration.Id}) was created");
+                Log.Info($"a new order with id {newOrder.Id} was successfully placed");
+
+                SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
+                {
+                    Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
+                    Id = configuration.Id
+                };
             }
 
-            Response.StatusCode = (int)HttpStatusCode.OK;
             return SessionData.ActiveConfiguration.ConfigurationLink.Url;
         }
     }

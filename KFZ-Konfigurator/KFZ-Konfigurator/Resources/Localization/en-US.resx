@@ -175,7 +175,7 @@
     <value>Rims</value>
   </data>
   <data name="Configuration_GoToOverview" xml:space="preserve">
-    <value>Overview</value>
+    <value>Show Overview</value>
   </data>
   <data name="ConfigurationOverviewHeader" xml:space="preserve">
     <value>Your Configuration</value>
@@ -242,5 +242,14 @@
   </data>
   <data name="Load" xml:space="preserve">
     <value>Load</value>
+  </data>
+  <data name="Configuration_BasePrice" xml:space="preserve">
+    <value>Base Price</value>
+  </data>
+  <data name="Configuration_ExtrasPrice" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Configuration_Price" xml:space="preserve">
+    <value>Price</value>
   </data>
 </root>

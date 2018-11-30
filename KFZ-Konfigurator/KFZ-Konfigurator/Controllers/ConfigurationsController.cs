@@ -14,6 +14,8 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class ConfigurationsController : Controller
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ConfigurationsController));
+
         [Route("configurations", Name = Constants.Routes.ConfigurationList)]
         public ActionResult Index()
         {
@@ -25,7 +27,7 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public string Delete(int id)
         {
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -33,7 +35,11 @@ namespace KFZ_Konfigurator.Controllers
                 if (configToDelete != null)
                 {
                     if (configToDelete.Orders.Count > 0)
-                        throw new InvalidOperationException("configuration has orders and can't be deleted");
+                    {
+                        string error = $"configuration {id} has orders and can not be deleted";
+                        Log.Error(error);
+                        return error;
+                    }
 
                     configToDelete.Accessories.Clear();
                     context.Configurations.Remove(configToDelete);
@@ -41,7 +47,7 @@ namespace KFZ_Konfigurator.Controllers
                 }
             }
 
-            return new EmptyResult();
+            return string.Empty;
         }
 
         [Route("configuration/load/{guid}", Name = Constants.Routes.LoadConfiguration)]
@@ -51,7 +57,7 @@ namespace KFZ_Konfigurator.Controllers
             {
                 var configuration = context.Configurations.FirstOrDefault(cur => cur.Guid == guid);
                 if (configuration == null)
-                    throw new ArgumentException("configuration not found");
+                    throw new ArgumentException($"configuration {guid} not found");
 
                 var activeConfig = SessionData.ActiveConfiguration;
                 activeConfig.Reset();

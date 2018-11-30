@@ -206,10 +206,23 @@ class ConfigurationViewModel {
      */
     _calculatePriceFactory(items) {
         return function () {
-            return _.chain(items)
-                .filter((cur) => cur.isSelected())
-                .map((cur) => cur.price)
-                .reduce((memo, cur) => memo + cur, 0);
+            /** @type {number} */
+            let i;
+            /** @type {number} */
+            let result = 0;
+            /** @type {Array.<number>} */
+            let filteredItems = _.filter(items, (cur) => cur.isSelected());
+
+            for (i = 0; i < filteredItems.length; i += 1) {
+                result += filteredItems[i].price;
+            }
+            return result;
+
+            //TODO not working when filtered empty or something
+            //var result = _.chain(items)
+            //    .filter((cur) => cur.isSelected())
+            //    .map((cur) => cur.price)
+            //    .reduce((memo, cur) => memo + cur, 0);
         }
     }
 

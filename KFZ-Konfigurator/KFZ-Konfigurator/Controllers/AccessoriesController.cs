@@ -59,10 +59,14 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedAccessories(string id)
+        public string SetSelectedAccessories(string id)
         {
             if (!Request.IsAjaxRequest())
-                throw new InvalidOperationException("This action must be called with ajax");
+            {
+                Log.Error("SetSelectedAccessories was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
 
             if (id == null)
             {
@@ -73,7 +77,8 @@ namespace KFZ_Konfigurator.Controllers
                 var ids = id.Trim('[', ']').Split(',').Select(cur => int.Parse(cur)).ToList();
                 SessionData.ActiveConfiguration.AccessoryIds = ids.ToArray();
             }
-            return new EmptyResult();
+            Log.Debug($"AccessoryIds set to {id}");
+            return string.Empty; ;
         }
     }
 }

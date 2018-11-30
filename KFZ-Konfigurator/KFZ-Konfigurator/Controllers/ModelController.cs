@@ -14,6 +14,8 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class ModelController : Controller
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ModelController));
+
         [Route("configuration/models", Name = Constants.Routes.ModelOverview)]
         public ActionResult Index()
         {
@@ -25,10 +27,14 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetCarModel(int id)
+        public string SetCarModel(int id)
         {
             if (!Request.IsAjaxRequest())
-                throw new InvalidOperationException("This action must be called with ajax");
+            {
+                Log.Error("SetCarModel was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
 
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -53,7 +59,7 @@ namespace KFZ_Konfigurator.Controllers
                 //set default rims
                 SessionData.ActiveConfiguration.RimId = context.Rims.First(cur => cur.IsDefault == true).Id;
 
-                return new EmptyResult();
+                return string.Empty;
             }
         }
     }

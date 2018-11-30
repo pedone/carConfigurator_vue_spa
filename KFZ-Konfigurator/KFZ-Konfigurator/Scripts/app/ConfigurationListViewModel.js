@@ -12,6 +12,8 @@
         this.name = data.Name;
         /** @type {string} */
         this.guid = data.Guid;
+        /** @type {boolean} */
+        this.hasOrders = data.HasOrders;
         /** @type {string} */
         this.linkUrl = linkTemplate.replace("Placeholder", data.Guid);
     }
@@ -43,9 +45,9 @@ class ConfigurationListViewModel {
                 .done(function () {
                     self.configurations.remove(item);
                 })
-                .fail(function () {
-                    //TODO
-                    alert('item ' + item.id + ' could not be removed');
+                .fail(function (error) {
+                    console.log('failed to delete configuration: ' + error.responseText + ' (' + error.statusText + ')');
+                    alert('configuration ' + item.name + ' could not be removed');
                 });
         };
 
@@ -62,7 +64,8 @@ class ConfigurationListViewModel {
                     __RequestVerificationToken: antiForgeryToken,
                     id: id
                 },
-                contentType: 'application/x-www-form-urlencoded'
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'text'
             });
         }
     }
@@ -74,4 +77,5 @@ class ConfigurationListViewModel {
  * @property {number} Price
  * @property {string} Name
  * @property {string} Guid
+ * @property {string} HasOrders
  */

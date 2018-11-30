@@ -64,13 +64,17 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetSelectedEngineSettings(int id)
+        public string SetSelectedEngineSettings(int id)
         {
             if (!Request.IsAjaxRequest())
-                throw new InvalidOperationException("This action must be called with ajax");
+            {
+                Log.Error("SetSelectedEngineSettings was called without ajax");
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return "This action must be called with ajax";
+            }
 
             SessionData.ActiveConfiguration.EngineSettingsId = id;
-            return new EmptyResult();
+            return string.Empty;
         }
     }
 }

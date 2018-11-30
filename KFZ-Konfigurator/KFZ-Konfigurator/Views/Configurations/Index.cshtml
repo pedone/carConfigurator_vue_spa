@@ -1,4 +1,5 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.ConfigurationViewModel>
+﻿@using KFZ_Konfigurator.Helper;
+@model IEnumerable<KFZ_Konfigurator.ViewModels.ConfigurationViewModel>
 
 @{
     ViewBag.Title = "Configurations";
@@ -21,10 +22,12 @@
     <tbody data-bind="foreach: configurations">
         <tr>
             <td data-bind="text: name"></td>
-            <td data-bind="text: price"></td>
+            <td data-bind="text: formatCurrency(price)"></td>
             <td>
-                <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("Load")</a> |
-                <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }">@LocalizationManager.Localize("Delete")</a>
+                <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("Load")</a>
+                <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }, visible: !hasOrders">
+                    @LocalizationManager.Localize("Delete")
+                </a>
             </td>
         </tr>
     </tbody>
@@ -38,24 +41,11 @@
         let loadConfigurationRouteTemplate = "@Url.RouteUrl(Constants.Routes.LoadConfiguration, new { guid = "Placeholder" })";
         let viewModel = new ConfigurationListViewModel(configurations, loadConfigurationRouteTemplate);
 
+        function formatCurrency(amount) {
+            return amount.toFixed(2) + ' EUR';
+        }
         $(document).ready(function () {
             ko.applyBindings(viewModel);
         });
-        console.log(viewModel);
-        //$(window).on('beforeunload', function () {
-        //    let antiForgeryToken = getAntiForgeryToken($(document));
-        //    let selectedAccessories = viewModel.selectedAccessoryIds;
-        //    saveViewModel('/Accessories/SetSelectedAccessories', selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
-        //        .done((data) => {
-        //            console.log('success: ' + JSON.stringify(data));
-        //            //alert('worked');
-        //            //TODO
-        //        })
-        //        .fail((data) => {
-        //            console.log('fail: ' + JSON.stringify(data));
-        //            //alert('failed');
-        //            //TODO
-        //        });
-        //});
     </script>
 }

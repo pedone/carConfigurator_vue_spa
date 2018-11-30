@@ -115,11 +115,38 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overview.
+        ///   Looks up a localized string similar to Base Price.
+        /// </summary>
+        internal static string Configuration_BasePrice {
+            get {
+                return ResourceManager.GetString("Configuration_BasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extras.
+        /// </summary>
+        internal static string Configuration_ExtrasPrice {
+            get {
+                return ResourceManager.GetString("Configuration_ExtrasPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Overview.
         /// </summary>
         internal static string Configuration_GoToOverview {
             get {
                 return ResourceManager.GetString("Configuration_GoToOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string Configuration_Price {
+            get {
+                return ResourceManager.GetString("Configuration_Price", resourceCulture);
             }
         }
         

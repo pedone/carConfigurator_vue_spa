@@ -43,6 +43,7 @@
     var activeModel = SessionData.ActiveConfiguration.CarModel;
     @section CartOverview {
         <div class="card rounded-0">
+            @*TODO put image*@
             @*<img class="card-img-top" alt=""*@
             <div class="card-body">
                 <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
@@ -50,18 +51,18 @@
                 </a>
                 <div class="card-text">
                     <div>
-                        base price: <span data-bind="text: configViewModel.basePrice"></span>
+                        @LocalizationManager.Localize("Configuration_BasePrice"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span>
                     </div>
                     <div>
-                        extras: <span data-bind="text: configViewModel.extrasPrice"></span>
+                        @LocalizationManager.Localize("Configuration_ExtrasPrice"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span>
                     </div>
                     <div>
-                        price: <span data-bind="text: configViewModel.fullPrice"></span>
+                        @LocalizationManager.Localize("Configuration_Price"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
                     </div>
                 </div>
                 @if (viewKind != ConfigurationViewKind.Overview)
                 {
-                    <a href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)" class="btn btn-primary">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)" class="btn btn-primary mt-3">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
                 }
             </div>
         </div>
@@ -97,5 +98,10 @@
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/AjaxHelper.js")"></script>
+    <script type="text/javascript">
+        function formatCurrency(amount) {
+            return amount.toFixed(2) + ' EUR';
+        }
+    </script>
     @RenderSection("scripts", required: false)
 }
