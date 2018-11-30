@@ -38,7 +38,6 @@ class ConfigurationListViewModel {
         this.deleteItem = function (item, event, document) {
             event.preventDefault();
 
-            console.log(event.currentTarget.ownerDocument);
             /** @type {string} */
             let antiForgeryToken = getAntiForgeryToken(document);
             deleteItemAjax(item.id, antiForgeryToken)

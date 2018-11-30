@@ -252,4 +252,22 @@
   <data name="Configuration_Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="ConfigurationOverview_Accessories_Header" xml:space="preserve">
+    <value>Accessories</value>
+  </data>
+  <data name="ConfigurationOverview_Exterior_Header" xml:space="preserve">
+    <value>Exterior</value>
+  </data>
+  <data name="ConfigurationOverview_FinalPrice_Header" xml:space="preserve">
+    <value>Final Price</value>
+  </data>
+  <data name="ConfigurationOverview_Paint_Header" xml:space="preserve">
+    <value>Paint</value>
+  </data>
+  <data name="ConfigurationOverview_Rims_Header" xml:space="preserve">
+    <value>Rims</value>
+  </data>
+  <data name="RimSizeUnit" xml:space="preserve">
+    <value>inch</value>
+  </data>
 </root>

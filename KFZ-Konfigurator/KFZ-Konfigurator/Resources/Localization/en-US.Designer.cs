@@ -178,6 +178,51 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accessories.
+        /// </summary>
+        internal static string ConfigurationOverview_Accessories_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Accessories_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exterior.
+        /// </summary>
+        internal static string ConfigurationOverview_Exterior_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Exterior_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final Price.
+        /// </summary>
+        internal static string ConfigurationOverview_FinalPrice_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_FinalPrice_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paint.
+        /// </summary>
+        internal static string ConfigurationOverview_Paint_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Paint_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rims.
+        /// </summary>
+        internal static string ConfigurationOverview_Rims_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Rims_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Technical Data.
         /// </summary>
         internal static string ConfigurationOverview_TechnicalData_Header {
@@ -363,6 +408,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string RimsHeader {
             get {
                 return ResourceManager.GetString("RimsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inch.
+        /// </summary>
+        internal static string RimSizeUnit {
+            get {
+                return ResourceManager.GetString("RimSizeUnit", resourceCulture);
             }
         }
         

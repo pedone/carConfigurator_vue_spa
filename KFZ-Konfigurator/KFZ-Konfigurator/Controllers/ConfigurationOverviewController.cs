@@ -50,7 +50,7 @@ namespace KFZ_Konfigurator.Controllers
                 return View(new ConfigurationOverviewPageViewModel
                 {
                     EngineSetting = engineSettings,
-                    Accessories = accessories,
+                    Accessories = accessories ?? Enumerable.Empty<AccessoryViewModel>(),
                     Paint = paint,
                     Rims = rims,
                     ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink?.Url
