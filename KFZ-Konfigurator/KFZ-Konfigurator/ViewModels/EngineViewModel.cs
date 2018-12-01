@@ -3,7 +3,7 @@ using System;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class EngineViewModel : ViewModelBase
+    public class EngineViewModel : ItemViewModelBase
     {
         public EngineKind EngineKind { get; }
         public int Liter { get; }

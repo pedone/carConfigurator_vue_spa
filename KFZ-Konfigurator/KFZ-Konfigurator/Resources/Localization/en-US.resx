@@ -180,8 +180,8 @@
   <data name="ConfigurationOverviewHeader" xml:space="preserve">
     <value>Your Configuration</value>
   </data>
-  <data name="ConfigurationOverviewTitle" xml:space="preserve">
-    <value>Configuration Overview</value>
+  <data name="OrderOverviewView_Title" xml:space="preserve">
+    <value>Order Overview</value>
   </data>
   <data name="ConfigurationOverview_TechnicalData_Header" xml:space="preserve">
     <value>Technical Data</value>
@@ -225,14 +225,11 @@
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
-  <data name="PlaceOrder" xml:space="preserve">
+  <data name="ConfigurationOverview_PlaceOrder_Button" xml:space="preserve">
     <value>Place Order</value>
   </data>
-  <data name="ConfigurationName_Placeholder" xml:space="preserve">
-    <value>Configuration Name</value>
-  </data>
-  <data name="ConfigurationList" xml:space="preserve">
-    <value>Configurations</value>
+  <data name="ConfigurationOverview_OrderDescriptionPlaceholder" xml:space="preserve">
+    <value>Discription (optional)</value>
   </data>
   <data name="OrderList" xml:space="preserve">
     <value>Orders</value>
@@ -278,5 +275,35 @@
   </data>
   <data name="PaintCategory_Uni" xml:space="preserve">
     <value>Uni</value>
+  </data>
+  <data name="Configuration_Label" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="ConfigurationOverview_CopyConfigurationLink" xml:space="preserve">
+    <value>Copy link to your configuration to clipboard</value>
+  </data>
+  <data name="ConfigurationOverview_Order_Button" xml:space="preserve">
+    <value>Order Your Configuration</value>
+  </data>
+  <data name="OrderOverviewView_Header" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="ConfigurationOverview_Title" xml:space="preserve">
+    <value>Configuration Overview</value>
+  </data>
+  <data name="OrderOverviewView_BasePrice_Header" xml:space="preserve">
+    <value>Base Price</value>
+  </data>
+  <data name="OrderOverviewView_Description_CarModel" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="OrderOverviewView_Description_Header" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="OrderOverviewView_ExstrasPrice_Header" xml:space="preserve">
+    <value>Extras Price</value>
+  </data>
+  <data name="OrderOverviewView_Price_Header" xml:space="preserve">
+    <value>Price</value>
   </data>
 </root>

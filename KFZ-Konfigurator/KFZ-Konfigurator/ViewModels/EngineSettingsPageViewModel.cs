@@ -5,7 +5,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class EngineSettingsPageViewModel
+    public class EngineSettingsPageViewModel : ViewModelBase
     {
         public IEnumerable<EngineSettingsViewModel> EngineSettings { get; set; }
         public IEnumerable<AccessoryViewModel> SelectedAccessories { get; set; }

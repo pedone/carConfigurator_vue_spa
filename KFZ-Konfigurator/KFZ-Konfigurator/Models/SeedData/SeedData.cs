@@ -51,12 +51,8 @@ namespace KFZ_Konfigurator.Models.SeedData
         {
             //remove many to many relationships first
             foreach (var cur in context.Configurations)
-            {
                 cur.Accessories.Clear();
-                cur.Orders.Clear();
-            }
 
-            context.Configurations.RemoveRange(context.Configurations);
             context.Accessories.RemoveRange(context.Accessories);
             context.EngineSettings.RemoveRange(context.EngineSettings);
             context.CarModels.RemoveRange(context.CarModels);

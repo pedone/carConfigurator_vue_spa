@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class AccessoryViewModel : ViewModelBase
+    public class AccessoryViewModel : ItemViewModelBase
     {
         public AccessoryCategory Category { get; }
         public string Name { get; }

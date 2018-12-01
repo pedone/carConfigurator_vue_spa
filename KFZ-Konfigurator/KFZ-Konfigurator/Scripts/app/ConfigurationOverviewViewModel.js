@@ -1,51 +1,38 @@
 ﻿class ConfigurationOverviewViewModel {
     /**
      * @param {string} configurationUrl
-     * @param {HandlerOptions} handlerOptions
+     * @param {HandlerOptions} options
      */
-    constructor(configurationUrl, handlerOptions) {
+    constructor(configurationUrl, options) {
         self = this;
         /** @type {string} */
-        this.configurationLinkUrl = ko.observable(configurationUrl || "");
+        this.configurationLink = ko.observable(configurationUrl || "");
         /** @type {string} */
-        this.configurationName = ko.observable("");
+        this.configurationDescription = ko.observable("");
         /** @type {HandlerOptions} */
-        this.options = handlerOptions;
-    }
-
-    generateConfigurationLink() {
-        $.ajax({
-            type: 'POST',
-            url: '/ConfigurationOverview/GenerateConfigurationLink',
-            data: { __RequestVerificationToken: self.options.antiForgeryToken, configurationName: self.configurationName() },
-            contentType: 'application/x-www-form-urlencoded',
-        }).done(function (data) {
-            self.configurationLinkUrl(data);
-        }).fail(function (error) {
-            console.log('failed to generate configuration link: ' + error.responseText + ' (' + error.statusText + ')');
-        });
+        this.options = options;
     }
 
     placeOrder() {
         $.ajax({
             type: 'POST',
             url: '/ConfigurationOverview/PlaceOrder',
-            data: { __RequestVerificationToken: self.options.antiForgeryToken, configurationName: self.configurationName() },
+            data: { __RequestVerificationToken: self.options.antiForgeryToken, description: self.configurationDescription() },
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'text'
-        }).done(function (data) {
-            self.configurationLinkUrl(data);
-            if (self.options.placeOrderSuccess) {
-                self.options.placeOrderSuccess();
-            }
-        })
-        .fail(
-            function (error) {
+        }).done(
+            function (data) {
+                self.configurationLink(data);
+                if (self.options.placeOrderSuccess) {
+                    self.options.placeOrderSuccess();
+                }
+            })
+            .fail(function (error) {
                 console.log('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');
                 if (self.options.placeOrderFailure) {
                     self.options.placeOrderFailure();
                 }
-        });
+            });
     }
 }
 

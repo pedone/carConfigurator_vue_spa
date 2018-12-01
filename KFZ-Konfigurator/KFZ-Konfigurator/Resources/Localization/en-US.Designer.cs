@@ -142,6 +142,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration.
+        /// </summary>
+        internal static string Configuration_Label {
+            get {
+                return ResourceManager.GetString("Configuration_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         internal static string Configuration_Price {
@@ -160,29 +169,20 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configurations.
-        /// </summary>
-        internal static string ConfigurationList {
-            get {
-                return ResourceManager.GetString("ConfigurationList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration Name.
-        /// </summary>
-        internal static string ConfigurationName_Placeholder {
-            get {
-                return ResourceManager.GetString("ConfigurationName_Placeholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Accessories.
         /// </summary>
         internal static string ConfigurationOverview_Accessories_Header {
             get {
                 return ResourceManager.GetString("ConfigurationOverview_Accessories_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy link to your configuration to clipboard.
+        /// </summary>
+        internal static string ConfigurationOverview_CopyConfigurationLink {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_CopyConfigurationLink", resourceCulture);
             }
         }
         
@@ -205,11 +205,38 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Your Configuration.
+        /// </summary>
+        internal static string ConfigurationOverview_Order_Button {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Order_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discription (optional).
+        /// </summary>
+        internal static string ConfigurationOverview_OrderDescriptionPlaceholder {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_OrderDescriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paint.
         /// </summary>
         internal static string ConfigurationOverview_Paint_Header {
             get {
                 return ResourceManager.GetString("ConfigurationOverview_Paint_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place Order.
+        /// </summary>
+        internal static string ConfigurationOverview_PlaceOrder_Button {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_PlaceOrder_Button", resourceCulture);
             }
         }
         
@@ -232,20 +259,20 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration Overview.
+        /// </summary>
+        internal static string ConfigurationOverview_Title {
+            get {
+                return ResourceManager.GetString("ConfigurationOverview_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Configuration.
         /// </summary>
         internal static string ConfigurationOverviewHeader {
             get {
                 return ResourceManager.GetString("ConfigurationOverviewHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration Overview.
-        /// </summary>
-        internal static string ConfigurationOverviewTitle {
-            get {
-                return ResourceManager.GetString("ConfigurationOverviewTitle", resourceCulture);
             }
         }
         
@@ -376,6 +403,69 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base Price.
+        /// </summary>
+        internal static string OrderOverviewView_BasePrice_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_BasePrice_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model.
+        /// </summary>
+        internal static string OrderOverviewView_Description_CarModel {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Description_CarModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string OrderOverviewView_Description_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Description_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extras Price.
+        /// </summary>
+        internal static string OrderOverviewView_ExstrasPrice_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_ExstrasPrice_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orders.
+        /// </summary>
+        internal static string OrderOverviewView_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string OrderOverviewView_Price_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Price_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Overview.
+        /// </summary>
+        internal static string OrderOverviewView_Title {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metallic.
         /// </summary>
         internal static string PaintCategory_Metalic {
@@ -408,15 +498,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string PaintsHeader {
             get {
                 return ResourceManager.GetString("PaintsHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Place Order.
-        /// </summary>
-        internal static string PlaceOrder {
-            get {
-                return ResourceManager.GetString("PlaceOrder", resourceCulture);
             }
         }
         

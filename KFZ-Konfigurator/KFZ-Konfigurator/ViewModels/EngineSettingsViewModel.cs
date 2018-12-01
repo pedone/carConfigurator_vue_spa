@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class EngineSettingsViewModel : ViewModelBase
+    public class EngineSettingsViewModel : ItemViewModelBase
     {
         public double Acceleration { get; }
         public double Consumption { get; }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class ExteriorPageViewModel
+    public class ExteriorPageViewModel : ViewModelBase
     {
         public IEnumerable<PaintViewModel> Paints { get; set; }
         public IEnumerable<RimViewModel> Rims { get; set; }

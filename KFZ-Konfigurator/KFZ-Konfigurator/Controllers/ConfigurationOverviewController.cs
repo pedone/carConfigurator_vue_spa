@@ -53,88 +53,36 @@ namespace KFZ_Konfigurator.Controllers
                     Accessories = accessories ?? Enumerable.Empty<AccessoryViewModel>(),
                     Paint = paint,
                     Rims = rims,
-                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink?.Url
+                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink
                 });
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public string GenerateConfigurationLink(string configurationName)
+        private Configuration InitConfiguration(CarConfiguratorEntityContext context)
         {
-            if (!Request.IsAjaxRequest())
-            {
-                Log.Error("GenerateConfigurationLink was called without ajax");
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return "This action must be called with ajax";
-            }
-            if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
-            {
-                Log.Error(error);
-                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return error;
-            }
-            if (SessionData.ActiveConfiguration.HasConfiguration)
-            {
-                return SessionData.ActiveConfiguration.ConfigurationLink.Url;
-            }
-
-            Configuration configuration;
-            using (var context = new CarConfiguratorEntityContext())
-            {
-                try
-                {
-                    configuration = InitConfiguration(context, configurationName);
-                    context.Configurations.Add(configuration);
-                    context.SaveChanges();
-                    Log.Info($"configuration {configurationName} ({configuration.Id}) was created");
-                }
-                catch (ArgumentException ex)
-                {
-                    Log.Error(ex);
-                    Response.StatusCode = (int)HttpStatusCode.Conflict;
-                    return ex.Message;
-                }
-            }
-
-            SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
-            {
-                Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
-                Id = configuration.Id
-            };
-            return SessionData.ActiveConfiguration.ConfigurationLink.Url;
-        }
-
-        private Configuration InitConfiguration(CarConfiguratorEntityContext context, string name)
-        {
-            if (context.Configurations.Any(cur => cur.Name == name))
-                throw new ArgumentException($"a configuration with the name {name} already exists");
-
             var configViewModel = SessionData.ActiveConfiguration;
             var configuration = context.Configurations.Create();
-            configuration.Name = name;
-            configuration.Guid = MiscHelper.GenerateShortGuid();
             configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == configViewModel.EngineSettingsId);
             configuration.Paint = context.Paints.First(cur => cur.Id == configViewModel.PaintId);
             configuration.Rims = context.Rims.First(cur => cur.Id == configViewModel.RimId);
             configuration.Accessories = context.Accessories.Where(cur => configViewModel.AccessoryIds.Contains(cur.Id)).ToList();
-            configuration.Price = CalculateConfigurationPrice(configuration);
 
             return configuration;
         }
 
-        private double CalculateConfigurationPrice(Configuration config)
+        private (double basePrice, double extrasPrice) CalculatePrice(Configuration config)
         {
             var accessoryPrices = config.Accessories.Select(cur => cur.Price).ToList();
-            return config.EngineSetting.Price +
-                config.Paint.Price +
+            var extras = config.Paint.Price +
                 config.Rims.Price +
                 (accessoryPrices.Count > 0 ? accessoryPrices.Aggregate((result, next) => result + next) : 0);
+
+            return (basePrice: config.EngineSetting.Price, extrasPrice: extras);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string PlaceOrder(string configurationName)
+        public string PlaceOrder(string description)
         {
             if (!Request.IsAjaxRequest())
             {
@@ -152,53 +100,39 @@ namespace KFZ_Konfigurator.Controllers
             Configuration configuration;
             using (var context = new CarConfiguratorEntityContext())
             {
-                if (!SessionData.ActiveConfiguration.HasConfiguration)
+                try
                 {
-                    try
-                    {
-                        //store the current configuration
-                        configuration = InitConfiguration(context, configurationName);
-                        context.Configurations.Add(configuration);
+                    //store the current configuration
+                    configuration = InitConfiguration(context);
+                    context.Configurations.Add(configuration);
 
-                    }
-                    catch (ArgumentException ex)
-                    {
-                        Log.Error(ex);
-                        Response.StatusCode = (int)HttpStatusCode.Conflict;
-                        return ex.Message;
-                    }
                 }
-                else
+                catch (ArgumentException ex)
                 {
-                    //TODO update the current configuration
-                    //the configuration was already generated, get the existing one
-                    var activeConfigId = SessionData.ActiveConfiguration.ConfigurationLink.Id;
-                    configuration = context.Configurations.FirstOrDefault(cur => cur.Id == activeConfigId);
-                    if (configuration == null)
-                    {
-                        var message = "the active configuration was not found in the database";
-                        Log.Error(message);
-                        Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        return message;
-                    }
+                    Log.Error(ex);
+                    Response.StatusCode = (int)HttpStatusCode.Conflict;
+                    return ex.Message;
                 }
 
                 var newOrder = context.Orders.Create();
+                newOrder.Description = description;
+                newOrder.Guid = MiscHelper.GenerateShortGuid();
+
+                (double basePrice, double extrasPrice) configurationPrice = CalculatePrice(configuration);
+                newOrder.BasePrice = configurationPrice.basePrice;
+                newOrder.ExtrasPrice = configurationPrice.extrasPrice;
+
                 newOrder.Configuration = configuration;
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
 
-                Log.Info($"configuration {configurationName} ({configuration.Id}) was created");
-                Log.Info($"a new order with id {newOrder.Id} was successfully placed");
+                Log.Info($"configuration for order {newOrder.Id} was created");
+                Log.Info($"a new order with id '{newOrder.Id}' was successfully placed");
 
-                SessionData.ActiveConfiguration.ConfigurationLink = new ConfigurationLink
-                {
-                    Url = MiscHelper.GenerateConfigurationLink(Request, Url, configuration.Guid),
-                    Id = configuration.Id
-                };
+                SessionData.ActiveConfiguration.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, newOrder.Guid);
             }
 
-            return SessionData.ActiveConfiguration.ConfigurationLink.Url;
+            return SessionData.ActiveConfiguration.ConfigurationLink;
         }
     }
 }

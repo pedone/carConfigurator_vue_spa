@@ -203,6 +203,7 @@ class ConfigurationViewModel {
     /** 
      *  @param {Object.<ViewModel>} items
      *  @returns {function() : number}
+     * @private
      */
     _calculatePriceFactory(items) {
         return function () {
@@ -245,15 +246,25 @@ class ConfigurationViewModel {
     }
 
     /** @param {number} settingsId */
-    settingsSelectedClick(settingsId) {
-        //deselect all settings, because deselection doesn't work with binding
-        _.each(this._engineSettingsById, (cur) => { cur.isSelected(false) });
-        this._engineSettingsById[settingsId].isSelected(true);
+    selectEngineSettings(settingsId) {
+        //deselect all other settings, because deselection doesn't work with binding
+        _.each(this._engineSettingsById, (cur) => { cur.isSelected(cur.id === settingsId) });
     }
 
     /** @param {string} id */
     selectPaint(id) {
         this.selectedPaintId(id);
+    }
+
+    /** @param {string} id */
+    selectAccessory(id) {
+
+        /** @type {boolean} */
+        let isSelected = this.accessoriesById[id].isSelected();
+
+        if (isSelected || !this.isAccessoryLimitReached()) {
+            this.accessoriesById[id].isSelected(!isSelected);
+        }
     }
 }
 

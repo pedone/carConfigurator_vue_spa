@@ -117,19 +117,20 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Paint_Id" Type="int" Nullable="false" />
     <Property Name="EngineSetting_Id" Type="int" Nullable="false" />
     <Property Name="Rims_Id" Type="int" Nullable="false" />
+    <Property Name="ConfigurationOrder_Configuration_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Configuration_Id" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExtrasPrice" Type="float" Nullable="false" />
+    <Property Name="BasePrice" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="ConfigurationAccessory">
     <Key>
@@ -200,14 +201,16 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ConfigurationOrder">
-    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="1" />
-    <End Role="Order" Type="CarConfiguratorModel.Store.Orders" Multiplicity="*" />
+    <End Role="Configuration" Type="CarConfiguratorModel.Store.Configurations" Multiplicity="*" />
+    <End Role="Order" Type="CarConfiguratorModel.Store.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
-      <Principal Role="Configuration">
+      <Principal Role="Order">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="Configuration_Id" />
+      <Dependent Role="Configuration">
+        <PropertyRef Name="ConfigurationOrder_Configuration_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -427,10 +430,6 @@
           <NavigationProperty Name="EngineSetting" Relationship="CarConfiguratorModel.EngineSettingsConfiguration" FromRole="Configuration" ToRole="EngineSettings" />
           <NavigationProperty Name="Accessories" Relationship="CarConfiguratorModel.ConfigurationAccessory" FromRole="Configuration" ToRole="Accessory" />
           <NavigationProperty Name="Rims" Relationship="CarConfiguratorModel.RimConfiguration" FromRole="Configuration" ToRole="Rim" />
-          <Property Name="Guid" Type="String" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="CarConfiguratorModel.ConfigurationOrder" FromRole="Configuration" ToRole="Order" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="PaintConfiguration">
           <End Type="CarConfiguratorModel.Paint" Role="Paint" Multiplicity="1" />
@@ -455,10 +454,16 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Configuration" Relationship="CarConfiguratorModel.ConfigurationOrder" FromRole="Order" ToRole="Configuration" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Guid" Type="String" Nullable="false" />
+          <Property Name="ExtrasPrice" Type="Double" Nullable="false" />
+          <Property Name="BasePrice" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="ConfigurationOrder">
           <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="1" />
-          <End Type="CarConfiguratorModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="CarConfiguratorModel.Order" Role="Order" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -538,9 +543,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Configuration)">
         <MappingFragment StoreEntitySet="Configurations">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Guid" ColumnName="Guid" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -548,6 +550,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(CarConfiguratorModel.Order)">
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="ExtrasPrice" ColumnName="ExtrasPrice" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -599,11 +605,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ConfigurationOrder" TypeName="CarConfiguratorModel.ConfigurationOrder" StoreEntitySet="Orders">
-      <EndProperty Name="Configuration">
-        <ScalarProperty Name="Id" ColumnName="Configuration_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="ConfigurationOrder" TypeName="CarConfiguratorModel.ConfigurationOrder" StoreEntitySet="Configurations">
       <EndProperty Name="Order">
+        <ScalarProperty Name="Id" ColumnName="ConfigurationOrder_Configuration_Id" />
+      </EndProperty>
+      <EndProperty Name="Configuration">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

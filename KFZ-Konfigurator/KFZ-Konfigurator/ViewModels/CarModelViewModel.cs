@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class CarModelViewModel : ViewModelBase
+    public class CarModelViewModel : ItemViewModelBase
     {
         public BodyKind BodyType { get; }
         public string Series { get; }

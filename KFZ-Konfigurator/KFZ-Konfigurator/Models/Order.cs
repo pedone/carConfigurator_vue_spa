@@ -15,6 +15,10 @@ namespace KFZ_Konfigurator.Models
     public partial class Order
     {
         public int Id { get; set; }
+        public string Description { get; set; }
+        public string Guid { get; set; }
+        public double ExtrasPrice { get; set; }
+        public double BasePrice { get; set; }
     
         public virtual Configuration Configuration { get; set; }
     }

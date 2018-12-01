@@ -172,11 +172,11 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\ConfigurationOverviewController.cs" />
-    <Compile Include="Controllers\ConfigurationsController.cs" />
     <Compile Include="Controllers\ExteriorController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderOverviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,16 +264,18 @@
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\ConfigurationOverviewPageViewModel.cs" />
-    <Compile Include="ViewModels\ConfigurationViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\FuelKind.cs" />
+    <Compile Include="ViewModels\ItemViewModelBase.cs" />
+    <Compile Include="ViewModels\OrderPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\RimViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineViewModel.cs" />
     <Compile Include="ViewModels\PaintViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -292,7 +294,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
-    <Content Include="Scripts\app\ConfigurationListViewModel.js" />
+    <Content Include="Scripts\app\OrderListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />
     <Content Include="Scripts\app\Helper.js" />
@@ -402,7 +404,7 @@
     <Content Include="Views\Accessories\Index.cshtml" />
     <Content Include="Views\Exterior\Index.cshtml" />
     <Content Include="Views\ConfigurationOverview\Index.cshtml" />
-    <Content Include="Views\Configurations\Index.cshtml" />
+    <Content Include="Views\OrderOverview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

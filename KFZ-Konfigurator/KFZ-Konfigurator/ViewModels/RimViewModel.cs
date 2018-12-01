@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class RimViewModel : ViewModelBase
+    public class RimViewModel : ItemViewModelBase
     {
         public int Size { get; }
 

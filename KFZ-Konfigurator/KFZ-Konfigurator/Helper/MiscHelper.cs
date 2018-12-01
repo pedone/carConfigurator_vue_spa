@@ -42,7 +42,7 @@ namespace KFZ_Konfigurator.Helper
         public static string GenerateConfigurationLink(HttpRequestBase request, UrlHelper url, string guid)
         {
             var projectBaseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, url.Content("~"));
-            return new Uri(new Uri(projectBaseUrl), url.RouteUrl(Constants.Routes.LoadConfiguration, new { guid = guid })).AbsoluteUri;
+            return new Uri(new Uri(projectBaseUrl), url.RouteUrl(Constants.Routes.LoadOrder, new { orderGuid = guid })).AbsoluteUri;
         }
     }
 }

@@ -16,7 +16,7 @@
     {
         <a class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center @MiscHelper.If(item.IsSelected, "active")"
            data-toggle="list"
-           data-bind="click: function() { configViewModel.settingsSelectedClick(@item.Id) } ">
+           data-bind="click: function() { configViewModel.selectEngineSettings(@item.Id) } ">
             <div class="flex-column w-100 align-items-lg-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">@($"{Html.DisplayFor(_ => item.Engine.Liter)} {Html.DisplayFor(_ => item.Engine.EngineKind)} {Html.DisplayFor(_ => item.Gears)}-{LocalizationManager.Localize("Gears")}")</h5>

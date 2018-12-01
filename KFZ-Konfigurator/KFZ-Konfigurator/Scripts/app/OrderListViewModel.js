@@ -1,39 +1,40 @@
-﻿class ConfigurationItemViewModel {
+﻿class OrderItemViewModel {
     /**
-     * @param {ConfigurationData} data
+     * @param {OrderData} data
      * @param {string} linkTemplate
      */
     constructor(data, linkTemplate) {
         /** @type {number} */
         this.id = data.Id;
         /** @type {number} */
+        this.basePrice = data.BasePrice;
+        /** @type {number} */
+        this.extrasPrice = data.ExtrasPrice;
+        /** @type {number} */
         this.price = data.Price;
         /** @type {string} */
-        this.name = data.Name;
+        this.description = data.Description;
+        /** @type {string} */
+        this.model = data.Model;
         /** @type {string} */
         this.guid = data.Guid;
-        /** @type {boolean} */
-        this.hasOrders = data.HasOrders;
-        /** @type {number} */
-        this.orderCount = data.OrderCount;
         /** @type {string} */
         this.linkUrl = linkTemplate.replace("Placeholder", data.Guid);
     }
 }
 
-class ConfigurationListViewModel {
+class OrderListViewModel {
     /**
-     * @param {Array.<ConfigurationData>} data
+     * @param {Array.<OrderData>} data
      * @param {string} linkTemplate
      */
     constructor(data, linkTemplate) {
         var self = this;
-
         /** @type {KnockoutObservableArrayStatic} */
-        this.configurations = ko.observableArray(_.map(data, (cur) => new ConfigurationItemViewModel(cur, linkTemplate)));
+        this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur, linkTemplate)));
 
         /**
-         * @param {ConfigurationItemViewModel} item
+         * @param {OrderItemViewModel} item
          * @param {Event} event
          * @param {JQueryStatic} document
          */
@@ -44,11 +45,11 @@ class ConfigurationListViewModel {
             let antiForgeryToken = getAntiForgeryToken(document);
             deleteItemAjax(item.id, antiForgeryToken)
                 .done(function () {
-                    self.configurations.remove(item);
+                    self.orders.remove(item);
                 })
                 .fail(function (error) {
-                    console.log('failed to delete configuration: ' + error.responseText + ' (' + error.statusText + ')');
-                    alert('configuration ' + item.name + ' could not be removed');
+                    console.log('failed to delete order: ' + error.responseText + ' (' + error.statusText + ')');
+                    alert('order ' + item.name + ' could not be removed');
                 });
         };
 
@@ -60,7 +61,7 @@ class ConfigurationListViewModel {
         function deleteItemAjax(id, antiForgeryToken) {
             return $.ajax({
                 type: 'POST',
-                url: '/Configurations/delete',
+                url: '/OrderOverview/delete',
                 data: {
                     __RequestVerificationToken: antiForgeryToken,
                     id: id
@@ -73,11 +74,12 @@ class ConfigurationListViewModel {
 }
 
 /**
- * @typedef {Object} ConfigurationData
+ * @typedef {Object} OrderData
  * @property {number} Id
+ * @property {number} ExtrasPrice
+ * @property {number} BasePrice
  * @property {number} Price
- * @property {string} Name
+ * @property {string} Description
+ * @property {string} Model
  * @property {string} Guid
- * @property {string} HasOrders
- * @property {number} OrderCount
  */

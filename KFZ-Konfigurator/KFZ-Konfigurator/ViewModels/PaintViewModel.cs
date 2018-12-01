@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class PaintViewModel: ViewModelBase
+    public class PaintViewModel: ItemViewModelBase
     {
         public PaintCategory Category { get; }
         public string Color { get; }

@@ -30,7 +30,7 @@
                                         <input type="checkbox"
                                                data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
                                     </div>
-                                    <div class="col">
+                                    <div class="col" data-bind="click: function() { configViewModel.selectAccessory(@item.Id) }">
                                         <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
                                         <h6 class="card-text">@Html.DisplayFor(_ => item.Price)</h6>
                                     </div>

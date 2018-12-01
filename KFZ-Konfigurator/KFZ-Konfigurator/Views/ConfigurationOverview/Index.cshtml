@@ -5,7 +5,7 @@
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = LocalizationManager.Localize("ConfigurationOverviewTitle");
+    ViewBag.Title = LocalizationManager.Localize("ConfigurationOverview_Title");
     ViewBag.BackgroundImage = "carConfiguration.png";
 }
 
@@ -96,37 +96,40 @@
     </tbody>
 </table>
 
-<h4 class="mt-3 mb-4">@LocalizationManager.Localize("ConfigurationOverview_FinalPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span></h4>
+<p>
+    <h1 class="mt-3 mb-4">
+        @LocalizationManager.Localize("ConfigurationOverview_FinalPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
+    </h1>
+</p>
 
-<div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" id="generateLinkButton" type="button"
-                    data-bind="click: configOVW.generateConfigurationLink, disable: (configOVW.configurationLinkUrl().length > 0 || configOVW.configurationName().length === 0)">
-                @LocalizationManager.Localize("GenerateConfigurationLink_Label")
-            </button>
+@* Order *@
+<p>
+    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#orderCollapse">@LocalizationManager.Localize("ConfigurationOverview_Order_Button")</button>
+</p>
+<div class="collapse" id="orderCollapse">
+    <div class="card card-body">
+        <div class="input-group">
+            <input type="text" class="form-control"
+                   placeholder="@LocalizationManager.Localize("ConfigurationOverview_OrderDescriptionPlaceholder")"
+                   data-bind="value: configOVW.configurationDescription" />
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="placeOrderButton" type="button" data-bind="click: configOVW.placeOrder">
+                    @LocalizationManager.Localize("ConfigurationOverview_PlaceOrder_Button")
+                </button>
+            </div>
         </div>
-        <input type="text"
-               class="form-control configurationNameLink"
-               placeholder="@LocalizationManager.Localize("ConfigurationName_Placeholder")"
-               data-bind="visible: (configOVW.configurationLinkUrl().length == 0), textInput: configOVW.configurationName" />
-        <input type="text" class="form-control configurationNameLink" readonly="readonly" id="configurationLink"
-               data-bind="visible: (configOVW.configurationLinkUrl().length > 0), value: configOVW.configurationLinkUrl" />
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" id="copyLinkButton" type="button">@LocalizationManager.Localize("Copy")</button>
-        </div>
-    </div>
-
-    <div>
-        <button class="btn btn-primary mb-3" id="placeOrderButton" type="button"
-                data-bind="click: configOVW.placeOrder, disable: (configOVW.configurationLinkUrl().length === 0 && configOVW.configurationName().length === 0)">
-            @LocalizationManager.Localize("PlaceOrder")
-        </button>
-        <div class="alert alert-success fade show" id="orderSuccessAlert" role="alert" hidden>
-            Your order was successfully placed
-        </div>
-        <div class="alert alert-danger fade show" id="orderFailedAlert" role="alert" hidden>
-            Your order could not be placed
+        <div class="mt-3">
+            <div class="alert alert-success fade show" id="orderSuccessAlert" role="alert" hidden>
+                Your order was successfully placed
+                <button class="btn btn-light ml-3" id="copyLinkButton" type="button">
+                    @LocalizationManager.Localize("ConfigurationOverview_CopyConfigurationLink")
+                </button>
+                <input type="hidden" class="form-control configurationNameLink" id="configurationLink"
+                       data-bind="value: configOVW.configurationLink" />
+            </div>
+            <div class="alert alert-danger fade show" id="orderFailedAlert" role="alert" hidden>
+                Your order could not be placed
+            </div>
         </div>
     </div>
 </div>
@@ -134,12 +137,11 @@
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
     <script type="text/javascript">
-        let accessories = @Html.Raw(Json.Encode(Model.Accessories));
-        let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
-        let paint = @Html.Raw(Json.Encode(Model.Paint));
-        let rims = @Html.Raw(Json.Encode(Model.Rims));
-
         $(document).ready(function () {
+            let accessories = @Html.Raw(Json.Encode(Model.Accessories));
+            let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
+            let paint = @Html.Raw(Json.Encode(Model.Paint));
+            let rims = @Html.Raw(Json.Encode(Model.Rims));
             let options = {
                 antiForgeryToken: getAntiForgeryToken($(document)),
                 placeOrderSuccess: function () {
@@ -147,7 +149,6 @@
                     $('#placeOrderButton').attr('disable', true);
                 },
                 placeOrderFailure: function () {
-                    alert("placeOrderFailure");
                     showFailedAlert();
                 }
             };
@@ -160,9 +161,12 @@
             });
 
             $('#copyLinkButton').click(function () {
+                let linkText = $('#configurationLink');
                 //have to select an element to be able to copy it to clipboard
-                $('#configurationLink').select();
+                linkText.attr('type', 'text');
+                linkText.select();
                 document.execCommand('copy');
+                linkText.attr('type', 'hidden');
             });
 
             function showSuccessAlert() {

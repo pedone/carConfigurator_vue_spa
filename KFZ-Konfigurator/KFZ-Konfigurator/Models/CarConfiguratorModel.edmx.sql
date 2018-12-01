@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/29/2018 23:35:23
+-- Date Created: 12/01/2018 17:53:53
 -- Generated from EDMX file: D:\Documents\Projects\CC-KFZ-Generator\git\KFZ-Konfigurator\KFZ-Konfigurator\Models\CarConfiguratorModel.edmx
 -- --------------------------------------------------
 
@@ -39,7 +39,7 @@ IF OBJECT_ID(N'[dbo].[FK_RimConfiguration]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Configurations] DROP CONSTRAINT [FK_RimConfiguration];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ConfigurationOrder]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_ConfigurationOrder];
+    ALTER TABLE [dbo].[Configurations] DROP CONSTRAINT [FK_ConfigurationOrder];
 GO
 
 -- --------------------------------------------------
@@ -145,19 +145,20 @@ GO
 -- Creating table 'Configurations'
 CREATE TABLE [dbo].[Configurations] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Guid] nvarchar(max)  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Price] float  NOT NULL,
     [Paint_Id] int  NOT NULL,
     [EngineSetting_Id] int  NOT NULL,
-    [Rims_Id] int  NOT NULL
+    [Rims_Id] int  NOT NULL,
+    [ConfigurationOrder_Configuration_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Orders'
 CREATE TABLE [dbo].[Orders] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Configuration_Id] int  NOT NULL
+    [Description] nvarchar(max)  NULL,
+    [Guid] nvarchar(max)  NOT NULL,
+    [ExtrasPrice] float  NOT NULL,
+    [BasePrice] float  NOT NULL
 );
 GO
 
@@ -329,19 +330,19 @@ ON [dbo].[Configurations]
     ([Rims_Id]);
 GO
 
--- Creating foreign key on [Configuration_Id] in table 'Orders'
-ALTER TABLE [dbo].[Orders]
+-- Creating foreign key on [ConfigurationOrder_Configuration_Id] in table 'Configurations'
+ALTER TABLE [dbo].[Configurations]
 ADD CONSTRAINT [FK_ConfigurationOrder]
-    FOREIGN KEY ([Configuration_Id])
-    REFERENCES [dbo].[Configurations]
+    FOREIGN KEY ([ConfigurationOrder_Configuration_Id])
+    REFERENCES [dbo].[Orders]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ConfigurationOrder'
 CREATE INDEX [IX_FK_ConfigurationOrder]
-ON [dbo].[Orders]
-    ([Configuration_Id]);
+ON [dbo].[Configurations]
+    ([ConfigurationOrder_Configuration_Id]);
 GO
 
 -- --------------------------------------------------

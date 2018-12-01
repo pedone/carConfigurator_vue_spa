@@ -19,10 +19,10 @@ namespace KFZ_Konfigurator.ViewModels
             get => _AccessoryIds ?? Enumerable.Empty<int>();
             set => _AccessoryIds = value;
         }
-        public ConfigurationLink ConfigurationLink { get; set; }
-        public bool HasConfiguration
+        public string ConfigurationLink { get; set; }
+        public bool IsReadOnly
         {
-            get => ConfigurationLink != null;
+            get => !string.IsNullOrEmpty(ConfigurationLink);
         }
 
         public void Reset()
