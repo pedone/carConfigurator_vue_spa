@@ -1,0 +1,60 @@
+﻿@using KFZ_Konfigurator.Helper;
+@model KFZ_Konfigurator.ViewModels.OrderListPageViewModel
+
+@{
+    ViewBag.Title = LocalizationManager.Localize("OrderListView_Title");
+}
+
+@Html.AntiForgeryToken()
+<h2 class="mt-3">@LocalizationManager.Localize("OrderListView_Header")</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @LocalizationManager.Localize("OrderListView_Description_CarModel")
+        </th>
+        <th>
+            @LocalizationManager.Localize("OrderListView_Description_Header")
+        </th>
+        <th>
+            @LocalizationManager.Localize("OrderListView_BasePrice_Header")
+        </th>
+        <th>
+            @LocalizationManager.Localize("OrderListView_ExstrasPrice_Header")
+        </th>
+        <th>
+            @LocalizationManager.Localize("OrderListView_Price_Header")
+        </th>
+        <th></th>
+    </tr>
+
+    <tbody data-bind="foreach: orders">
+        <tr>
+            <td data-bind="text: model"></td>
+            <td data-bind="text: description"></td>
+            <td data-bind="text: formatCurrency(basePrice)"></td>
+            <td data-bind="text: formatCurrency(extrasPrice)"></td>
+            <td data-bind="text: formatCurrency(price)"></td>
+            <td>
+                <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("View")</a> |
+                <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }">
+                    @LocalizationManager.Localize("Delete")
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/OrderListViewModel.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/Helper.js")"></script>
+    <script type="text/javascript">
+        let orders = @Html.Raw(Json.Encode(Model.Orders));
+        let loadConfigurationRouteTemplate = "@Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = "Placeholder" })";
+        let viewModel = new OrderListViewModel(orders, loadConfigurationRouteTemplate);
+
+        $(document).ready(function () {
+            ko.applyBindings(viewModel);
+        });
+    </script>
+}

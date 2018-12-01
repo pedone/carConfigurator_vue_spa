@@ -6,7 +6,6 @@
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("ConfigurationOverview_Title");
-    ViewBag.BackgroundImage = "carConfiguration.png";
 }
 
 @Html.AntiForgeryToken()
@@ -96,7 +95,10 @@
     </tbody>
 </table>
 
+<hr />
 <p>
+    <h4>@LocalizationManager.Localize("ConfigurationOverview_BasePrice_Header"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span></h4>
+    <h4>@LocalizationManager.Localize("ConfigurationOverview_ExtrasPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span></h4>
     <h1 class="mt-3 mb-4">
         @LocalizationManager.Localize("ConfigurationOverview_FinalPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
     </h1>
@@ -119,14 +121,6 @@
             </div>
         </div>
         <div class="mt-3">
-            <div class="alert alert-success fade show" id="orderSuccessAlert" role="alert" hidden>
-                Your order was successfully placed
-                <button class="btn btn-light ml-3" id="copyLinkButton" type="button">
-                    @LocalizationManager.Localize("ConfigurationOverview_CopyConfigurationLink")
-                </button>
-                <input type="hidden" class="form-control configurationNameLink" id="configurationLink"
-                       data-bind="value: configOVW.configurationLink" />
-            </div>
             <div class="alert alert-danger fade show" id="orderFailedAlert" role="alert" hidden>
                 Your order could not be placed
             </div>
@@ -144,12 +138,11 @@
             let rims = @Html.Raw(Json.Encode(Model.Rims));
             let options = {
                 antiForgeryToken: getAntiForgeryToken($(document)),
-                placeOrderSuccess: function () {
-                    showSuccessAlert();
-                    $('#placeOrderButton').attr('disable', true);
+                placeOrderSuccess: function (targetUrl) {
+                    window.location.href = targetUrl;
                 },
                 placeOrderFailure: function () {
-                    showFailedAlert();
+                    $('#orderFailedAlert').attr('hidden', false);
                 }
             };
             let configOverviewViewModel = new ConfigurationOverviewViewModel("@Html.Encode(Model.ConfigurationLink)", options);
@@ -159,25 +152,6 @@
                 configViewModel: configViewModel,
                 configOVW: configOverviewViewModel
             });
-
-            $('#copyLinkButton').click(function () {
-                let linkText = $('#configurationLink');
-                //have to select an element to be able to copy it to clipboard
-                linkText.attr('type', 'text');
-                linkText.select();
-                document.execCommand('copy');
-                linkText.attr('type', 'hidden');
-            });
-
-            function showSuccessAlert() {
-                $('#orderSuccessAlert').attr('hidden', false);
-                $('#orderFailedAlert').attr('hidden', true);
-            }
-
-            function showFailedAlert() {
-                $('#orderSuccessAlert').attr('hidden', true);
-                $('#orderFailedAlert').attr('hidden', false);
-            }
         });
     </script>
 }

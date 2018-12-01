@@ -24,7 +24,7 @@
             function (data) {
                 self.configurationLink(data);
                 if (self.options.placeOrderSuccess) {
-                    self.options.placeOrderSuccess();
+                    self.options.placeOrderSuccess(data);
                 }
             })
             .fail(function (error) {

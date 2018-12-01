@@ -21,9 +21,9 @@
 .card.car-model-link:hover {
   border-bottom: 3px solid red;
 }
-/*.configurationNameLink {
-    min-width: 10em;
-}*/
+.navbar-nav .nav-link.active {
+  text-decoration: underline;
+}
 .paintContainer > input {
   position: absolute;
   opacity: 0;

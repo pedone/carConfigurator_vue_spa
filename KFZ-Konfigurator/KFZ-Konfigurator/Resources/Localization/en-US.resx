@@ -180,7 +180,7 @@
   <data name="ConfigurationOverviewHeader" xml:space="preserve">
     <value>Your Configuration</value>
   </data>
-  <data name="OrderOverviewView_Title" xml:space="preserve">
+  <data name="OrderListView_Title" xml:space="preserve">
     <value>Order Overview</value>
   </data>
   <data name="ConfigurationOverview_TechnicalData_Header" xml:space="preserve">
@@ -285,25 +285,49 @@
   <data name="ConfigurationOverview_Order_Button" xml:space="preserve">
     <value>Order Your Configuration</value>
   </data>
-  <data name="OrderOverviewView_Header" xml:space="preserve">
+  <data name="OrderListView_Header" xml:space="preserve">
     <value>Orders</value>
   </data>
   <data name="ConfigurationOverview_Title" xml:space="preserve">
     <value>Configuration Overview</value>
   </data>
-  <data name="OrderOverviewView_BasePrice_Header" xml:space="preserve">
+  <data name="OrderListView_BasePrice_Header" xml:space="preserve">
     <value>Base Price</value>
   </data>
-  <data name="OrderOverviewView_Description_CarModel" xml:space="preserve">
+  <data name="OrderListView_Description_CarModel" xml:space="preserve">
     <value>Model</value>
   </data>
-  <data name="OrderOverviewView_Description_Header" xml:space="preserve">
+  <data name="OrderListView_Description_Header" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="OrderOverviewView_ExstrasPrice_Header" xml:space="preserve">
+  <data name="OrderListView_ExstrasPrice_Header" xml:space="preserve">
     <value>Extras Price</value>
   </data>
-  <data name="OrderOverviewView_Price_Header" xml:space="preserve">
+  <data name="OrderListView_Price_Header" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="ConfigurationLayout_GoToModelOverview" xml:space="preserve">
+    <value>Go to model selection</value>
+  </data>
+  <data name="ConfigurationOverview_BasePrice_Header" xml:space="preserve">
+    <value>Base Price</value>
+  </data>
+  <data name="ConfigurationOverview_ExtrasPrice_Header" xml:space="preserve">
+    <value>Extras Price</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="AccessoriesView_ContinueToExterior_Button" xml:space="preserve">
+    <value>Continue To Exterior</value>
+  </data>
+  <data name="EngineSettingsView_ContinueToAccessories_Button" xml:space="preserve">
+    <value>Continue To Accessories</value>
+  </data>
+  <data name="ExteriorView_ContinueToOverview_Button" xml:space="preserve">
+    <value>Continue To Overview</value>
+  </data>
+  <data name="OrderOverviewView_Title" xml:space="preserve">
+    <value>Order Overview</value>
   </data>
 </root>

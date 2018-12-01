@@ -8,7 +8,7 @@ using System.Web;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class OrderPageViewModel : ViewModelBase
+    public class OrderListPageViewModel : ViewModelBase
     {
         public IEnumerable<OrderViewModel> Orders { get; set; }
     }

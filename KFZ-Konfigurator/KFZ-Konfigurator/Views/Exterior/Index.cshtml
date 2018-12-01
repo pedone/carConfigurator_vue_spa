@@ -4,8 +4,6 @@
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("ExteriorTitle");
-    //ViewBag.BackgroundImage = "accessories.png";
-
     var paintCategories = Enum.GetNames(typeof(PaintCategory));
 }
 
@@ -48,19 +46,12 @@
                 @Html.DisplayFor(_ => item.Price)
             </td>
         </tr>
-        @*<div class="card col-sm-4 rounded-0">
-                <div class="card-header">
-                    <input type="radio" name="rimOptions"  />
-                    <h5 class="card-title">@Html.DisplayFor(_ => item.Size)</h5>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        @Html.DisplayFor(_ => item.Price)
-                    </div>
-                </div>
-            </div>*@
     }
 </table>
+
+<div class="d-flex justify-content-end mt-3">
+    <a class="btn btn-outline-dark" href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)">@LocalizationManager.Localize("ExteriorView_ContinueToOverview_Button")</a>
+</div>
 
 @section scripts {
     <script type="text/javascript">
@@ -80,7 +71,7 @@
             saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
                 .fail((error) => {
                     console.log('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
-                    //TODO show alert?
+                    alert('something went wrong. see console for details');
                 });
         });
     </script>

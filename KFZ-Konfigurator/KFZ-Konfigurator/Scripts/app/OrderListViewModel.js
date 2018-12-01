@@ -61,7 +61,7 @@ class OrderListViewModel {
         function deleteItemAjax(id, antiForgeryToken) {
             return $.ajax({
                 type: 'POST',
-                url: '/OrderOverview/delete',
+                url: '/OrderList/delete',
                 data: {
                     __RequestVerificationToken: antiForgeryToken,
                     id: id

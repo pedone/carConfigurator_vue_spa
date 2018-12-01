@@ -44,7 +44,7 @@
     @section CartOverview {
         <div class="card rounded-0 container">
             <div class="card-body">
-                <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)">
+                <a href="@Url.RouteUrl(Constants.Routes.ModelOverview)" title="@LocalizationManager.Localize("ConfigurationLayout_GoToModelOverview")">
                     <h5 class="card-title">@modelHeader</h5>
                 </a>
                 <div class="card-text">
@@ -70,7 +70,7 @@
 @section ConfigurationHeader {
     <div class="bg-light">
         <div class="container text-overlap-container">
-            <img src="~/Resources/Images/@ViewBag.BackgroundImage" class="img-fluid" />
+            <img src="~/Resources/Images/audiA4Side.png" class="img-fluid" />
             @if (!isModelSelection)
             {
                 <h2 class="overlap-top-left">@modelHeader</h2>

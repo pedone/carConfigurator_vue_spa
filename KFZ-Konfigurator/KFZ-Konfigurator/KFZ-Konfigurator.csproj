@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderListController.cs" />
     <Compile Include="Controllers\OrderOverviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,7 +269,8 @@
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\FuelKind.cs" />
     <Compile Include="ViewModels\ItemViewModelBase.cs" />
-    <Compile Include="ViewModels\OrderPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderListPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderOverviewPageViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\RimViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -294,6 +296,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
+    <Content Include="Resources\Images\audiA4Side.png" />
     <Content Include="Scripts\app\OrderListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />
@@ -322,7 +325,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\acceleration.svg" />
-    <Content Include="Resources\Images\carConfiguration.png" />
     <Content Include="Resources\Images\consumption.svg" />
     <Content Include="Resources\Images\emissions.svg" />
     <Content Include="Resources\Images\engine.png" />
@@ -404,6 +406,7 @@
     <Content Include="Views\Accessories\Index.cshtml" />
     <Content Include="Views\Exterior\Index.cshtml" />
     <Content Include="Views\ConfigurationOverview\Index.cshtml" />
+    <Content Include="Views\OrderList\Index.cshtml" />
     <Content Include="Views\OrderOverview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

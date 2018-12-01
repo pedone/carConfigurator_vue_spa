@@ -4,8 +4,6 @@
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("AccessoriesTitle");
-    ViewBag.BackgroundImage = "engine.png";
-
     var categories = Enum.GetNames(typeof(AccessoryCategory));
 }
 
@@ -44,6 +42,10 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-end mt-3">
+    <a class="btn btn-outline-dark" href="@Url.RouteUrl(Constants.Routes.Exterior)">@LocalizationManager.Localize("AccessoriesView_ContinueToExterior_Button")</a>
+</div>
+
 @section scripts {
     <script type="text/javascript">
         let accessories = @Html.Raw(Json.Encode(Model.Accessories));
@@ -62,7 +64,7 @@
             saveViewModel('/Accessories/SetSelectedAccessories', selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
                 .fail((error) => {
                     console.log('failed to set selected accessories: ' + error.responseText + ' (' + error.statusText + ')');
-                    //TODO show alert?
+                    alert('something went wrong. see console for details');
                 });
         });
     </script>
