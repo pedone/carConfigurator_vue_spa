@@ -8,9 +8,9 @@ namespace KFZ_Konfigurator.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("", Name = Constants.Routes.Home)]
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
             return View();
         }
 

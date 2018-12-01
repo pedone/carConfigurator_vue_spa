@@ -3,12 +3,12 @@
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = LocalizationManager.Localize("AccessoriesTitle");
+    ViewBag.Title = LocalizationManager.Localize("AccessoriesView_Title");
     var categories = Enum.GetNames(typeof(AccessoryCategory));
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("AccessoriesHeader")</h2>
+<h2>@LocalizationManager.Localize("AccessoriesView_Header")</h2>
 
 <div>
     <div class="accordion" id="accessoriesAccordion">

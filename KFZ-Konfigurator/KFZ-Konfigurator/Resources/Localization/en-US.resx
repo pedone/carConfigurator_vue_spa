@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessoriesHeader" xml:space="preserve">
+  <data name="AccessoriesView_Header" xml:space="preserve">
     <value>Accessories</value>
   </data>
-  <data name="AccessoriesTitle" xml:space="preserve">
+  <data name="AccessoriesView_Title" xml:space="preserve">
     <value>Accessories</value>
   </data>
   <data name="AccessoryCategory_AssistenceSystems" xml:space="preserve">
@@ -135,55 +135,40 @@
   <data name="AccessoryCategory_TechnologyAndSafety" xml:space="preserve">
     <value>Technology and Safety</value>
   </data>
-  <data name="ConfigurationDescription" xml:space="preserve">
+  <data name="HomeView_ConfigurationDescription" xml:space="preserve">
     <value>Design your individual car by configuring each and every part of it</value>
   </data>
-  <data name="EngineSettingsHeader" xml:space="preserve">
+  <data name="ConfigurationLayout_EngineSettings_Button" xml:space="preserve">
     <value>Engines</value>
   </data>
-  <data name="EngineSettingsTitle" xml:space="preserve">
+  <data name="EngineSettingsView_Title" xml:space="preserve">
     <value>Engine Settings</value>
   </data>
-  <data name="from" xml:space="preserve">
+  <data name="General_From" xml:space="preserve">
     <value>from</value>
   </data>
-  <data name="Gears" xml:space="preserve">
-    <value>Gears</value>
-  </data>
-  <data name="ModelHeader" xml:space="preserve">
+  <data name="ModelView_Header" xml:space="preserve">
     <value>Choose your model</value>
   </data>
-  <data name="PaintsHeader" xml:space="preserve">
-    <value>Paint</value>
-  </data>
-  <data name="ExteriorTitle" xml:space="preserve">
-    <value>Exterior</value>
-  </data>
-  <data name="ProductTitle" xml:space="preserve">
+  <data name="General_ProductTitle" xml:space="preserve">
     <value>Car Configurator</value>
   </data>
-  <data name="Select" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="StartConfiguration" xml:space="preserve">
+  <data name="HomeView_StartConfiguration_Button" xml:space="preserve">
     <value>Start Configuration</value>
   </data>
-  <data name="ExteriorHeader" xml:space="preserve">
+  <data name="ConfigurationLayout_Exterior_Button" xml:space="preserve">
     <value>Exterior</value>
   </data>
-  <data name="RimsHeader" xml:space="preserve">
-    <value>Rims</value>
-  </data>
-  <data name="Configuration_GoToOverview" xml:space="preserve">
+  <data name="ConfigurationLayout_GoToOverview" xml:space="preserve">
     <value>Show Overview</value>
   </data>
-  <data name="ConfigurationOverviewHeader" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Header" xml:space="preserve">
     <value>Your Configuration</value>
   </data>
   <data name="OrderListView_Title" xml:space="preserve">
     <value>Order Overview</value>
   </data>
-  <data name="ConfigurationOverview_TechnicalData_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_TechnicalData_Header" xml:space="preserve">
     <value>Technical Data</value>
   </data>
   <data name="TechnicalData_Acceleration" xml:space="preserve">
@@ -219,52 +204,46 @@
   <data name="GenerateConfigurationLink_Label" xml:space="preserve">
     <value>Get a link to your configuration</value>
   </data>
-  <data name="TechnicalData_Transmission_LabelSuffix" xml:space="preserve">
+  <data name="TechnicalData_Transmission_Suffix" xml:space="preserve">
     <value>-Gear</value>
   </data>
-  <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="ConfigurationOverview_PlaceOrder_Button" xml:space="preserve">
+  <data name="ConfigurationOverviewView_PlaceOrder_Button" xml:space="preserve">
     <value>Place Order</value>
   </data>
-  <data name="ConfigurationOverview_OrderDescriptionPlaceholder" xml:space="preserve">
+  <data name="ConfigurationOverviewView_OrderDescription_Placeholder" xml:space="preserve">
     <value>Discription (optional)</value>
   </data>
-  <data name="OrderList" xml:space="preserve">
+  <data name="Layout_OrderList_Link" xml:space="preserve">
     <value>Orders</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="General_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Load" xml:space="preserve">
-    <value>Load</value>
-  </data>
-  <data name="Configuration_BasePrice" xml:space="preserve">
+  <data name="ConfigurationLayout_BasePrice_Label" xml:space="preserve">
     <value>Base Price</value>
   </data>
-  <data name="Configuration_ExtrasPrice" xml:space="preserve">
+  <data name="ConfigurationLayout_ExtrasPrice_Label" xml:space="preserve">
     <value>Extras</value>
   </data>
-  <data name="Configuration_Price" xml:space="preserve">
+  <data name="ConfigurationLayout_Price_Label" xml:space="preserve">
     <value>Price</value>
   </data>
-  <data name="ConfigurationOverview_Accessories_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Accessories_Header" xml:space="preserve">
     <value>Accessories</value>
   </data>
-  <data name="ConfigurationOverview_Exterior_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Exterior_Header" xml:space="preserve">
     <value>Exterior</value>
   </data>
-  <data name="ConfigurationOverview_FinalPrice_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_FinalPrice_Header" xml:space="preserve">
     <value>Final Price</value>
   </data>
-  <data name="ConfigurationOverview_Paint_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Paint_Header" xml:space="preserve">
     <value>Paint</value>
   </data>
-  <data name="ConfigurationOverview_Rims_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Rims_Header" xml:space="preserve">
     <value>Rims</value>
   </data>
-  <data name="RimSizeUnit" xml:space="preserve">
+  <data name="General_RimSizeUnit" xml:space="preserve">
     <value>inch</value>
   </data>
   <data name="PaintCategory_Metalic" xml:space="preserve">
@@ -276,25 +255,22 @@
   <data name="PaintCategory_Uni" xml:space="preserve">
     <value>Uni</value>
   </data>
-  <data name="Configuration_Label" xml:space="preserve">
-    <value>Configuration</value>
-  </data>
-  <data name="ConfigurationOverview_CopyConfigurationLink" xml:space="preserve">
+  <data name="ConfigurationOverviewView_CopyConfigurationLink" xml:space="preserve">
     <value>Copy link to your configuration to clipboard</value>
   </data>
-  <data name="ConfigurationOverview_Order_Button" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Order_Button" xml:space="preserve">
     <value>Order Your Configuration</value>
   </data>
   <data name="OrderListView_Header" xml:space="preserve">
     <value>Orders</value>
   </data>
-  <data name="ConfigurationOverview_Title" xml:space="preserve">
+  <data name="ConfigurationOverviewView_Title" xml:space="preserve">
     <value>Configuration Overview</value>
   </data>
   <data name="OrderListView_BasePrice_Header" xml:space="preserve">
     <value>Base Price</value>
   </data>
-  <data name="OrderListView_Description_CarModel" xml:space="preserve">
+  <data name="OrderListView_CarModel_Header" xml:space="preserve">
     <value>Model</value>
   </data>
   <data name="OrderListView_Description_Header" xml:space="preserve">
@@ -309,13 +285,13 @@
   <data name="ConfigurationLayout_GoToModelOverview" xml:space="preserve">
     <value>Go to model selection</value>
   </data>
-  <data name="ConfigurationOverview_BasePrice_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_BasePrice_Header" xml:space="preserve">
     <value>Base Price</value>
   </data>
-  <data name="ConfigurationOverview_ExtrasPrice_Header" xml:space="preserve">
+  <data name="ConfigurationOverviewView_ExtrasPrice_Header" xml:space="preserve">
     <value>Extras Price</value>
   </data>
-  <data name="View" xml:space="preserve">
+  <data name="General_View" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="AccessoriesView_ContinueToExterior_Button" xml:space="preserve">
@@ -329,5 +305,23 @@
   </data>
   <data name="OrderOverviewView_Title" xml:space="preserve">
     <value>Order Overview</value>
+  </data>
+  <data name="ConfigurationLayout_Accessories_Button" xml:space="preserve">
+    <value>Accessories</value>
+  </data>
+  <data name="Layout_Home_Link" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ModelView_Title" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="ExteriorView_Paints_Header" xml:space="preserve">
+    <value>Paint</value>
+  </data>
+  <data name="ExteriorView_Rims_Header" xml:space="preserve">
+    <value>Rims</value>
+  </data>
+  <data name="ExteriorView_Title" xml:space="preserve">
+    <value>Exterior</value>
   </data>
 </root>

@@ -61,29 +61,29 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accessories.
-        /// </summary>
-        internal static string AccessoriesHeader {
-            get {
-                return ResourceManager.GetString("AccessoriesHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Accessories.
-        /// </summary>
-        internal static string AccessoriesTitle {
-            get {
-                return ResourceManager.GetString("AccessoriesTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Continue To Exterior.
         /// </summary>
         internal static string AccessoriesView_ContinueToExterior_Button {
             get {
                 return ResourceManager.GetString("AccessoriesView_ContinueToExterior_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessories.
+        /// </summary>
+        internal static string AccessoriesView_Header {
+            get {
+                return ResourceManager.GetString("AccessoriesView_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessories.
+        /// </summary>
+        internal static string AccessoriesView_Title {
+            get {
+                return ResourceManager.GetString("AccessoriesView_Title", resourceCulture);
             }
         }
         
@@ -124,56 +124,47 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accessories.
+        /// </summary>
+        internal static string ConfigurationLayout_Accessories_Button {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Accessories_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Price.
         /// </summary>
-        internal static string Configuration_BasePrice {
+        internal static string ConfigurationLayout_BasePrice_Label {
             get {
-                return ResourceManager.GetString("Configuration_BasePrice", resourceCulture);
+                return ResourceManager.GetString("ConfigurationLayout_BasePrice_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Engines.
+        /// </summary>
+        internal static string ConfigurationLayout_EngineSettings_Button {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_EngineSettings_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exterior.
+        /// </summary>
+        internal static string ConfigurationLayout_Exterior_Button {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Exterior_Button", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Extras.
         /// </summary>
-        internal static string Configuration_ExtrasPrice {
+        internal static string ConfigurationLayout_ExtrasPrice_Label {
             get {
-                return ResourceManager.GetString("Configuration_ExtrasPrice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show Overview.
-        /// </summary>
-        internal static string Configuration_GoToOverview {
-            get {
-                return ResourceManager.GetString("Configuration_GoToOverview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration.
-        /// </summary>
-        internal static string Configuration_Label {
-            get {
-                return ResourceManager.GetString("Configuration_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Price.
-        /// </summary>
-        internal static string Configuration_Price {
-            get {
-                return ResourceManager.GetString("Configuration_Price", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it.
-        /// </summary>
-        internal static string ConfigurationDescription {
-            get {
-                return ResourceManager.GetString("ConfigurationDescription", resourceCulture);
+                return ResourceManager.GetString("ConfigurationLayout_ExtrasPrice_Label", resourceCulture);
             }
         }
         
@@ -187,164 +178,146 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Overview.
+        /// </summary>
+        internal static string ConfigurationLayout_GoToOverview {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_GoToOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string ConfigurationLayout_Price_Label {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Price_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accessories.
         /// </summary>
-        internal static string ConfigurationOverview_Accessories_Header {
+        internal static string ConfigurationOverviewView_Accessories_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_Accessories_Header", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_Accessories_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Base Price.
         /// </summary>
-        internal static string ConfigurationOverview_BasePrice_Header {
+        internal static string ConfigurationOverviewView_BasePrice_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_BasePrice_Header", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_BasePrice_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Copy link to your configuration to clipboard.
         /// </summary>
-        internal static string ConfigurationOverview_CopyConfigurationLink {
+        internal static string ConfigurationOverviewView_CopyConfigurationLink {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_CopyConfigurationLink", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_CopyConfigurationLink", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Exterior.
         /// </summary>
-        internal static string ConfigurationOverview_Exterior_Header {
+        internal static string ConfigurationOverviewView_Exterior_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_Exterior_Header", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_Exterior_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Extras Price.
         /// </summary>
-        internal static string ConfigurationOverview_ExtrasPrice_Header {
+        internal static string ConfigurationOverviewView_ExtrasPrice_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_ExtrasPrice_Header", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_ExtrasPrice_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Final Price.
         /// </summary>
-        internal static string ConfigurationOverview_FinalPrice_Header {
+        internal static string ConfigurationOverviewView_FinalPrice_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverview_FinalPrice_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Order Your Configuration.
-        /// </summary>
-        internal static string ConfigurationOverview_Order_Button {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_Order_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discription (optional).
-        /// </summary>
-        internal static string ConfigurationOverview_OrderDescriptionPlaceholder {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_OrderDescriptionPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Paint.
-        /// </summary>
-        internal static string ConfigurationOverview_Paint_Header {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_Paint_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Place Order.
-        /// </summary>
-        internal static string ConfigurationOverview_PlaceOrder_Button {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_PlaceOrder_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rims.
-        /// </summary>
-        internal static string ConfigurationOverview_Rims_Header {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_Rims_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Technical Data.
-        /// </summary>
-        internal static string ConfigurationOverview_TechnicalData_Header {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_TechnicalData_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configuration Overview.
-        /// </summary>
-        internal static string ConfigurationOverview_Title {
-            get {
-                return ResourceManager.GetString("ConfigurationOverview_Title", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_FinalPrice_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Your Configuration.
         /// </summary>
-        internal static string ConfigurationOverviewHeader {
+        internal static string ConfigurationOverviewView_Header {
             get {
-                return ResourceManager.GetString("ConfigurationOverviewHeader", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy.
+        ///   Looks up a localized string similar to Order Your Configuration.
         /// </summary>
-        internal static string Copy {
+        internal static string ConfigurationOverviewView_Order_Button {
             get {
-                return ResourceManager.GetString("Copy", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_Order_Button", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to Discription (optional).
         /// </summary>
-        internal static string Delete {
+        internal static string ConfigurationOverviewView_OrderDescription_Placeholder {
             get {
-                return ResourceManager.GetString("Delete", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_OrderDescription_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Engines.
+        ///   Looks up a localized string similar to Paint.
         /// </summary>
-        internal static string EngineSettingsHeader {
+        internal static string ConfigurationOverviewView_Paint_Header {
             get {
-                return ResourceManager.GetString("EngineSettingsHeader", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_Paint_Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Engine Settings.
+        ///   Looks up a localized string similar to Place Order.
         /// </summary>
-        internal static string EngineSettingsTitle {
+        internal static string ConfigurationOverviewView_PlaceOrder_Button {
             get {
-                return ResourceManager.GetString("EngineSettingsTitle", resourceCulture);
+                return ResourceManager.GetString("ConfigurationOverviewView_PlaceOrder_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rims.
+        /// </summary>
+        internal static string ConfigurationOverviewView_Rims_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewView_Rims_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical Data.
+        /// </summary>
+        internal static string ConfigurationOverviewView_TechnicalData_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewView_TechnicalData_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuration Overview.
+        /// </summary>
+        internal static string ConfigurationOverviewView_Title {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewView_Title", resourceCulture);
             }
         }
         
@@ -358,20 +331,11 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exterior.
+        ///   Looks up a localized string similar to Engine Settings.
         /// </summary>
-        internal static string ExteriorHeader {
+        internal static string EngineSettingsView_Title {
             get {
-                return ResourceManager.GetString("ExteriorHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exterior.
-        /// </summary>
-        internal static string ExteriorTitle {
-            get {
-                return ResourceManager.GetString("ExteriorTitle", resourceCulture);
+                return ResourceManager.GetString("EngineSettingsView_Title", resourceCulture);
             }
         }
         
@@ -385,11 +349,29 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to from.
+        ///   Looks up a localized string similar to Paint.
         /// </summary>
-        internal static string from {
+        internal static string ExteriorView_Paints_Header {
             get {
-                return ResourceManager.GetString("from", resourceCulture);
+                return ResourceManager.GetString("ExteriorView_Paints_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rims.
+        /// </summary>
+        internal static string ExteriorView_Rims_Header {
+            get {
+                return ResourceManager.GetString("ExteriorView_Rims_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exterior.
+        /// </summary>
+        internal static string ExteriorView_Title {
+            get {
+                return ResourceManager.GetString("ExteriorView_Title", resourceCulture);
             }
         }
         
@@ -412,11 +394,47 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gears.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
-        internal static string Gears {
+        internal static string General_Delete {
             get {
-                return ResourceManager.GetString("Gears", resourceCulture);
+                return ResourceManager.GetString("General_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from.
+        /// </summary>
+        internal static string General_From {
+            get {
+                return ResourceManager.GetString("General_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car Configurator.
+        /// </summary>
+        internal static string General_ProductTitle {
+            get {
+                return ResourceManager.GetString("General_ProductTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inch.
+        /// </summary>
+        internal static string General_RimSizeUnit {
+            get {
+                return ResourceManager.GetString("General_RimSizeUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string General_View {
+            get {
+                return ResourceManager.GetString("General_View", resourceCulture);
             }
         }
         
@@ -430,29 +448,56 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load.
+        ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it.
         /// </summary>
-        internal static string Load {
+        internal static string HomeView_ConfigurationDescription {
             get {
-                return ResourceManager.GetString("Load", resourceCulture);
+                return ResourceManager.GetString("HomeView_ConfigurationDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose your model.
+        ///   Looks up a localized string similar to Start Configuration.
         /// </summary>
-        internal static string ModelHeader {
+        internal static string HomeView_StartConfiguration_Button {
             get {
-                return ResourceManager.GetString("ModelHeader", resourceCulture);
+                return ResourceManager.GetString("HomeView_StartConfiguration_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Layout_Home_Link {
+            get {
+                return ResourceManager.GetString("Layout_Home_Link", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Orders.
         /// </summary>
-        internal static string OrderList {
+        internal static string Layout_OrderList_Link {
             get {
-                return ResourceManager.GetString("OrderList", resourceCulture);
+                return ResourceManager.GetString("Layout_OrderList_Link", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your model.
+        /// </summary>
+        internal static string ModelView_Header {
+            get {
+                return ResourceManager.GetString("ModelView_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model.
+        /// </summary>
+        internal static string ModelView_Title {
+            get {
+                return ResourceManager.GetString("ModelView_Title", resourceCulture);
             }
         }
         
@@ -468,9 +513,9 @@ namespace KFZ_Konfigurator.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Model.
         /// </summary>
-        internal static string OrderListView_Description_CarModel {
+        internal static string OrderListView_CarModel_Header {
             get {
-                return ResourceManager.GetString("OrderListView_Description_CarModel", resourceCulture);
+                return ResourceManager.GetString("OrderListView_CarModel_Header", resourceCulture);
             }
         }
         
@@ -556,60 +601,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paint.
-        /// </summary>
-        internal static string PaintsHeader {
-            get {
-                return ResourceManager.GetString("PaintsHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Car Configurator.
-        /// </summary>
-        internal static string ProductTitle {
-            get {
-                return ResourceManager.GetString("ProductTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rims.
-        /// </summary>
-        internal static string RimsHeader {
-            get {
-                return ResourceManager.GetString("RimsHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to inch.
-        /// </summary>
-        internal static string RimSizeUnit {
-            get {
-                return ResourceManager.GetString("RimSizeUnit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select.
-        /// </summary>
-        internal static string Select {
-            get {
-                return ResourceManager.GetString("Select", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Configuration.
-        /// </summary>
-        internal static string StartConfiguration {
-            get {
-                return ResourceManager.GetString("StartConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Acceleration 0-100 km/h.
         /// </summary>
         internal static string TechnicalData_Acceleration {
@@ -684,18 +675,9 @@ namespace KFZ_Konfigurator.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to -Gear.
         /// </summary>
-        internal static string TechnicalData_Transmission_LabelSuffix {
+        internal static string TechnicalData_Transmission_Suffix {
             get {
-                return ResourceManager.GetString("TechnicalData_Transmission_LabelSuffix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View.
-        /// </summary>
-        internal static string View {
-            get {
-                return ResourceManager.GetString("View", resourceCulture);
+                return ResourceManager.GetString("TechnicalData_Transmission_Suffix", resourceCulture);
             }
         }
     }

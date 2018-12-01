@@ -49,19 +49,19 @@
                 </a>
                 <div class="card-text">
                     <div>
-                        @LocalizationManager.Localize("Configuration_BasePrice"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span>
+                        @LocalizationManager.Localize("ConfigurationLayout_BasePrice_Label"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span>
                     </div>
                     <div>
-                        @LocalizationManager.Localize("Configuration_ExtrasPrice"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span>
+                        @LocalizationManager.Localize("ConfigurationLayout_ExtrasPrice_Label"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span>
                     </div>
                     <div>
-                        @LocalizationManager.Localize("Configuration_Price"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
+                        @LocalizationManager.Localize("ConfigurationLayout_Price_Label"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
                     </div>
                 </div>
             </div>
             @if (viewKind != ConfigurationViewKind.Overview)
             {
-                <a href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)" class="btn btn-info row">@LocalizationManager.Localize("Configuration_GoToOverview")</a>
+                <a href="@Url.RouteUrl(Constants.Routes.CurrentConfigurationOverview)" class="btn btn-info row">@LocalizationManager.Localize("ConfigurationLayout_GoToOverview")</a>
             }
         </div>
     }
@@ -84,9 +84,9 @@
             </button>
             <div class="navbar-collapse collapse" id="configurationNavbarToggleContent">
                 <div class="navbar-nav">
-                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.EngineSettings, "active")">@LocalizationManager.Localize("EngineSettingsHeader")</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.Accessories, "active")">@LocalizationManager.Localize("AccessoriesHeader")</a>
-                    <a href="@Url.RouteUrl(Constants.Routes.Exterior)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.Exterior, "active")">@LocalizationManager.Localize("ExteriorHeader")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.EngineSettings)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.EngineSettings, "active")">@LocalizationManager.Localize("ConfigurationLayout_EngineSettings_Button")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Accessories)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.Accessories, "active")">@LocalizationManager.Localize("ConfigurationLayout_Accessories_Button")</a>
+                    <a href="@Url.RouteUrl(Constants.Routes.Exterior)" class="nav-item nav-link @MiscHelper.If(viewKind == ConfigurationViewKind.Exterior, "active")">@LocalizationManager.Localize("ConfigurationLayout_Exterior_Button")</a>
                 </div>
             </div>
         </div>

@@ -5,19 +5,19 @@
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = LocalizationManager.Localize("ConfigurationOverview_Title");
+    ViewBag.Title = LocalizationManager.Localize("ConfigurationOverviewView_Title");
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("ConfigurationOverviewHeader")</h2>
+<h2>@LocalizationManager.Localize("ConfigurationOverviewView_Header")</h2>
 
 @* Engine Settings *@
-<h4>@LocalizationManager.Localize("ConfigurationOverview_TechnicalData_Header")</h4>
+<h4>@LocalizationManager.Localize("ConfigurationOverviewView_TechnicalData_Header")</h4>
 <table class="table">
     <tbody>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Transmission")</th>
-            <td>@(Model.EngineSetting.Gears + LocalizationManager.Localize("TechnicalData_Transmission_LabelSuffix"))</td>
+            <td>@(Model.EngineSetting.Gears + LocalizationManager.Localize("TechnicalData_Transmission_Suffix"))</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Acceleration")</th>
@@ -53,7 +53,7 @@
 @if (Model.Accessories.Count() > 0)
 {
     @* Accessories *@
-    <h4 class="mt-3">@LocalizationManager.Localize("ConfigurationOverview_Accessories_Header")</h4>
+    <h4 class="mt-3">@LocalizationManager.Localize("ConfigurationOverviewView_Accessories_Header")</h4>
     <table class="table">
         <tr>
             <th>
@@ -79,17 +79,17 @@
 }
 
 @* Exterior *@
-<h4 class="mt-3">@LocalizationManager.Localize("ConfigurationOverview_Exterior_Header")</h4>
+<h4 class="mt-3">@LocalizationManager.Localize("ConfigurationOverviewView_Exterior_Header")</h4>
 <table class="table">
     <tbody>
         <tr>
-            <th scope="row">@LocalizationManager.Localize("ConfigurationOverview_Paint_Header")</th>
+            <th scope="row">@LocalizationManager.Localize("ConfigurationOverviewView_Paint_Header")</th>
             <td>@(LocalizationManager.LocalizeEnum<PaintCategory>(Model.Paint.Category.ToString())) @Html.DisplayFor(_ => Model.Paint.Name)</td>
             <td>@Html.DisplayFor(_ => Model.Paint.Price)</td>
         </tr>
         <tr>
-            <th scope="row">@LocalizationManager.Localize("ConfigurationOverview_Rims_Header")</th>
-            <td>@Html.DisplayFor(_ => Model.Rims.Size) @LocalizationManager.Localize("RimSizeUnit")</td>
+            <th scope="row">@LocalizationManager.Localize("ConfigurationOverviewView_Rims_Header")</th>
+            <td>@Html.DisplayFor(_ => Model.Rims.Size) @LocalizationManager.Localize("General_RimSizeUnit")</td>
             <td>@Html.DisplayFor(_ => Model.Rims.Price)</td>
         </tr>
     </tbody>
@@ -97,26 +97,26 @@
 
 <hr />
 <p>
-    <h4>@LocalizationManager.Localize("ConfigurationOverview_BasePrice_Header"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span></h4>
-    <h4>@LocalizationManager.Localize("ConfigurationOverview_ExtrasPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span></h4>
+    <h4>@LocalizationManager.Localize("ConfigurationOverviewView_BasePrice_Header"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span></h4>
+    <h4>@LocalizationManager.Localize("ConfigurationOverviewView_ExtrasPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.extrasPrice())"></span></h4>
     <h1 class="mt-3 mb-4">
-        @LocalizationManager.Localize("ConfigurationOverview_FinalPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
+        @LocalizationManager.Localize("ConfigurationOverviewView_FinalPrice_Header"): <span data-bind="text: formatCurrency(configViewModel.fullPrice())"></span>
     </h1>
 </p>
 
 @* Order *@
 <p>
-    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#orderCollapse">@LocalizationManager.Localize("ConfigurationOverview_Order_Button")</button>
+    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#orderCollapse">@LocalizationManager.Localize("ConfigurationOverviewView_Order_Button")</button>
 </p>
 <div class="collapse" id="orderCollapse">
     <div class="card card-body">
         <div class="input-group">
             <input type="text" class="form-control"
-                   placeholder="@LocalizationManager.Localize("ConfigurationOverview_OrderDescriptionPlaceholder")"
+                   placeholder="@LocalizationManager.Localize("ConfigurationOverviewView_OrderDescription_Placeholder")"
                    data-bind="value: configOVW.configurationDescription" />
             <div class="input-group-append">
                 <button class="btn btn-primary" id="placeOrderButton" type="button" data-bind="click: configOVW.placeOrder">
-                    @LocalizationManager.Localize("ConfigurationOverview_PlaceOrder_Button")
+                    @LocalizationManager.Localize("ConfigurationOverviewView_PlaceOrder_Button")
                 </button>
             </div>
         </div>

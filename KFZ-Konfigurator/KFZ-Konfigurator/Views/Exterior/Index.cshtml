@@ -3,12 +3,12 @@
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
-    ViewBag.Title = LocalizationManager.Localize("ExteriorTitle");
+    ViewBag.Title = LocalizationManager.Localize("ExteriorView_Title");
     var paintCategories = Enum.GetNames(typeof(PaintCategory));
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("PaintsHeader")</h2>
+<h2>@LocalizationManager.Localize("ExteriorView_Paints_Header")</h2>
 
 <div class="container">
     @foreach (var category in paintCategories)
@@ -33,14 +33,14 @@
     }
 </div>
 <p />
-<h2>@LocalizationManager.Localize("RimsHeader")</h2>
+<h2>@LocalizationManager.Localize("ExteriorView_Rims_Header")</h2>
 <table class="table">
     @foreach (var item in Model.Rims)
     {
         <tr>
             <th>
                 <input type="radio" name="rimOptions" class="mr-2" value="@item.Id" data-bind="checked: configViewModel.selectedRimsId" />
-                <label>@Html.DisplayFor(_ => item.Size) @LocalizationManager.Localize("RimSizeUnit")</label>
+                <label>@Html.DisplayFor(_ => item.Size) @LocalizationManager.Localize("General_RimSizeUnit")</label>
             </th>
             <td>
                 @Html.DisplayFor(_ => item.Price)

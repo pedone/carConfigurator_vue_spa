@@ -11,7 +11,7 @@
 <table class="table">
     <tr>
         <th>
-            @LocalizationManager.Localize("OrderListView_Description_CarModel")
+            @LocalizationManager.Localize("OrderListView_CarModel_Header")
         </th>
         <th>
             @LocalizationManager.Localize("OrderListView_Description_Header")
@@ -36,9 +36,9 @@
             <td data-bind="text: formatCurrency(extrasPrice)"></td>
             <td data-bind="text: formatCurrency(price)"></td>
             <td>
-                <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("View")</a> |
+                <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("General_View")</a> |
                 <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }">
-                    @LocalizationManager.Localize("Delete")
+                    @LocalizationManager.Localize("General_Delete")
                 </a>
             </td>
         </tr>

@@ -18,6 +18,7 @@ namespace KFZ_Konfigurator
             public const string CurrentConfigurationOverview = nameof(CurrentConfigurationOverview);
             public const string ViewOrder = nameof(ViewOrder);
             public const string OrderList = nameof(OrderList);
+            public const string Home = nameof(Home);
         }
         public static class SubSeries
         {
