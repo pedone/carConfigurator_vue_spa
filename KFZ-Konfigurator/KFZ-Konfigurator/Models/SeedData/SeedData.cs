@@ -51,7 +51,10 @@ namespace KFZ_Konfigurator.Models.SeedData
         {
             //remove many to many relationships first
             foreach (var cur in context.Configurations)
+            {
                 cur.Accessories.Clear();
+                cur.Orders.Clear();
+            }
 
             context.Configurations.RemoveRange(context.Configurations);
             context.Accessories.RemoveRange(context.Accessories);
@@ -60,6 +63,7 @@ namespace KFZ_Konfigurator.Models.SeedData
             context.Engines.RemoveRange(context.Engines);
             context.Paints.RemoveRange(context.Paints);
             context.Rims.RemoveRange(context.Rims);
+            context.Orders.RemoveRange(context.Orders);
 
             context.SaveChanges();
             Log.Info("db data was reset");
