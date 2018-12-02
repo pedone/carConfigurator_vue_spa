@@ -403,6 +403,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string General_Cancel {
+            get {
+                return ResourceManager.GetString("General_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string General_Delete {

@@ -11,7 +11,7 @@ ko.extenders.filterSelected = function (target) {
     /** @type {Function} */
     var subscribeFactory = function (index) {
         return function (value) {
-            if (value) {
+            if (value) { 
                 result.push(data[index]);
             } else {
                 result.remove(data[index]);

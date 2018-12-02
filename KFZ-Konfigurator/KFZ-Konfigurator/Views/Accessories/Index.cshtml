@@ -4,21 +4,25 @@
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("AccessoriesView_Title");
-    var categories = Enum.GetNames(typeof(AccessoryCategory));
+    var categoryValues = Enum.GetValues(typeof(AccessoryCategory));
 }
 
 @Html.AntiForgeryToken()
 <div>
     <div class="accordion" id="accessoriesAccordion">
-        @foreach (var curCategory in categories)
+        @foreach (AccessoryCategory curCategory in categoryValues)
         {
             <div class="card">
                 <div class="card-header btn d-flex align-items-start" role="button" data-target="@string.Format($"#collapse{curCategory}")" data-toggle="collapse">
-                    <h5>@(LocalizationManager.LocalizeEnum<AccessoryCategory>(curCategory))</h5>
+                    <h5>
+                        @(LocalizationManager.LocalizeEnum<AccessoryCategory>(curCategory.ToString()))
+                        <span class="badge badge-secondary" data-bind="text: configViewModel.countCategory(configViewModel.selectedAccessories(), @((int)curCategory))"></span> 
+                    </h5>
+
                 </div>
                 <div class="collapse" data-parent="#accessoriesAccordion" id="@string.Format($"collapse{curCategory}")">
                     <div class="card-body list-group list-group-flush pr-0">
-                        @foreach (var item in Model.Accessories.Where(cur => cur.Category.ToString() == curCategory))
+                        @foreach (var item in Model.Accessories.Where(cur => cur.Category == curCategory))
                         {
                             <div class="list-group-item">
                                 <div class="row">
@@ -26,7 +30,7 @@
                                         <input type="checkbox"
                                                data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
                                     </div>
-                                    <div class="col" data-bind="click: function() { configViewModel.selectAccessory(@item.Id) }">
+                                    <div class="col" data-bind="click: () => configViewModel.selectAccessory(@item.Id)">
                                         <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>
                                         <h6 class="card-text">@Html.DisplayFor(_ => item.Price)</h6>
                                     </div>

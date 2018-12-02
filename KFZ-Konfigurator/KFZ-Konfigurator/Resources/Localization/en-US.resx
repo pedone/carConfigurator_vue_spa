@@ -342,4 +342,7 @@
   <data name="ConfigurationLayout_Overview_Rims_Header" xml:space="preserve">
     <value>Rims</value>
   </data>
+  <data name="General_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

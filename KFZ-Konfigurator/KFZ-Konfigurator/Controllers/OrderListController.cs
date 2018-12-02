@@ -21,8 +21,7 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                var orderCount = context.Orders.Count();
-                var pageCount = (int)Math.Ceiling((double)orderCount / Constants.PageItemsCount);
+                var pageCount = CalculatePageCount(context.Orders.Count());
                 return View(new OrderListPageViewModel
                 {
                     PageCount = pageCount,
@@ -33,9 +32,14 @@ namespace KFZ_Konfigurator.Controllers
             }
         }
 
+        private int CalculatePageCount(int itemCount)
+        {
+            return (int)Math.Ceiling((double)itemCount / Constants.PageItemsCount); ;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string Delete(int id)
+        public JsonResult Delete(int id, int pageIndex)
         {
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -46,13 +50,19 @@ namespace KFZ_Konfigurator.Controllers
                     context.Orders.Remove(toDelete);
                     context.SaveChanges();
                 }
-            }
 
-            return string.Empty;
+                //return the item that's next in line because everything after the deleted item is moving up
+                var newOrderItem = context.Orders.ToList().ElementAtOrDefault(pageIndex * Constants.PageItemsCount + (Constants.PageItemsCount - 1));
+                return Json(new
+                {
+                    NewPageCount = CalculatePageCount(context.Orders.Count()),
+                    NewItem = (newOrderItem != null ? new OrderViewModel(newOrderItem, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = newOrderItem.Guid })) : null)
+                });
+            }
         }
 
         [HttpGet]
-        public ActionResult LoadPage(int pageIndex)
+        public JsonResult LoadPage(int pageIndex)
         {
             using (var context = new CarConfiguratorEntityContext())
             {
@@ -62,6 +72,5 @@ namespace KFZ_Konfigurator.Controllers
                 return Json(orders, JsonRequestBehavior.AllowGet);
             }
         }
-
     }
 }

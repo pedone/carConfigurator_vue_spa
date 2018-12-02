@@ -9,9 +9,9 @@
 <h2 class="mt-3">@LocalizationManager.Localize("OrderListView_Header")</h2>
 
 @* Paging *@
-<nav class="d-flex justify-content-end @MiscHelper.If(Model.PageCount == 1, "invisible")">
+<nav class="d-flex justify-content-end" data-bind="css: {invisible: pages().length <= 1}">
     <ul class="pagination" data-bind="foreach: pages">
-        <li class="page-item" data-bind="css: { active: $parent.currentPageIndex === ($data - 1) }">
+        <li class="page-item" data-bind="css: { active: $parent.currentPageIndex() === ($data - 1) }">
             <a class="page-link" href="#" data-bind="text: $data, click: $parent.loadPage"></a>
         </li>
     </ul>
@@ -46,8 +46,8 @@
             <td data-bind="text: formatCurrency(price)"></td>
             <td>
                 <a data-bind="attr: {href: linkUrl}">@LocalizationManager.Localize("General_View")</a> |
-                <a href="#" data-bind="click: function(data, event) { $parent.deleteItem(data, event, $(document)) }">
-                    @LocalizationManager.Localize("General_Delete")
+                <a href="#" data-bind="click: (data, event) => { $parent.deleteItem(data, event, $(document)) }">
+                    @LocalizationManager.Localize("General_Cancel")
                 </a>
             </td>
         </tr>

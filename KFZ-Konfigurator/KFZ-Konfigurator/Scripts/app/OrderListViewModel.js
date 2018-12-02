@@ -31,11 +31,17 @@ class OrderListViewModel {
         let self = this;
         /** @type {KnockoutObservableArrayStatic} */
         this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur)));
-        /** @type {Array.<number>} */
-        this.pages = [];
-        _.times(pageCount, (index) => this.pages.push(index + 1));
-        /** @type {number} */
-        this.currentPageIndex = 0;
+        /**
+         * koObservableArray
+         * @type {Array.<number>}
+         */
+        this.pages = ko.observableArray([]);
+        _.times(pageCount, (index) => this.pages().push(index + 1));
+        /**
+         * koObservable
+         * @type {number}
+         */
+        this.currentPageIndex = ko.observable(0);
 
         /**
          * Notes: this method has to be placed within the constructor, because self.orders is not returning the
@@ -50,9 +56,26 @@ class OrderListViewModel {
             /** @type {string} */
             let antiForgeryToken = getAntiForgeryToken(document);
             deleteItemAjax(item.id, antiForgeryToken)
-                .done(function () {
-                    self.orders.remove(item);
-                })
+                .done(
+                    /** @param {{NewPageCount: number, NewItem: OrderData }} data */
+                    function (data) {
+                        self.orders.remove(item);
+                        if (data.NewItem) {
+                            //insert the item that has moved up to the current page
+                            self.orders.push(new OrderItemViewModel(data.NewItem));
+                        }
+                        if (self.pages().length !== data.NewPageCount) {
+                            //update the max page count
+                            self.pages.pop();
+
+                            // if the current page is larger than the max pages, gotta load the previous page
+                            /** @type {number} */
+                            let curPageNumber = self.currentPageIndex() + 1;
+                            if (curPageNumber > self.pages().length) {
+                                self.loadPage(curPageNumber - 1);
+                            }
+                        }
+                    })
                 .fail(function (error) {
                     console.log('failed to delete order: ' + error.responseText + ' (' + error.statusText + ')');
                     alert('order ' + item.name + ' could not be removed');
@@ -70,10 +93,11 @@ class OrderListViewModel {
                 url: '/OrderList/delete',
                 data: {
                     __RequestVerificationToken: antiForgeryToken,
-                    id: id
+                    id: id,
+                    pageIndex: self.currentPageIndex()
                 },
                 contentType: 'application/x-www-form-urlencoded',
-                dataType: 'text'
+                dataType: 'json'
             });
         }
 
@@ -82,7 +106,7 @@ class OrderListViewModel {
             /** @type {number} */
             let targetIndex = number - 1;
 
-            if (targetIndex === this.currentPageIndex) {
+            if (targetIndex === self.currentPageIndex()) {
                 return;
             }
 
@@ -90,7 +114,9 @@ class OrderListViewModel {
                 type: 'GET',
                 url: '/OrderList/LoadPage',
                 data: { pageIndex: targetIndex },
+                dataType: 'json'
             }).done(function (data) {
+                self.currentPageIndex(targetIndex);
                 self.orders(_.map(data, (cur) => new OrderItemViewModel(cur)));
             }).fail(function (error) {
                 console.log('failed to load page: ' + error.responseText + ' (' + error.statusText + ')');

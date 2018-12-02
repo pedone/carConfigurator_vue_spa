@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 class ViewModel {
-    /** @param {ViewModelData|NameViewModelData|RimViewModelData} data */
+    /** @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data */
     constructor(data) {
         /** @type {number} */
         this.id = data.Id;
@@ -13,6 +13,8 @@ class ViewModel {
         this.name = data.Name;
         /** @type {number|null} */
         this.size = data.Size;
+        /** @type {number|null} */
+        this.category = data.Category;
     }
 }
 
@@ -22,7 +24,6 @@ class ViewModel {
  * @property {Object.<ViewModel>} _paintById
  * @property {Object.<ViewModel>} accessoriesById
  * @property {Array.<ViewModel>} selectedAccessories
- * @property {ViewModel} _selectedEngineId
  */
 class ConfigurationViewModel {
     /**
@@ -169,6 +170,14 @@ class ConfigurationViewModel {
         return _.map(this.selectedAccessories(), (cur) => cur.id);
     }
 
+    /**
+     * @param {Array.<ViewModel>} accessories
+     * @param {number} category
+     */
+    countCategory(accessories, category) {
+        return _.filter(accessories, (cur) => cur.category === category).length;
+    }
+
     /** @param {number} settingsId */
     selectEngineSettings(settingsId) {
         //deselect all other settings, because deselection doesn't work with binding
@@ -184,6 +193,8 @@ class ConfigurationViewModel {
     selectAccessory(id) {
         /** @type {boolean} */
         let isSelected = this.accessoriesById[id].isSelected();
+
+        console.log('selectAccessory: ' + id);
 
         if (isSelected || !this.isAccessoryLimitReached()) {
             this.accessoriesById[id].isSelected(!isSelected);
@@ -207,6 +218,12 @@ class ConfigurationViewModel {
  * @typedef {ViewModelData} RimViewModelData
  * @property {number} Size
  */
+
+/**
+ * @typedef {NameViewModelData} AccessoryViewModelData
+ * @property {number} Category
+ */
+
 /**
  * @typedef {Object} ConfigurationData
  * @property {Array.<ViewModelData>} engineSettings

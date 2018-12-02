@@ -12,7 +12,7 @@
     {
         <a class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center @MiscHelper.If(item.IsSelected, "active")"
            data-toggle="list"
-           data-bind="click: function() { configViewModel.selectEngineSettings(@item.Id) } ">
+           data-bind="click: () => configViewModel.selectEngineSettings(@item.Id)">
             <div class="flex-column w-100 align-items-lg-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">@($"{Html.DisplayFor(_ => item.Engine.Liter)} {Html.DisplayFor(_ => item.Engine.EngineKind)} {Html.DisplayFor(_ => item.Gears)}{LocalizationManager.Localize("TechnicalData_Transmission_Suffix")}")</h5>
@@ -67,13 +67,14 @@
 
         let selectedEngineId = viewModel.selectedEngineId;
         $(window).on('beforeunload', function () {
-            if (selectedEngineId == viewModel.selectedEngineId) {
+            if (selectedEngineId === viewModel.selectedEngineSettings().id) {
+                console.debug('engine settings did not change');
                 //skip if the selected engine didn't change
                 return;
             }
 
             let antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineId, antiForgeryToken)
+            saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineSettings().id, antiForgeryToken)
                 .fail((error) => {
                     console.log('failed to set selected engine: ' + error.responseText + ' (' + error.statusText + ')');
                     alert('something went wrong. see console for details');

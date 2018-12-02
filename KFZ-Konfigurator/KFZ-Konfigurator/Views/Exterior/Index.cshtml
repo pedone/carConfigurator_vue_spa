@@ -20,7 +20,7 @@
         <div class="row">
             @foreach (var item in currentPaints)
             {
-                <div class="paintContainer" data-bind="click: function() { configViewModel.selectPaint(@item.Id) }">
+                <div class="paintContainer" data-bind="click: () => configViewModel.selectPaint(@item.Id)">
                     <input type="radio" name="paintOptions" value="@item.Id"
                            data-bind="checked: configViewModel.selectedPaintId, css: { checked: configViewModel.selectedPaintId() == @item.Id }" />
                     <figure class="figure m-1">

@@ -3,32 +3,32 @@
 class ConfigurationOverviewViewModel {
     /** @param {HandlerOptions} options */
     constructor(options) {
+        let self = this;
         /** @type {string} */
         this.configurationDescription = ko.observable("");
         /** @type {HandlerOptions} */
         this.options = options;
-    }
 
-    placeOrder() {
-        let self = this;
-        $.ajax({
-            type: 'POST',
-            url: '/ConfigurationOverview/PlaceOrder',
-            data: { __RequestVerificationToken: self.options.antiForgeryToken, description: self.configurationDescription() },
-            contentType: 'application/x-www-form-urlencoded',
-            dataType: 'text'
-        }).done(
-            function (data) {
-                if (self.options.placeOrderSuccess) {
-                    self.options.placeOrderSuccess(data);
-                }
-            })
-            .fail(function (error) {
-                console.log('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');
-                if (self.options.placeOrderFailure) {
-                    self.options.placeOrderFailure();
-                }
-            });
+        this.placeOrder = function () {
+            $.ajax({
+                type: 'POST',
+                url: '/ConfigurationOverview/PlaceOrder',
+                data: { __RequestVerificationToken: self.options.antiForgeryToken, description: self.configurationDescription() },
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'text'
+            }).done(
+                function (data) {
+                    if (self.options.placeOrderSuccess) {
+                        self.options.placeOrderSuccess(data);
+                    }
+                })
+                .fail(function (error) {
+                    console.log('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');
+                    if (self.options.placeOrderFailure) {
+                        self.options.placeOrderFailure();
+                    }
+                });
+        };
     }
 }
 
