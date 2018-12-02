@@ -17,15 +17,18 @@ namespace KFZ_Konfigurator.Controllers
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(OrderOverviewController));
 
         [Route("orders/view/{orderGuid}", Name = Constants.Routes.ViewOrder)]
+        [Route("orders/view/{orderGuid}/orderplaced", Name = Constants.Routes.ViewOrderAfterPlaced)]
         public ActionResult Index(string orderGuid)
         {
+            var orderJustPlaced = Request.RawUrl.EndsWith("orderplaced");
+
             using (var context = new CarConfiguratorEntityContext())
             {
                 var order = context.Orders.FirstOrDefault(cur => cur.Guid == orderGuid);
                 if (order == null)
                     throw new ArgumentException($"order {orderGuid} was not found");
 
-                return View(new OrderOverviewPageViewModel(order, MiscHelper.GenerateConfigurationLink(Request, Url, orderGuid)));
+                return View(new OrderOverviewPageViewModel(order, MiscHelper.GenerateOrderLink(Request, Url, order.Guid), orderJustPlaced));
             }
 
         }

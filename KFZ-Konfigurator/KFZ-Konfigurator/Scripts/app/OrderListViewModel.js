@@ -1,9 +1,6 @@
 ﻿class OrderItemViewModel {
-    /**
-     * @param {OrderData} data
-     * @param {string} linkTemplate
-     */
-    constructor(data, linkTemplate) {
+    /** @param {OrderData} data */
+    constructor(data) {
         /** @type {number} */
         this.id = data.Id;
         /** @type {number} */
@@ -19,19 +16,16 @@
         /** @type {string} */
         this.guid = data.Guid;
         /** @type {string} */
-        this.linkUrl = linkTemplate.replace("Placeholder", data.Guid);
+        this.linkUrl = data.LinkUrl;
     }
 }
 
 class OrderListViewModel {
-    /**
-     * @param {Array.<OrderData>} data
-     * @param {string} linkTemplate
-     */
-    constructor(data, linkTemplate) {
+    /** @param {Array.<OrderData>} data */
+    constructor(data) {
         var self = this;
         /** @type {KnockoutObservableArrayStatic} */
-        this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur, linkTemplate)));
+        this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur)));
 
         /**
          * @param {OrderItemViewModel} item
@@ -82,4 +76,5 @@ class OrderListViewModel {
  * @property {string} Description
  * @property {string} Model
  * @property {string} Guid
+ * @property {string} LinkUrl
  */

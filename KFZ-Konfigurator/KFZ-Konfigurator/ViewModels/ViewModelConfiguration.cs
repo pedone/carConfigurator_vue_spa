@@ -19,10 +19,10 @@ namespace KFZ_Konfigurator.ViewModels
             get => _AccessoryIds ?? Enumerable.Empty<int>();
             set => _AccessoryIds = value;
         }
-        public string ConfigurationLink { get; set; }
+        public string OrderLink { get; set; }
         public bool IsReadOnly
         {
-            get => !string.IsNullOrEmpty(ConfigurationLink);
+            get => !string.IsNullOrEmpty(OrderLink);
         }
 
         public void Reset()
@@ -32,7 +32,7 @@ namespace KFZ_Konfigurator.ViewModels
             PaintId = -1;
             RimId = -1;
             AccessoryIds = null;
-            ConfigurationLink = null;
+            OrderLink = null;
         }
 
         public bool IsValid(int? id, out string error)

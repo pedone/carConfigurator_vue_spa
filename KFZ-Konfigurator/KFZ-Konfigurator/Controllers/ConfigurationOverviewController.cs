@@ -47,14 +47,15 @@ namespace KFZ_Konfigurator.Controllers
                 //rims
                 RimViewModel rims = new RimViewModel(context.Rims.First(cur => cur.Id == SessionData.ActiveConfiguration.RimId));
 
-                return View(new ConfigurationOverviewPageViewModel
+                var pageViewModel = new ConfigurationOverviewPageViewModel
                 {
                     EngineSetting = engineSettings,
                     Accessories = accessories ?? Enumerable.Empty<AccessoryViewModel>(),
                     Paint = paint,
-                    Rims = rims,
-                    ConfigurationLink = SessionData.ActiveConfiguration.ConfigurationLink
-                });
+                    Rims = rims
+                };
+                pageViewModel.InitPrice();
+                return View(pageViewModel);
             }
         }
 
@@ -129,10 +130,10 @@ namespace KFZ_Konfigurator.Controllers
                 Log.Info($"configuration for order {newOrder.Id} was created");
                 Log.Info($"a new order with id '{newOrder.Id}' was successfully placed");
 
-                SessionData.ActiveConfiguration.ConfigurationLink = MiscHelper.GenerateConfigurationLink(Request, Url, newOrder.Guid);
+                SessionData.ActiveConfiguration.OrderLink = Url.RouteUrl(Constants.Routes.ViewOrderAfterPlaced, new { orderGuid = newOrder.Guid });
             }
 
-            return SessionData.ActiveConfiguration.ConfigurationLink;
+            return SessionData.ActiveConfiguration.OrderLink;
         }
     }
 }

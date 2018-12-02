@@ -408,6 +408,7 @@
     <Content Include="Views\ConfigurationOverview\Index.cshtml" />
     <Content Include="Views\OrderList\Index.cshtml" />
     <Content Include="Views\OrderOverview\Index.cshtml" />
+    <Content Include="Views\ConfigurationOverview\_ConfigurationOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

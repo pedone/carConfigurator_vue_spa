@@ -23,7 +23,9 @@ namespace KFZ_Konfigurator.Controllers
             {
                 return View(new OrderListPageViewModel
                 {
-                    Orders = context.Orders.ToList().Select(cur => new OrderViewModel(cur)).ToList()
+                    Orders = context.Orders.ToList()
+                    .Select(cur => new OrderViewModel(cur, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = cur.Guid })))
+                    .ToList()
                 });
             }
         }

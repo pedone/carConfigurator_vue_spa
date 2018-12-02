@@ -241,7 +241,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Final Price.
+        ///   Looks up a localized string similar to Price.
         /// </summary>
         internal static string ConfigurationOverviewView_FinalPrice_Header {
             get {
@@ -529,7 +529,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extras Price.
+        ///   Looks up a localized string similar to Extras.
         /// </summary>
         internal static string OrderListView_ExstrasPrice_Header {
             get {
@@ -561,6 +561,24 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string OrderListView_Title {
             get {
                 return ResourceManager.GetString("OrderListView_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to link to your order.
+        /// </summary>
+        internal static string OrderOverviewView_CopyOrderLink_Button {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_CopyOrderLink_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Order.
+        /// </summary>
+        internal static string OrderOverviewView_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_Header", resourceCulture);
             }
         }
         

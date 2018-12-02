@@ -11,18 +11,26 @@ namespace KFZ_Konfigurator.ViewModels
 {
     public class OrderOverviewPageViewModel : ItemViewModelBase
     {
+        public string Model { get; }
         public double BasePrice { get; }
         public double ExtrasPrice { get; }
         public string Description { get; }
+        public string OrderLink { get; }
+        public bool OrderSuccess { get; }
         public ConfigurationOverviewPageViewModel Configuration { get; }
 
-        public OrderOverviewPageViewModel(Order model, string configurationLink)
+        public OrderOverviewPageViewModel(Order model, string orderLink, bool orderSuccess = false)
             : base(model.Id, model.BasePrice + model.ExtrasPrice)
         {
+            var carModel = model.Configuration.EngineSetting.CarModel;
+            Model = $"{carModel.Series} {carModel.BodyType.ToString()} {carModel.Year}";
+
             BasePrice = model.BasePrice;
             ExtrasPrice = model.ExtrasPrice;
             Description = model.Description;
-            Configuration = new ConfigurationOverviewPageViewModel(model.Configuration, configurationLink);
+            OrderLink = orderLink;
+            OrderSuccess = orderSuccess;
+            Configuration = new ConfigurationOverviewPageViewModel(model.Configuration);
         }
 
     }

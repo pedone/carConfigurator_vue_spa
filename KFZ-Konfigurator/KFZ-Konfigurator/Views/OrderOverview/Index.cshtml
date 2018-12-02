@@ -4,5 +4,42 @@
     ViewBag.Title = LocalizationManager.Localize("OrderOverviewView_Title");
 }
 
-@Html.AntiForgeryToken()
-@*<h2 class="mt-3">@LocalizationManager.Localize("OrderListView_Header")</h2>*@
+@if (Model.OrderSuccess)
+{
+    <div class="mt-3 alert alert-success alert-dismissible fade show" role="alert">
+        <h4>Order successfully placed</h4>
+        <p>
+            <div>Here is the overview to the configuration you ordered</div>
+            <div>
+                You can also copy a <a href="" id="copyLinkButton">@LocalizationManager.Localize("OrderOverviewView_CopyOrderLink_Button")</a> to view it later
+                <input type="hidden" value="@Model.OrderLink" id="orderLinkContent" />
+            </div>
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<h2 class="mt-3">@LocalizationManager.Localize("OrderOverviewView_Header") - @Model.Model</h2>
+<p>@Model.Description</p>
+
+<div class="container mt-3">
+    @Html.Partial("../ConfigurationOverview/_ConfigurationOverview", Model.Configuration)
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // copy link to clipboard
+            $('#copyLinkButton').click(function (event) {
+                event.preventDefault();
+                let orderLink = $('#orderLinkContent');
+                orderLink.attr('type', 'text');
+                orderLink.select();
+                document.execCommand('copy');
+                orderLink.attr('type', 'hidden');
+            });
+        });
+    </script>
+}

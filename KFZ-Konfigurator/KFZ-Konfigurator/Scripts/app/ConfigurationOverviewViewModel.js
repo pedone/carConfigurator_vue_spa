@@ -1,12 +1,7 @@
 ﻿class ConfigurationOverviewViewModel {
-    /**
-     * @param {string} configurationUrl
-     * @param {HandlerOptions} options
-     */
-    constructor(configurationUrl, options) {
+    /** @param {HandlerOptions} options */
+    constructor(options) {
         self = this;
-        /** @type {string} */
-        this.configurationLink = ko.observable(configurationUrl || "");
         /** @type {string} */
         this.configurationDescription = ko.observable("");
         /** @type {HandlerOptions} */
@@ -22,7 +17,6 @@
             dataType: 'text'
         }).done(
             function (data) {
-                self.configurationLink(data);
                 if (self.options.placeOrderSuccess) {
                     self.options.placeOrderSuccess(data);
                 }
