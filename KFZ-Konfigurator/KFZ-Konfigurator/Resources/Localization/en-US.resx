@@ -201,9 +201,6 @@
   <data name="FuelKind_Petrol" xml:space="preserve">
     <value>Petrol</value>
   </data>
-  <data name="GenerateConfigurationLink_Label" xml:space="preserve">
-    <value>Get a link to your configuration</value>
-  </data>
   <data name="TechnicalData_Transmission_Suffix" xml:space="preserve">
     <value>-Gear</value>
   </data>
@@ -255,11 +252,8 @@
   <data name="PaintCategory_Uni" xml:space="preserve">
     <value>Uni</value>
   </data>
-  <data name="ConfigurationOverviewView_CopyConfigurationLink" xml:space="preserve">
-    <value>Copy link to your configuration to clipboard</value>
-  </data>
   <data name="ConfigurationOverviewView_Order_Button" xml:space="preserve">
-    <value>Order Your Configuration</value>
+    <value>Buy Your Configuration</value>
   </data>
   <data name="OrderListView_Header" xml:space="preserve">
     <value>Orders</value>
@@ -328,6 +322,18 @@
     <value>Your Order</value>
   </data>
   <data name="OrderOverviewView_CopyOrderLink_Button" xml:space="preserve">
-    <value>link to your order</value>
+    <value>copy a link to your order</value>
+  </data>
+  <data name="OrderOverviewView_OrderSuccessful_Description_1" xml:space="preserve">
+    <value>Here is the overview to the configuration you ordered</value>
+  </data>
+  <data name="OrderOverviewView_OrderSuccessful_Description_2" xml:space="preserve">
+    <value>You can also </value>
+  </data>
+  <data name="OrderOverviewView_OrderSuccessful_Description_3" xml:space="preserve">
+    <value> to view it later</value>
+  </data>
+  <data name="OrderOverviewView_OrderSuccessful_Header" xml:space="preserve">
+    <value>Order successfully placed</value>
   </data>
 </root>

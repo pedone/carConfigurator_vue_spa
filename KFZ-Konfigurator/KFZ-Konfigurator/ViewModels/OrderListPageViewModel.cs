@@ -11,5 +11,6 @@ namespace KFZ_Konfigurator.ViewModels
     public class OrderListPageViewModel : ViewModelBase
     {
         public IEnumerable<OrderViewModel> Orders { get; set; }
+        public int PageCount { get; set; }
     }
 }

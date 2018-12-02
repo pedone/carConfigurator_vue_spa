@@ -214,15 +214,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy link to your configuration to clipboard.
-        /// </summary>
-        internal static string ConfigurationOverviewView_CopyConfigurationLink {
-            get {
-                return ResourceManager.GetString("ConfigurationOverviewView_CopyConfigurationLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Exterior.
         /// </summary>
         internal static string ConfigurationOverviewView_Exterior_Header {
@@ -259,7 +250,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Order Your Configuration.
+        ///   Looks up a localized string similar to Buy Your Configuration.
         /// </summary>
         internal static string ConfigurationOverviewView_Order_Button {
             get {
@@ -439,15 +430,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get a link to your configuration.
-        /// </summary>
-        internal static string GenerateConfigurationLink_Label {
-            get {
-                return ResourceManager.GetString("GenerateConfigurationLink_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it.
         /// </summary>
         internal static string HomeView_ConfigurationDescription {
@@ -565,7 +547,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to link to your order.
+        ///   Looks up a localized string similar to copy a link to your order.
         /// </summary>
         internal static string OrderOverviewView_CopyOrderLink_Button {
             get {
@@ -579,6 +561,42 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string OrderOverviewView_Header {
             get {
                 return ResourceManager.GetString("OrderOverviewView_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here is the overview to the configuration you ordered.
+        /// </summary>
+        internal static string OrderOverviewView_OrderSuccessful_Description_1 {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_OrderSuccessful_Description_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can also .
+        /// </summary>
+        internal static string OrderOverviewView_OrderSuccessful_Description_2 {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_OrderSuccessful_Description_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  to view it later.
+        /// </summary>
+        internal static string OrderOverviewView_OrderSuccessful_Description_3 {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_OrderSuccessful_Description_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order successfully placed.
+        /// </summary>
+        internal static string OrderOverviewView_OrderSuccessful_Header {
+            get {
+                return ResourceManager.GetString("OrderOverviewView_OrderSuccessful_Header", resourceCulture);
             }
         }
         

@@ -21,9 +21,12 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
+                var orderCount = context.Orders.Count();
+                var pageCount = (int)Math.Ceiling((double)orderCount / Constants.PageItemsCount);
                 return View(new OrderListPageViewModel
                 {
-                    Orders = context.Orders.ToList()
+                    PageCount = pageCount,
+                    Orders = context.Orders.Take(Constants.PageItemsCount).ToList()
                     .Select(cur => new OrderViewModel(cur, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = cur.Guid })))
                     .ToList()
                 });
@@ -46,6 +49,18 @@ namespace KFZ_Konfigurator.Controllers
             }
 
             return string.Empty;
+        }
+
+        [HttpGet]
+        public ActionResult LoadPage(int pageIndex)
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var orders = context.Orders.ToList().Skip(Constants.PageItemsCount * pageIndex).Take(Constants.PageItemsCount).ToList()
+                .Select(cur => new OrderViewModel(cur, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = cur.Guid })))
+                .ToList();
+                return Json(orders, JsonRequestBehavior.AllowGet);
+            }
         }
 
     }

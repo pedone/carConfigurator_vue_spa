@@ -21,13 +21,23 @@
 }
 
 class OrderListViewModel {
-    /** @param {Array.<OrderData>} data */
-    constructor(data) {
+    /**
+     * @param {Array.<OrderData>} data
+     * @param {number} pageCount
+     */
+    constructor(data, pageCount) {
         var self = this;
         /** @type {KnockoutObservableArrayStatic} */
         this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur)));
+        /** @type {Array.<number>} */
+        this.pages = [];
+        _.times(pageCount, (index) => this.pages.push(index + 1));
+        /** @type {number} */
+        this.currentPageIndex = 0;
 
         /**
+         * Notes: this method has to be placed within the constructor, because self.orders is not returning the
+         * KnockoutObservableArrayStatic object outside the constructor, but the function that knockout is generating.
          * @param {OrderItemViewModel} item
          * @param {Event} event
          * @param {JQueryStatic} document
@@ -64,6 +74,26 @@ class OrderListViewModel {
                 dataType: 'text'
             });
         }
+
+        /** @param {number} number */
+        this.loadPage = function (number) {
+            /** @type {number} */
+            let targetIndex = number - 1;
+
+            if (targetIndex === this.currentPageIndex) {
+                return;
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: '/OrderList/LoadPage',
+                data: { pageIndex: targetIndex },
+            }).done(function (data) {
+                self.orders(_.map(data, (cur) => new OrderItemViewModel(cur)));
+            }).fail(function (error) {
+                console.log('failed to load page: ' + error.responseText + ' (' + error.statusText + ')');
+            });
+        };
     }
 }
 
