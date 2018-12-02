@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 class ViewModel {
-    /** @param {ViewModelData} data */
+    /** @param {ViewModelData|NameViewModelData|RimViewModelData} data */
     constructor(data) {
         /** @type {number} */
         this.id = data.Id;
@@ -9,8 +9,10 @@ class ViewModel {
         this.price = data.Price;
         /** @type {boolean} */
         this.isSelected = ko.observable(data.IsSelected);
-        /** @type {string|null} */
+        /** @type {number|null} */
         this.name = data.Name;
+        /** @type {number|null} */
+        this.size = data.Size;
     }
 }
 
@@ -20,34 +22,13 @@ class ViewModel {
  * @property {Object.<ViewModel>} _paintById
  * @property {Object.<ViewModel>} accessoriesById
  * @property {Array.<ViewModel>} selectedAccessories
- * @property {number} _computedEnginePrice
- * @property {number} _computedAccessoriesPrice
- * @property {number} _computedPaintPrice
- * @property {number} _computedRimsPrice
- * @property {number} _setEnginePrice
- * @property {number} _setPaintPrice
- * @property {number} _setRimsPrice
- * @property {number} _setAccessoriesPrice
+ * @property {ViewModel} _selectedEngineId
  */
 class ConfigurationViewModel {
     /**
      * @param {ConfigurationData} data
      */
     constructor(data) {
-        var self = this;
-
-        /**
-         * observable
-         * @type {string}
-         */
-        this.selectedPaintId = ko.observable(this._getInitialSelectedId(data.paints));
-
-        /**
-         * observable
-         * @type {string}
-         */
-        this.selectedRimsId = ko.observable(this._getInitialSelectedId(data.rims));
-
         Object.defineProperties(this, {
             _engineSettingsById: {
                 value: this._toViewModelDictionary(data.engineSettings),
@@ -71,84 +52,87 @@ class ConfigurationViewModel {
             }
         });
 
-        Object.defineProperties(this, {
-            selectedAccessories: {
-                value: ko.observableArray(_.values(this.accessoriesById)).extend({ filterSelected: null }),
-                writable: false,
-                enumerable: true
-            },
-            _computedEnginePrice: {
-                value: ko.computed(this._calculatePriceFactory(this._engineSettingsById)),
-                writable: false,
-                enumerable: false
-            },
-            _computedAccessoriesPrice: {
-                value: ko.computed(this._calculatePriceFactory(this.accessoriesById)),
-                writable: false,
-                enumerable: false
-            },
-            _computedPaintPrice: {
-                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._paintById, () => this.selectedPaintId())),
-                writable: false,
-                enumerable: false
-            },
-            _computedRimsPrice: {
-                value: ko.computed(this._calculatePriceBySelectedIdFactory(this._rimsById, () => this.selectedRimsId())),
-                writable: false,
-                enumerable: false
-            },
-            _setEnginePrice: {
-                value: (data.selectedEngineSetting && data.selectedEngineSetting.Price) || 0,
-                writable: false,
-                enumerable: false
-            },
-            _setPaintPrice: {
-                value: (data.selectedPaint && data.selectedPaint.Price) || 0,
-                writable: false,
-                enumerable: false
-            },
-            _setRimsPrice: {
-                value: (data.selectedRims && data.selectedRims.Price) || 0,
-                writable: false,
-                enumerable: false
-            },
-            _setAccessoriesPrice: {
-                value: this._calculatePrice(data.selectedAccessories),
-                writable: false,
-                enumerable: false
+        /**
+         * koObservable
+         * @type {string}
+         */
+        this.selectedPaintId = ko.observable(this._getInitialSelectedId(data.paints));
+
+        /**
+         * koObservable
+         * @type {string}
+         */
+        this.selectedRimsId = ko.observable(this._getInitialSelectedId(data.rims));
+
+        /**
+         * koObservable
+         * @type {Array.<ViewModel>}
+         */
+        this.selectedAccessories = data.selectedAccessories ? ko.observableArray(_.map(data.selectedAccessories, (cur) => new ViewModel(cur))) :
+            ko.observableArray(_.values(this.accessoriesById)).extend({ filterSelected: null });
+
+        /**
+         * koComputed
+         * @type {ViewModel}
+         */
+        this.selectedPaint = ko.computed(() => data.selectedPaint ? new ViewModel(data.selectedPaint) : this._paintById[this.selectedPaintId()]);
+
+        /**
+         * koComputed
+         * @type {ViewModel}
+         */
+        this.selectedRims = ko.computed(() => data.selectedRims ? new ViewModel(data.selectedRims) : this._rimsById[this.selectedRimsId()]);
+
+        /**
+         * koComputed
+         * @type {ViewModel}
+         */
+        this.selectedEngineSettings = ko.computed(() => {
+            if (data.selectedEngineSetting) {
+                return new ViewModel(data.selectedEngineSetting);
             }
+
+            let values = _.values(this._engineSettingsById);
+            return _.first(_.filter(values, (cur) => cur.isSelected()));
         });
 
-        /** @type {boolean} */
-        this.isAccessoryLimitReached = ko.computed(function () {
+        /**
+         * koComputed
+         * @type {boolean}
+         */
+        this.isAccessoryLimitReached = ko.computed(() => {
             /** @type {number} */
             const accessoryLimit = 5;
-            return _.filter(_.values(self.accessoriesById), (cur) => cur.isSelected()).length >= accessoryLimit;
+            return this.selectedAccessories().length >= accessoryLimit;
         });
 
         /**
          * Calculates the combined price of everything but the engine
+         * koComputed
          * @type {number}
          */
-        this.extrasPrice = ko.computed(function () {
+        this.extrasPrice = ko.computed(() => {
             /** @type {number} */
-            let accessoriesPrice = self._setAccessoriesPrice || self._computedAccessoriesPrice();
-            /** @type {number} */
-            let paintPrice = self._setPaintPrice || self._computedPaintPrice();
-            /** @type {number} */
-            let rimsPrice = self._setRimsPrice || self._computedRimsPrice();
-
-            return accessoriesPrice + paintPrice + rimsPrice;
+            let accessoriesPrice = _.reduce(this.selectedAccessories(), (memo, cur) => memo + cur.price, 0);
+            return accessoriesPrice + (this.selectedPaint() && this.selectedPaint().price) + (this.selectedRims() && this.selectedRims().price);
         });
 
-        /** @type {number} */
-        this.basePrice = ko.computed(function () {
-            return self._setEnginePrice || self._computedEnginePrice();
+        /**
+         * Just the engine price
+         * koComputed
+         * @type {number}
+         */
+        this.basePrice = ko.computed(() => {
+            return (this.selectedEngineSettings() && this.selectedEngineSettings().price) || 0;
         });
 
-        /** @type {number} */
-        this.fullPrice = ko.computed(function () {
-            return self.basePrice() + self.extrasPrice();
+        /**
+         * The base price combined with the extras price
+         * koComputed
+         * @type {number}
+         */
+        this.fullPrice = ko.computed(() => {
+            return this.basePrice() + this.extrasPrice();
         });
     }
 
@@ -168,34 +152,6 @@ class ConfigurationViewModel {
     }
 
     /**
-     * @param {Object.<ViewModel>} items
-     * @param {Function(): number} selectedId
-     * @returns {Function(): number}
-     * @private
-     */
-    _calculatePriceBySelectedIdFactory(items, selectedId) {
-        return function () {
-            /** @type {ViewModel} */
-            let selectedItem = items[selectedId()];
-            return (selectedItem && selectedItem.price) || 0;
-        };
-    }
-    /**
-     * @param {Array.<ViewModelData>} items
-     * @returns {number}
-     * @private
-     */
-    _calculatePrice(items) {
-        if (!items) {
-            return 0;
-        }
-
-        return _.chain(items)
-            .map((cur) => cur.Price)
-            .reduce((memo, cur) => memo + cur, 0);
-    }
-
-    /**
      * @param {Array.<ViewModelData>} items
      * @returns {Object.<ViewModel>}
      * @private
@@ -208,49 +164,9 @@ class ConfigurationViewModel {
         return result;
     }
 
-    /** 
-     *  @param {Object.<ViewModel>} items
-     *  @returns {function() : number}
-     * @private
-     */
-    _calculatePriceFactory(items) {
-        return function () {
-            /** @type {number} */
-            let i;
-            /** @type {number} */
-            let result = 0;
-            /** @type {Array.<number>} */
-            let filteredItems = _.filter(items, (cur) => cur.isSelected());
-
-            for (i = 0; i < filteredItems.length; i += 1) {
-                result += filteredItems[i].price;
-            }
-            return result;
-
-            //TODO not working when filtered empty or something
-            //var result = _.chain(items)
-            //    .filter((cur) => cur.isSelected())
-            //    .map((cur) => cur.price)
-            //    .reduce((memo, cur) => memo + cur, 0);
-        }
-    }
-
-    /** @returns {number|null} */
-    get selectedEngineId() {
-        /** @type {Array.<ViewModel>} */
-        let engineSettings = _.values(this._engineSettingsById);
-
-        let selectedEngine = _.find(engineSettings, (cur) => { return cur.isSelected(); });
-        return selectedEngine && selectedEngine.id;
-    }
-
     /** @returns {Array.<number>} */
     get selectedAccessoryIds() {
-        /** @type {Array.<ViewModel>} */
-        let accessories = _.values(this.accessoriesById);
-
-        let selectedItems = _.filter(accessories, (cur) => { return cur.isSelected(); });
-        return _.map(selectedItems, (cur) => cur.id);
+        return _.map(this.selectedAccessories(), (cur) => cur.id);
     }
 
     /** @param {number} settingsId */
@@ -266,7 +182,6 @@ class ConfigurationViewModel {
 
     /** @param {string} id */
     selectAccessory(id) {
-
         /** @type {boolean} */
         let isSelected = this.accessoriesById[id].isSelected();
 
@@ -281,9 +196,17 @@ class ConfigurationViewModel {
  * @property {number} Id
  * @property {number} Price
  * @property {boolean} IsSelected
- * @property {string|null} Name
  */
 
+/**
+ * @typedef {ViewModelData} NameViewModelData
+ * @property {string} Name
+ */
+
+/**
+ * @typedef {ViewModelData} RimViewModelData
+ * @property {number} Size
+ */
 /**
  * @typedef {Object} ConfigurationData
  * @property {Array.<ViewModelData>} engineSettings

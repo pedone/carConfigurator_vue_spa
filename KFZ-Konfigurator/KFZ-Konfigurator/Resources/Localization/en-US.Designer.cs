@@ -72,15 +72,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Accessories.
         /// </summary>
-        internal static string AccessoriesView_Header {
-            get {
-                return ResourceManager.GetString("AccessoriesView_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Accessories.
-        /// </summary>
         internal static string AccessoriesView_Title {
             get {
                 return ResourceManager.GetString("AccessoriesView_Title", resourceCulture);
@@ -192,6 +183,24 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string ConfigurationLayout_Overview_Extras_Header {
             get {
                 return ResourceManager.GetString("ConfigurationLayout_Overview_Extras_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paint.
+        /// </summary>
+        internal static string ConfigurationLayout_Overview_Paint_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Overview_Paint_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rims.
+        /// </summary>
+        internal static string ConfigurationLayout_Overview_Rims_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Overview_Rims_Header", resourceCulture);
             }
         }
         

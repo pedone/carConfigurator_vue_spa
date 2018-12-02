@@ -1,7 +1,8 @@
-﻿class ConfigurationOverviewViewModel {
+﻿'use strict';
+
+class ConfigurationOverviewViewModel {
     /** @param {HandlerOptions} options */
     constructor(options) {
-        self = this;
         /** @type {string} */
         this.configurationDescription = ko.observable("");
         /** @type {HandlerOptions} */
@@ -9,6 +10,7 @@
     }
 
     placeOrder() {
+        let self = this;
         $.ajax({
             type: 'POST',
             url: '/ConfigurationOverview/PlaceOrder',

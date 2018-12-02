@@ -8,8 +8,6 @@
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("AccessoriesView_Header")</h2>
-
 <div>
     <div class="accordion" id="accessoriesAccordion">
         @foreach (var curCategory in categories)

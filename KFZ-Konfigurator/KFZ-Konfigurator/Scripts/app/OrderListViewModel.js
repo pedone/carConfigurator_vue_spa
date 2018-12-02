@@ -1,4 +1,6 @@
-﻿class OrderItemViewModel {
+﻿'use strict';
+
+class OrderItemViewModel {
     /** @param {OrderData} data */
     constructor(data) {
         /** @type {number} */
@@ -26,7 +28,7 @@ class OrderListViewModel {
      * @param {number} pageCount
      */
     constructor(data, pageCount) {
-        var self = this;
+        let self = this;
         /** @type {KnockoutObservableArrayStatic} */
         this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur)));
         /** @type {Array.<number>} */

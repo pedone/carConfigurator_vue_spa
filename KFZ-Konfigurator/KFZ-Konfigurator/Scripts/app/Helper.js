@@ -1,4 +1,6 @@
-﻿/**
+﻿'use strict';
+
+/**
  * @param {string} url
  * @param {string} id
  * @param {string} antiForgeryToken
