@@ -14,11 +14,10 @@
         {
             <div class="card">
                 <div class="card-header btn d-flex align-items-start" role="button" data-target="@string.Format($"#collapse{curCategory}")" data-toggle="collapse">
-                    <h5>
+                    <h5 data-bind="with: { count: configViewModel.countCategory(configViewModel.selectedAccessories(), @((int)curCategory)) }">
                         @(LocalizationManager.LocalizeEnum<AccessoryCategory>(curCategory.ToString()))
-                        <span class="badge badge-secondary" data-bind="text: configViewModel.countCategory(configViewModel.selectedAccessories(), @((int)curCategory))"></span> 
+                        <span class="badge badge-secondary" data-bind="text: count, css: { invisible: count === 0 }"></span>
                     </h5>
-
                 </div>
                 <div class="collapse" data-parent="#accessoriesAccordion" id="@string.Format($"collapse{curCategory}")">
                     <div class="card-body list-group list-group-flush pr-0">
