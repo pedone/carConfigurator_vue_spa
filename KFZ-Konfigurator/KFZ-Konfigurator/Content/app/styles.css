@@ -24,6 +24,9 @@
 .navbar-nav .nav-link.active {
   text-decoration: underline;
 }
+.sticky-top-offset {
+  top: 5em;
+}
 .paintContainer > input {
   position: absolute;
   opacity: 0;
