@@ -48,7 +48,11 @@
                     <h5 class="card-title">@modelHeader</h5>
                 </a>
                 <div class="card-text">
-                    <div>
+                    <strong data-bind="if: (configViewModel.selectedAccessories().length > 0)">@LocalizationManager.Localize("ConfigurationLayout_Overview_Extras_Header")</strong>
+                    <div data-bind="foreach: configViewModel.selectedAccessories">
+                        <div data-bind="text: name"></div>
+                    </div>
+                    <div class="mt-3">
                         @LocalizationManager.Localize("ConfigurationLayout_BasePrice_Label"): <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span>
                     </div>
                     <div>
@@ -94,6 +98,7 @@
 }
 
 @section scripts {
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/KoExtenders.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/Helper.js")"></script>
     @RenderSection("scripts", required: false)

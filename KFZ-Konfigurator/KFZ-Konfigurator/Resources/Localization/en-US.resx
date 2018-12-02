@@ -336,4 +336,7 @@
   <data name="OrderOverviewView_OrderSuccessful_Header" xml:space="preserve">
     <value>Order successfully placed</value>
   </data>
+  <data name="ConfigurationLayout_Overview_Extras_Header" xml:space="preserve">
+    <value>Extras</value>
+  </data>
 </root>

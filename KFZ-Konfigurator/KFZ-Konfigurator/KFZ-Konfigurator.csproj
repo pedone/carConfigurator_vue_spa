@@ -297,6 +297,7 @@
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Resources\Images\audiA4Side.png" />
+    <Content Include="Scripts\app\KoExtenders.js" />
     <Content Include="Scripts\app\OrderListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
     <Content Include="Scripts\app\ConfigurationViewModel.js" />

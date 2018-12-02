@@ -3,12 +3,14 @@
 class ViewModel {
     /** @param {ViewModelData} data */
     constructor(data) {
-        /** type {number} */
+        /** @type {number} */
         this.id = data.Id;
-        /** type {number} */
+        /** @type {number} */
         this.price = data.Price;
-        /** type {boolean} */
+        /** @type {boolean} */
         this.isSelected = ko.observable(data.IsSelected);
+        /** @type {string|null} */
+        this.name = data.Name;
     }
 }
 
@@ -17,6 +19,7 @@ class ViewModel {
  * @property {Object.<ViewModel>} _rimsById
  * @property {Object.<ViewModel>} _paintById
  * @property {Object.<ViewModel>} accessoriesById
+ * @property {Array.<ViewModel>} selectedAccessories
  * @property {number} _computedEnginePrice
  * @property {number} _computedAccessoriesPrice
  * @property {number} _computedPaintPrice
@@ -69,6 +72,11 @@ class ConfigurationViewModel {
         });
 
         Object.defineProperties(this, {
+            selectedAccessories: {
+                value: ko.observableArray(_.values(this.accessoriesById)).extend({ filterSelected: null }),
+                writable: false,
+                enumerable: true
+            },
             _computedEnginePrice: {
                 value: ko.computed(this._calculatePriceFactory(this._engineSettingsById)),
                 writable: false,
@@ -273,6 +281,7 @@ class ConfigurationViewModel {
  * @property {number} Id
  * @property {number} Price
  * @property {boolean} IsSelected
+ * @property {string|null} Name
  */
 
 /**

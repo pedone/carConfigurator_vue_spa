@@ -187,6 +187,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extras.
+        /// </summary>
+        internal static string ConfigurationLayout_Overview_Extras_Header {
+            get {
+                return ResourceManager.GetString("ConfigurationLayout_Overview_Extras_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         internal static string ConfigurationLayout_Price_Label {
