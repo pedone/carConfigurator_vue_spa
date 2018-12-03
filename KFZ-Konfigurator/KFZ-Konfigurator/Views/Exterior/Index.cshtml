@@ -70,6 +70,7 @@
             saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
                 .fail((error) => {
                     console.log('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
+                    // TODO randomly triggered, maybe because of antiForgeryValidation
                     alert('something went wrong. see console for details');
                 });
         });

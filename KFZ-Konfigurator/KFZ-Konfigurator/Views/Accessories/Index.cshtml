@@ -64,6 +64,7 @@
             saveViewModel('/Accessories/SetSelectedAccessories', selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
                 .fail((error) => {
                     console.log('failed to set selected accessories: ' + error.responseText + ' (' + error.statusText + ')');
+                    // TODO randomly triggered, maybe because of antiForgeryValidation
                     alert('something went wrong. see console for details');
                 });
         });
