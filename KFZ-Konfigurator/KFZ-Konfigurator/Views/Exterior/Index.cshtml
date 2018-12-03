@@ -69,9 +69,10 @@
             let sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
             saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
                 .fail((error) => {
-                    console.log('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.error('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.debug(error);
                     // TODO randomly triggered, maybe because of antiForgeryValidation
-                    alert('something went wrong. see console for details');
+                    //alert('something went wrong. see console for details');
                 });
         });
     </script>

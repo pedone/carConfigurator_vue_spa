@@ -77,9 +77,10 @@
             let antiForgeryToken = getAntiForgeryToken($(document));
             saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineSettings().id, antiForgeryToken)
                 .fail((error) => {
-                    console.log('failed to set selected engine: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.error('failed to set selected engine: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.debug(error);
                     // TODO randomly triggered, maybe because of antiForgeryValidation
-                    alert('something went wrong. see console for details');
+                    //alert('something went wrong. see console for details');
                 });
         });
     </script>
