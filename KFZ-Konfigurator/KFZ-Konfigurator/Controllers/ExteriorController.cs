@@ -70,7 +70,7 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string SetSelectedPaintAndRim([Bind(Include = "PaintId")] int paintId, [Bind(Include = "RimId")] int rimId)
+        public string SetSelectedPaintAndRim(int paintId, int rimId)
         {
             if (!Request.IsAjaxRequest())
             {

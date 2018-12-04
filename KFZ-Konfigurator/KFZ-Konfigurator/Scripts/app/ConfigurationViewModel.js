@@ -227,6 +227,7 @@ class ConfigurationViewModel {
  * @property {Array.<ViewModelData>} engineSettings
  * @property {Array.<ViewModelData>} accessories
  * @property {Array.<ViewModelData>} paints
+ * @property {Array.<ViewModelData>} rims
  * @property {Array.<ViewModelData>} selectedAccessories
  * @property {ViewModelData} selectedEngineSetting
  * @property {ViewModelData} selectedPaint
