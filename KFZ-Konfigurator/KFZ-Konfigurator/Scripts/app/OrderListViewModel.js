@@ -59,7 +59,7 @@ class OrderListViewModel {
                 .done(
                     /** @param {{NewPageCount: number, NewItem: OrderData }} data */
                     function (data) {
-                        consol.debug('removing order ' + item.id + ' from view');
+                        console.debug('removing order ' + item.id + ' from view');
                         self.orders.remove(item);
                         if (data.NewItem) {
                             //insert the item that has moved up to the current page
