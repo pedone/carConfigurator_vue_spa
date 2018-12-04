@@ -493,7 +493,7 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it.
+        ///   Looks up a localized string similar to Design your individual car by configuring each and every part of it..
         /// </summary>
         internal static string HomeView_ConfigurationDescription {
             get {

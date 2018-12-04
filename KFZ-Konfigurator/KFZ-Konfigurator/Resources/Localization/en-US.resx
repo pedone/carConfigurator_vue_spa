@@ -133,7 +133,7 @@
     <value>Technology and Safety</value>
   </data>
   <data name="HomeView_ConfigurationDescription" xml:space="preserve">
-    <value>Design your individual car by configuring each and every part of it</value>
+    <value>Design your individual car by configuring each and every part of it.</value>
   </data>
   <data name="ConfigurationLayout_EngineSettings_Button" xml:space="preserve">
     <value>Engines</value>
