@@ -16,6 +16,7 @@ namespace KFZ_Konfigurator.ViewModels
         public double BasePrice { get; }
         public double ExtrasPrice { get; }
         public string LinkUrl { get; }
+        public string DateTime { get; }
 
         public OrderViewModel(Order model, string orderLink)
             : base(model.Id, model.BasePrice + model.ExtrasPrice)
@@ -27,6 +28,7 @@ namespace KFZ_Konfigurator.ViewModels
             BasePrice = model.BasePrice;
             ExtrasPrice = model.ExtrasPrice;
             LinkUrl = orderLink;
+            DateTime = model.DateTime.ToLocalTime().ToString();
         }
     }
 }

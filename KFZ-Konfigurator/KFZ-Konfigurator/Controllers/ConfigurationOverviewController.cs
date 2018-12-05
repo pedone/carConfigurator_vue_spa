@@ -118,6 +118,7 @@ namespace KFZ_Konfigurator.Controllers
                 var newOrder = context.Orders.Create();
                 newOrder.Description = description;
                 newOrder.Guid = MiscHelper.GenerateShortGuid();
+                newOrder.DateTime = DateTime.Now;
 
                 (double basePrice, double extrasPrice) configurationPrice = CalculatePrice(configuration);
                 newOrder.BasePrice = configurationPrice.basePrice;

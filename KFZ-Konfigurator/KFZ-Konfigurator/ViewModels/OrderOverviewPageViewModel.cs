@@ -15,6 +15,7 @@ namespace KFZ_Konfigurator.ViewModels
         public double BasePrice { get; }
         public double ExtrasPrice { get; }
         public string Description { get; }
+        public DateTime DateTime { get; }
         public string OrderLink { get; }
         public bool OrderSuccess { get; }
         public ConfigurationOverviewPageViewModel Configuration { get; }
@@ -28,6 +29,7 @@ namespace KFZ_Konfigurator.ViewModels
             BasePrice = model.BasePrice;
             ExtrasPrice = model.ExtrasPrice;
             Description = model.Description;
+            DateTime = model.DateTime;
             OrderLink = orderLink;
             OrderSuccess = orderSuccess;
             Configuration = new ConfigurationOverviewPageViewModel(model.Configuration);

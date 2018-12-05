@@ -185,6 +185,7 @@
     <Property Name="Guid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ExtrasPrice" Type="float" Nullable="false" />
     <Property Name="BasePrice" Type="float" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -674,6 +675,7 @@
           <Property Name="Guid" Type="String" Nullable="false" />
           <Property Name="ExtrasPrice" Type="Double" Nullable="false" />
           <Property Name="BasePrice" Type="Double" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" />
         </EntityType>
         <Association Name="ConfigurationOrder">
           <End Type="CarConfiguratorModel.Configuration" Role="Configuration" Multiplicity="1" />
@@ -808,6 +810,7 @@
           <ScalarProperty Name="Guid" ColumnName="Guid" />
           <ScalarProperty Name="ExtrasPrice" ColumnName="ExtrasPrice" />
           <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

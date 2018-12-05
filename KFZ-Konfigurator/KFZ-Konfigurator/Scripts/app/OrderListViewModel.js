@@ -14,6 +14,8 @@ class OrderItemViewModel {
         /** @type {string} */
         this.description = data.Description;
         /** @type {string} */
+        this.dateTime = data.DateTime;
+        /** @type {string} */
         this.model = data.Model;
         /** @type {string} */
         this.guid = data.Guid;
@@ -140,6 +142,7 @@ class OrderListViewModel {
  * @property {number} BasePrice
  * @property {number} Price
  * @property {string} Description
+ * @property {string} DateTime
  * @property {string} Model
  * @property {string} Guid
  * @property {string} LinkUrl

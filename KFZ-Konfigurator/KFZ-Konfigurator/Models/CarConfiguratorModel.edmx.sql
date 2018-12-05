@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/03/2018 17:44:13
+-- Date Created: 12/05/2018 15:09:01
 -- Generated from EDMX file: D:\Documents\Projects\CC-KFZ-Generator\git\KFZ-Konfigurator\KFZ-Konfigurator\Models\CarConfiguratorModel.edmx
 -- --------------------------------------------------
 
@@ -212,7 +212,8 @@ CREATE TABLE [dbo].[Orders] (
     [Description] nvarchar(max)  NULL,
     [Guid] nvarchar(max)  NOT NULL,
     [ExtrasPrice] float  NOT NULL,
-    [BasePrice] float  NOT NULL
+    [BasePrice] float  NOT NULL,
+    [DateTime] datetime  NOT NULL
 );
 GO
 

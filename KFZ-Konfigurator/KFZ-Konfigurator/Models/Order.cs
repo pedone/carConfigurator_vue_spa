@@ -19,6 +19,7 @@ namespace KFZ_Konfigurator.Models
         public string Guid { get; set; }
         public double ExtrasPrice { get; set; }
         public double BasePrice { get; set; }
+        public System.DateTime DateTime { get; set; }
     
         public virtual Configuration Configuration { get; set; }
     }

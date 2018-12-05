@@ -26,6 +26,9 @@
             @LocalizationManager.Localize("OrderListView_Description_Header")
         </th>
         <th>
+            @LocalizationManager.Localize("OrderListView_DateTime_Header")
+        </th>
+        <th>
             @LocalizationManager.Localize("OrderListView_BasePrice_Header")
         </th>
         <th>
@@ -41,6 +44,7 @@
         <tr>
             <td data-bind="text: model"></td>
             <td data-bind="text: description"></td>
+            <td data-bind="text: dateTime"></td>
             <td data-bind="text: formatCurrency(basePrice)"></td>
             <td data-bind="text: formatCurrency(extrasPrice)"></td>
             <td data-bind="text: formatCurrency(price)"></td>

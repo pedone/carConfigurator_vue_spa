@@ -4,7 +4,7 @@ Done - configuration caroussel
 In Progress- configuration partial views
 Not Free - application insights
 - car model filter
-- confirmation dialogs
+Done - confirmation dialogs
 In Progress - azure pipeline deployment
 - refactor configurationViewModel, only load in configurationLayout
-- Order Date
+Done - Order DateTime

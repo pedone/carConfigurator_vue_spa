@@ -619,6 +619,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string OrderListView_DateTime_Header {
+            get {
+                return ResourceManager.GetString("OrderListView_DateTime_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string OrderListView_Description_Header {

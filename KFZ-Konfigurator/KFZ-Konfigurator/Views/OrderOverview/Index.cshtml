@@ -24,7 +24,14 @@
 }
 
 <h2 class="mt-3">@LocalizationManager.Localize("OrderOverviewView_Header") - @Model.Model</h2>
-<p>@Model.Description</p>
+<p>
+    <div>
+        @Model.DateTime.ToLocalTime()
+    </div>
+    <div>
+        @Model.Description
+    </div>
+</p>
 
 <div class="container mt-3">
     @Html.Partial("../ConfigurationOverview/_ConfigurationOverview", Model.Configuration)
