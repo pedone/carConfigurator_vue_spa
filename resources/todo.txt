@@ -6,3 +6,4 @@ Not Free - application insights
 - car model filter
 - confirmation dialogs
 In Progress - azure pipeline deployment
+- refactor configurationViewModel, only load in configurationLayout
