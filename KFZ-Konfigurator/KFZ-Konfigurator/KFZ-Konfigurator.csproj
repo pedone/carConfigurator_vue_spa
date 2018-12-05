@@ -296,7 +296,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
-    <Content Include="Resources\Images\audiA4Side.png" />
+    <Content Include="Resources\Images\2018A4AngularFront.png" />
+    <Content Include="Resources\Images\2018A4AngularRear.png" />
+    <Content Include="Resources\Images\2018A4Front.png" />
+    <Content Include="Resources\Images\2018A4Rear.png" />
+    <Content Include="Resources\Images\2018A4Engine.png" />
+    <Content Include="Resources\Images\2018A4Side.png" />
     <Content Include="Scripts\app\KoExtenders.js" />
     <Content Include="Scripts\app\OrderListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
@@ -328,7 +333,6 @@
     <Content Include="Resources\Images\acceleration.svg" />
     <Content Include="Resources\Images\consumption.svg" />
     <Content Include="Resources\Images\emissions.svg" />
-    <Content Include="Resources\Images\engine.png" />
     <Content Include="Resources\Images\engineSize.svg" />
     <Content Include="Resources\Images\performance.svg" />
     <Content Include="Resources\Images\topSpeed.svg" />

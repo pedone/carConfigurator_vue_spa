@@ -27,6 +27,19 @@
 .sticky-top-offset {
   top: 5em;
 }
+@media (max-width: 768px) {
+  .hidden-xs {
+    display: none;
+  }
+}
+.carousel-indicators.dark .active {
+  background-color: #3a40a6;
+  opacity: 0.6;
+}
+.carousel-indicators.dark li {
+  background-color: #3a4029;
+  opacity: 0.3;
+}
 .paintContainer > input {
   position: absolute;
   opacity: 0;
