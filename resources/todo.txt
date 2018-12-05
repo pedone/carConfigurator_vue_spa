@@ -1,10 +1,10 @@
 TODO
-- error page
+- custom error page
 Done - configuration caroussel
 In Progress- configuration partial views
 Not Free - application insights
-- car model filter
+Done - car model filter
 Done - confirmation dialogs
 In Progress - azure pipeline deployment
-- refactor configurationViewModel, only load in configurationLayout
+In Progress - refactor configurationViewModel, only load in configurationLayout
 Done - Order DateTime

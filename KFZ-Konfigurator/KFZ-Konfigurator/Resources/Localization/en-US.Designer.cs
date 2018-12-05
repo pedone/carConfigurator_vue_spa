@@ -565,6 +565,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string ModelView_Filter_All {
+            get {
+                return ResourceManager.GetString("ModelView_Filter_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose your model.
         /// </summary>
         internal static string ModelView_Header {

@@ -21,7 +21,10 @@ namespace KFZ_Konfigurator.Controllers
         {
             using (var context = new CarConfiguratorEntityContext())
             {
-                return View(context.CarModels.ToList().Select(cur => new CarModelViewModel(cur)).ToList());
+                return View(new CarModelPageViewModel
+                {
+                    CarModels = context.CarModels.ToList().Select(cur => new CarModelViewModel(cur)).ToList()
+                });
             }
         }
 

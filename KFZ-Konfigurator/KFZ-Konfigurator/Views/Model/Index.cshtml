@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KFZ_Konfigurator.ViewModels.CarModelViewModel>
+﻿@model KFZ_Konfigurator.ViewModels.CarModelPageViewModel
 
 @{
     Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
@@ -6,12 +6,26 @@
 }
 
 @Html.AntiForgeryToken()
-<h2>@LocalizationManager.Localize("ModelView_Header")</h2>
+<div class="row container">
+    <h2 class="col">@LocalizationManager.Localize("ModelView_Header")</h2>
+    <div class="btn-group btn-group-toggle align-self-start">
+        <button type="button" class="btn btn-light" data-bind="css: { active: curModelFilter() === ''}, click: () => filterModels('')">
+            @LocalizationManager.Localize("ModelView_Filter_All")
+        </button>
+        @foreach (var curSeries in Model.CarSeriesList)
+        {
+            <button type="button" class="btn btn-light" data-bind="css: { active: curModelFilter() === '@curSeries'}, click: () => filterModels('@curSeries')">
+                @curSeries
+            </button>
+        }
+    </div>
+</div>
 
 <div class="row container">
-    @foreach (var item in Model)
+    @foreach (var item in Model.CarModels)
     {
-        <a class="card mb-2 col-md-4 rounded-0 car-model-link" data-id="@item.Id" href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})">
+        <a class="card mb-2 col-md-4 rounded-0 car-model-link" data-id="@item.Id" href="@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})"
+           data-bind="attr: { hidden: (curModelFilter() !== '@item.Series' && curModelFilter() !== '') }">
             <div class="card-body">
                 <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
                 <h6 class="card-subtitle">@LocalizationManager.Localize("General_From") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
@@ -29,8 +43,12 @@
 </div>
 
 @section scripts {
+    <script type="text/javascript" src="@Url.Content("/Scripts/app/ModelSelectionViewModel.js")"></script>
     <script type='text/javascript'>
         $(document).ready(function () {
+            let viewModel = new ModelSelectionViewModel();
+            ko.applyBindings(viewModel);
+
             $('.car-model-link').click(function () {
                 event.preventDefault();
                 let targetUrl = $(this).attr('href');

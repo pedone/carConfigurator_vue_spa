@@ -378,4 +378,7 @@
   <data name="OrderListView_DateTime_Header" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="ModelView_Filter_All" xml:space="preserve">
+    <value>All</value>
+  </data>
 </root>
