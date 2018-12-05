@@ -25,7 +25,7 @@ class ConfigurationOverviewViewModel {
                 })
                 .fail(function (error) {
                     console.error('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(error);
+                    console.debug(JSON.stringify(error));
                     if (self.options.placeOrderFailure) {
                         self.options.placeOrderFailure();
                     }

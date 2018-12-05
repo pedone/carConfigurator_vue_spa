@@ -85,7 +85,7 @@ class OrderListViewModel {
                     })
                 .fail(function (error) {
                     console.error('failed to delete order: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(error);
+                    console.debug(JSON.stringify(error));
                     alert('order ' + item.name + ' could not be removed');
                 });
         };
@@ -119,6 +119,8 @@ class OrderListViewModel {
             }
 
             $.ajax({
+                //make sure the data is saved before the next page is loaded
+                async: false,
                 type: 'GET',
                 url: '/OrderList/LoadPage',
                 data: { pageIndex: targetIndex },
@@ -129,7 +131,7 @@ class OrderListViewModel {
                 self.orders(_.map(data, (cur) => new OrderItemViewModel(cur)));
             }).fail(function (error) {
                 console.error('failed to load page: ' + error.responseText + ' (' + error.statusText + ')');
-                console.debug(error);
+                console.debug(JSON.stringify(error));
             });
         };
     }

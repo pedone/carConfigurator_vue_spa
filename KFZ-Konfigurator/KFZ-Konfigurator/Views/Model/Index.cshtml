@@ -58,7 +58,7 @@
                 })
                 .fail((error) => {
                     console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(error);
+                    console.debug(JSON.stringify(error));
                     // TODO randomly triggered, maybe because of antiForgeryValidation
                     //alert('something went wrong. see console for details');
                 });

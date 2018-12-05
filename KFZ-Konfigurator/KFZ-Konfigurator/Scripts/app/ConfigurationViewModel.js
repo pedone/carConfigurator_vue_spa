@@ -242,7 +242,7 @@ class ConfigurationViewModel {
             contentType: 'application/x-www-form-urlencoded'
         }).fail((error) => {
             console.error('failed to save configuration changes: ' + error.responseText + ' (' + error.statusText + ')');
-            console.debug(error);
+            console.debug(JSON.stringify(error));
             //alert('something went wrong. see console for details');
         });
     }

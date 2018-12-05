@@ -6,5 +6,6 @@ Not Free - application insights
 Done - car model filter
 Done - confirmation dialogs
 In Progress - azure pipeline deployment
-In Progress - refactor configurationViewModel, only load in configurationLayout
+Done - refactor configurationViewModel
 Done - Order DateTime
+- set car model when going directly to engineSettings/accessories/exterior/overview
