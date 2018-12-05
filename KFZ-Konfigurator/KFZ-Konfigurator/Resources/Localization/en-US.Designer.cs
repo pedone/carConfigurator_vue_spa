@@ -844,6 +844,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to quattro.
+        /// </summary>
+        internal static string TechnicalData_Transmission_Allroad {
+            get {
+                return ResourceManager.GetString("TechnicalData_Transmission_Allroad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -Gear.
         /// </summary>
         internal static string TechnicalData_Transmission_Suffix {

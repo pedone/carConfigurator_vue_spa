@@ -1,4 +1,5 @@
 ﻿@using KFZ_Konfigurator.Models;
+@using KFZ_Konfigurator.Helper;
 @model KFZ_Konfigurator.ViewModels.ConfigurationViewModel
 
 @* Engine Settings *@
@@ -7,7 +8,7 @@
     <tbody>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Transmission")</th>
-            <td>@(Model.EngineSettings.Gears + LocalizationManager.Localize("TechnicalData_Transmission_Suffix"))</td>
+            <td>@(Model.EngineSettings.Gears + LocalizationManager.Localize("TechnicalData_Transmission_Suffix")) @MiscHelper.If(Model.EngineSettings.WheelDrive == WheelDriveKind.All, LocalizationManager.Localize("TechnicalData_Transmission_Allroad"))</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Acceleration")</th>

@@ -381,4 +381,7 @@
   <data name="ModelView_Filter_All" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="TechnicalData_Transmission_Allroad" xml:space="preserve">
+    <value>quattro</value>
+  </data>
 </root>
