@@ -8,7 +8,7 @@
 
 <div>
     <div class="accordion" id="accessoriesAccordion">
-        @foreach (string curCategory in Model.AccessoryCategories)
+        @foreach (string curCategory in Model.AccessoryCategories.OrderBy(cur => cur))
         {
             <div class="card">
                 <div class="card-header btn d-flex align-items-start" role="button" data-target="@string.Format($"#collapse{curCategory}")" data-toggle="collapse">

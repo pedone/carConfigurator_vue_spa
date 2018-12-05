@@ -61,7 +61,7 @@ namespace KFZ_Konfigurator.Models.SeedData
             // A7
             new CarModel { Id = CarModelIdConstants.A7Sportback2019, SeriesCategory = CategorySeedData.GetCategoryByName<CarSeriesCategory>(SeriesId.A7), BodyCategory = CategorySeedData.GetCategoryByName<BodyCategory>(BodyId.Sportback), Year = 2019 },
             // A8
-            new CarModel { Id = CarModelIdConstants.A8Limousine2019, SeriesCategory = CategorySeedData.GetCategoryByName<CarSeriesCategory>(SeriesId.A6), BodyCategory = CategorySeedData.GetCategoryByName<BodyCategory>(BodyId.Limousine), Year = 2019 },
+            new CarModel { Id = CarModelIdConstants.A8Limousine2019, SeriesCategory = CategorySeedData.GetCategoryByName<CarSeriesCategory>(SeriesId.A8), BodyCategory = CategorySeedData.GetCategoryByName<BodyCategory>(BodyId.Limousine), Year = 2019 },
         };
 
         public static CarModel Get(int id)
