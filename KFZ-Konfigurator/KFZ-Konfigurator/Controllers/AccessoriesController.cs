@@ -31,29 +31,5 @@ namespace KFZ_Konfigurator.Controllers
                 return View(new AccessoriesPageViewModel(context) { AccessoryCategories = accessoryCategories });
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public string SetSelectedAccessories(string id)
-        {
-            if (!Request.IsAjaxRequest())
-            {
-                Log.Error("SetSelectedAccessories was called without ajax");
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return "This action must be called with ajax";
-            }
-
-            if (id == null)
-            {
-                SessionData.ActiveConfiguration.AccessoryIds = null;
-            }
-            else
-            {
-                var ids = id.Trim('[', ']').Split(',').Select(cur => int.Parse(cur)).ToList();
-                SessionData.ActiveConfiguration.AccessoryIds = ids.ToArray();
-            }
-            Log.Debug($"AccessoryIds set to {id}");
-            return string.Empty; ;
-        }
     }
 }

@@ -31,21 +31,5 @@ namespace KFZ_Konfigurator.Controllers
                 return View(new ExteriorPageViewModel(context) { PaintCategories = paintCategories });
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public string SetSelectedPaintAndRim(int paintId, int rimId)
-        {
-            if (!Request.IsAjaxRequest())
-            {
-                Log.Error("SetSelectedPaintAndRim was called without ajax");
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return "This action must be called with ajax";
-            }
-
-            SessionData.ActiveConfiguration.PaintId = paintId;
-            SessionData.ActiveConfiguration.RimId = rimId;
-            return string.Empty;
-        }
     }
 }

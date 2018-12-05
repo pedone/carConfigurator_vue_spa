@@ -30,20 +30,5 @@ namespace KFZ_Konfigurator.Controllers
                 return View(new EngineSettingsPageViewModel(context));
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public string SetSelectedEngineSettings(int id)
-        {
-            if (!Request.IsAjaxRequest())
-            {
-                Log.Error("SetSelectedEngineSettings was called without ajax");
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return "This action must be called with ajax";
-            }
-
-            SessionData.ActiveConfiguration.EngineSettingsId = id;
-            return string.Empty;
-        }
     }
 }
