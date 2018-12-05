@@ -25,37 +25,7 @@ namespace KFZ_Konfigurator.Controllers
 
             using (var context = new CarConfiguratorEntityContext())
             {
-                var carModel = context.CarModels.First(cur => cur.Id == id);
-
-                //engine settings
-                var engineSettings = new EngineSettingsViewModel(context.EngineSettings.First(cur => cur.Id == SessionData.ActiveConfiguration.EngineSettingsId));
-
-                //accessories
-                var accessoryIds = SessionData.ActiveConfiguration.AccessoryIds;
-                IEnumerable<AccessoryViewModel> accessories = null;
-                if (accessoryIds.Any())
-                {
-                    accessories = context.Accessories.Where(cur => accessoryIds.Contains(cur.Id))
-                        .ToList()
-                        .Select(cur => new AccessoryViewModel(cur))
-                        .ToList();
-                }
-
-                //paint
-                PaintViewModel paint = new PaintViewModel(context.Paints.First(cur => cur.Id == SessionData.ActiveConfiguration.PaintId));
-
-                //rims
-                RimViewModel rims = new RimViewModel(context.Rims.First(cur => cur.Id == SessionData.ActiveConfiguration.RimId));
-
-                var pageViewModel = new ConfigurationOverviewPageViewModel
-                {
-                    EngineSetting = engineSettings,
-                    Accessories = accessories ?? Enumerable.Empty<AccessoryViewModel>(),
-                    Paint = paint,
-                    Rims = rims
-                };
-                pageViewModel.InitPrice();
-                return View(pageViewModel);
+                return View(new ConfigurationOverviewPageViewModel(context));
             }
         }
 

@@ -1,7 +1,5 @@
 ﻿@using KFZ_Konfigurator.Models;
-@using KFZ_Konfigurator.ViewModels;
-@using KFZ_Konfigurator.Helper;
-@model KFZ_Konfigurator.ViewModels.ConfigurationOverviewPageViewModel
+@model KFZ_Konfigurator.ViewModels.ConfigurationViewModel
 
 @* Engine Settings *@
 <h4>@LocalizationManager.Localize("ConfigurationOverviewView_TechnicalData_Header")</h4>
@@ -9,35 +7,35 @@
     <tbody>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Transmission")</th>
-            <td>@(Model.EngineSetting.Gears + LocalizationManager.Localize("TechnicalData_Transmission_Suffix"))</td>
+            <td>@(Model.EngineSettings.Gears + LocalizationManager.Localize("TechnicalData_Transmission_Suffix"))</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Acceleration")</th>
-            <td>@Model.EngineSetting.Acceleration s</td>
+            <td>@Model.EngineSettings.Acceleration s</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_TopSpeed")</th>
-            <td>@Model.EngineSetting.TopSpeed km/h</td>
+            <td>@Model.EngineSettings.TopSpeed km/h</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Consumption")</th>
-            <td>@Model.EngineSetting.Consumption l/100 km</td>
+            <td>@Model.EngineSettings.Consumption l/100 km</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_Performance")</th>
-            <td>@Model.EngineSetting.Engine.Performance kW (@Model.EngineSetting.Engine.PerformancePS PS)</td>
+            <td>@Model.EngineSettings.Engine.Performance kW (@Model.EngineSettings.Engine.PerformancePS PS)</td>
         </tr>
         <tr>
             <th scope="row">CO<sub>2</sub>-@LocalizationManager.Localize("TechnicalData_Emissions")</th>
-            <td>@Model.EngineSetting.Emission g/km</td>
+            <td>@Model.EngineSettings.Emission g/km</td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_EngineSize")</th>
-            <td>@Model.EngineSetting.Engine.Size cm<sup>3</sup></td>
+            <td>@Model.EngineSettings.Engine.Size cm<sup>3</sup></td>
         </tr>
         <tr>
             <th scope="row">@LocalizationManager.Localize("TechnicalData_FuelType")</th>
-            <td>@(LocalizationManager.LocalizeCategory<FuelCategory>(Model.EngineSetting.Engine.FuelKind))</td>
+            <td>@(LocalizationManager.LocalizeCategory<FuelCategory>(Model.EngineSettings.Engine.FuelKind))</td>
         </tr>
     </tbody>
 </table>
@@ -49,13 +47,13 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Accessories.First().Name)
+                @Html.DisplayNameFor(model => Model.Accessories.First().Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Accessories.First().Category)
+                @Html.DisplayNameFor(model => Model.Accessories.First().Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Accessories.First().Price)
+                @Html.DisplayNameFor(model => Model.Accessories.First().Price)
             </th>
         </tr>
 

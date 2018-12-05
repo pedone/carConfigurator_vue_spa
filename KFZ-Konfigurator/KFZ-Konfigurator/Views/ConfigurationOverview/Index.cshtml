@@ -9,7 +9,7 @@
 <h2>@LocalizationManager.Localize("ConfigurationOverviewView_Header")</h2>
 
 <div id="content">
-    @Html.Partial("_ConfigurationOverview")
+    @Html.Partial("_ConfigurationOverview", Model.Configuration)
 </div>
 
 @* Order *@
@@ -62,27 +62,23 @@
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            let accessories = @Html.Raw(Json.Encode(Model.Accessories));
-            let engineSetting = @Html.Raw(Json.Encode(Model.EngineSetting));
-            let paint = @Html.Raw(Json.Encode(Model.Paint));
-            let rims = @Html.Raw(Json.Encode(Model.Rims));
-            let options = {
-                antiForgeryToken: getAntiForgeryToken($(document)),
-                placeOrderSuccess: function (targetUrl) {
-                    window.location.href = targetUrl;
-                },
-                placeOrderFailure: function () {
-                    $('#orderFailedAlert').attr('hidden', false);
-                }
-            };
-            let configOverviewViewModel = new ConfigurationOverviewViewModel(options);
-            let configViewModel = new ConfigurationViewModel({ selectedAccessories: accessories, selectedEngineSetting: engineSetting, selectedPaint: paint, selectedRims: rims });
+        /** @@type {ConfigurationData} */
+        let configurationData = @Html.Raw(Json.Encode(Model));
+        let configViewModel = new ConfigurationViewModel(configurationData);
+        let options = {
+            antiForgeryToken: getAntiForgeryToken($(document)),
+            placeOrderSuccess: function (targetUrl) {
+                window.location.href = targetUrl;
+            },
+            placeOrderFailure: function () {
+                $('#orderFailedAlert').attr('hidden', false);
+            }
+        };
+        let configOverviewViewModel = new ConfigurationOverviewViewModel(options);
 
-            ko.applyBindings({
-                configViewModel: configViewModel,
-                configOVW: configOverviewViewModel
-            });
+        ko.applyBindings({
+            configViewModel: configViewModel,
+            configOVW: configOverviewViewModel
         });
     </script>
 }

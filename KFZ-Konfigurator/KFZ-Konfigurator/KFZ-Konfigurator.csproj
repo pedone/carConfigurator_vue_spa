@@ -266,7 +266,9 @@
     <Compile Include="ViewModels\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelPageViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationBaseViewModel.cs" />
     <Compile Include="ViewModels\ConfigurationOverviewPageViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationViewModel.cs" />
     <Compile Include="ViewModels\EngineSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModelBase.cs" />

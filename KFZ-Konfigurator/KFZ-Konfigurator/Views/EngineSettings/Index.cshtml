@@ -56,15 +56,10 @@
 
 @section scripts {
     <script type="text/javascript">
-        let engineSettings = @Html.Raw(Json.Encode(Model.EngineSettings));
-        let selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
-        let selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
-        let selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
-        let viewModel = new ConfigurationViewModel({ engineSettings: engineSettings, selectedAccessories: selectedAccessories, selectedPaint: selectedPaint, selectedRims: selectedRims });
-
-        $(document).ready(function () {
-            ko.applyBindings({ configViewModel: viewModel });
-        });
+        /** @@type {ConfigurationData} */
+        let configurationData = @Html.Raw(Json.Encode(Model));
+        let viewModel = new ConfigurationViewModel(configurationData);
+        ko.applyBindings({ configViewModel: viewModel });
 
         let selectedEngineId = viewModel.selectedEngineId;
         $(window).on('beforeunload', function () {

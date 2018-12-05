@@ -18,7 +18,7 @@ namespace KFZ_Konfigurator.ViewModels
         public DateTime DateTime { get; }
         public string OrderLink { get; }
         public bool OrderSuccess { get; }
-        public ConfigurationOverviewPageViewModel Configuration { get; }
+        public ConfigurationViewModel Configuration { get; }
 
         public OrderOverviewPageViewModel(Order model, string orderLink, bool orderSuccess = false)
             : base(model.Id, model.BasePrice + model.ExtrasPrice)
@@ -32,7 +32,7 @@ namespace KFZ_Konfigurator.ViewModels
             DateTime = model.DateTime;
             OrderLink = orderLink;
             OrderSuccess = orderSuccess;
-            Configuration = new ConfigurationOverviewPageViewModel(model.Configuration);
+            Configuration = new ConfigurationViewModel(model.Configuration);
         }
 
     }

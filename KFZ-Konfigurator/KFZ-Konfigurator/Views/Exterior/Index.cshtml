@@ -54,16 +54,10 @@
 
 @section scripts {
     <script type="text/javascript">
-        let selectedAccessories = @Html.Raw(Json.Encode(Model.SelectedAccessories));
-        let selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
-        let paints = @Html.Raw(Json.Encode(Model.Paints));
-        let rims = @Html.Raw(Json.Encode(Model.Rims));
-        let viewModel = new ConfigurationViewModel({ paints: paints, rims: rims, selectedAccessories: selectedAccessories, selectedEngineSetting: selectedEngineSetting });
-
-        $(document).ready(function () {
-            ko.applyBindings({ configViewModel: viewModel });
-        });
-
+        /** @@type {ConfigurationData} */
+        let configurationData = @Html.Raw(Json.Encode(Model));
+        let viewModel = new ConfigurationViewModel(configurationData);
+        ko.applyBindings({ configViewModel: viewModel });
         $(window).on('beforeunload', function () {
             let antiForgeryToken = getAntiForgeryToken($(document));
             let sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };

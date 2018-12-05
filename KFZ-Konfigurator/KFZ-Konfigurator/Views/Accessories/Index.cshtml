@@ -48,20 +48,15 @@
 
 @section scripts {
     <script type="text/javascript">
-        let accessories = @Html.Raw(Json.Encode(Model.Accessories));
-        let selectedEngineSetting = @Html.Raw(Json.Encode(Model.SelectedEngineSetting));
-        let selectedPaint = @Html.Raw(Json.Encode(Model.SelectedPaint));
-        let selectedRims = @Html.Raw(Json.Encode(Model.SelectedRims));
-        let viewModel = new ConfigurationViewModel({ accessories: accessories, selectedEngineSetting: selectedEngineSetting, selectedPaint: selectedPaint, selectedRims: selectedRims });
-
-        $(document).ready(function () {
-            ko.applyBindings({ configViewModel: viewModel });
-        });
+        /** @@type {ConfigurationData} */
+        let configurationData = @Html.Raw(Json.Encode(Model));
+        let viewModel = new ConfigurationViewModel(configurationData);
+        ko.applyBindings({ configViewModel: viewModel });
 
         $(window).on('beforeunload', function () {
             let antiForgeryToken = getAntiForgeryToken($(document));
             let selectedAccessories = viewModel.selectedAccessoryIds;
-            saveViewModel('/Accessories/SetSelectedAccessories', selectedAccessories.length > 0 ? ko.toJSON(selectedAccessories) : null, antiForgeryToken)
+            saveViewModel('/Accessories/SetSelectedAccessories', (selectedAccessories.length && ko.toJSON(selectedAccessories)) || null, antiForgeryToken)
                 .fail((error) => {
                     console.error('failed to set selected accessories: ' + error.responseText + ' (' + error.statusText + ')');
                     console.debug(error);

@@ -45,26 +45,24 @@
 @section scripts {
     <script type="text/javascript" src="@Url.Content("/Scripts/app/ModelSelectionViewModel.js")"></script>
     <script type='text/javascript'>
-        $(document).ready(function () {
-            let viewModel = new ModelSelectionViewModel();
-            ko.applyBindings(viewModel);
+        let viewModel = new ModelSelectionViewModel();
+        ko.applyBindings(viewModel);
 
-            $('.car-model-link').click(function () {
-                event.preventDefault();
-                let targetUrl = $(this).attr('href');
-                let id = $(this).data('id');
-                let antiForgeryToken = getAntiForgeryToken($(document));
-                saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
-                    .done(() => {
-                        window.location.href = targetUrl;
-                    })
-                    .fail((error) => {
-                        console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');
-                        console.debug(error);
-                        // TODO randomly triggered, maybe because of antiForgeryValidation
-                        //alert('something went wrong. see console for details');
-                    });
-            });
+        $('.car-model-link').click(function () {
+            event.preventDefault();
+            let targetUrl = $(this).attr('href');
+            let id = $(this).data('id');
+            let antiForgeryToken = getAntiForgeryToken($(document));
+            saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
+                .done(() => {
+                    window.location.href = targetUrl;
+                })
+                .fail((error) => {
+                    console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.debug(error);
+                    // TODO randomly triggered, maybe because of antiForgeryValidation
+                    //alert('something went wrong. see console for details');
+                });
         });
     </script>
 }

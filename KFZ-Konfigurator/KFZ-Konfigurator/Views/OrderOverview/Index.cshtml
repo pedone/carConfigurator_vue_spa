@@ -39,16 +39,14 @@
 
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            // copy link to clipboard
-            $('#copyLinkButton').click(function (event) {
-                event.preventDefault();
-                let orderLink = $('#orderLinkContent');
-                orderLink.attr('type', 'text');
-                orderLink.select();
-                document.execCommand('copy');
-                orderLink.attr('type', 'hidden');
-            });
+        // copy link to clipboard
+        $('#copyLinkButton').click(function (event) {
+            event.preventDefault();
+            let orderLink = $('#orderLinkContent');
+            orderLink.attr('type', 'text');
+            orderLink.select();
+            document.execCommand('copy');
+            orderLink.attr('type', 'hidden');
         });
     </script>
 }

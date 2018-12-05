@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KFZ_Konfigurator.Models;
 
 namespace KFZ_Konfigurator.ViewModels
 {
-    public class EngineSettingsPageViewModel : ViewModelBase
+    public class EngineSettingsPageViewModel : ConfigurationBaseViewModel
     {
-        public IEnumerable<EngineSettingsViewModel> EngineSettings { get; set; }
-        public IEnumerable<AccessoryViewModel> SelectedAccessories { get; set; }
-        public PaintViewModel SelectedPaint { get; set; }
-        public RimViewModel SelectedRims { get; set; }
+        public EngineSettingsPageViewModel(CarConfiguratorEntityContext context)
+            : base(context, onlySelectedAccessories: true, onlySelectedPaints: true, onlySelectedRims: true)
+        { }
     }
 }

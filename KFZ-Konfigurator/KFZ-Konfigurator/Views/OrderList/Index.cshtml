@@ -84,7 +84,6 @@
     <script type="text/javascript" src="@Url.Content("/Scripts/app/OrderListViewModel.js")"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/app/Helper.js")"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
             let orders = @Html.Raw(Json.Encode(Model.Orders));
             let viewModel = new OrderListViewModel(orders, @Model.PageCount);
             ko.applyBindings(viewModel);
@@ -93,6 +92,5 @@
                 let orderId = $(e.relatedTarget).data('id');
                 $(this).find('#confirmCancelBtn').attr('data-orderid', orderId);
             });
-        });
     </script>
 }

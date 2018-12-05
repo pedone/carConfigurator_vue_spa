@@ -37,14 +37,14 @@
 
     //header carousel
     var headerImages = new List<(string image, ConfigurationViewKind? defaultViewKind)>
-    {
-        ( "2018A4AngularFront.png", ConfigurationViewKind.ModelSelection ),
-        ( "2018A4Engine.png" , ConfigurationViewKind.EngineSettings ),
-        ( "2018A4Front.png" , ConfigurationViewKind.Accessories ),
-        ( "2018A4Side.png" , ConfigurationViewKind.Exterior ),
-        ( "2018A4AngularRear.png", ConfigurationViewKind.Overview ),
-        ( "2018A4Rear.png", null ),
-    };
+{
+( "2018A4AngularFront.png", ConfigurationViewKind.ModelSelection ),
+( "2018A4Engine.png" , ConfigurationViewKind.EngineSettings ),
+( "2018A4Front.png" , ConfigurationViewKind.Accessories ),
+( "2018A4Side.png" , ConfigurationViewKind.Exterior ),
+( "2018A4AngularRear.png", ConfigurationViewKind.Overview ),
+( "2018A4Rear.png", null ),
+};
 
     var activeHeaderImage = headerImages.FirstOrDefault(cur => cur.defaultViewKind == viewKind).image ?? headerImages[0].image;
 }
@@ -64,9 +64,9 @@
             <div class="carousel-inner">
                 @foreach (var cur in headerImages)
                 {
-                <div class="carousel-item @MiscHelper.If(cur.image == activeHeaderImage, "active")">
-                    <img class="img-fluid" src="~/Resources/Images/@cur.image">
-                </div>
+                    <div class="carousel-item @MiscHelper.If(cur.image == activeHeaderImage, "active")">
+                        <img class="img-fluid" src="~/Resources/Images/@cur.image">
+                    </div>
                 }
             </div>
             @if (!isModelSelection)
