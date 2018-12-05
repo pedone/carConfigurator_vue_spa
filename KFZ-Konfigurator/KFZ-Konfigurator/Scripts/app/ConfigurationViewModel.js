@@ -58,18 +58,35 @@ class ConfigurationViewModel {
          * @type {string}
          */
         this.selectedPaintId = ko.observable(this._getInitialSelectedId(data.Paints));
+        /** @type {string} */
+        this._initialPaintId = this.selectedPaintId();
 
         /**
          * koObservable
          * @type {string}
          */
         this.selectedRimsId = ko.observable(this._getInitialSelectedId(data.Rims));
+        /** @type {string} */
+        this._initialRimsId = this.selectedRimsId();
 
         /**
          * koObservable
          * @type {Array.<ViewModel>}
          */
         this.selectedAccessories = ko.observableArray(_.values(this.accessoriesById)).extend({ filterSelected: null });
+        /** @type {Array.<number>} */
+        this._initialAccessoryIds = this.selectedAccessoryIds;
+
+        /**
+         * koComputed
+         * @type {ViewModel}
+         */
+        this.selectedEngineSettings = ko.computed(() => {
+            let values = _.values(this._engineSettingsById);
+            return _.first(_.filter(values, (cur) => cur.isSelected()));
+        });
+        /** @type {ViewModel} */
+        this._initialEngineSettings = this.selectedEngineSettings();
 
         /**
          * koComputed
@@ -82,15 +99,6 @@ class ConfigurationViewModel {
          * @type {ViewModel}
          */
         this.selectedRims = ko.computed(() => this._rimsById[this.selectedRimsId()]);
-
-        /**
-         * koComputed
-         * @type {ViewModel}
-         */
-        this.selectedEngineSettings = ko.computed(() => {
-            let values = _.values(this._engineSettingsById);
-            return _.first(_.filter(values, (cur) => cur.isSelected()));
-        });
 
         /**
          * koComputed
@@ -192,6 +200,51 @@ class ConfigurationViewModel {
         if (isSelected || !this.isAccessoryLimitReached()) {
             this.accessoriesById[id].isSelected(!isSelected);
         }
+    }
+
+    /** @param {string} antiForgeryToken */
+    saveChanges(antiForgeryToken) {
+        let selectedAccessoryIds = this.selectedAccessoryIds;
+
+        //check for changes
+        let accessoriesChanged = (this._initialAccessoryIds.length !== selectedAccessoryIds.length || _.difference(this._initialAccessoryIds, this.selectedAccessoryIds).length > 0);
+        let engineSettingsChanged = this._initialEngineSettings != this.selectedEngineSettings();
+        let paintChanged = this._initialPaintId != this.selectedPaintId();
+        let rimsChanged = this._initialRimsId != this.selectedRimsId();
+
+        if (!accessoriesChanged && !engineSettingsChanged && !paintChanged && !rimsChanged) {
+            console.debug('no configuration changes');
+            return;
+        }
+
+        // package changes
+        let changedData = { __RequestVerificationToken: antiForgeryToken };
+        if (paintChanged) {
+            changedData.paintId = viewModel.selectedPaintId();
+        }
+        if (rimsChanged) {
+            changedData.rimId = viewModel.selectedRimsId();
+        }
+        if (engineSettingsChanged) {
+            changedData.engineSettingsId = viewModel.selectedEngineSettings().id;
+        }
+        if (accessoriesChanged) {
+            changedData.accessoryIds = selectedAccessoryIds;
+        }
+
+        console.debug('saving configuration changes');
+
+        //send changes
+        $.ajax({
+            type: 'POST',
+            url: '/Configuration/UpdateActiveConfiguration',
+            data: changedData,
+            contentType: 'application/x-www-form-urlencoded'
+        }).fail((error) => {
+            console.error('failed to save configuration changes: ' + error.responseText + ' (' + error.statusText + ')');
+            console.debug(error);
+            //alert('something went wrong. see console for details');
+        });
     }
 }
 

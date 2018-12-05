@@ -7,7 +7,6 @@
     ViewBag.Title = LocalizationManager.Localize("EngineSettingsView_Title");
 }
 
-@Html.AntiForgeryToken()
 <div class="list-group">
     @foreach (var item in Model.EngineSettings)
     {
@@ -61,22 +60,6 @@
         let viewModel = new ConfigurationViewModel(configurationData);
         ko.applyBindings({ configViewModel: viewModel });
 
-        let selectedEngineId = viewModel.selectedEngineId;
-        $(window).on('beforeunload', function () {
-            if (selectedEngineId === viewModel.selectedEngineSettings().id) {
-                console.debug('engine settings did not change');
-                //skip if the selected engine didn't change
-                return;
-            }
-
-            let antiForgeryToken = getAntiForgeryToken($(document));
-            saveViewModel('/EngineSettings/SetSelectedEngineSettings', viewModel.selectedEngineSettings().id, antiForgeryToken)
-                .fail((error) => {
-                    console.error('failed to set selected engine: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(error);
-                    // TODO randomly triggered, maybe because of antiForgeryValidation
-                    //alert('something went wrong. see console for details');
-                });
-        });
+        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));
     </script>
 }

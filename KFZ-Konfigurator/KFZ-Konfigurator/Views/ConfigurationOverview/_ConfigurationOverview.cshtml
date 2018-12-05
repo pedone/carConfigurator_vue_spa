@@ -57,7 +57,7 @@
             </th>
         </tr>
 
-        @foreach (var item in Model.Accessories)
+        @foreach (var item in Model.Accessories.OrderBy(cur => cur.Category))
         {
             <tr>
                 <td>@Html.DisplayFor(_ => item.Name)</td>

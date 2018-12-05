@@ -49,6 +49,7 @@
     var activeHeaderImage = headerImages.FirstOrDefault(cur => cur.defaultViewKind == viewKind).image ?? headerImages[0].image;
 }
 
+@Html.AntiForgeryToken()
 @RenderBody()
 
 @section ConfigurationHeader {
@@ -109,7 +110,7 @@
                         <strong>@LocalizationManager.Localize("ConfigurationLayout_Overview_Paint_Header")</strong>: <span data-bind="text: configViewModel.selectedPaint().name"></span>
                     </div>
                     <div>
-                        <strong>@LocalizationManager.Localize("ConfigurationLayout_Overview_Rims_Header")</strong>: <span data-bind="text: configViewModel.selectedRims().size"></span>
+                        <strong>@LocalizationManager.Localize("ConfigurationLayout_Overview_Rims_Header")</strong>: <span data-bind="text: configViewModel.selectedRims().size"></span> @LocalizationManager.Localize("General_RimSizeUnit")
                     </div>
                     <div class="mt-3">
                         <strong>@LocalizationManager.Localize("ConfigurationLayout_BasePrice_Label")</strong>: <span data-bind="text: formatCurrency(configViewModel.basePrice())"></span>

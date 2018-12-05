@@ -6,7 +6,6 @@
     ViewBag.Title = LocalizationManager.Localize("ExteriorView_Title");
 }
 
-@Html.AntiForgeryToken()
 <h2>@LocalizationManager.Localize("ExteriorView_Paints_Header")</h2>
 
 <div class="container">
@@ -58,16 +57,7 @@
         let configurationData = @Html.Raw(Json.Encode(Model));
         let viewModel = new ConfigurationViewModel(configurationData);
         ko.applyBindings({ configViewModel: viewModel });
-        $(window).on('beforeunload', function () {
-            let antiForgeryToken = getAntiForgeryToken($(document));
-            let sendData = { paintId: viewModel.selectedPaintId(), rimId: viewModel.selectedRimsId() };
-            saveViewModel('/Exterior/SetSelectedPaintAndRim', null, antiForgeryToken, sendData)
-                .fail((error) => {
-                    console.error('failed to set selected paint and rims: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(error);
-                    // TODO randomly triggered, maybe because of antiForgeryValidation
-                    //alert('something went wrong. see console for details');
-                });
-        });
+
+        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));
     </script>
 }

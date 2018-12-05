@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ConfigurationOverviewController.cs" />
     <Compile Include="Controllers\ExteriorController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
@@ -422,6 +423,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
+    <Folder Include="Views\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
