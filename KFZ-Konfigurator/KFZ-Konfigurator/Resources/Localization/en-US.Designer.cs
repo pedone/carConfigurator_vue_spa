@@ -277,6 +277,24 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to place this order?.
+        /// </summary>
+        internal static string ConfigurationOverviewView_OrderConfirm_Text {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewView_OrderConfirm_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place Order.
+        /// </summary>
+        internal static string ConfigurationOverviewView_OrderConfirm_Title {
+            get {
+                return ResourceManager.GetString("ConfigurationOverviewView_OrderConfirm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discription (optional).
         /// </summary>
         internal static string ConfigurationOverviewView_OrderDescription_Placeholder {
@@ -466,6 +484,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string General_No {
+            get {
+                return ResourceManager.GetString("General_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car Configurator.
         /// </summary>
         internal static string General_ProductTitle {
@@ -489,6 +516,15 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string General_View {
             get {
                 return ResourceManager.GetString("General_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string General_Yes {
+            get {
+                return ResourceManager.GetString("General_Yes", resourceCulture);
             }
         }
         
@@ -552,6 +588,24 @@ namespace KFZ_Konfigurator.Resources.Localization {
         internal static string OrderListView_BasePrice_Header {
             get {
                 return ResourceManager.GetString("OrderListView_BasePrice_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel this order?.
+        /// </summary>
+        internal static string OrderListView_CancelConfirm_Text {
+            get {
+                return ResourceManager.GetString("OrderListView_CancelConfirm_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel Order.
+        /// </summary>
+        internal static string OrderListView_CancelConfirm_Title {
+            get {
+                return ResourceManager.GetString("OrderListView_CancelConfirm_Title", resourceCulture);
             }
         }
         

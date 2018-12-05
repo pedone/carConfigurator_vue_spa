@@ -46,20 +46,23 @@ class OrderListViewModel {
         /**
          * Notes: this method has to be placed within the constructor, because self.orders is not returning the
          * KnockoutObservableArrayStatic object outside the constructor, but the function that knockout is generating.
-         * @param {OrderItemViewModel} item
-         * @param {Event} event
+         * @param {number} itemId
          * @param {JQueryStatic} document
          */
-        this.deleteItem = function (item, event, document) {
-            event.preventDefault();
+        this.deleteItem = function (itemId, document) {
+            var item = _.find(self.orders(), (cur) => cur.id == itemId);
+            if (!item) {
+                console.error('order ' + itemId + ' not found');
+                return;
+            }
 
             /** @type {string} */
             let antiForgeryToken = getAntiForgeryToken(document);
-            deleteItemAjax(item.id, antiForgeryToken)
+            deleteItemAjax(itemId, antiForgeryToken)
                 .done(
                     /** @param {{NewPageCount: number, NewItem: OrderData }} data */
                     function (data) {
-                        console.debug('removing order ' + item.id + ' from view');
+                        console.debug('removing order ' + itemId + ' from view');
                         self.orders.remove(item);
                         if (data.NewItem) {
                             //insert the item that has moved up to the current page
