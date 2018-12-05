@@ -1,0 +1,8 @@
+TODO
+- error page
+- configuration caroussel
+In Progress- configuration partial views
+Not Free - application insights
+- car model filter
+- confirmation dialogs
+In Progress - azure pipeline deployment
