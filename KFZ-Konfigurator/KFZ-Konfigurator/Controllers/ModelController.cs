@@ -27,7 +27,9 @@ namespace KFZ_Konfigurator.Controllers
                 });
             }
         }
-
+        /// <summary>
+        /// Post with ajax to initialize car model
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public string SetCarModel(int id)
@@ -39,6 +41,12 @@ namespace KFZ_Konfigurator.Controllers
                 return "This action must be called with ajax";
             }
 
+            InitCarModel(id);
+            return string.Empty;
+        }
+
+        public void InitCarModel(int id)
+        {
             using (var context = new CarConfiguratorEntityContext())
             {
                 var selectedCarModel = context.CarModels.FirstOrDefault(cur => cur.Id == id);
@@ -61,8 +69,6 @@ namespace KFZ_Konfigurator.Controllers
 
                 //set default rims
                 SessionData.ActiveConfiguration.RimId = context.Rims.First(cur => cur.IsDefault == true).Id;
-
-                return string.Empty;
             }
         }
     }

@@ -8,4 +8,4 @@ Done - confirmation dialogs
 In Progress - azure pipeline deployment
 Done - refactor configurationViewModel
 Done - Order DateTime
-- set car model when going directly to engineSettings/accessories/exterior/overview
+Done - set car model when going directly to engineSettings/accessories/exterior/overview

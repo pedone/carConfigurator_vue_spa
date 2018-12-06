@@ -20,7 +20,12 @@ namespace KFZ_Konfigurator.Controllers
             if (!SessionData.ActiveConfiguration.IsValid(id, out string error))
             {
                 Log.Error(error);
-                return RedirectToRoute(Constants.Routes.ModelOverview);
+                new ModelController().InitCarModel(id);
+                if (!SessionData.ActiveConfiguration.IsValid(id, out string error2))
+                {
+                    Log.Error($"failed to initialize car model: {error2}");
+                    return RedirectToRoute(Constants.Routes.ModelOverview);
+                }
             }
 
             using (var context = new CarConfiguratorEntityContext())
