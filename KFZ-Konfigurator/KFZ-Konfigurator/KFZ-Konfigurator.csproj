@@ -182,7 +182,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\MathHelper.cs" />
     <Compile Include="Helper\MiscHelper.cs" />
     <Compile Include="Models\Accessory.cs">
       <DependentUpon>CarConfiguratorModel.tt</DependentUpon>
@@ -423,7 +422,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
-    <Folder Include="Views\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -83,6 +83,7 @@ class ConfigurationViewModel {
          */
         this.selectedEngineSettings = ko.computed(() => {
             let values = _.values(this._engineSettingsById);
+            // only one setting is supposed to be selected
             return _.first(_.filter(values, (cur) => cur.isSelected()));
         });
         /** @type {ViewModel} */

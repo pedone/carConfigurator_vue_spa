@@ -47,6 +47,7 @@
         let viewModel = new ModelSelectionViewModel();
         ko.applyBindings(viewModel);
 
+        //TODO refactor to viewmodel?
         $('.car-model-link').click(function () {
             event.preventDefault();
             let targetUrl = $(this).attr('href');

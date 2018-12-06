@@ -5,7 +5,7 @@ class ConfigurationOverviewViewModel {
     constructor(options) {
         let self = this;
         /** @type {string} */
-        this.configurationDescription = ko.observable("");
+        this.configurationDescription = ko.observable('');
         /** @type {HandlerOptions} */
         this.options = options;
 

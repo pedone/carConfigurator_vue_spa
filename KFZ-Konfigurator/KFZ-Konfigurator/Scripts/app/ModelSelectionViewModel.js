@@ -7,11 +7,6 @@ class ModelSelectionViewModel {
          * @type {string}
          */
         this.curModelFilter = ko.observable('');
-
-        this.test = ko.observable('A1');
-        this.test.subscribe(function (newValue) {
-            console.log(newValue);
-        });
     }
 
     /**

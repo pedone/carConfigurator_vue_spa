@@ -7,12 +7,6 @@ using System.Web;
 
 namespace KFZ_Konfigurator.Models.SeedData
 {
-
-    public abstract class BaseSeedData<T>
-    {
-        public abstract IEnumerable<T> GetData();
-    }
-
     public static class SeedData
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(SeedData));

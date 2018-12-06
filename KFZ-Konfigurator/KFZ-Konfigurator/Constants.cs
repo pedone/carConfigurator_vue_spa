@@ -23,9 +23,5 @@ namespace KFZ_Konfigurator
             public const string OrderList = nameof(OrderList);
             public const string Home = nameof(Home);
         }
-        public static class SubSeries
-        {
-            public const string AllroadQuattro = "allroad quattro";
-        }
     }
 }

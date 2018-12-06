@@ -66,6 +66,7 @@ namespace KFZ_Konfigurator.Controllers
                 Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return "This action must be called with ajax";
             }
+            //make sure the user didn't wait too long and the session already expired
             if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
             {
                 Log.Error(error);
@@ -76,19 +77,9 @@ namespace KFZ_Konfigurator.Controllers
             Configuration configuration;
             using (var context = new CarConfiguratorEntityContext())
             {
-                try
-                {
-                    //store the current configuration
-                    configuration = InitConfiguration(context);
-                    context.Configurations.Add(configuration);
-
-                }
-                catch (ArgumentException ex)
-                {
-                    Log.Error(ex);
-                    Response.StatusCode = (int)HttpStatusCode.Conflict;
-                    return ex.Message;
-                }
+                //store the current configuration
+                configuration = InitConfiguration(context);
+                context.Configurations.Add(configuration);
 
                 var newOrder = context.Orders.Create();
                 newOrder.Description = description;
@@ -106,10 +97,8 @@ namespace KFZ_Konfigurator.Controllers
                 Log.Info($"configuration for order {newOrder.Id} was created");
                 Log.Info($"a new order with id '{newOrder.Id}' was successfully placed");
 
-                SessionData.ActiveConfiguration.OrderLink = Url.RouteUrl(Constants.Routes.ViewOrderAfterPlaced, new { orderGuid = newOrder.Guid });
+                return Url.RouteUrl(Constants.Routes.ViewOrderAfterPlaced, new { orderGuid = newOrder.Guid });
             }
-
-            return SessionData.ActiveConfiguration.OrderLink;
         }
     }
 }
