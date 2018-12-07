@@ -102,16 +102,6 @@ class ConfigurationViewModel {
         this.selectedRims = ko.computed(() => this._rimsById[this.selectedRimsId()]);
 
         /**
-         * koComputed
-         * @type {boolean}
-         */
-        this.isAccessoryLimitReached = ko.computed(() => {
-            /** @type {number} */
-            const accessoryLimit = 5;
-            return this.selectedAccessories().length >= accessoryLimit;
-        });
-
-        /**
          * Calculates the combined price of everything but the engine
          * koComputed
          * @type {number}
@@ -198,7 +188,7 @@ class ConfigurationViewModel {
         /** @type {boolean} */
         let isSelected = this.accessoriesById[id].isSelected();
 
-        if (isSelected || !this.isAccessoryLimitReached()) {
+        if (isSelected) {
             this.accessoriesById[id].isSelected(!isSelected);
         }
     }

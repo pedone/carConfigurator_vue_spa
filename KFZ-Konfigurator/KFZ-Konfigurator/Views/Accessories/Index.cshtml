@@ -25,7 +25,7 @@
                                 <div class="row">
                                     <div class="col-auto align-items-center d-flex">
                                         <input type="checkbox"
-                                               data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected, disable: configViewModel.isAccessoryLimitReached() && !configViewModel.accessoriesById[@item.Id].isSelected()" />
+                                               data-bind="checked: configViewModel.accessoriesById[@item.Id].isSelected" />
                                     </div>
                                     <div class="col" data-bind="click: () => configViewModel.selectAccessory(@item.Id)">
                                         <h5 class="card-title">@Html.DisplayFor(_ => item.Name)</h5>

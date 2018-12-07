@@ -439,24 +439,6 @@ namespace KFZ_Konfigurator.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diesel.
-        /// </summary>
-        internal static string FuelKind_Diesel {
-            get {
-                return ResourceManager.GetString("FuelKind_Diesel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Petrol.
-        /// </summary>
-        internal static string FuelKind_Petrol {
-            get {
-                return ResourceManager.GetString("FuelKind_Petrol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string General_Cancel {

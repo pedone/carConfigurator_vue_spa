@@ -192,12 +192,6 @@
   <data name="TechnicalData_Transmission" xml:space="preserve">
     <value>Transmission</value>
   </data>
-  <data name="FuelKind_Diesel" xml:space="preserve">
-    <value>Diesel</value>
-  </data>
-  <data name="FuelKind_Petrol" xml:space="preserve">
-    <value>Petrol</value>
-  </data>
   <data name="TechnicalData_Transmission_Suffix" xml:space="preserve">
     <value>-Gear</value>
   </data>
