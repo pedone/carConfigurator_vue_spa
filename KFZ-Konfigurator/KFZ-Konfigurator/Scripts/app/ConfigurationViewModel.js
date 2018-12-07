@@ -237,6 +237,8 @@ class ConfigurationViewModel {
 
         //send changes
         $.ajax({
+            //make sure the changes are saved before the next page is loaded
+            async: false,
             type: 'POST',
             url: '/Configuration/UpdateActiveConfiguration',
             data: changedData,
