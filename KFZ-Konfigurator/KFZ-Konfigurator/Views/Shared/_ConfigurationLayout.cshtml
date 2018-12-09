@@ -38,12 +38,12 @@
     //header carousel
     var headerImages = new List<(string image, ConfigurationViewKind? defaultViewKind)>
 {
-( "2018A4AngularFront.png", ConfigurationViewKind.ModelSelection ),
-( "2018A4Engine.png" , ConfigurationViewKind.EngineSettings ),
-( "2018A4Front.png" , ConfigurationViewKind.Accessories ),
-( "2018A4Side.png" , ConfigurationViewKind.Exterior ),
-( "2018A4AngularRear.png", ConfigurationViewKind.Overview ),
-( "2018A4Rear.png", null ),
+( "2018A4AngularFront.gif", ConfigurationViewKind.ModelSelection ),
+( "2018A4Engine.gif" , ConfigurationViewKind.EngineSettings ),
+( "2018A4Front.gif" , ConfigurationViewKind.Accessories ),
+( "2018A4Side.gif" , ConfigurationViewKind.Exterior ),
+( "2018A4AngularRear.gif", ConfigurationViewKind.Overview ),
+( "2018A4Rear.gif", null ),
 };
 
     var activeHeaderImage = headerImages.FirstOrDefault(cur => cur.defaultViewKind == viewKind).image ?? headerImages[0].image;
