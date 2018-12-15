@@ -187,10 +187,7 @@ class ConfigurationViewModel {
     selectAccessory(id) {
         /** @type {boolean} */
         let isSelected = this.accessoriesById[id].isSelected();
-
-        if (isSelected) {
-            this.accessoriesById[id].isSelected(!isSelected);
-        }
+        this.accessoriesById[id].isSelected(!isSelected);
     }
 
     /** @param {string} antiForgeryToken */
