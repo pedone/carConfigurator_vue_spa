@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿/// <binding BeforeBuild='compileJS, compileCSS' />
+'use strict';
 
 const { src, dest, series } = require('gulp'),
     rimraf = require('rimraf'),
@@ -7,22 +8,37 @@ const { src, dest, series } = require('gulp'),
     uglify = require('gulp-uglify'),
     babel = require('gulp-babel'),
     less = require('gulp-less'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    through2 = require('through2');
 
+const contentPath = './Content';
+const contentAppPath = './Content/app';
+const scriptPath = './Scripts';
+const scriptAppPath = './Scripts/app';
 const paths = {
     less: {
-        src: './Content/**/*.less',
-        destDir: './Content',
+        src: contentAppPath + '/**/*.less',
+        destDir: contentPath,
     },
     css: {
-        src: ['./Content/**/*.css', '!./Content/**/*.min.css'],
-        dest: './Content/out/site.min.css'
+        src: [contentAppPath + '/**/*.css', '!' + contentAppPath + '/**/*.min.css'],
+        dest: contentPath + '/out/site.css',
+        minExtension: '.min.css'
     },
     babel: {
-        src: ['./Scripts/**/*.js', '!./Scripts/**/*.min.js'],
-        dest: './Scripts/out/site.min.js'
+        src: [scriptAppPath + '/**/*.js', '!' + scriptAppPath + '/**/*.min.js'],
+        dest: scriptPath + '/out/site.js',
+        minExtension: '.min.js'
     }
 };
+
+function logFileName(name) {
+    console.log(name);
+    return through2.obj(function (file, _, cb) {
+        console.log(file.history);
+        cb(null, file);
+    });
+}
 
 // LESS
 
@@ -39,10 +55,13 @@ function cleanCSS(done) {
     rimraf(paths.css.dest, done);
 }
 
-function minCSS() {
+function compileCSS() {
     return src(paths.css.src)
+        .pipe(logFileName('minCSS'))
         .pipe(concat(paths.css.dest))
+        .pipe(dest('.'))
         .pipe(cssmin())
+        .pipe(rename({ extname: paths.css.minExtension }))
         .pipe(dest('.'));
 }
 
@@ -55,14 +74,17 @@ function cleanJS(done) {
 function bundleMinJS() {
     return src(paths.babel.src)
         .pipe(babel({ presets: ['@babel/env'] }))
+        .pipe(logFileName('bundleMinJS'))
         .pipe(concat(paths.babel.dest))
+        .pipe(dest('.'))
         .pipe(uglify())
+        .pipe(rename({ extname: paths.babel.minExtension }))
         .pipe(dest('.'));
 }
 
 exports.cleanCSS = cleanCSS;
-exports.minCSS = series(compileLess, minCSS);
+exports.compileCSS = series(cleanCSS, compileLess, compileCSS);
 
 exports.compileLess = compileLess;
 exports.cleanJS = cleanJS;
-exports.bundleJS = series(cleanJS, bundleMinJS);
+exports.compileJS = series(cleanJS, bundleMinJS);

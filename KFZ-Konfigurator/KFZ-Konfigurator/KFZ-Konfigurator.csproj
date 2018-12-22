@@ -358,13 +358,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\app\styles.less" />
-    <None Include="compilerconfig.json" />
-    <Content Include="compilerconfig.json.bindings">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </Content>
-    <None Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
