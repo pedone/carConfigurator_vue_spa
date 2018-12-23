@@ -40,6 +40,6 @@ export function getAntiForgeryToken(document) {
     return document.find('[name="__RequestVerificationToken"]').val();
 }
 
-function formatCurrency(amount) {
+export function formatCurrency(amount) {
     return amount.toLocaleString() + ' EUR';
 }

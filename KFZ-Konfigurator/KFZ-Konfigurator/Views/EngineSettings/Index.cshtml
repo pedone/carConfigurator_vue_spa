@@ -11,8 +11,7 @@
     @foreach (var item in Model.EngineSettings)
     {
         <a class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center @MiscHelper.If(item.IsSelected, "active")"
-           data-toggle="list"
-           data-bind="click: () => configViewModel.selectEngineSettings(@item.Id)">
+           data-toggle="list" @@click="selectEngineSettings(@item.Id)">
             <div class="flex-column w-100 align-items-lg-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">
@@ -56,12 +55,25 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript">
-        /** @@type {ConfigurationData} */
-        let configurationData = @Html.Raw(Json.Encode(Model));
+    @if (!HttpContext.Current.IsDebuggingEnabled)
+    {
+        @Scripts.Render("~/bundles/engineSettings")
+    }
+    <script type="module">
+        (async () => {
+            var module;
+            if (@Json.Encode(HttpContext.Current.IsDebuggingEnabled) === false) {
+                module = myBundle;
+            } else {
+                module = await import('/Views/EngineSettings/Index.js');
+            }
+            const vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)));
+        })();
+
+        @*let configurationData = @Html.Raw(Json.Encode(Model));
         let viewModel = new ConfigurationViewModel(configurationData);
         ko.applyBindings({ configViewModel: viewModel });
 
-        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));
+        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));*@
     </script>
 }

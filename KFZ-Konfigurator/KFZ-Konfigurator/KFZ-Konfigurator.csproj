@@ -375,6 +375,7 @@
     <Content Include="Scripts\underscore-1.9.1.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Views\EngineSettings\Index.js" />
     <Content Include="Views\Model\Index.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

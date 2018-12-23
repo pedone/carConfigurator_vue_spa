@@ -1,5 +1,7 @@
 ﻿'use strict';
 
+import * as helper from './Helper.js';
+
 class ViewModel {
     /** @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data */
     constructor(data) {
@@ -146,19 +148,6 @@ class ConfigurationViewModel {
         return selectedItem.Id.toString();
     }
 
-    /**
-     * @param {Array.<ViewModelData>} items
-     * @returns {Object.<ViewModel>}
-     * @private
-     */
-    _toViewModelDictionary(items) {
-        /** @type {Object.<ViewModel>} */
-        var result = {};
-
-        _.each(items, (cur) => { result[cur.Id] = new ViewModel(cur); });
-        return result;
-    }
-
     /** @returns {Array.<number>} */
     get selectedAccessoryIds() {
         return _.map(this.selectedAccessories(), (cur) => cur.id);
@@ -266,4 +255,135 @@ class ConfigurationViewModel {
  * @property {Array.<ViewModelData>} Accessories
  * @property {Array.<ViewModelData>} Paints
  * @property {Array.<ViewModelData>} Rims
+ */
+
+
+/**
+ * @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data
+ * @returns {ViewModel}
+ */
+function buildViewModel(data) {
+    /** @type {ViewModel} */
+    return {
+        id: data.Id,
+        category: data.category,
+        isSelected: data.IsSelected,
+        name: data.Name,
+        price: data.Price,
+        size: data.Size
+    };
+}
+
+/**
+ * @param {Array.<ViewModelData>} items
+ * @returns {Object.<ViewModel>}
+ * @private
+ */
+function toViewModelDictionary(items) {
+    /** @type {Object.<ViewModel>} */
+    var result = {};
+
+    _.each(items, (cur) => { result[cur.Id] = buildViewModel(cur); });
+    return result;
+}
+
+/**
+ * @param {Array.<ViewModelData>} items
+ * @returns {string}
+ * @private
+ */
+function getInitialSelectedId(items) {
+    if (!items || items.length === 0) {
+        return -1;
+    }
+
+    /** @type {ViewModelData} */
+    let selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
+    return selectedItem.Id.toString();
+}
+
+/**
+ * @param {ConfigurationData} data
+ */
+export function buildVue(data) {
+    return new Vue({
+        el: '#app',
+        data: {
+            selectedPaintId: getInitialSelectedId(data.Paints),
+            selectedRimsId: getInitialSelectedId(data.Rims),
+            engineSettingsById: toViewModelDictionary(data.EngineSettings)
+        },
+        created: function () {
+            this._paintById = toViewModelDictionary(data.Paints);
+            this._rimsById = toViewModelDictionary(data.Rims);
+        },
+        computed: {
+            /** @type {ViewModel} */
+            selectedPaint: function () {
+                return this._paintById[this.selectedPaintId];
+            },
+            /** @type {ViewModel} */
+            selectedRims: function () {
+                return this._rimsById[this.selectedRimsId];
+            },
+            /** @type {Array.<ViewModel>} */
+            selectedAccessories: function () {
+                /** @type {Array.<ViewModel>} */
+                let values = _.values(this.accessoriesById);
+                return _.filter(values, (cur) => cur.isSelected);
+            },
+            /**
+             * Just the engine price
+             * @type {number}
+             */
+            basePrice: function () {
+                return (this.selectedEngineSettings && this.selectedEngineSettings.price) || 0;
+            },
+            formattedBasePrice: function () {
+                return helper.formatCurrency(this.basePrice);
+            },
+            /**
+             * Calculates the combined price of everything but the engine
+             * @type {number}
+             */
+            extrasPrice: function () {
+                /** @type {number} */
+                let accessoriesPrice = _.reduce(this.selectedAccessories, (memo, cur) => memo + cur.price, 0);
+                return accessoriesPrice + (this.selectedPaint && this.selectedPaint.price) + (this.selectedRims && this.selectedRims.price);
+            },
+            formattedExtrasPrice: function () {
+                return helper.formatCurrency(this.extrasPrice);
+            },
+            /**
+             * The base price combined with the extras price
+             * @type {number}
+             */
+            formattedFullPrice: function () {
+                return this.basePrice + this.extrasPrice;
+            },
+            /** @type {ViewModel} */
+            selectedEngineSettings: function () {
+                let values = _.values(this.engineSettingsById);
+                // only one setting is supposed to be selected
+                return _.first(_.filter(values, (cur) => cur.isSelected));
+            }
+        },
+        methods: {
+            /** @param {number} settingsId */
+            selectEngineSettings: function (settingsId) {
+                //deselect all other settings, because deselection doesn't work with binding
+                _.each(this.engineSettingsById, (cur) => { cur.isSelected = (cur.id === settingsId) });
+            }
+        }
+    });
+}
+
+/**
+ * @typedef {Object} ViewModel
+ * @property {number} id
+ * @property {number} price
+ * @property {boolean} isSelected
+ * @property {string} name
+ * @property {number|null} size
+ * @property {number|null} category
  */
