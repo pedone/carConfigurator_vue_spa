@@ -300,7 +300,6 @@
     <Content Include="Resources\Images\2018A4Front.gif" />
     <Content Include="Resources\Images\2018A4Rear.gif" />
     <Content Include="Resources\Images\2018A4Side.gif" />
-    <Content Include="Scripts\app\KoExtenders.js" />
     <Content Include="Scripts\app\ModelSelectionViewModel.js" />
     <Content Include="Scripts\app\OrderListViewModel.js" />
     <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />

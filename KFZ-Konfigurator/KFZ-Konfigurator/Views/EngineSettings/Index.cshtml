@@ -60,20 +60,16 @@
         @Scripts.Render("~/bundles/engineSettings")
     }
     <script type="module">
+        let vm = null;
+        let module = null;
         (async () => {
-            var module;
             if (@Json.Encode(HttpContext.Current.IsDebuggingEnabled) === false) {
                 module = myBundle;
             } else {
                 module = await import('/Views/EngineSettings/Index.js');
             }
-            const vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)));
+            vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)));
         })();
-
-        @*let configurationData = @Html.Raw(Json.Encode(Model));
-        let viewModel = new ConfigurationViewModel(configurationData);
-        ko.applyBindings({ configViewModel: viewModel });
-
-        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));*@
+        $(window).on('beforeunload', () => vm.saveChanges(module.helper.getAntiForgeryToken($(document))));
     </script>
 }

@@ -314,8 +314,16 @@ export function buildVue(data) {
             engineSettingsById: toViewModelDictionary(data.EngineSettings)
         },
         created: function () {
+            this._getSelectedAccessoryIds = function () {
+                return _.map(this.selectedAccessories, (cur) => cur.id);
+            };
+
             this._paintById = toViewModelDictionary(data.Paints);
             this._rimsById = toViewModelDictionary(data.Rims);
+            this._initialAccessoryIds = this._getSelectedAccessoryIds();
+            this._initialEngineSettings = this.selectedEngineSettings
+            this._initialPaintId = this.selectedPaintId;
+            this._initialRimsId = this.selectedRimsId;
         },
         computed: {
             /** @type {ViewModel} */
@@ -373,6 +381,53 @@ export function buildVue(data) {
             selectEngineSettings: function (settingsId) {
                 //deselect all other settings, because deselection doesn't work with binding
                 _.each(this.engineSettingsById, (cur) => { cur.isSelected = (cur.id === settingsId) });
+            },
+            /** @param {string} antiForgeryToken */
+            saveChanges: function (antiForgeryToken) {
+                /** @type {Array.<number>} */
+                let selectedAccessoryIds = this._getSelectedAccessoryIds();
+
+                //check for changes
+                let accessoriesChanged = (this._initialAccessoryIds.length !== selectedAccessoryIds.length || _.difference(this._initialAccessoryIds, selectedAccessoryIds).length > 0);
+                let engineSettingsChanged = this._initialEngineSettings != this.selectedEngineSettings;
+                let paintChanged = this._initialPaintId != this.selectedPaintId;
+                let rimsChanged = this._initialRimsId != this.selectedRimsId;
+
+                if (!accessoriesChanged && !engineSettingsChanged && !paintChanged && !rimsChanged) {
+                    console.debug('no configuration changes');
+                    return;
+                }
+
+                // package changes
+                let changedData = { __RequestVerificationToken: antiForgeryToken };
+                if (paintChanged) {
+                    changedData.paintId = this.selectedPaintId;
+                }
+                if (rimsChanged) {
+                    changedData.rimId = this.selectedRimsId;
+                }
+                if (engineSettingsChanged) {
+                    changedData.engineSettingsId = this.selectedEngineSettings.id;
+                }
+                if (accessoriesChanged) {
+                    changedData.accessoryIds = selectedAccessoryIds;
+                }
+
+                console.debug('saving configuration changes');
+
+                //send changes
+                $.ajax({
+                    //make sure the changes are saved before the next page is loaded
+                    async: false,
+                    type: 'POST',
+                    url: '/Configuration/UpdateActiveConfiguration',
+                    data: changedData,
+                    contentType: 'application/x-www-form-urlencoded'
+                }).fail((error) => {
+                    console.error('failed to save configuration changes: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.debug(JSON.stringify(error));
+                    //alert('something went wrong. see console for details');
+                });
             }
         }
     });
