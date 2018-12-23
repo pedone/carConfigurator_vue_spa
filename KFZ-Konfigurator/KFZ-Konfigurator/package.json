@@ -13,6 +13,11 @@
     "@babel/register": "^7.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-less": "^4.0.1",
-    "gulp-rename": "^1.4.0"
+    "gulp-rename": "^1.4.0",
+    "browserify": "^16.2.3",
+    "babelify": "^10.0.0",
+    "vinyl-source-stream": "^2.0.0",
+    "vinyl-buffer": "^1.0.1",
+    "glob": "^7.1.3"
   }
 }

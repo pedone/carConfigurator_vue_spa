@@ -20,13 +20,16 @@ namespace KFZ_Konfigurator
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/knockout-{version}.js",
                       "~/Scripts/vue.js",
-                      "~/Scripts/out/site.js",
                       "~/Scripts/underscore-{version}.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/out/site.css"));
+
+            //Views
+            bundles.Add(new ScriptBundle("~/bundles/model").Include(
+                      "~/Views/Model/Index.bundle.js"));
         }
     }
 }

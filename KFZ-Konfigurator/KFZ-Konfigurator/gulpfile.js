@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='compileJS, compileCSS' />
+﻿/// <binding />
 'use strict';
 
 const { src, dest, series } = require('gulp'),
@@ -71,26 +71,26 @@ function compileCSS() {
 
 // JS
 
-function cleanJS(done) {
-    rimraf(paths.babel.dest, done);
-}
+//function cleanJS(done) {
+//    rimraf(paths.babel.dest, done);
+//}
 
-function bundleMinJS() {
-    return src(paths.babel.src)
-        .pipe(babel({ presets: ['@babel/env'] }))
-        .pipe(logFileName('bundleMinJS'))
-        .pipe(concat(paths.babel.dest))
-        .pipe(dest('.'))
-        .pipe(uglify())
-        .pipe(rename({ extname: paths.babel.minExtension }))
-        .pipe(dest('.'));
-}
+//function bundleMinJS() {
+//    return src(paths.babel.src)
+//        .pipe(babel({ presets: ['@babel/env'] }))
+//        .pipe(logFileName('bundleMinJS'))
+//        .pipe(concat(paths.babel.dest))
+//        .pipe(dest('.'))
+//        .pipe(uglify())
+//        .pipe(rename({ extname: paths.babel.minExtension }))
+//        .pipe(dest('.'));
+//}
 
 // Bundle JS in Views
 function bundleViewJs(done) {
-    glob('./Views/**/*.js', { ignore: './**/*.bundle.js' }, function (er, files) {
+    glob('./Views/**/*.js', { ignore: ['./**/*.bundle.js', './**/*.bundle.min.js'] }, function (er, files) {
         files.forEach(curFile => {
-            browserify(curFile)
+            browserify(curFile, { standalone: 'myBundle' })
                 .transform('babelify', { presets: ["@babel/preset-env"] })
                 .bundle()
                 .pipe(source(curFile))
@@ -111,5 +111,5 @@ exports.cleanCSS = cleanCSS;
 exports.compileCSS = series(cleanCSS, compileLess, compileCSS);
 
 exports.compileLess = compileLess;
-exports.cleanJS = cleanJS;
-exports.compileJS = series(cleanJS, bundleMinJS);
+//exports.cleanJS = cleanJS;
+//exports.compileJS = series(cleanJS, bundleMinJS);

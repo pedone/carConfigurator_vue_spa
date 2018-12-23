@@ -44,6 +44,8 @@
 </div>
 
 @section scripts {
+    @Scripts.Render("~/bundles/model")
+
     <script type='text/javascript'>
         const vm = new Vue({
             el: '#app',
@@ -62,8 +64,8 @@
                     }
                 },
                 selectCarModel: function (id, targetUrl) {
-                    const antiForgeryToken = getAntiForgeryToken($(document));
-                    saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
+                    const antiForgeryToken = myBundle.helper.getAntiForgeryToken($(document));
+                    myBundle.helper.saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
                         .done(() => {
                             window.location.href = targetUrl;
                         })

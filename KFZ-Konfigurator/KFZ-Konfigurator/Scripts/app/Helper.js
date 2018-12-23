@@ -7,7 +7,7 @@
  * @param {Object} [additionalData]
  * @returns {jqXHR}
  */
-function saveViewModel(url, id, antiForgeryToken, additionalData) {
+export function saveViewModel(url, id, antiForgeryToken, additionalData) {
     let i;
     /** @type {Object} */
     let dataObject = {
@@ -36,7 +36,7 @@ function saveViewModel(url, id, antiForgeryToken, additionalData) {
  * @param {Document} document
  * @returns {string}
  */
-function getAntiForgeryToken(document) {
+export function getAntiForgeryToken(document) {
     return document.find('[name="__RequestVerificationToken"]').val();
 }
 
