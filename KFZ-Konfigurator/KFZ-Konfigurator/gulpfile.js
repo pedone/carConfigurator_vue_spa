@@ -8,7 +8,11 @@ const { src, dest, series } = require('gulp'),
     uglify = require('gulp-uglify'),
     babel = require('gulp-babel'),
     less = require('gulp-less'),
+    browserify = require('browserify'),
     rename = require('gulp-rename'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    glob = require('glob'),
     through2 = require('through2');
 
 const contentPath = './Content';
@@ -82,6 +86,27 @@ function bundleMinJS() {
         .pipe(dest('.'));
 }
 
+// Bundle JS in Views
+function bundleViewJs(done) {
+    glob('./Views/**/*.js', { ignore: './**/*.bundle.js' }, function (er, files) {
+        files.forEach(curFile => {
+            browserify(curFile)
+                .transform('babelify', { presets: ["@babel/preset-env"] })
+                .bundle()
+                .pipe(source(curFile))
+                .pipe(buffer())
+                .pipe(logFileName('bundleViewJs.' + curFile))
+                .pipe(rename({ extname: '.bundle.js' }))
+                .pipe(dest('.'))
+                .pipe(uglify())
+                .pipe(rename({ extname: '.min.js' }))
+                .pipe(dest('.'));
+        });
+        done();
+    });
+}
+
+exports.bundleViewJs = bundleViewJs;
 exports.cleanCSS = cleanCSS;
 exports.compileCSS = series(cleanCSS, compileLess, compileCSS);
 
