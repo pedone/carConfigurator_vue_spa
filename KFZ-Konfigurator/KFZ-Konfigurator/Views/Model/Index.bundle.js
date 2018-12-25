@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.saveViewModel = saveViewModel;
 exports.getAntiForgeryToken = getAntiForgeryToken;
+exports.formatCurrency = formatCurrency;
 
 function saveViewModel(url, id, antiForgeryToken, additionalData) {
   var i;

@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 import * as helper from './Helper.js';
 
@@ -266,7 +266,7 @@ function buildViewModel(data) {
     /** @type {ViewModel} */
     return {
         id: data.Id,
-        category: data.category,
+        category: data.Category,
         isSelected: data.IsSelected,
         name: data.Name,
         price: data.Price,
@@ -311,7 +311,9 @@ export function buildVue(data) {
         data: {
             selectedPaintId: getInitialSelectedId(data.Paints),
             selectedRimsId: getInitialSelectedId(data.Rims),
-            engineSettingsById: toViewModelDictionary(data.EngineSettings)
+            engineSettingsById: toViewModelDictionary(data.EngineSettings),
+            accessoriesById: toViewModelDictionary(data.Accessories),
+            accesoryCountByCategory: {}
         },
         created: function () {
             this._getSelectedAccessoryIds = function () {
@@ -376,7 +378,19 @@ export function buildVue(data) {
                 return _.first(_.filter(values, (cur) => cur.isSelected));
             }
         },
+        watch: {
+            selectedAccessories: function (items) {
+                this.accesoryCountByCategory = {};
+                for (let cur of items) {
+                    this.accesoryCountByCategory[cur.category] = (this.accesoryCountByCategory[cur.category] || 0) + 1;
+                }
+            }
+        },
         methods: {
+            /** @param {string} id */
+            toggleAccessorySelection: function (id) {
+                this.accessoriesById[id].isSelected = !this.accessoriesById[id].isSelected;
+            },
             /** @param {number} settingsId */
             selectEngineSettings: function (settingsId) {
                 //deselect all other settings, because deselection doesn't work with binding
