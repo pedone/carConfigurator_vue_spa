@@ -18,9 +18,9 @@
         <div class="row">
             @foreach (var item in currentPaints)
             {
-                <div class="paintContainer" data-bind="click: () => configViewModel.selectPaint(@item.Id)">
+                <div class="paintContainer" @@click="selectPaint(@item.Id)">
                     <input type="radio" name="paintOptions" value="@item.Id"
-                           data-bind="checked: configViewModel.selectedPaintId, css: { checked: configViewModel.selectedPaintId() == @item.Id }" />
+                           v-bind:class="{ checked: selectedPaintId === @item.Id }" />
                     <figure class="figure m-1">
                         <img style="background: @item.Color" class="border-0" />
                         <figcaption class="figure-caption">@Html.DisplayFor(_ => item.Name)</figcaption>
@@ -37,7 +37,7 @@
     {
         <tr>
             <th>
-                <input type="radio" name="rimOptions" class="mr-2" value="@item.Id" data-bind="checked: configViewModel.selectedRimsId" />
+                <input type="radio" name="rimOptions" class="mr-2" value="@item.Id" v-model="selectedRimsId" />
                 <label>@Html.DisplayFor(_ => item.Size) @LocalizationManager.Localize("General_RimSizeUnit")</label>
             </th>
             <td>
@@ -52,12 +52,21 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript">
-        /** @@type {ConfigurationData} */
-        let configurationData = @Html.Raw(Json.Encode(Model));
-        let viewModel = new ConfigurationViewModel(configurationData);
-        ko.applyBindings({ configViewModel: viewModel });
-
-        $(window).on('beforeunload', () => viewModel.saveChanges(getAntiForgeryToken($(document))));
+    @if (!HttpContext.Current.IsDebuggingEnabled)
+    {
+        @Scripts.Render("~/bundles/exterior")
+    }
+    <script type="module">
+        let vm = null;
+        let module = null;
+        (async () => {
+            if (@Json.Encode(HttpContext.Current.IsDebuggingEnabled) === false) {
+                module = myBundle;
+            } else {
+                module = await import('/Views/Exterior/Index.js');
+            }
+            vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)));
+        })();
+        $(window).on('beforeunload', () => vm.saveChanges(module.helper.getAntiForgeryToken($(document))));
     </script>
 }

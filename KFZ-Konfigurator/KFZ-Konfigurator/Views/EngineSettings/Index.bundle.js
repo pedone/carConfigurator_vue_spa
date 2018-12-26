@@ -339,7 +339,7 @@ function buildViewModel(data) {
   /** @type {ViewModel} */
   return {
     id: data.Id,
-    category: data.category,
+    category: data.Category,
     isSelected: data.IsSelected,
     name: data.Name,
     price: data.Price,
@@ -393,7 +393,9 @@ function buildVue(data) {
     data: {
       selectedPaintId: getInitialSelectedId(data.Paints),
       selectedRimsId: getInitialSelectedId(data.Rims),
-      engineSettingsById: toViewModelDictionary(data.EngineSettings)
+      engineSettingsById: toViewModelDictionary(data.EngineSettings),
+      accessoriesById: toViewModelDictionary(data.Accessories),
+      accesoryCountByCategory: {}
     },
     created: function created() {
       this._getSelectedAccessoryIds = function () {
@@ -475,7 +477,40 @@ function buildVue(data) {
         }));
       }
     },
+    watch: {
+      selectedAccessories: function selectedAccessories(items) {
+        this.accesoryCountByCategory = {};
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var cur = _step.value;
+            this.accesoryCountByCategory[cur.category] = (this.accesoryCountByCategory[cur.category] || 0) + 1;
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+    },
     methods: {
+      /** @param {string} id */
+      toggleAccessorySelection: function toggleAccessorySelection(id) {
+        this.accessoriesById[id].isSelected = !this.accessoriesById[id].isSelected;
+      },
+
       /** @param {number} settingsId */
       selectEngineSettings: function selectEngineSettings(settingsId) {
         //deselect all other settings, because deselection doesn't work with binding

@@ -289,7 +289,7 @@ function toViewModelDictionary(items) {
 
 /**
  * @param {Array.<ViewModelData>} items
- * @returns {string}
+ * @returns {number}
  * @private
  */
 function getInitialSelectedId(items) {
@@ -299,7 +299,7 @@ function getInitialSelectedId(items) {
 
     /** @type {ViewModelData} */
     let selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
-    return selectedItem.Id.toString();
+    return selectedItem.Id;
 }
 
 /**
@@ -379,14 +379,21 @@ export function buildVue(data) {
             }
         },
         watch: {
-            selectedAccessories: function (items) {
-                this.accesoryCountByCategory = {};
-                for (let cur of items) {
-                    this.accesoryCountByCategory[cur.category] = (this.accesoryCountByCategory[cur.category] || 0) + 1;
+            selectedAccessories: {
+                immediate: true,
+                handler: function (items) {
+                    this.accesoryCountByCategory = {};
+                    for (let cur of items) {
+                        this.accesoryCountByCategory[cur.category] = (this.accesoryCountByCategory[cur.category] || 0) + 1;
+                    }
                 }
             }
         },
         methods: {
+            /** @param {string} id */
+            selectPaint(id) {
+                this.selectedPaintId = id;
+            },
             /** @param {string} id */
             toggleAccessorySelection: function (id) {
                 this.accessoriesById[id].isSelected = !this.accessoriesById[id].isSelected;
