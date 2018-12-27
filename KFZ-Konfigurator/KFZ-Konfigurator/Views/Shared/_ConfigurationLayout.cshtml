@@ -113,13 +113,13 @@
                         <strong>@LocalizationManager.Localize("ConfigurationLayout_Overview_Rims_Header")</strong>: {{ selectedRims.size }} @LocalizationManager.Localize("General_RimSizeUnit")
                     </div>
                     <div class="mt-3">
-                        <strong>@LocalizationManager.Localize("ConfigurationLayout_BasePrice_Label")</strong>: {{ formattedBasePrice }}
+                        <strong>@LocalizationManager.Localize("ConfigurationLayout_BasePrice_Label")</strong>: {{ basePrice | formatCurrency }}
                     </div>
                     <div>
-                        <strong>@LocalizationManager.Localize("ConfigurationLayout_ExtrasPrice_Label")</strong>: {{ formattedExtrasPrice }}
+                        <strong>@LocalizationManager.Localize("ConfigurationLayout_ExtrasPrice_Label")</strong>: {{ extrasPrice | formatCurrency }}
                     </div>
                     <div>
-                        <strong>@LocalizationManager.Localize("ConfigurationLayout_Price_Label")</strong>: {{ formattedFullPrice }}
+                        <strong>@LocalizationManager.Localize("ConfigurationLayout_Price_Label")</strong>: {{ fullPrice | formatCurrency }}
                     </div>
                 </div>
             </div>
