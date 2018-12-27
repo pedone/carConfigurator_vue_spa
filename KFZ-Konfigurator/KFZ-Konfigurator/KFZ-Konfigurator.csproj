@@ -334,6 +334,7 @@
     <Content Include="Resources\Images\engineSize.svg" />
     <Content Include="Resources\Images\performance.svg" />
     <Content Include="Resources\Images\topSpeed.svg" />
+    <Content Include="Scripts\app\VueGlobals.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

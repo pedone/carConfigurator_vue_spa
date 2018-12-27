@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 /** @param {HandlerOptions} options */
-export function buildConfigOverviewViewModelVueMixin(options) {
+export function buildVueMixin(options) {
     return {
         data: {
             configurationDescription: ''

@@ -45,10 +45,9 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/model")
-
-    <script type='text/javascript'>
-        const vm = new Vue({
-            el: '#app',
+    <script type='module'>
+        import { vueMixins } from '/Scripts/app/VueGlobals.js';
+        vueMixins.push({
             data: {
                 curModelFilter: ''
             },

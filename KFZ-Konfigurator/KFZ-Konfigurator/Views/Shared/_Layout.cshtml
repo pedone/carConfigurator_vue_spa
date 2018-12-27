@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var productTitle = LocalizationManager.Localize("General_ProductTitle");
 }
 
@@ -45,6 +45,17 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrapVue")
     @RenderSection("scripts", required: false)
-    <script type="module" src="~/Scripts/app/VueFilters.js"></script>
+    <script type="module">
+        import { vueMixins, setVueInstance } from '/Scripts/app/VueGlobals.js';
+        $(window).on('load', () => {
+            if (vueMixins.length > 0) {
+                console.debug('initializing app Vue');
+                setVueInstance(new Vue({
+                    el: '#app',
+                    mixins: vueMixins
+                }));
+            }
+        });
+    </script>
 </body>
 </html>

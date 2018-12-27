@@ -55,21 +55,14 @@
 </div>
 
 @section scripts {
-    @if (!HttpContext.Current.IsDebuggingEnabled)
-    {
-        @Scripts.Render("~/bundles/engineSettings")
-    }
+    @*@if (!HttpContext.Current.IsDebuggingEnabled)
+        {
+            @Scripts.Render("~/bundles/engineSettings")
+        }*@
     <script type="module">
-        let vm = null;
-        let module = null;
-        (async () => {
-            if (@Json.Encode(HttpContext.Current.IsDebuggingEnabled) === false) {
-                module = myBundle;
-            } else {
-                module = await import('/Views/EngineSettings/Index.js');
-            }
-            vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)));
-        })();
-        $(window).on('beforeunload', () => vm.saveChanges(module.helper.getAntiForgeryToken($(document))));
+        import * as myBundle from '/Views/EngineSettings/Index.js';
+
+        myBundle.vueMixins.push(myBundle.configurationViewModel.buildVueMixin(@Html.Raw(Json.Encode(Model))));
+        $(window).on('beforeunload', () => myBundle.vueInstance.saveChanges(myBundle.helper.getAntiForgeryToken($(document))));
     </script>
 }

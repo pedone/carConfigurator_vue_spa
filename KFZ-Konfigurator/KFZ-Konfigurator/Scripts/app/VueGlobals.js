@@ -5,3 +5,9 @@ Vue.filter('formatCurrency', function (value) {
         return formatCurrency(value);
     }
 });
+
+export let vueMixins = [];
+export let vueInstance = undefined;
+export function setVueInstance(vm) {
+    vueInstance = vm;
+}
