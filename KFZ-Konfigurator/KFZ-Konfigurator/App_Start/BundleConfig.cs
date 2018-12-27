@@ -18,7 +18,6 @@ namespace KFZ_Konfigurator
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapVue").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/knockout-{version}.js",
                       "~/Scripts/vue.js",
                       "~/Scripts/underscore-{version}.js"));
 
@@ -28,16 +27,16 @@ namespace KFZ_Konfigurator
                       "~/Content/out/site.css"));
 
             //Views
-            bundles.Add(new ScriptBundle("~/bundles/model").Include(
-                      "~/Views/Model/Index.bundle.js"));
-            bundles.Add(new ScriptBundle("~/bundles/engineSettings").Include(
-                      "~/Views/EngineSettings/Index.bundle.js"));
-            bundles.Add(new ScriptBundle("~/bundles/accessories").Include(
-                      "~/Views/Accessories/Index.bundle.js"));
-            bundles.Add(new ScriptBundle("~/bundles/exterior").Include(
-                      "~/Views/Exterior/Index.bundle.js"));
-            bundles.Add(new ScriptBundle("~/bundles/configurationOverview").Include(
-                      "~/Views/ConfigurationOverview/Index.bundle.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/model").Include(
+            //          "~/Views/Model/Index.bundle.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/engineSettings").Include(
+            //          "~/Views/EngineSettings/Index.bundle.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/accessories").Include(
+            //          "~/Views/Accessories/Index.bundle.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/exterior").Include(
+            //          "~/Views/Exterior/Index.bundle.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/configurationOverview").Include(
+            //          "~/Views/ConfigurationOverview/Index.bundle.js"));
         }
     }
 }

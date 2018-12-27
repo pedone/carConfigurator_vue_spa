@@ -146,29 +146,3 @@ export function buildVueMixin(data, pageCount) {
  * @property {string} guid
  * @property {string} linkUrl
  */
-
-class OrderListViewModel {
-    
-    constructor(data, pageCount) {
-        let self = this;
-        /** @type {KnockoutObservableArrayStatic} */
-        this.orders = ko.observableArray(_.map(data, (cur) => new OrderItemViewModel(cur)));
-        /**
-         * koObservableArray
-         * @type {Array.<number>}
-         */
-        this.pages = ko.observableArray([]);
-        _.times(pageCount, (index) => this.pages().push(index + 1));
-        /**
-         * koObservable
-         * @type {number}
-         */
-        this.currentPageIndex = ko.observable(0);
-
-        
-
-        
-
-        
-    }
-}
