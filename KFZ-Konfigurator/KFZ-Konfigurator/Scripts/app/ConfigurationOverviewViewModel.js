@@ -11,7 +11,7 @@ export function buildVueMixin(options) {
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/PlaceOrder',
-                    data: { __RequestVerificationToken: options.antiForgeryToken, description: this.configurationDescription },
+                    data: { __RequestVerificationToken: this._antiForgeryToken, description: this.configurationDescription },
                     contentType: 'application/x-www-form-urlencoded',
                     dataType: 'text'
                 }).done(
@@ -35,7 +35,6 @@ export function buildVueMixin(options) {
 
 /**
  * @typedef {Object} HandlerOptions
- * @property {string} antiForgeryToken
  * @property {Function|null} placeOrderSuccess
  * @property {Function|null} placeOrderFailure
  */

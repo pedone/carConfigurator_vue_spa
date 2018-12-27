@@ -63,6 +63,6 @@
         import * as myBundle from '/Views/EngineSettings/Index.js';
 
         myBundle.vueMixins.push(myBundle.configurationViewModel.buildVueMixin(@Html.Raw(Json.Encode(Model))));
-        $(window).on('beforeunload', () => myBundle.vueInstance.saveChanges(myBundle.helper.getAntiForgeryToken($(document))));
+        $(window).on('beforeunload', () => myBundle.vueInstance.saveChanges());
     </script>
 }

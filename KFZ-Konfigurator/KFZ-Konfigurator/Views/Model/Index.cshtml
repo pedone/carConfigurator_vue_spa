@@ -44,9 +44,9 @@
 </div>
 
 @section scripts {
-    @Scripts.Render("~/bundles/model")
     <script type='module'>
         import { vueMixins } from '/Scripts/app/VueGlobals.js';
+        import * as helper from '/Scripts/app/Helper.js';
         vueMixins.push({
             data: {
                 curModelFilter: ''
@@ -63,8 +63,8 @@
                     }
                 },
                 selectCarModel: function (id, targetUrl) {
-                    const antiForgeryToken = myBundle.helper.getAntiForgeryToken($(document));
-                    myBundle.helper.saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
+                    const antiForgeryToken = helper.getAntiForgeryToken($(document));
+                    helper.saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
                         .done(() => {
                             window.location.href = targetUrl;
                         })

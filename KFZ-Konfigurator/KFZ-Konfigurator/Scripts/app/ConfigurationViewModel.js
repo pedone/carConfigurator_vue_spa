@@ -138,8 +138,7 @@ export function buildVueMixin(data) {
                 //deselect all other settings, because deselection doesn't work with binding
                 _.each(this.engineSettingsById, (cur) => { cur.isSelected = (cur.id === settingsId) });
             },
-            /** @param {string} antiForgeryToken */
-            saveChanges: function (antiForgeryToken) {
+            saveChanges: function () {
                 /** @type {Array.<number>} */
                 let selectedAccessoryIds = this._getSelectedAccessoryIds();
 
@@ -155,7 +154,7 @@ export function buildVueMixin(data) {
                 }
 
                 // package changes
-                let changedData = { __RequestVerificationToken: antiForgeryToken };
+                let changedData = { __RequestVerificationToken: this._antiForgeryToken };
                 if (paintChanged) {
                     changedData.paintId = this.selectedPaintId;
                 }

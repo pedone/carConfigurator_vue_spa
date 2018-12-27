@@ -49,7 +49,6 @@
     var activeHeaderImage = headerImages.FirstOrDefault(cur => cur.defaultViewKind == viewKind).image ?? headerImages[0].image;
 }
 
-@Html.AntiForgeryToken()
 @RenderBody()
 
 @section ConfigurationHeader {

@@ -379,7 +379,7 @@
     <Content Include="Views\ConfigurationOverview\Index.js" />
     <Content Include="Views\EngineSettings\Index.js" />
     <Content Include="Views\Exterior\Index.js" />
-    <Content Include="Views\Model\Index.js" />
+    <Content Include="Views\OrderList\Index.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
