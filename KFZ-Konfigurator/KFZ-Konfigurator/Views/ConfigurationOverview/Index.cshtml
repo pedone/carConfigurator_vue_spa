@@ -20,7 +20,7 @@
         <div class="input-group">
             <input type="text" class="form-control"
                    placeholder="@LocalizationManager.Localize("ConfigurationOverviewView_OrderDescription_Placeholder")"
-                   data-bind="value: configOVW.configurationDescription" />
+                   v-model="configurationDescription" />
             <div class="input-group-append">
                 <button class="btn btn-primary" id="placeOrderButton" type="button" data-target="#confirmPlaceOrderDialog" data-toggle="modal">
                     @LocalizationManager.Localize("ConfigurationOverviewView_PlaceOrder_Button")
@@ -50,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@LocalizationManager.Localize("General_No")</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: configOVW.placeOrder">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @@click="placeOrder">
                     @LocalizationManager.Localize("General_Yes")
                 </button>
             </div>
@@ -59,25 +59,55 @@
 </div>
 
 @section scripts {
-    <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
-    <script type="text/javascript">
-        /** @@type {ConfigurationData} */
-        let configurationData = @Html.Raw(Json.Encode(Model));
-        let configViewModel = new ConfigurationViewModel(configurationData);
-        let options = {
-            antiForgeryToken: getAntiForgeryToken($(document)),
-            placeOrderSuccess: function (targetUrl) {
-                window.location.href = targetUrl;
-            },
-            placeOrderFailure: function () {
-                $('#orderFailedAlert').attr('hidden', false);
+    @if (!HttpContext.Current.IsDebuggingEnabled)
+    {
+        @Scripts.Render("~/bundles/configurationOverview")
+    }
+    <script type="module">
+        let vm = null;
+        let module = null;
+        (async () => {
+            if (@Json.Encode(HttpContext.Current.IsDebuggingEnabled) === false) {
+                module = myBundle;
+            } else {
+                module = await import('/Views/ConfigurationOverview/Index.js');
             }
-        };
-        let configOverviewViewModel = new ConfigurationOverviewViewModel(options);
 
-        ko.applyBindings({
-            configViewModel: configViewModel,
-            configOVW: configOverviewViewModel
-        });
+            let options = {
+                antiForgeryToken: module.helper.getAntiForgeryToken($(document)),
+                placeOrderSuccess: function (targetUrl) {
+                    window.location.href = targetUrl;
+                },
+                placeOrderFailure: function () {
+                    $('#orderFailedAlert').attr('hidden', false);
+                }
+            };
+            let mixin = module.configurationOverviewViewModel.buildConfigOverviewViewModelVueMixin(options);
+            vm = module.configurationViewModel.buildVue(@Html.Raw(Json.Encode(Model)), mixin);
+        })();
     </script>
 }
+
+@*@section scripts {
+        <script type="text/javascript" src="@Url.Content("/Scripts/app/ConfigurationOverviewViewModel.js")"></script>
+        <script type="text/javascript">
+            /** @@type {ConfigurationData} */
+            let configurationData = @Html.Raw(Json.Encode(Model));
+            let configViewModel = new ConfigurationViewModel(configurationData);
+            let options = {
+                antiForgeryToken: getAntiForgeryToken($(document)),
+                placeOrderSuccess: function (targetUrl) {
+                    window.location.href = targetUrl;
+                },
+                placeOrderFailure: function () {
+                    $('#orderFailedAlert').attr('hidden', false);
+                }
+            };
+            let configOverviewViewModel = new ConfigurationOverviewViewModel(options);
+
+            ko.applyBindings({
+                configViewModel: configViewModel,
+                configOVW: configOverviewViewModel
+            });
+        </script>
+    }*@

@@ -304,10 +304,12 @@ function getInitialSelectedId(items) {
 
 /**
  * @param {ConfigurationData} data
+ * @param {Object} [mixins]
  */
-export function buildVue(data) {
+export function buildVue(data, mixins) {
     return new Vue({
         el: '#app',
+        mixins: [mixins || {}],
         data: {
             selectedPaintId: getInitialSelectedId(data.Paints),
             selectedRimsId: getInitialSelectedId(data.Rims),

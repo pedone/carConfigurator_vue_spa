@@ -36,6 +36,8 @@ namespace KFZ_Konfigurator
                       "~/Views/Accessories/Index.bundle.js"));
             bundles.Add(new ScriptBundle("~/bundles/exterior").Include(
                       "~/Views/Exterior/Index.bundle.js"));
+            bundles.Add(new ScriptBundle("~/bundles/configurationOverview").Include(
+                      "~/Views/ConfigurationOverview/Index.bundle.js"));
         }
     }
 }
