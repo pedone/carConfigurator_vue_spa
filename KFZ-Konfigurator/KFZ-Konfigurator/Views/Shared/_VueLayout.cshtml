@@ -12,7 +12,7 @@
     @RenderSection("CartOverview", required: false)
 }
 
-@section scripts {
+@section headerScripts {
     @{
         var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
         var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
@@ -22,6 +22,9 @@
         window.ServerUrl = '@serverUrl';
         @*window.VueRouterUrl = '@controllerUrl';*@
     </script>
+    <script src="~/Scripts/app/@controllerName/bundle.js" defer></script>
+}
+
+@section scripts {
     @RenderSection("scripts", required: false)
-    @Scripts.Render("~/Scripts/app/" + controllerName + "/bundle.js")
 }

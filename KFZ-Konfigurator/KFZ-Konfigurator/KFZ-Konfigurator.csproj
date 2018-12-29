@@ -262,19 +262,19 @@
     </Compile>
     <Compile Include="Resources\Localization\LocalizationManager.cs" />
     <Compile Include="SessionData.cs" />
-    <Compile Include="ViewModels\AccessoriesPageViewModel.cs" />
-    <Compile Include="ViewModels\AccessoryViewModel.cs" />
+    <Compile Include="ViewModels\Accessories\AccessoriesPageViewModel.cs" />
+    <Compile Include="ViewModels\Accessories\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\Model\CarModelPageViewModel.cs" />
     <Compile Include="ViewModels\Model\CarModelViewModel.cs" />
     <Compile Include="ViewModels\ConfigurationBaseViewModel.cs" />
-    <Compile Include="ViewModels\ConfigurationOverviewPageViewModel.cs" />
-    <Compile Include="ViewModels\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationOverview\ConfigurationOverviewPageViewModel.cs" />
+    <Compile Include="ViewModels\ConfigurationOverview\ConfigurationViewModel.cs" />
     <Compile Include="ViewModels\EngineSettings\EngineSettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\ExteriorPageViewModel.cs" />
+    <Compile Include="ViewModels\Exterior\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModelBase.cs" />
-    <Compile Include="ViewModels\OrderListPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderList\OrderListPageViewModel.cs" />
     <Compile Include="ViewModels\OrderOverviewPageViewModel.cs" />
-    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\OrderList\OrderViewModel.cs" />
     <Compile Include="ViewModels\RimViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ConfigurationViewKind.cs" />
@@ -300,11 +300,14 @@
     <Content Include="Resources\Images\2018A4Front.gif" />
     <Content Include="Resources\Images\2018A4Rear.gif" />
     <Content Include="Resources\Images\2018A4Side.gif" />
+    <Content Include="Scripts\app\Accessories\bundle.js" />
+    <Content Include="Scripts\app\ConfigurationOverview\bundle.js" />
     <Content Include="Scripts\app\EngineSettings\bundle.js" />
+    <Content Include="Scripts\app\Exterior\bundle.js" />
     <Content Include="Scripts\app\ModelSelectionViewModel.js" />
     <Content Include="Scripts\app\Model\bundle.js" />
-    <Content Include="Scripts\app\OrderListViewModel.js" />
-    <Content Include="Scripts\app\ConfigurationOverviewViewModel.js" />
+    <Content Include="Scripts\app\orderListViewModel.js" />
+    <Content Include="Scripts\app\configurationOverviewViewModel.js" />
     <Content Include="Scripts\app\configurationViewModel.js" />
     <Content Include="Models\CarConfiguratorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -335,6 +338,7 @@
     <Content Include="Resources\Images\engineSize.svg" />
     <Content Include="Resources\Images\performance.svg" />
     <Content Include="Resources\Images\topSpeed.svg" />
+    <Content Include="Scripts\app\OrderList\bundle.js" />
     <Content Include="Scripts\app\vueGlobals.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -375,13 +379,12 @@
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
     <Content Include="Scripts\app\helper.js" />
+    <Content Include="ViewModels\Accessories\main.js" />
+    <Content Include="ViewModels\ConfigurationOverview\main.js" />
     <Content Include="ViewModels\EngineSettings\main.js" />
+    <Content Include="ViewModels\Exterior\main.js" />
     <Content Include="ViewModels\Model\main.js" />
-    <Content Include="Views\Accessories\Index.js" />
-    <Content Include="Views\ConfigurationOverview\Index.js" />
-    <Content Include="Views\EngineSettings\Index.js" />
-    <Content Include="Views\Exterior\Index.js" />
-    <Content Include="Views\OrderList\Index.js" />
+    <Content Include="ViewModels\OrderList\main.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

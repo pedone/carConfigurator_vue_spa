@@ -1,6 +1,52 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
+const helper = require('helper.js');
+
+/** @param {HandlerOptions} options */
+module.exports.buildVueMixin = function(options) {
+    return {
+        data: {
+            configurationDescription: ''
+        },
+        created: function () {
+            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
+        },
+        methods: {
+            placeOrder: function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ConfigurationOverview/PlaceOrder',
+                    data: { __RequestVerificationToken: this._antiForgeryToken, description: this.configurationDescription },
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'text'
+                }).done(
+                    function (data) {
+                        console.debug('order successfully placed');
+                        if (options.placeOrderSuccess) {
+                            options.placeOrderSuccess(data);
+                        }
+                    })
+                    .fail(function (error) {
+                        console.error('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');
+                        console.debug(JSON.stringify(error));
+                        if (options.placeOrderFailure) {
+                            options.placeOrderFailure();
+                        }
+                    });
+            }
+        }
+    };
+};
+
+/**
+ * @typedef {Object} HandlerOptions
+ * @property {Function|null} placeOrderSuccess
+ * @property {Function|null} placeOrderFailure
+ */
+},{"helper.js":3}],2:[function(require,module,exports){
+'use strict';
+
 const _ = require('lodash/lodash.js');
 const helper = require('helper.js');
 
@@ -233,7 +279,7 @@ module.exports.buildVueMixin = function(data) {
  * @property {Array.<ViewModelData>} Rims
  */
 
-},{"helper.js":2,"lodash/lodash.js":5}],2:[function(require,module,exports){
+},{"helper.js":3,"lodash/lodash.js":6}],3:[function(require,module,exports){
 'use strict';
 
 /**
@@ -279,7 +325,7 @@ module.exports.getAntiForgeryToken = function (document) {
 module.exports.formatCurrency = function (amount) {
     return amount.toLocaleString() + ' EUR';
 };
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 const helper = require('helper.js');
 const Vue = require('vue/dist/vue.js');
 
@@ -288,20 +334,31 @@ Vue.filter('formatCurrency', function (value) {
         return helper.formatCurrency(value);
     }
 });
-},{"helper.js":2,"vue/dist/vue.js":8}],4:[function(require,module,exports){
+},{"helper.js":3,"vue/dist/vue.js":9}],5:[function(require,module,exports){
 'use strict';
 
 const vueGlobals = require('vueGlobals.js');
 const Vue = require('vue/dist/vue.js');
 const configurationViewModel = require('configurationViewModel.js');
+const configurationOverviewViewModel = require('configurationOverviewViewModel.js');
+
+let options = {
+    placeOrderSuccess: function (targetUrl) {
+        window.location.href = targetUrl;
+    },
+    placeOrderFailure: function () {
+        $('#orderFailedAlert').attr('hidden', false);
+    }
+};
 
 const vm = new Vue({
     el: '#app',
-    mixins: [configurationViewModel.buildVueMixin(window.modelData)]
+    mixins: [
+        configurationViewModel.buildVueMixin(window.modelData),
+        configurationOverviewViewModel.buildVueMixin(options)
+    ]
 });
-
-$(window).on('beforeunload', () => vm.saveChanges());
-},{"configurationViewModel.js":1,"vue/dist/vue.js":8,"vueGlobals.js":3}],5:[function(require,module,exports){
+},{"configurationOverviewViewModel.js":1,"configurationViewModel.js":2,"vue/dist/vue.js":9,"vueGlobals.js":4}],6:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -17412,7 +17469,7 @@ $(window).on('beforeunload', () => vm.saveChanges());
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -17598,7 +17655,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -17677,7 +17734,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":6,"timers":7}],8:[function(require,module,exports){
+},{"process/browser.js":7,"timers":8}],9:[function(require,module,exports){
 (function (global,setImmediate){
 /*!
  * Vue.js v2.5.21
@@ -28743,6 +28800,6 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 })));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":7}]},{},[4]);
+},{"timers":8}]},{},[5]);
 
 //# sourceMappingURL=bundle.js.map

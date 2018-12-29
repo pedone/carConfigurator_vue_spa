@@ -119,6 +119,7 @@ exports.watch_JS_Develop = function (done) {
     done();
 };
 
+//TODO remove js stuff, clean up css stuff
 //const contentPath = './Content';
 //const contentAppPath = './Content/app';
 //const scriptPath = './Scripts';

@@ -2,6 +2,7 @@
 @model KFZ_Konfigurator.ViewModels.OrderListPageViewModel
 
 @{
+    Layout = "~/Views/Shared/_VueLayout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("OrderListView_Title");
 }
 
@@ -40,7 +41,7 @@
         <th></th>
     </tr>
 
-    <tbody v-for="item in orders">
+    <tbody v-for="item in orders" :key ="item.id">
         <tr>
             <td>{{item.model}}</td>
             <td>{{item.description}}</td>
@@ -81,15 +82,10 @@
 </div>
 
 @section scripts {
-    <script type="module">
-        import * as myBundle from '/Views/OrderList/Index.js';
-
-        myBundle.vueMixins.push(myBundle.orderListViewModel.buildVueMixin(@Html.Raw(Json.Encode(Model.Orders)), @Model.PageCount));
-
-        //set the data of the confirm dialog, so that the selected item can be removed
-        $(document).on('show.bs.modal', '#confirmCancelDialog', function (e) {
-            let orderId = $(e.relatedTarget).data('id');
-            $(this).find('#confirmCancelBtn').attr('data-orderid', orderId);
-        });
+    <script type="text/javascript">
+        window.modelData = {
+            data: @Html.Raw(Json.Encode(Model.Orders)),
+            pageCount: @Model.PageCount
+        };
     </script>
 }

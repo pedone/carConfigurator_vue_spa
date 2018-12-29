@@ -56,9 +56,6 @@
 
 @section scripts {
     <script type="text/javascript">
-    window.modelData = @Html.Raw(Json.Encode(Model));
-
-    @*myBundle.vueMixins.push(myBundle.configurationViewModel.buildVueMixin()));
-    $(window).on('beforeunload', () => myBundle.vueInstance.saveChanges());*@
+        window.modelData = @Html.Raw(Json.Encode(Model));
     </script>
 }

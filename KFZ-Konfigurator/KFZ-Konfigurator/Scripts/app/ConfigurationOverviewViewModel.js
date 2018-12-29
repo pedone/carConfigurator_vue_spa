@@ -1,10 +1,15 @@
 ﻿'use strict';
 
+const helper = require('helper.js');
+
 /** @param {HandlerOptions} options */
-export function buildVueMixin(options) {
+module.exports.buildVueMixin = function(options) {
     return {
         data: {
             configurationDescription: ''
+        },
+        created: function () {
+            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
         },
         methods: {
             placeOrder: function () {

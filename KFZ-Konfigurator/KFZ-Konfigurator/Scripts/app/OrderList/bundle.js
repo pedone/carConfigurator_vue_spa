@@ -1,241 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-const _ = require('lodash/lodash.js');
-const helper = require('helper.js');
-
-/**
- * @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data
- * @returns {ViewModel}
- */
-function buildViewModel(data) {
-    /** @type {ViewModel} */
-    return {
-        id: data.Id,
-        category: data.Category,
-        isSelected: data.IsSelected,
-        name: data.Name,
-        price: data.Price,
-        size: data.Size
-    };
-}
-
-/**
- * @param {Array.<ViewModelData>} items
- * @returns {Object.<ViewModel>}
- * @private
- */
-function toViewModelDictionary(items) {
-    /** @type {Object.<ViewModel>} */
-    var result = {};
-
-    _.each(items, (cur) => { result[cur.Id] = buildViewModel(cur); });
-    return result;
-}
-
-/**
- * @param {Array.<ViewModelData>} items
- * @returns {number}
- * @private
- */
-function getInitialSelectedId(items) {
-    if (!items || items.length === 0) {
-        return -1;
-    }
-
-    /** @type {ViewModelData} */
-    let selectedItem = _.find(items, (cur) => cur.IsSelected) || items[0];
-    return selectedItem.Id;
-}
-
-/**
- * @param {ConfigurationData} data
- */
-module.exports.buildVueMixin = function(data) {
-    return {
-        data: {
-            selectedPaintId: getInitialSelectedId(data.Paints),
-            selectedRimsId: getInitialSelectedId(data.Rims),
-            engineSettingsById: toViewModelDictionary(data.EngineSettings),
-            accessoriesById: toViewModelDictionary(data.Accessories),
-            accesoryCountByCategory: {}
-        },
-        created: function () {
-            this._getSelectedAccessoryIds = function () {
-                return _.map(this.selectedAccessories, (cur) => cur.id);
-            };
-
-            this._paintById = toViewModelDictionary(data.Paints);
-            this._rimsById = toViewModelDictionary(data.Rims);
-            this._initialAccessoryIds = this._getSelectedAccessoryIds();
-            this._initialEngineSettings = this.selectedEngineSettings
-            this._initialPaintId = this.selectedPaintId;
-            this._initialRimsId = this.selectedRimsId;
-            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
-        },
-        computed: {
-            /** @type {ViewModel} */
-            selectedPaint: function () {
-                return this._paintById[this.selectedPaintId];
-            },
-            /** @type {ViewModel} */
-            selectedRims: function () {
-                return this._rimsById[this.selectedRimsId];
-            },
-            /** @type {Array.<ViewModel>} */
-            selectedAccessories: function () {
-                /** @type {Array.<ViewModel>} */
-                let values = _.values(this.accessoriesById);
-                return _.filter(values, (cur) => cur.isSelected);
-            },
-            /**
-             * Just the engine price
-             * @type {number}
-             */
-            basePrice: function () {
-                return (this.selectedEngineSettings && this.selectedEngineSettings.price) || 0;
-            },
-            /**
-             * Calculates the combined price of everything but the engine
-             * @type {number}
-             */
-            extrasPrice: function () {
-                /** @type {number} */
-                let accessoriesPrice = _.reduce(this.selectedAccessories, (memo, cur) => memo + cur.price, 0);
-                return accessoriesPrice + (this.selectedPaint && this.selectedPaint.price) + (this.selectedRims && this.selectedRims.price);
-            },
-            /**
-             * The base price combined with the extras price
-             * @type {number}
-             */
-            fullPrice: function () {
-                return this.basePrice + this.extrasPrice;
-            },
-            /** @type {ViewModel} */
-            selectedEngineSettings: function () {
-                let values = _.values(this.engineSettingsById);
-                // only one setting is supposed to be selected
-                return _.first(_.filter(values, (cur) => cur.isSelected));
-            }
-        },
-        watch: {
-            selectedAccessories: {
-                immediate: true,
-                handler: function (items) {
-                    this.accesoryCountByCategory = {};
-                    for (let cur of items) {
-                        this.accesoryCountByCategory[cur.category] = (this.accesoryCountByCategory[cur.category] || 0) + 1;
-                    }
-                }
-            }
-        },
-        methods: {
-            /** @param {string} id */
-            selectPaint(id) {
-                this.selectedPaintId = id;
-            },
-            /** @param {string} id */
-            toggleAccessorySelection: function (id) {
-                this.accessoriesById[id].isSelected = !this.accessoriesById[id].isSelected;
-            },
-            /** @param {number} settingsId */
-            selectEngineSettings: function (settingsId) {
-                //deselect all other settings, because deselection doesn't work with binding
-                _.each(this.engineSettingsById, (cur) => { cur.isSelected = (cur.id === settingsId) });
-            },
-            saveChanges: function () {
-                /** @type {Array.<number>} */
-                let selectedAccessoryIds = this._getSelectedAccessoryIds();
-
-                //check for changes
-                let accessoriesChanged = (this._initialAccessoryIds.length !== selectedAccessoryIds.length || _.difference(this._initialAccessoryIds, selectedAccessoryIds).length > 0);
-                let engineSettingsChanged = this._initialEngineSettings != this.selectedEngineSettings;
-                let paintChanged = this._initialPaintId != this.selectedPaintId;
-                let rimsChanged = this._initialRimsId != this.selectedRimsId;
-
-                if (!accessoriesChanged && !engineSettingsChanged && !paintChanged && !rimsChanged) {
-                    console.debug('no configuration changes');
-                    return;
-                }
-
-                // package changes
-                let changedData = { __RequestVerificationToken: this._antiForgeryToken };
-                if (paintChanged) {
-                    changedData.paintId = this.selectedPaintId;
-                }
-                if (rimsChanged) {
-                    changedData.rimId = this.selectedRimsId;
-                }
-                if (engineSettingsChanged) {
-                    changedData.engineSettingsId = this.selectedEngineSettings.id;
-                }
-                if (accessoriesChanged) {
-                    changedData.accessoryIds = selectedAccessoryIds;
-                }
-
-                console.debug('saving configuration changes');
-
-                //send changes
-                $.ajax({
-                    //make sure the changes are saved before the next page is loaded
-                    async: false,
-                    type: 'POST',
-                    url: '/Configuration/UpdateActiveConfiguration',
-                    data: changedData,
-                    contentType: 'application/x-www-form-urlencoded'
-                }).fail((error) => {
-                    console.error('failed to save configuration changes: ' + error.responseText + ' (' + error.statusText + ')');
-                    console.debug(JSON.stringify(error));
-                    //alert('something went wrong. see console for details');
-                });
-            }
-        }
-    };
-}
-
-/**
- * @typedef {Object} ViewModel
- * @property {number} id
- * @property {number} price
- * @property {boolean} isSelected
- * @property {string} name
- * @property {number|null} size
- * @property {number|null} category
- */
-
-/**
- * @typedef {Object} ViewModelData
- * @property {number} Id
- * @property {number} Price
- * @property {boolean} IsSelected
- */
-
-/**
- * @typedef {ViewModelData} NameViewModelData
- * @property {string} Name
- */
-
-/**
- * @typedef {ViewModelData} RimViewModelData
- * @property {number} Size
- */
-
-/**
- * @typedef {NameViewModelData} AccessoryViewModelData
- * @property {number} Category
- */
-
-/**
- * @typedef {Object} ConfigurationData
- * @property {Array.<ViewModelData>} EngineSettings
- * @property {Array.<ViewModelData>} Accessories
- * @property {Array.<ViewModelData>} Paints
- * @property {Array.<ViewModelData>} Rims
- */
-
-},{"helper.js":2,"lodash/lodash.js":5}],2:[function(require,module,exports){
-'use strict';
-
 /**
  * @param {string} url
  * @param {string} id
@@ -279,7 +44,161 @@ module.exports.getAntiForgeryToken = function (document) {
 module.exports.formatCurrency = function (amount) {
     return amount.toLocaleString() + ' EUR';
 };
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
+'use strict';
+
+const _ = require('lodash/lodash.js');
+const helper = require('helper.js');
+
+/**
+ * @param {OrderData} data
+ * @returns {OrderItemViewModel}
+ */
+function buildOrderItemViewModel(data) {
+    /** @type {ViewModel} */
+    return {
+        id: data.Id,
+        basePrice: data.BasePrice,
+        extrasPrice: data.ExtrasPrice,
+        price: data.Price,
+        description: data.Description,
+        dateTime: data.DateTime,
+        model: data.Model,
+        guid: data.Guid,
+        linkUrl: data.LinkUrl
+    };
+}
+
+/**
+ * @param {Array.<OrderData>} data
+ * @param {number} pageCount
+ */
+module.exports.buildVueMixin = function(data, pageCount) {
+    return {
+        data: {
+            orders: _.map(data, (cur) => buildOrderItemViewModel(cur)),
+            pages: [],
+            currentPageIndex: 0
+        },
+        created: function () {
+            let self = this;
+            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
+
+            _.times(pageCount, (index) => this.pages.push(index + 1));
+
+            /**
+             * @param {number} id
+             * @param {string} antiForgeryToken
+             * @returns {jqXHR}
+             */
+            this._deleteItemAjax = function (id, antiForgeryToken) {
+                return $.ajax({
+                    type: 'POST',
+                    url: '/OrderList/delete',
+                    data: {
+                        __RequestVerificationToken: antiForgeryToken,
+                        id: id,
+                        pageIndex: self.currentPageIndex
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'json'
+                });
+            };
+        },
+        methods: {
+            /** @param {number} itemId */
+            deleteItem: function (itemId) {
+                let self = this;
+                var item = _.find(this.orders, (cur) => cur.id == itemId);
+                if (!item) {
+                    console.error('order ' + itemId + ' not found');
+                    return;
+                }
+
+                this._deleteItemAjax(itemId, this._antiForgeryToken)
+                    .done(
+                        /** @param {{NewPageCount: number, NewItem: OrderData }} data */
+                        function (data) {
+                            console.debug('removing order ' + itemId + ' from view');
+                            self.orders.splice(self.orders.indexOf(item), 1);
+                            if (data.NewItem) {
+                                //insert the item that has moved up to the current page
+                                self.orders.push(buildOrderItemViewModel(data.NewItem));
+                            }
+                            if (self.pages.length !== data.NewPageCount) {
+                                console.debug('page count changed from ' + self.pages.length + ' to ' + data.NewPageCount);
+                                //update the max page count
+                                self.pages.pop();
+
+                                // if the current page is larger than the max pages, gotta load the previous page
+                                /** @type {number} */
+                                let curPageNumber = self.currentPageIndex + 1;
+                                if (curPageNumber > self.pages.length) {
+                                    self.loadPage(curPageNumber - 1);
+                                }
+                            }
+                        })
+                    .fail(function (error) {
+                        console.error('failed to delete order: ' + error.responseText + ' (' + error.statusText + ')');
+                        console.debug(JSON.stringify(error));
+                        alert('order ' + item.name + ' could not be removed');
+                    });
+            },
+            /** @param {number} number */
+            loadPage: function (number) {
+                let self = this;
+                /** @type {number} */
+                let targetIndex = number - 1;
+                if (targetIndex === this.currentPageIndex) {
+                    return;
+                }
+
+                $.ajax({
+                    //make sure the data is saved before the next page is loaded
+                    async: false,
+                    type: 'GET',
+                    url: '/OrderList/LoadPage',
+                    data: { pageIndex: targetIndex },
+                    dataType: 'json'
+                }).done(function (data) {
+                    console.debug('order list for page index ' + targetIndex + ' successfully retrieved');
+                    self.currentPageIndex = targetIndex;
+                    self.orders = _.map(data, (cur) => buildOrderItemViewModel(cur));
+                }).fail(function (error) {
+                    console.error('failed to load page: ' + error.responseText + ' (' + error.statusText + ')');
+                    console.debug(JSON.stringify(error));
+                });
+            }
+        }
+    };
+};
+
+/**
+ * @typedef {Object} OrderData
+ * @property {number} Id
+ * @property {number} ExtrasPrice
+ * @property {number} BasePrice
+ * @property {number} Price
+ * @property {string} Description
+ * @property {string} DateTime
+ * @property {string} Model
+ * @property {string} Guid
+ * @property {string} LinkUrl
+ */
+
+/**
+ * @typedef {Object} OrderItemViewModel
+ * @property {number} id
+ * @property {number} basePrice
+ * @property {number} extrasPrice
+ * @property {number} price
+ * @property {string} description
+ * @property {string} dateTime
+ * @property {string} model
+ * @property {string} guid
+ * @property {string} linkUrl
+ */
+},{"helper.js":1,"lodash/lodash.js":5}],3:[function(require,module,exports){
 const helper = require('helper.js');
 const Vue = require('vue/dist/vue.js');
 
@@ -288,20 +207,24 @@ Vue.filter('formatCurrency', function (value) {
         return helper.formatCurrency(value);
     }
 });
-},{"helper.js":2,"vue/dist/vue.js":8}],4:[function(require,module,exports){
+},{"helper.js":1,"vue/dist/vue.js":8}],4:[function(require,module,exports){
 'use strict';
 
 const vueGlobals = require('vueGlobals.js');
 const Vue = require('vue/dist/vue.js');
-const configurationViewModel = require('configurationViewModel.js');
+const orderListViewModel = require('orderListViewModel.js');
 
 const vm = new Vue({
     el: '#app',
-    mixins: [configurationViewModel.buildVueMixin(window.modelData)]
+    mixins: [orderListViewModel.buildVueMixin(window.modelData.data, window.modelData.pageCount)]
 });
 
-$(window).on('beforeunload', () => vm.saveChanges());
-},{"configurationViewModel.js":1,"vue/dist/vue.js":8,"vueGlobals.js":3}],5:[function(require,module,exports){
+//set the data of the confirm dialog, so that the selected item can be removed
+$(document).on('show.bs.modal', '#confirmCancelDialog', function (e) {
+    let orderId = $(e.relatedTarget).data('id');
+    $(this).find('#confirmCancelBtn').attr('data-orderid', orderId);
+});
+},{"orderListViewModel.js":2,"vue/dist/vue.js":8,"vueGlobals.js":3}],5:[function(require,module,exports){
 (function (global){
 /**
  * @license

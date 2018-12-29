@@ -1,5 +1,8 @@
 'use strict';
 
+const _ = require('underscore$');
+const helper = require('helper.js');
+
 /**
  * @param {OrderData} data
  * @returns {OrderItemViewModel}
@@ -23,7 +26,7 @@ function buildOrderItemViewModel(data) {
  * @param {Array.<OrderData>} data
  * @param {number} pageCount
  */
-export function buildVueMixin(data, pageCount) {
+module.exports.buildVueMixin = function(data, pageCount) {
     return {
         data: {
             orders: _.map(data, (cur) => buildOrderItemViewModel(cur)),
@@ -32,6 +35,8 @@ export function buildVueMixin(data, pageCount) {
         },
         created: function () {
             let self = this;
+            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
+
             _.times(pageCount, (index) => this.pages.push(index + 1));
 
             /**

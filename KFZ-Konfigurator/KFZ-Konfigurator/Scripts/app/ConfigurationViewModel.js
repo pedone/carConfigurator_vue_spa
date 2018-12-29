@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('underscore$');
+const helper = require('helper.js');
 
 /**
  * @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data
@@ -69,6 +70,7 @@ module.exports.buildVueMixin = function(data) {
             this._initialEngineSettings = this.selectedEngineSettings
             this._initialPaintId = this.selectedPaintId;
             this._initialRimsId = this.selectedRimsId;
+            this._antiForgeryToken = helper.getAntiForgeryToken($(document));
         },
         computed: {
             /** @type {ViewModel} */
