@@ -47,7 +47,6 @@ function getFilesOrFolders(pattern) {
  */
 function compileJS(input, output) {
     var b = browserify({
-        debug: true,
         entries: [input],
         basedir: process.env.INIT_CWD,
         paths: [paths.scriptResources]
@@ -58,7 +57,7 @@ function compileJS(input, output) {
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
+        //.pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(minify())
         //.on('error', gutil.log)
         //.pipe(sourcemaps.write('./'))
@@ -67,6 +66,7 @@ function compileJS(input, output) {
 
 function watchJSFolder(input, output) {
     var b = browserify({
+        debug: true,
         entries: [input],
         plugin: [watchify],
         //cache and packageCache neccessary for watchify
@@ -83,7 +83,6 @@ function watchJSFolder(input, output) {
             .pipe(source('bundle.js'))
             .pipe(buffer())
             .pipe(sourcemaps.init({ loadMaps: true }))
-            // Add transformation tasks to the pipeline here.
             //.pipe(minify())
             //  .on('error', gutil.log)
             .pipe(sourcemaps.write('./'))

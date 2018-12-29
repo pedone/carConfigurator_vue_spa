@@ -17412,6 +17412,7 @@ $(window).on('beforeunload', () => vm.saveChanges());
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
 },{}],6:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
@@ -17677,6 +17678,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
+
 },{"process/browser.js":6,"timers":7}],8:[function(require,module,exports){
 (function (global,setImmediate){
 /*!
@@ -28743,6 +28745,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 })));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":7}]},{},[4]);
+
+},{"timers":7}]},{},[4])
 
 //# sourceMappingURL=bundle.js.map

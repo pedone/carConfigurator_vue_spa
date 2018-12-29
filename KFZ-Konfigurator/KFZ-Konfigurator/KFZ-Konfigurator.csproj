@@ -304,7 +304,6 @@
     <Content Include="Scripts\app\ConfigurationOverview\bundle.js" />
     <Content Include="Scripts\app\EngineSettings\bundle.js" />
     <Content Include="Scripts\app\Exterior\bundle.js" />
-    <Content Include="Scripts\app\ModelSelectionViewModel.js" />
     <Content Include="Scripts\app\Model\bundle.js" />
     <Content Include="Scripts\app\orderListViewModel.js" />
     <Content Include="Scripts\app\configurationOverviewViewModel.js" />

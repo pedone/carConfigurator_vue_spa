@@ -346,6 +346,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
+
 },{"process/browser.js":3,"timers":4}],5:[function(require,module,exports){
 (function (global,setImmediate){
 /*!
@@ -11412,6 +11413,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 })));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":4}]},{},[2]);
+
+},{"timers":4}]},{},[2])
 
 //# sourceMappingURL=bundle.js.map
