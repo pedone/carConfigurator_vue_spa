@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@RenderBody()
+
+@section ConfigurationHeader {
+    @RenderSection("ConfigurationHeader", required: false)
+}
+
+@section CartOverview {
+    @RenderSection("CartOverview", required: false)
+}
+
+@section scripts {
+    @{
+        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+        var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+        //var controllerUrl = Url.Content("~") + controllerName;
+    }
+    <script type="text/javascript">
+        window.ServerUrl = '@serverUrl';
+        @*window.VueRouterUrl = '@controllerUrl';*@
+    </script>
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/app/" + controllerName + "/bundle.js")
+}

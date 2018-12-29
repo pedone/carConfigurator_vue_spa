@@ -1,13 +1,8 @@
-﻿import { formatCurrency } from './Helper.js';
+﻿const helper = require('helper.js');
+const Vue = require('vue$');
 
 Vue.filter('formatCurrency', function (value) {
     if (value !== undefined) {
-        return formatCurrency(value);
+        return helper.formatCurrency(value);
     }
 });
-
-export let vueMixins = [];
-export let vueInstance = undefined;
-export function setVueInstance(vm) {
-    vueInstance = vm;
-}

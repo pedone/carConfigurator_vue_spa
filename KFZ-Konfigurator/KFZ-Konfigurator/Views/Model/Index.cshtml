@@ -5,77 +5,38 @@
     ViewBag.Title = LocalizationManager.Localize("ModelView_Title");
 }
 
-<div id="app">
-    <div class="row container">
-        <h2 class="col">@LocalizationManager.Localize("ModelView_Header")</h2>
-        <div class="btn-group btn-group-toggle align-self-start">
-            <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @@click="filterModels()">
-                @LocalizationManager.Localize("ModelView_Filter_All")
-            </button>
-            @foreach (var curSeries in Model.CarSeriesList)
-            {
-                <button type="button" class="btn btn-light" @@click="filterModels('@curSeries')" v-bind:class="{ active: curModelFilter === '@curSeries' }">
-                    @curSeries
-                </button>
-            }
-        </div>
-    </div>
-
-    <div class="row container">
-        @foreach (var item in Model.CarModels)
+<div class="row container">
+    <h2 class="col">@LocalizationManager.Localize("ModelView_Header")</h2>
+    <div class="btn-group btn-group-toggle align-self-start">
+        <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @@click="filterModels">
+            @LocalizationManager.Localize("ModelView_Filter_All")
+        </button>
+        @foreach (var curSeries in Model.CarSeriesList)
         {
-            <a class="card mb-2 col-md-4 rounded-0 car-model-link" v-show="curModelFilter === '@item.Series' || isModelFilterEmpty"
-               @@click="selectCarModel(@item.Id, '@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})')">
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
-                    <h6 class="card-subtitle">@LocalizationManager.Localize("General_From") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
-                    <div class="card-text mt-3">
-                        <div>
-                            @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
-                        </div>
-                        <div>
-                            @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
-                        </div>
-                    </div>
-                </div>
-            </a>
+            <button type="button" class="btn btn-light" @@click="filterModels('@curSeries')" v-bind:class="{ active: curModelFilter === '@curSeries' }">
+                @curSeries
+            </button>
         }
     </div>
 </div>
 
-@section scripts {
-    <script type='module'>
-        import { vueMixins } from '/Scripts/app/VueGlobals.js';
-        import * as helper from '/Scripts/app/Helper.js';
-        vueMixins.push({
-            data: {
-                curModelFilter: ''
-            },
-            computed: {
-                isModelFilterEmpty: function () {
-                    return this.curModelFilter === '';
-                }
-            },
-            methods: {
-                filterModels: function (filter) {
-                    if (filter !== this.curModelFilter) {
-                        this.curModelFilter = filter || '';
-                    }
-                },
-                selectCarModel: function (id, targetUrl) {
-                    const antiForgeryToken = helper.getAntiForgeryToken($(document));
-                    helper.saveViewModel('/Model/SetCarModel', id, antiForgeryToken)
-                        .done(() => {
-                            window.location.href = targetUrl;
-                        })
-                        .fail((error) => {
-                            console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');
-                            console.debug(JSON.stringify(error));
-                            // TODO randomly triggered, maybe because of antiForgeryValidation
-                            //alert('something went wrong. see console for details');
-                        });
-                }
-            }
-        });
-    </script>
-}
+<div class="row container">
+    @foreach (var item in Model.CarModels)
+    {
+        <a class="card mb-2 col-md-4 rounded-0 car-model-link" v-show="curModelFilter === '@item.Series' || isModelFilterEmpty"
+           @@click="selectCarModel(@item.Id, '@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})')">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
+                <h6 class="card-subtitle">@LocalizationManager.Localize("General_From") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
+                <div class="card-text mt-3">
+                    <div>
+                        @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
+                    </div>
+                    <div>
+                        @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

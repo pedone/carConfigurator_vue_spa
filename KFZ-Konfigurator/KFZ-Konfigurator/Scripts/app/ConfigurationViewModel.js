@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('underscore$');
+
 /**
  * @param {ViewModelData|NameViewModelData|AccessoryViewModelData|RimViewModelData} data
  * @returns {ViewModel}
@@ -47,7 +49,7 @@ function getInitialSelectedId(items) {
 /**
  * @param {ConfigurationData} data
  */
-export function buildVueMixin(data) {
+module.exports.buildVueMixin = function(data) {
     return {
         data: {
             selectedPaintId: getInitialSelectedId(data.Paints),

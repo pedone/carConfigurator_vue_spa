@@ -44,24 +44,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrapVue")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script type="module">
-        import { vueMixins, setVueInstance } from '/Scripts/app/VueGlobals.js';
-        import { getAntiForgeryToken } from '/Scripts/app/Helper.js';
-
-        $(window).on('load', () => {
-            if (vueMixins.length > 0) {
-                console.debug('initializing app Vue');
-                setVueInstance(new Vue({
-                    el: '#app',
-                    mixins: vueMixins,
-                    created: function () {
-                        this._antiForgeryToken = getAntiForgeryToken($(document));
-                    }
-                }));
-            }
-        });
-    </script>
 </body>
 </html>
