@@ -293,6 +293,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
+    <Content Include="JS\index.js" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Resources\Images\2018A4AngularFront.gif" />
     <Content Include="Resources\Images\2018A4AngularRear.gif" />
@@ -363,6 +364,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\app\styles.less" />
     <Content Include="package.json" />
+    <None Include="JS\App.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -414,6 +416,7 @@
     <Content Include="Views\OrderOverview\Index.cshtml" />
     <Content Include="Views\ConfigurationOverview\_ConfigurationOverview.cshtml" />
     <Content Include="Views\Shared\_VueLayout.cshtml" />
+    <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

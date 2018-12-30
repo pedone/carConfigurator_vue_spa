@@ -1,42 +1,47 @@
-﻿@model KFZ_Konfigurator.ViewModels.CarModelPageViewModel
-
-@{
-    Layout = "~/Views/Shared/_ConfigurationLayout.cshtml";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = LocalizationManager.Localize("ModelView_Title");
 }
 
-<div class="row container">
-    <h2 class="col">@LocalizationManager.Localize("ModelView_Header")</h2>
-    <div class="btn-group btn-group-toggle align-self-start">
-        <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @@click="filterModels">
-            @LocalizationManager.Localize("ModelView_Filter_All")
-        </button>
-        @foreach (var curSeries in Model.CarSeriesList)
-        {
-            <button type="button" class="btn btn-light" @@click="filterModels('@curSeries')" v-bind:class="{ active: curModelFilter === '@curSeries' }">
-                @curSeries
-            </button>
-        }
-    </div>
-</div>
+@Html.AntiForgeryToken()
+<div id="app">Loading...</div>
 
-<div class="row container">
-    @foreach (var item in Model.CarModels)
-    {
-        <a class="card mb-2 col-md-4 rounded-0 car-model-link" v-show="curModelFilter === '@item.Series' || isModelFilterEmpty"
-           @@click="selectCarModel(@item.Id, '@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})')">
-            <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
-                <h6 class="card-subtitle">@LocalizationManager.Localize("General_From") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
-                <div class="card-text mt-3">
-                    <div>
-                        @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
-                    </div>
-                    <div>
-                        @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
+@section scripts {
+    <script type="module" src="~/JS/dist/bundle.js"></script>
+}
+
+@*<div class="row container">
+        <h2 class="col">@LocalizationManager.Localize("ModelView_Header")</h2>
+        <div class="btn-group btn-group-toggle align-self-start">
+            <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @@click="filterModels">
+                @LocalizationManager.Localize("ModelView_Filter_All")
+            </button>
+            @foreach (var curSeries in Model.CarSeriesList)
+            {
+                <button type="button" class="btn btn-light" @@click="filterModels('@curSeries')" v-bind:class="{ active: curModelFilter === '@curSeries' }">
+                    @curSeries
+                </button>
+            }
+        </div>
+    </div>
+
+    <div class="row container">
+        @foreach (var item in Model.CarModels)
+        {
+            <a class="card mb-2 col-md-4 rounded-0 car-model-link" v-show="curModelFilter === '@item.Series' || isModelFilterEmpty"
+               @@click="selectCarModel(@item.Id, '@Url.RouteUrl(Constants.Routes.EngineSettings, new { id = item.Id})')">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(_ => item.Series) @Html.DisplayFor(_ => item.BodyType) @Html.DisplayFor(_ => item.Year)</h5>
+                    <h6 class="card-subtitle">@LocalizationManager.Localize("General_From") @Html.DisplayFor(_ => item.BaseSettings.Price)</h6>
+                    <div class="card-text mt-3">
+                        <div>
+                            @LocalizationManager.Localize("TechnicalData_Consumption"): @Html.DisplayFor(_ => item.BaseSettings.Consumption) l/100 km
+                        </div>
+                        <div>
+                            @LocalizationManager.Localize("TechnicalData_Emissions"): @Html.DisplayFor(_ => item.BaseSettings.Emission) g/km
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    }
-</div>
+            </a>
+        }
+    </div>*@
