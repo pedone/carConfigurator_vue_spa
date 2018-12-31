@@ -7,33 +7,34 @@ const bundleOutputDir = './JS/dist';
 
 const config = {
     entry: './JS/index.js',
-    watch: true,
-  output: {
-    path: path.resolve(__dirname, bundleOutputDir),
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      }
+    //watch: true,
+    output: {
+        path: path.resolve(__dirname, bundleOutputDir),
+        filename: 'bundle.js'
+    },
+    devtool: 'source-map',
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader'
+            }
+        ]
+    },
+    resolve: {
+        extensions: [
+            '.js',
+            '.vue'
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        new LodashModuleReplacementPlugin
     ]
-  },
-  resolve: {
-    extensions: [
-      '.js',
-      '.vue'
-    ]
-  },
-  plugins: [
-    new VueLoaderPlugin(),
-    new LodashModuleReplacementPlugin
-  ]
 }
 
 module.exports = config;

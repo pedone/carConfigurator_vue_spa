@@ -292,7 +292,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="gulpfile.js" />
     <Content Include="JS\index.js" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Resources\Images\2018A4AngularFront.gif" />
@@ -301,11 +300,6 @@
     <Content Include="Resources\Images\2018A4Front.gif" />
     <Content Include="Resources\Images\2018A4Rear.gif" />
     <Content Include="Resources\Images\2018A4Side.gif" />
-    <Content Include="Scripts\app\Accessories\bundle.js" />
-    <Content Include="Scripts\app\ConfigurationOverview\bundle.js" />
-    <Content Include="Scripts\app\EngineSettings\bundle.js" />
-    <Content Include="Scripts\app\Exterior\bundle.js" />
-    <Content Include="Scripts\app\Model\bundle.js" />
     <Content Include="Scripts\app\orderListViewModel.js" />
     <Content Include="Scripts\app\configurationOverviewViewModel.js" />
     <Content Include="Scripts\app\configurationViewModel.js" />
@@ -338,7 +332,6 @@
     <Content Include="Resources\Images\engineSize.svg" />
     <Content Include="Resources\Images\performance.svg" />
     <Content Include="Resources\Images\topSpeed.svg" />
-    <Content Include="Scripts\app\OrderList\bundle.js" />
     <Content Include="Scripts\app\vueGlobals.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
