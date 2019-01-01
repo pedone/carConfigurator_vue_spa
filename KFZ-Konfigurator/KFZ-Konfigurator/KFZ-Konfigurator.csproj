@@ -357,6 +357,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\app\styles.less" />
     <Content Include="package.json" />
+    <Content Include="JS\About.vue" />
     <None Include="JS\App.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
