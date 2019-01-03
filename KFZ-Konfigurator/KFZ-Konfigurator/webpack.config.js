@@ -17,7 +17,10 @@ const config = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    plugins: ['lodash']
+                }
             },
             {
                 test: /\.js$/,

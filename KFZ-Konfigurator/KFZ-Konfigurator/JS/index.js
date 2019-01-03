@@ -1,7 +1,7 @@
 ﻿import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
-import About from './About';
+import Model from './Model/Model';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -12,8 +12,8 @@ const routes = [
         component: App,
         children: [
             {
-                path: 'about',
-                component: About
+                path: '',
+                component: Model
             }
         ]
     }

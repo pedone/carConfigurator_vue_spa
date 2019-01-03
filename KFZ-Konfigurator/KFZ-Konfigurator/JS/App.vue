@@ -1,11 +1,7 @@
 <template>
-    <div>
-        <div>App</div>
-        <router-link :to="$route.path + '/about'">About</router-link>
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
-    export default { }
+    export default {}
 </script>

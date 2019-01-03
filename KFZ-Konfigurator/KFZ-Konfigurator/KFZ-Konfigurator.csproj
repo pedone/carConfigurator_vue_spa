@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ConfigurationOverviewController.cs" />
@@ -292,6 +293,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="JS\Api\data.js" />
     <Content Include="JS\index.js" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Resources\Images\2018A4AngularFront.gif" />
@@ -357,7 +359,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\app\styles.less" />
     <Content Include="package.json" />
-    <Content Include="JS\About.vue" />
+    <Content Include="JS\Model\Model.vue" />
     <None Include="JS\App.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
