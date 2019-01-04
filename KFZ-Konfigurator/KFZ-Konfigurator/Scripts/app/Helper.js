@@ -7,7 +7,7 @@
  * @param {Object} [additionalData]
  * @returns {jqXHR}
  */
-module.exports.saveViewModel = function (url, id, antiForgeryToken, additionalData) {
+export function saveViewModel(url, id, antiForgeryToken, additionalData) {
     let i;
     /** @type {Object} */
     let dataObject = {
@@ -36,10 +36,10 @@ module.exports.saveViewModel = function (url, id, antiForgeryToken, additionalDa
  * @param {Document} document
  * @returns {string}
  */
-module.exports.getAntiForgeryToken = function (document) {
+export function getAntiForgeryToken(document) {
     return document.find('[name="__RequestVerificationToken"]').val();
 };
 
-module.exports.formatCurrency = function (amount) {
+export function formatCurrency(amount) {
     return amount.toLocaleString() + ' EUR';
 };

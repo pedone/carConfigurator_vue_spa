@@ -14,15 +14,15 @@
 
 @section headerScripts {
     @{
-        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
-        var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+        //var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+        //var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
         //var controllerUrl = Url.Content("~") + controllerName;
+        var rootVueUrl = Url.RouteUrl(Constants.Routes.ModelOverview);
     }
     <script type="text/javascript">
-        window.ServerUrl = '@serverUrl';
-        @*window.VueRouterUrl = '@controllerUrl';*@
+        @*window.ServerUrl = '@serverUrl';*@
+        window.VueRouterUrl = '@rootVueUrl';
     </script>
-    <script src="~/Scripts/app/@controllerName/bundle.js" defer></script>
 }
 
 @section scripts {

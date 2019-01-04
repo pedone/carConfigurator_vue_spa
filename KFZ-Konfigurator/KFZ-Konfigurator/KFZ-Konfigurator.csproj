@@ -361,6 +361,7 @@
     <Content Include="package.json" />
     <Content Include="JS\Model\Model.vue" />
     <None Include="JS\App.vue" />
+    <Content Include="JS\EngineSettings\EngineSettings.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
