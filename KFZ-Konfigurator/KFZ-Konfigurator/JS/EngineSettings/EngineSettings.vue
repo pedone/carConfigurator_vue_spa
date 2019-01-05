@@ -1,6 +1,7 @@
 <template>
     <div>
-        EngineSettings
+        <!--{{ $t('message.hello') }}-->
+        Test
     </div>
 </template>
 
