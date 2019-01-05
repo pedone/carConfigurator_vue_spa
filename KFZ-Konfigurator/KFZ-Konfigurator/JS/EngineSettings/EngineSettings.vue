@@ -58,14 +58,14 @@
 
     export default {
         created: function () {
-            this.initConfigurationData();
+            this.loadConfigurationData(this.$route.params.id);
         },
         methods: {
             ...mapMutations([
                 'setEngineSettingsId'
             ]),
             ...mapActions([
-                'initConfigurationData'
+                'loadConfigurationData'
             ])
         }
     }

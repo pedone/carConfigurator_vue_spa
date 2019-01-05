@@ -1,6 +1,7 @@
 ﻿import App from './App';
 import Model from './Model/Model';
 import EngineSettings from './EngineSettings/EngineSettings';
+import Accessories from './Accessories/Accessories';
 
 export default [
     {
@@ -25,7 +26,7 @@ export default [
             {
                 name: 'accessories',
                 path: 'model-:id/accessories',
-                component: EngineSettings,
+                component: Accessories,
                 meta: {
                     title: 'Accessories'
                 }

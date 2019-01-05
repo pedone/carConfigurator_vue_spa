@@ -5,6 +5,7 @@ export default function () {
     return new Vuex.Store({
         strict: process.env.NODE_ENV !== 'production',
         state: {
+            carModelId: -1,
             configurationData: {},
             configuration: {
                 engineSettingsId: -1
@@ -16,12 +17,16 @@ export default function () {
             },
             setEngineSettingsId(state, id) {
                 state.configuration.engineSettingsId = id;
+            },
+            setCarModelId(state, id) {
+                state.carModelId = id;
             }
         },
         actions: {
-            initConfigurationData({ commit, state }) {
-                if (Object.keys(state.configurationData).length === 0) {
-                    getConfigurationData().then(data => commit('setConfiguration', data));
+            loadConfigurationData({ commit, state }, carModelId) {
+                if (carModelId !== state.carModelId) {
+                    commit('setCarModelId', carModelId);
+                    getConfigurationData(carModelId).then(data => commit('setConfiguration', data));
                 }
             }
         }

@@ -6,8 +6,8 @@
     });
 };
 
-export function getConfigurationData() {
-    return fetch('/Data/ConfigurationData?carModelId=5', {
+export function getConfigurationData(carModelId) {
+    return fetch('/Data/ConfigurationData?carModelId=' + carModelId, {
         method: 'get',
     }).then(function (response) {
         return response.json();

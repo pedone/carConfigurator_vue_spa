@@ -19,7 +19,8 @@
         engineSize: 'Engine Size'
     },
     engineCategory: {
-        TFSI: 'TFSI'
+        TFSI: 'TFSI',
+        TDI: 'TDI'
     }
 };
 
