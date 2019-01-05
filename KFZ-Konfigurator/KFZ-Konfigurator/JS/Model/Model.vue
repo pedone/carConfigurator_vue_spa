@@ -4,7 +4,7 @@
             <h2 class="col">{{$t('modelView.header')}}</h2>
             <div class="btn-group btn-group-toggle align-self-start">
                 <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @click="filterModels('')">
-                    {{$t('modelView.filterAll')}}
+                    {{ $t('modelView.filterAll') }}
                 </button>
                 <button v-for="item in seriesList"
                         type="button"
@@ -23,14 +23,14 @@
                 <div class="card-body">
                     <h5 class="card-title">{{item.Series}} {{item.BodyType}} {{item.Year}}</h5>
                     <h6 class="card-subtitle">
-                        {{$t('general.from')}} {{item.BaseSettings.Price | formatCurrency}}
+                        {{$t('general.from')}} {{ $n(item.BaseSettings.Price, 'currency') }}
                     </h6>
                     <div class="card-text mt-3">
                         <div>
-                            {{$t('technicalData.consumption')}}: {{item.BaseSettings.Consumption}} l/100 km
+                            {{ $t('technicalData.consumption') }}: {{ item.BaseSettings.Consumption }} l/100 km
                         </div>
                         <div>
-                            {{$t('technicalData.emissions')}}: {{item.BaseSettings.Emission}} g/km
+                            {{ $t('technicalData.emissions') }}: {{ item.BaseSettings.Emission }} g/km
                         </div>
                     </div>
                 </div>

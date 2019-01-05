@@ -8,9 +8,7 @@
     "build-dev-watch": "webpack -d --mode development --watch",
     "build-prod": "webpack -p --mode production"
   },
-  "dependencies": {
-    "vue-i18n": "^8.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "7.2.0",
@@ -23,6 +21,8 @@
     "vue-template-compiler": "^2.5.21",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "vue-i18n": "^8.7.0",
+    "vuex": "^3.0.1"
   }
 }

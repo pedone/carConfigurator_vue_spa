@@ -1,4 +1,4 @@
-﻿export default {
+﻿export const messages = {
     modelView: {
         header: 'Wähle dein Model',
         filterAll: 'Alle',
@@ -10,4 +10,10 @@
         consumption: 'Verbrauch',
         emissions: 'Emissionen'
     }
-}
+};
+
+export const numberFormats = {
+    currency: {
+        style: 'currency', currency: 'EUR'
+    }
+};
