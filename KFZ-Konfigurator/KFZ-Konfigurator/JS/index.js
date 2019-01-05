@@ -1,9 +1,10 @@
-﻿import Vue from 'vue';
+﻿import './filters';
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
 import Model from './Model/Model';
 import EngineSettings from './EngineSettings/EngineSettings';
-import { getAntiForgeryToken } from '../Scripts/app/helper.js';
+import { getAntiForgeryToken } from './helper';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);

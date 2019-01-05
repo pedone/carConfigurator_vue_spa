@@ -294,7 +294,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="JS\Api\data.js" />
+    <Content Include="JS\helper.js" />
     <Content Include="JS\index.js" />
+    <Content Include="JS\filters.js" />
     <Content Include="Models\CarConfiguratorModel.edmx.sql" />
     <Content Include="Resources\Images\2018A4AngularFront.gif" />
     <Content Include="Resources\Images\2018A4AngularRear.gif" />

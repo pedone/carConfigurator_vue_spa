@@ -25,7 +25,7 @@
                     <h5 class="card-title">{{item.Series}} {{item.BodyType}} {{item.Year}}</h5>
                     <h6 class="card-subtitle">
                         <!--@LocalizationManager.Localize("General_From")-->
-                        from {{item.BaseSettings.Price}}
+                        from {{item.BaseSettings.Price | formatCurrency}}
                     </h6>
                     <div class="card-text mt-3">
                         <div>
