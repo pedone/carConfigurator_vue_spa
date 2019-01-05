@@ -1,9 +1,13 @@
 ﻿export default {
-    message: {
-        hello: 'hallo welt',
-        hello2: 'hallo welt2'
+    modelView: {
+        header: 'Wähle dein Model',
+        filterAll: 'Alle',
     },
-    message2: {
-        hello: 'hallo1'
+    general: {
+        from: 'Ab',
+    },
+    technicalData: {
+        consumption: 'Verbrauch',
+        emissions: 'Emissionen'
     }
 }

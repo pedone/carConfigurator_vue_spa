@@ -1,11 +1,10 @@
 <template>
     <div>
         <div class="row container">
-            <h2 class="col"><!--@LocalizationManager.Localize("ModelView_Header")-->Choose your model</h2>
+            <h2 class="col">{{$t('modelView.header')}}</h2>
             <div class="btn-group btn-group-toggle align-self-start">
                 <button type="button" class="btn btn-light" v-bind:class="{ active: isModelFilterEmpty }" @click="filterModels('')">
-                    <!--@LocalizationManager.Localize("ModelView_Filter_All")-->
-                    All
+                    {{$t('modelView.filterAll')}}
                 </button>
                 <button v-for="item in seriesList"
                         type="button"
@@ -24,15 +23,14 @@
                 <div class="card-body">
                     <h5 class="card-title">{{item.Series}} {{item.BodyType}} {{item.Year}}</h5>
                     <h6 class="card-subtitle">
-                        <!--@LocalizationManager.Localize("General_From")-->
-                        from {{item.BaseSettings.Price | formatCurrency}}
+                        {{$t('general.from')}} {{item.BaseSettings.Price | formatCurrency}}
                     </h6>
                     <div class="card-text mt-3">
                         <div>
-                            <!--@LocalizationManager.Localize("TechnicalData_Consumption")-->Consumption: {{item.BaseSettings.Consumption}} l/100 km
+                            {{$t('technicalData.consumption')}}: {{item.BaseSettings.Consumption}} l/100 km
                         </div>
                         <div>
-                            <!--@LocalizationManager.Localize("TechnicalData_Emissions")-->Emissions: {{item.BaseSettings.Emission}} g/km
+                            {{$t('technicalData.emissions')}}: {{item.BaseSettings.Emission}} g/km
                         </div>
                     </div>
                 </div>
