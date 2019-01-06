@@ -294,6 +294,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="JS\Api\data.js" />
+    <Content Include="JS\constants.js" />
     <Content Include="JS\helper.js" />
     <Content Include="JS\index.js" />
     <Content Include="JS\Localization\de-DE.js" />
@@ -365,6 +366,7 @@
     <Content Include="Content\app\styles.less" />
     <Content Include="package.json" />
     <Content Include="JS\Model\Model.vue" />
+    <Content Include="JS\Exterior\Exterior.vue" />
     <None Include="JS\App.vue" />
     <Content Include="JS\EngineSettings\EngineSettings.vue" />
     <Content Include="JS\Accessories\Accessories.vue" />

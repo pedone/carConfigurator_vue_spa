@@ -54,7 +54,11 @@ namespace KFZ_Konfigurator.Controllers
                 var rims = context.Rims.ToList()
                         .Select(cur => new RimViewModel(cur))
                         .ToList();
-                return Json(new { accessories, engineSettings, paints, rims }, JsonRequestBehavior.AllowGet);
+
+                //accessoryCategories
+                var accessoryCategories = context.Categories.OfType<AccessoryCategory>().Select(cur => cur.Name).ToList();
+
+                return Json(new { accessories, engineSettings, paints, rims, accessoryCategories }, JsonRequestBehavior.AllowGet);
             }
         }
     }

@@ -22,7 +22,7 @@
   border-bottom: 3px solid red;
 }
 .navbar-nav .nav-link.active {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 .sticky-top-offset {
   top: 5em;

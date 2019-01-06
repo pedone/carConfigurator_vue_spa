@@ -1,10 +1,18 @@
 ﻿export const messages = {
+    app: {
+        engineSettingsButton: 'Engines',
+        accessoriesButton: 'Accessories',
+        exteriorButton: 'Exterior',
+    },
     modelView: {
         header: 'Choose your model',
         filterAll: 'All',
     },
     engineSettingsView: {
         continueToAccessoriesButton: 'Continue To Accessories'
+    },
+    accessoriesView: {
+        continueToExteriorButton: 'Continue To Exterior'
     },
     general: {
         from: 'from',

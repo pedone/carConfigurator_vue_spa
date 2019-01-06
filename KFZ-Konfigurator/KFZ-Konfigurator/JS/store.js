@@ -1,5 +1,6 @@
 ﻿import Vuex from 'vuex';
 import { getConfigurationData } from './Api/data';
+import constants from './constants';
 
 export default function () {
     return new Vuex.Store({
@@ -8,8 +9,12 @@ export default function () {
             carModelId: -1,
             configurationData: {},
             configuration: {
-                engineSettingsId: -1
-            }
+                /** @type {number} */
+                engineSettingsId: -1,
+                /** @type {Array.<number>} */
+                accessories: []
+            },
+            constants
         },
         mutations: {
             setConfiguration(state, value) {
@@ -20,6 +25,9 @@ export default function () {
             },
             setCarModelId(state, id) {
                 state.carModelId = id;
+            },
+            setSelectedAccessories(state, value) {
+                state.configuration.accessories = value;
             }
         },
         actions: {

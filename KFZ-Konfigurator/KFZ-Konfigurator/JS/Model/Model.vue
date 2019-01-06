@@ -75,7 +75,7 @@
             selectCarModel: function (id) {
                 saveViewModel('/Model/SetCarModel', id, this.antiForgeryToken)
                     .done(() => {
-                        this.$router.push({ name: 'engine-settings', params: { id: id } });
+                        this.$router.push({ name: this.$store.state.constants.routes.engineSettings, params: { id: id } });
                     })
                     .fail((error) => {
                         console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');

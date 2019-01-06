@@ -2,16 +2,16 @@
     <div>
         <div class="list-group">
             <a v-for="(item, index) in $store.state.configurationData.engineSettings"
+               v-bind:key="item.Id"
                class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center"
-               v-bind:class="{ active: index === 0 }"
+               v-bind:class="{ active: item.Id === $store.state.configuration.engineSettingsId || ($store.state.configuration.engineSettingsId === -1 && index === 0) }"
                data-toggle="list"
                @click="setEngineSettingsId(item.Id)">
                 <div class="flex-column w-100 align-items-lg-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">
                             {{ item.Engine.Liter }} {{ $t('engineCategory.' + item.Engine.EngineKind) }} {{ item.Gears }} {{ $t('technicalData.transmissionSuffix') }}
-                            <!-- TODO use a constant -->
-                            <template v-if="item.WheelDrive === 2">
+                            <template v-if="item.WheelDrive === $store.state.constants.wheelDriveKind.all">
                                 {{ $t('technicalData.transmissionAllroad') }}
                             </template>
                         </h5>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-3">
-            <router-link :to="{ name: 'accessories' }" class="btn btn-outline-dark">{{ $t('engineSettingsView.continueToAccessoriesButton') }}</router-link>
+            <router-link :to="{ name: $store.state.constants.routes.accessories }" class="btn btn-outline-dark">{{ $t('engineSettingsView.continueToAccessoriesButton') }}</router-link>
         </div>
     </div>
 </template>
