@@ -11,7 +11,7 @@ export default function () {
             configuration: {
                 /** @type {number} */
                 engineSettingsId: -1,
-                /** @type {Array.<number>} */
+                /** @type {Array.<AccessoryViewModelData>} */
                 accessories: []
             },
             constants
@@ -28,6 +28,14 @@ export default function () {
             },
             setSelectedAccessories(state, value) {
                 state.configuration.accessories = value;
+            },
+            toggleSelectedAccessory(state, value) {
+                const index = state.configuration.accessories.indexOf(value);
+                if (index === -1) {
+                    state.configuration.accessories.push(value);
+                } else {
+                    state.configuration.accessories.splice(index, 1);
+                }
             }
         },
         actions: {
@@ -40,3 +48,45 @@ export default function () {
         }
     })
 };
+
+//TODO refactor types
+
+/**
+ * @typedef {Object} ViewModel
+ * @property {number} id
+ * @property {number} price
+ * @property {boolean} isSelected
+ * @property {string} name
+ * @property {number|null} size
+ * @property {number|null} category
+ */
+
+/**
+ * @typedef {Object} ViewModelData
+ * @property {number} Id
+ * @property {number} Price
+ * @property {boolean} IsSelected
+ */
+
+/**
+ * @typedef {ViewModelData} NameViewModelData
+ * @property {string} Name
+ */
+
+/**
+ * @typedef {ViewModelData} RimViewModelData
+ * @property {number} Size
+ */
+
+/**
+ * @typedef {NameViewModelData} AccessoryViewModelData
+ * @property {number} Category
+ */
+
+/**
+ * @typedef {Object} ConfigurationData
+ * @property {Array.<ViewModelData>} EngineSettings
+ * @property {Array.<ViewModelData>} Accessories
+ * @property {Array.<ViewModelData>} Paints
+ * @property {Array.<ViewModelData>} Rims
+ */

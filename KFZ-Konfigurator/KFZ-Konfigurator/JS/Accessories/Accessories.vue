@@ -5,7 +5,7 @@
                 <div class="card" v-for="curCategory in sortedAccessoryCategories">
                     <div class="card-header btn d-flex align-items-start" role="button" v-bind:data-target="'#collapse' + curCategory" data-toggle="collapse">
                         <h5>
-                            {{ curCategory }} <!--<span class="badge badge-secondary">{{ getAccessoryCount(curCategory) }}</span>-->
+                            {{ curCategory }} <span class="badge badge-secondary">{{ $store.state.configuration.accessories | countAccessoriesByCategory(curCategory) }}</span>
                         </h5>
                     </div>
                     <div class="collapse" data-parent="#accessoriesAccordion" v-bind:id="'collapse' + curCategory">
@@ -15,11 +15,10 @@
                                 <div class="row">
                                     <div class="col-auto align-items-center d-flex">
                                         <input type="checkbox"
-                                               v-bind:value="item.Id"
+                                               v-bind:value="item"
                                                v-model="selectedAccessories" />
                                     </div>
-                                    <!--<div class="col" @click="toggleAccessorySelection(item.Id)">-->
-                                    <div class="col">
+                                    <div class="col" @click="toggleSelectedAccessory(item)">
                                         <h5 class="card-title">{{ item.Name }}</h5>
                                         <h6 class="card-text">{{ $n(item.Price, 'currency') }}</h6>
                                     </div>
@@ -57,23 +56,16 @@
             sortedAccessoryCategories: function () {
                 return _.sortBy(this.$store.state.configurationData.accessoryCategories);
             }
-            //accessoryCountByCategory: function () {
-            //    let result = _.reduce(this.sortedAccessoryCategories, (result, cur) => {
-            //        result[cur] = 0;
-            //        return result;
-            //    }, {});
-            //    _.each(this.$store.state.configurationData.accessories, cur => result[cur.Category] += 1);
-            //    return result;
-            //}
         },
         methods: {
             ...mapMutations([
-                'setSelectedAccessories'
+                'setSelectedAccessories',
+                'toggleSelectedAccessory'
             ]),
             ...mapActions([
                 'loadConfigurationData'
             ]),
-            getAccessoriesByCategory: function (category) {
+            getAccessoriesByCategory(category) {
                 return _.filter(this.$store.state.configurationData.accessories, cur => cur.Category === category);
             }
         }

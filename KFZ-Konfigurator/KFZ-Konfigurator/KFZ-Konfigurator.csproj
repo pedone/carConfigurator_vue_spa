@@ -295,6 +295,7 @@
     <Content Include="Global.asax" />
     <Content Include="JS\Api\data.js" />
     <Content Include="JS\constants.js" />
+    <Content Include="JS\filters.js" />
     <Content Include="JS\helper.js" />
     <Content Include="JS\index.js" />
     <Content Include="JS\Localization\de-DE.js" />
