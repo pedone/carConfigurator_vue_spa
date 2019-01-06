@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="list-group">
-            <a v-for="(item, index) in $store.state.configurationData.engineSettings"
+            <a v-for="(item, index) in sortedEngineSettings"
                v-bind:key="item.Id"
                class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center"
-               v-bind:class="{ active: item.Id === $store.state.configuration.engineSettingsId || ($store.state.configuration.engineSettingsId === -1 && index === 0) }"
+               v-bind:class="{ active: item.Id === $store.state.configuration.engineSettings.Id }"
                data-toggle="list"
-               @click="setEngineSettingsId(item.Id)">
+               @click="setEngineSettings(item)">
                 <div class="flex-column w-100 align-items-lg-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">
@@ -48,21 +48,26 @@
         </div>
 
         <div class="d-flex justify-content-end mt-3">
-            <router-link :to="{ name: $store.state.constants.routes.accessories }" class="btn btn-outline-dark">{{ $t('engineSettingsView.continueToAccessoriesButton') }}</router-link>
+            <router-link v-bind:to="{ name: $store.state.constants.routes.accessories }" class="btn btn-outline-dark">{{ $t('engineSettingsView.continueToAccessoriesButton') }}</router-link>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapActions, mapMutations } from 'vuex';
+    import { mapActions, mapMutations, mapGetters } from 'vuex';
 
     export default {
         created: function () {
             this.loadConfigurationData(this.$route.params.id);
         },
+        computed: {
+            ...mapGetters([
+                'sortedEngineSettings'
+            ])
+        },
         methods: {
             ...mapMutations([
-                'setEngineSettingsId'
+                'setEngineSettings'
             ]),
             ...mapActions([
                 'loadConfigurationData'

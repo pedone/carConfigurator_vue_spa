@@ -1,27 +1,38 @@
 ﻿import Vuex from 'vuex';
 import { getConfigurationData } from './Api/data';
 import constants from './constants';
+import { orderBy, find } from 'lodash';
 
 export default function () {
     return new Vuex.Store({
         strict: process.env.NODE_ENV !== 'production',
         state: {
             carModelId: -1,
+            /** @type {ConfigurationData} */
             configurationData: {},
             configuration: {
-                /** @type {number} */
-                engineSettingsId: -1,
+                /** @type {ViewModelData} */
+                engineSettings: undefined,
                 /** @type {Array.<AccessoryViewModelData>} */
-                accessories: []
+                accessories: [],
+                /** @type {PaintViewModelData} */
+                paint: undefined,
+                /** @type {RimViewModelData} */
+                rim: undefined
             },
             constants
+        },
+        getters: {
+            sortedEngineSettings(state) {
+                return orderBy(state.configurationData.engineSettings, cur => cur.Price);
+            }
         },
         mutations: {
             setConfiguration(state, value) {
                 state.configurationData = value;
             },
-            setEngineSettingsId(state, id) {
-                state.configuration.engineSettingsId = id;
+            setEngineSettings(state, value) {
+                state.configuration.engineSettings = value;
             },
             setCarModelId(state, id) {
                 state.carModelId = id;
@@ -36,13 +47,25 @@ export default function () {
                 } else {
                     state.configuration.accessories.splice(index, 1);
                 }
+            },
+            selectPaint(state, value) {
+                state.configuration.paint = value;
+            },
+            selectRim(state, value) {
+                state.configuration.rim = value;
             }
         },
         actions: {
-            loadConfigurationData({ commit, state }, carModelId) {
+            loadConfigurationData({ commit, state, getters }, carModelId) {
                 if (carModelId !== state.carModelId) {
                     commit('setCarModelId', carModelId);
-                    getConfigurationData(carModelId).then(data => commit('setConfiguration', data));
+                    getConfigurationData(carModelId).then(data => {
+                        commit('setConfiguration', data);
+                        //set default configuration values
+                        commit('setEngineSettings', getters.sortedEngineSettings[0]);
+                        commit('selectPaint', find(state.configurationData.paints, cur => cur.IsDefault) || state.configurationData.paints[0])
+                        commit('selectRim', find(state.configurationData.rims, cur => cur.IsDefault) || state.configurationData.rims[0])
+                    });
                 }
             }
         }
@@ -76,6 +99,13 @@ export default function () {
 /**
  * @typedef {ViewModelData} RimViewModelData
  * @property {number} Size
+ * @property {boolean|undefined} IsDefault
+ */
+
+/**
+ * @typedef {ViewModelData} PaintViewModelData
+ * @property {number} Size
+ * @property {boolean|undefined} IsDefault
  */
 
 /**
@@ -89,4 +119,6 @@ export default function () {
  * @property {Array.<ViewModelData>} Accessories
  * @property {Array.<ViewModelData>} Paints
  * @property {Array.<ViewModelData>} Rims
+ * @property {Array.<string>} AccessoryCategories
+ * @property {Array.<string>} PaintCategories
  */

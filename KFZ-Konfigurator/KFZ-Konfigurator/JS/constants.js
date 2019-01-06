@@ -3,7 +3,8 @@
         model: 'model',
         engineSettings: 'engineSettings',
         accessories: 'accessories',
-        exterior: 'exterior'
+        exterior: 'exterior',
+        configurationOverview: 'configurationOverview'
     },
     wheelDriveKind: {
         front: 0,

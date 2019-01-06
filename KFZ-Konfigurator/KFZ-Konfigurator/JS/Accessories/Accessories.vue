@@ -5,7 +5,7 @@
                 <div class="card" v-for="curCategory in sortedAccessoryCategories">
                     <div class="card-header btn d-flex align-items-start" role="button" v-bind:data-target="'#collapse' + curCategory" data-toggle="collapse">
                         <h5>
-                            {{ curCategory }} <span class="badge badge-secondary">{{ $store.state.configuration.accessories | countAccessoriesByCategory(curCategory) }}</span>
+                            {{ $t('accessoryCategory.' + curCategory) }} <span class="badge badge-secondary">{{ $store.state.configuration.accessories | countAccessoriesByCategory(curCategory) }}</span>
                         </h5>
                     </div>
                     <div class="collapse" data-parent="#accessoriesAccordion" v-bind:id="'collapse' + curCategory">
@@ -31,7 +31,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-3">
-            <router-link :to="{ name: $store.state.constants.routes.exterior }" class="btn btn-outline-dark">{{ $t('accessoriesView.continueToExteriorButton') }}</router-link>
+            <router-link v-bind:to="{ name: $store.state.constants.routes.exterior }" class="btn btn-outline-dark">{{ $t('accessoriesView.continueToExteriorButton') }}</router-link>
         </div>
     </div>
 </template>

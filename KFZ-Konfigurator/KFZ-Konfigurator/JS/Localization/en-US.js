@@ -8,6 +8,11 @@
         header: 'Choose your model',
         filterAll: 'All',
     },
+    exteriorView: {
+        paintsHeader: 'Paint',
+        rimsHeader: 'Rims',
+        continueToOverviewButton: 'Continue To Overview'
+    },
     engineSettingsView: {
         continueToAccessoriesButton: 'Continue To Accessories'
     },
@@ -16,6 +21,7 @@
     },
     general: {
         from: 'from',
+        rimSizeUnit: 'inch',
     },
     technicalData: {
         consumption: 'Consumption',
@@ -29,6 +35,17 @@
     engineCategory: {
         TFSI: 'TFSI',
         TDI: 'TDI'
+    },
+    accessoryCategory: {
+        AssistenceSystems: 'Assistence Systems',
+        Comfort: 'Comfort',
+        Infotainment: 'Infotainment',
+        TechnologyAndSafety: 'Technology and Safety',
+    },
+    paintCategory: {
+        Metalic: 'Metallic',
+        Pearlescent: 'Pearlescent',
+        Uni: 'Uni'
     }
 };
 

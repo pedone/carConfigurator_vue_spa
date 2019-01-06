@@ -11,6 +11,7 @@ namespace KFZ_Konfigurator.ViewModels
         public string Category { get; }
         public string Color { get; }
         public string Name { get; }
+        public bool? IsDefault { get; }
 
         public PaintViewModel(Paint model)
             : base(model.Id, model.Price)
@@ -18,6 +19,7 @@ namespace KFZ_Konfigurator.ViewModels
             Category = model.Category.Name;
             Color = model.Color;
             Name = model.Name;
+            IsDefault = model.IsDefault;
         }
     }
 }

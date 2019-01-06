@@ -6,6 +6,8 @@
     });
 };
 
+//TODO separate get for data that's not dependent on carModelId
+
 export function getConfigurationData(carModelId) {
     return fetch('/Data/ConfigurationData?carModelId=' + carModelId, {
         method: 'get',

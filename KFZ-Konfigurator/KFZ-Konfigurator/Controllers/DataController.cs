@@ -57,8 +57,10 @@ namespace KFZ_Konfigurator.Controllers
 
                 //accessoryCategories
                 var accessoryCategories = context.Categories.OfType<AccessoryCategory>().Select(cur => cur.Name).ToList();
+                //paintCategories
+                var paintCategories = context.Categories.OfType<PaintCategory>().Select(cur => cur.Name).ToList();
 
-                return Json(new { accessories, engineSettings, paints, rims, accessoryCategories }, JsonRequestBehavior.AllowGet);
+                return Json(new { accessories, engineSettings, paints, rims, accessoryCategories, paintCategories }, JsonRequestBehavior.AllowGet);
             }
         }
     }
