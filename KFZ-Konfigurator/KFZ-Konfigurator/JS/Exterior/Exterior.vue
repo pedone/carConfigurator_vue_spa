@@ -46,7 +46,7 @@
         computed: {
             selectedRim: {
                 get() {
-                    return this.$store.state.configuration.rim;
+                    return this.$store.state.configuration.rims;
                 },
                 set(value) {
                     this.selectRim(value);

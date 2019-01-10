@@ -4,6 +4,7 @@ import constants from './constants';
 import EngineSettings from './EngineSettings/EngineSettings';
 import Accessories from './Accessories/Accessories';
 import Exterior from './Exterior/Exterior';
+import ConfigurationOverview from './ConfigurationOverview/ConfigurationOverview';
 
 export default [
     {
@@ -40,6 +41,14 @@ export default [
                 component: Exterior,
                 meta: {
                     title: 'Exterior'
+                }
+            },
+            {
+                name: constants.routes.configurationOverview,
+                path: 'model-:id/overview',
+                component: ConfigurationOverview,
+                meta: {
+                    title: 'ConfigurationOverview'
                 }
             }
         ]

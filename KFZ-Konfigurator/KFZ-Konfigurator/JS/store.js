@@ -18,13 +18,16 @@ export default function () {
                 /** @type {PaintViewModelData} */
                 paint: undefined,
                 /** @type {RimViewModelData} */
-                rim: undefined
+                rims: undefined
             },
             constants
         },
         getters: {
-            sortedEngineSettings(state) {
+            orderedDataEngineSettings(state) {
                 return orderBy(state.configurationData.engineSettings, cur => cur.Price);
+            },
+            orderedConfigurationAccessories(state) {
+                return orderBy(state.configuration.accessories, cur => cur.Category);
             }
         },
         mutations: {
@@ -52,7 +55,7 @@ export default function () {
                 state.configuration.paint = value;
             },
             selectRim(state, value) {
-                state.configuration.rim = value;
+                state.configuration.rims = value;
             }
         },
         actions: {
@@ -62,7 +65,7 @@ export default function () {
                     getConfigurationData(carModelId).then(data => {
                         commit('setConfiguration', data);
                         //set default configuration values
-                        commit('setEngineSettings', getters.sortedEngineSettings[0]);
+                        commit('setEngineSettings', getters.orderedDataEngineSettings[0]);
                         commit('selectPaint', find(state.configurationData.paints, cur => cur.IsDefault) || state.configurationData.paints[0])
                         commit('selectRim', find(state.configurationData.rims, cur => cur.IsDefault) || state.configurationData.rims[0])
                     });

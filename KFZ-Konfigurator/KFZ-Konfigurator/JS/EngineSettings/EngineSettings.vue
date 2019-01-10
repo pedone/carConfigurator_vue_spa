@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="list-group">
-            <a v-for="(item, index) in sortedEngineSettings"
+            <a v-for="(item, index) in orderedDataEngineSettings"
                v-bind:key="item.Id"
                class="list-group-item list-group-item-light list-group-item-action rounded-0 d-flex align-items-lg-center"
                v-bind:class="{ active: item.Id === $store.state.configuration.engineSettings.Id }"
@@ -62,7 +62,7 @@
         },
         computed: {
             ...mapGetters([
-                'sortedEngineSettings'
+                'orderedDataEngineSettings'
             ])
         },
         methods: {

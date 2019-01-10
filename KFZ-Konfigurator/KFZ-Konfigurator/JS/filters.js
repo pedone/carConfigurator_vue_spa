@@ -1,5 +1,5 @@
 ﻿import Vue from 'vue';
-import { filter as _filter } from 'lodash';
+import { filter } from 'lodash';
 
 Vue.filter('countAccessoriesByCategory',
     /**
@@ -7,6 +7,6 @@ Vue.filter('countAccessoriesByCategory',
      * @param {string} category
      */
     function (data, category) {
-        return _filter(data, cur => cur.Category === category).length;
+        return filter(data, cur => cur.Category === category).length;
     }
 );
