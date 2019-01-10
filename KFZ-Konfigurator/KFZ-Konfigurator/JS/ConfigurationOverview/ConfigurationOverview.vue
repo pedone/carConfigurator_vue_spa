@@ -58,6 +58,7 @@
 
 <script>
     import ComfigurationDocument from './ConfigurationDocument';
+    import { map } from 'lodash';
 
     export default {
         components: {
@@ -72,10 +73,22 @@
         inject: ['antiForgeryToken'],
         methods: {
             placeOrder: function () {
+                //extract configuration ids
+                const config = this.$store.state.configuration;
+
+                const data = {
+                    __RequestVerificationToken: this.antiForgeryToken,
+                    description: this.configurationDescription,
+                    engineSettings: config.engineSettings.Id,
+                    paint: config.paint.Id,
+                    rims: config.rims.Id,
+                    accessories: map(config.accessories, cur => cur.Id)
+                };
+
                 $.ajax({
                     type: 'POST',
                     url: '/ConfigurationOverview/PlaceOrder',
-                    data: { __RequestVerificationToken: this.antiForgeryToken, description: this.configurationDescription },
+                    data: data,
                     contentType: 'application/x-www-form-urlencoded',
                     dataType: 'text'
                 }).done(

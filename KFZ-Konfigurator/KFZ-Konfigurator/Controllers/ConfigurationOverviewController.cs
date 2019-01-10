@@ -34,14 +34,13 @@ namespace KFZ_Konfigurator.Controllers
             }
         }
 
-        private Configuration InitConfiguration(CarConfiguratorEntityContext context)
+        private Configuration InitConfiguration(CarConfiguratorEntityContext context, (int engineSettings, int[] accessories, int paint, int rims) data)
         {
-            var configViewModel = SessionData.ActiveConfiguration;
             var configuration = context.Configurations.Create();
-            configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == configViewModel.EngineSettingsId);
-            configuration.Paint = context.Paints.First(cur => cur.Id == configViewModel.PaintId);
-            configuration.Rims = context.Rims.First(cur => cur.Id == configViewModel.RimId);
-            configuration.Accessories = context.Accessories.Where(cur => configViewModel.AccessoryIds.Contains(cur.Id)).ToList();
+            configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == data.engineSettings);
+            configuration.Paint = context.Paints.First(cur => cur.Id == data.paint);
+            configuration.Rims = context.Rims.First(cur => cur.Id == data.rims);
+            configuration.Accessories = context.Accessories.Where(cur => data.accessories.Contains(cur.Id)).ToList();
 
             return configuration;
         }
@@ -58,7 +57,7 @@ namespace KFZ_Konfigurator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string PlaceOrder(string description)
+        public string PlaceOrder(string description, int[] accessories, int engineSettings, int paint, int rims)
         {
             if (!Request.IsAjaxRequest())
             {
@@ -66,19 +65,12 @@ namespace KFZ_Konfigurator.Controllers
                 Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return "This action must be called with ajax";
             }
-            //make sure the user didn't wait too long and the session already expired
-            if (!SessionData.ActiveConfiguration.IsValid(null, out string error))
-            {
-                Log.Error(error);
-                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return error;
-            }
 
             Configuration configuration;
             using (var context = new CarConfiguratorEntityContext())
             {
                 //store the current configuration
-                configuration = InitConfiguration(context);
+                configuration = InitConfiguration(context, (engineSettings, accessories, paint, rims));
                 context.Configurations.Add(configuration);
 
                 var newOrder = context.Orders.Create();
