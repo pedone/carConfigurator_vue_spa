@@ -6,11 +6,14 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const bundleOutputDir = './JS/dist';
 
 const config = {
-    entry: './JS/index.js',
+    entry: {
+        main: './JS/index.js',
+        orderList: './JS/orderList.index.js'
+    },
     //watch: true,
     output: {
         path: path.resolve(__dirname, bundleOutputDir),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
     devtool: 'source-map',
     module: {

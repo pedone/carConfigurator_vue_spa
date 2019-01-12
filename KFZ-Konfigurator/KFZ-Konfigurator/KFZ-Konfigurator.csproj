@@ -297,6 +297,7 @@
     <Content Include="JS\constants.js" />
     <Content Include="JS\filters.js" />
     <Content Include="JS\helper.js" />
+    <Content Include="JS\orderList.index.js" />
     <Content Include="JS\index.js" />
     <Content Include="JS\Localization\de-DE.js" />
     <Content Include="JS\Localization\en-US.js" />
