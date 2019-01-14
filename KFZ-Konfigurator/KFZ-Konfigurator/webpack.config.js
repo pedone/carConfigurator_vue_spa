@@ -1,5 +1,4 @@
-﻿const webpack = require('webpack');
-const path = require('path');
+﻿const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
@@ -7,7 +6,7 @@ const bundleOutputDir = './JS/dist';
 
 const config = {
     entry: {
-        main: './JS/index.js',
+        main: './JS/main.index.js',
         orderList: './JS/orderList.index.js'
     },
     //watch: true,

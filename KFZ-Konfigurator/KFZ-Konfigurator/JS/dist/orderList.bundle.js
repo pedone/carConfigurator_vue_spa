@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./JS/main.index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./JS/orderList.index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -482,15 +482,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./JS/main.index.js":
-/*!**************************!*\
-  !*** ./JS/main.index.js ***!
-  \**************************/
+/***/ "./JS/orderList.index.js":
+/*!*******************************!*\
+  !*** ./JS/orderList.index.js ***!
+  \*******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _setup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setup */ \"./JS/setup.js\");\n/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ \"./JS/routes.js\");\n\n\nObject(_setup__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(_routes__WEBPACK_IMPORTED_MODULE_1__[\"default\"], window.vueRouterUrl.model);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9KUy9tYWluLmluZGV4LmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vSlMvbWFpbi5pbmRleC5qcz81MmYyIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBzZXR1cCBmcm9tICcuL3NldHVwJztcclxuaW1wb3J0IHJvdXRlcyBmcm9tICcuL3JvdXRlcyc7XHJcblxyXG5zZXR1cChyb3V0ZXMsIHdpbmRvdy52dWVSb3V0ZXJVcmwubW9kZWwpOyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUVBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./JS/main.index.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _setup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setup */ \"./JS/setup.js\");\n/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ \"./JS/routes.js\");\n\n\nObject(_setup__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(_routes__WEBPACK_IMPORTED_MODULE_1__[\"orderListRoutes\"], window.vueRouterUrl.orderList);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9KUy9vcmRlckxpc3QuaW5kZXguanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9KUy9vcmRlckxpc3QuaW5kZXguanM/NDJkZiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgc2V0dXAgZnJvbSAnLi9zZXR1cCc7XHJcbmltcG9ydCB7IG9yZGVyTGlzdFJvdXRlcyB9IGZyb20gJy4vcm91dGVzJztcclxuXHJcbnNldHVwKG9yZGVyTGlzdFJvdXRlcywgd2luZG93LnZ1ZVJvdXRlclVybC5vcmRlckxpc3QpOyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUVBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./JS/orderList.index.js\n");
 
 /***/ }),
 

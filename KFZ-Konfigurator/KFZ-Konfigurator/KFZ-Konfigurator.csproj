@@ -297,8 +297,9 @@
     <Content Include="JS\constants.js" />
     <Content Include="JS\filters.js" />
     <Content Include="JS\helper.js" />
+    <Content Include="JS\setup.js" />
     <Content Include="JS\orderList.index.js" />
-    <Content Include="JS\index.js" />
+    <Content Include="JS\main.index.js" />
     <Content Include="JS\Localization\de-DE.js" />
     <Content Include="JS\Localization\en-US.js" />
     <Content Include="JS\routes.js" />
@@ -369,11 +370,13 @@
     <Content Include="package.json" />
     <Content Include="JS\Model\Model.vue" />
     <Content Include="JS\Exterior\Exterior.vue" />
-    <None Include="JS\App.vue" />
+    <Content Include="JS\App.vue" />
+    <None Include="JS\Configuration.vue" />
     <Content Include="JS\EngineSettings\EngineSettings.vue" />
     <Content Include="JS\Accessories\Accessories.vue" />
     <Content Include="JS\ConfigurationOverview\ConfigurationOverview.vue" />
     <Content Include="JS\ConfigurationOverview\ConfigurationDocument.vue" />
+    <Content Include="JS\OrderList\OrderList.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

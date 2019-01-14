@@ -1,15 +1,17 @@
 ﻿import App from './App';
+import Configuration from './Configuration';
 import Model from './Model/Model';
 import constants from './constants';
 import EngineSettings from './EngineSettings/EngineSettings';
 import Accessories from './Accessories/Accessories';
 import Exterior from './Exterior/Exterior';
 import ConfigurationOverview from './ConfigurationOverview/ConfigurationOverview';
+import OrderList from './OrderList/OrderList';
 
 export default [
     {
         path: '',
-        component: App,
+        component: Configuration,
         children: [
             {
                 name: constants.routes.model,
@@ -49,6 +51,23 @@ export default [
                 component: ConfigurationOverview,
                 meta: {
                     title: 'ConfigurationOverview'
+                }
+            }
+        ]
+    }
+];
+
+export const orderListRoutes = [
+    {
+        path: '',
+        component: App,
+        children: [
+            {
+                name: constants.routes.orderList,
+                path: '',
+                component: OrderList,
+                meta: {
+                    title: 'OrderList'
                 }
             }
         ]

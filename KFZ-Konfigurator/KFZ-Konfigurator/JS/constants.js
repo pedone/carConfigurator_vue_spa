@@ -4,7 +4,8 @@
         engineSettings: 'engineSettings',
         accessories: 'accessories',
         exterior: 'exterior',
-        configurationOverview: 'configurationOverview'
+        configurationOverview: 'configurationOverview',
+        orderList: 'orderList'
     },
     wheelDriveKind: {
         front: 0,
