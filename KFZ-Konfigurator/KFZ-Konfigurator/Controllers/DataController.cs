@@ -26,6 +26,28 @@ namespace KFZ_Konfigurator.Controllers
         }
 
         [HttpGet]
+        public JsonResult OrderList()
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var result = new
+                {
+                    PageCount = CalculatePageCount(context.Orders.Count()),
+                    Orders = context.Orders.Take(Constants.PageItemsCount).ToList()
+                    .Select(cur => new OrderViewModel(cur, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = cur.Guid })))
+                    .ToList()
+                };
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+        
+        private int CalculatePageCount(int itemCount)
+        {
+            return (int)Math.Ceiling((double)itemCount / Constants.PageItemsCount); ;
+        }
+
+        [HttpGet]
         public JsonResult ConfigurationData(int carModelId)
         {
             using (var context = new CarConfiguratorEntityContext())

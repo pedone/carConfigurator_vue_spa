@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import * as DataApi from '../Api/data.js';
+    import { getCarModelList } from '../Api/data.js';
     import { map as _map, uniqBy as _uniqBy } from 'lodash';
     import { saveViewModel } from '../../Scripts/app/helper.js';
 
@@ -56,7 +56,7 @@
         created: function () {
             /** @param {{Series: string}} data */
             this._buildSeriesList = (data) => _uniqBy(_map(data, cur => cur.Series), cur => cur);
-            DataApi.getCarModelList().then(data => {
+            getCarModelList().then(data => {
                 this.modelList = data;
                 this.seriesList = this._buildSeriesList(data);
             });

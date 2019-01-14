@@ -6,6 +6,14 @@
     });
 };
 
+export function getOrderList() {
+    return fetch('/Data/OrderList', {
+        method: 'get'
+    }).then(function (response) {
+        return response.json();
+    });
+};
+
 //TODO separate get for data that's not dependent on carModelId
 
 export function getConfigurationData(carModelId) {

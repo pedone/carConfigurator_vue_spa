@@ -40,7 +40,8 @@ namespace KFZ_Konfigurator.Controllers
             configuration.EngineSetting = context.EngineSettings.First(cur => cur.Id == data.engineSettings);
             configuration.Paint = context.Paints.First(cur => cur.Id == data.paint);
             configuration.Rims = context.Rims.First(cur => cur.Id == data.rims);
-            configuration.Accessories = context.Accessories.Where(cur => data.accessories.Contains(cur.Id)).ToList();
+            if (data.accessories != null)
+                configuration.Accessories = context.Accessories.Where(cur => data.accessories.Contains(cur.Id)).ToList();
 
             return configuration;
         }

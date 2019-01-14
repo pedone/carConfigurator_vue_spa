@@ -14,6 +14,15 @@
         rimsHeader: 'Rims',
         paintsHeader: 'Paint',
     },
+    orderListView: {
+        header: 'Orders',
+        carModelHeader: 'Model',
+        descriptionHeader: 'Description',
+        dateTimeHeader: 'Date',
+        basePriceHeader: 'Base Price',
+        extrasPriceHeader: 'Extras',
+        priceHeader: 'Price',
+    },
     configurationOverviewView: {
         header: 'Your Configuration',
         orderButton: 'Buy Your Configuration',
@@ -43,6 +52,8 @@
         no: 'No',
         from: 'from',
         rimSizeUnit: 'inch',
+        view: 'View',
+        cancel: 'Cancel',
     },
     technicalData: {
         consumption: 'Consumption',
