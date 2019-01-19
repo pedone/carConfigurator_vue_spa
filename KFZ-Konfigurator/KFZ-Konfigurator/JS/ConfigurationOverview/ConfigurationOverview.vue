@@ -2,11 +2,8 @@
     <div>
         <h2>{{ $t('configurationOverviewView.header') }}</h2>
 
-        <!--<div id="content">
-            @Html.Partial("_ConfigurationOverview", Model.Configuration)
-        </div>-->
-
-        <comfiguration-document></comfiguration-document>
+        <div v-if="isLoading">Loading...</div>
+        <configuration-document v-else v-bind:configuration="configuration"></configuration-document>
 
         <p>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#orderCollapse">{{ $t('configurationOverviewView.orderButton') }}</button>
@@ -57,21 +54,37 @@
 </template>
 
 <script>
-    import ComfigurationDocument from './ConfigurationDocument';
+    import ConfigurationDocument from '../ConfigurationDocument/ConfigurationDocument';
     import { map } from 'lodash';
+    import { mapActions } from 'vuex';
 
     export default {
         components: {
-            'comfiguration-document': ComfigurationDocument
+            'configuration-document': ConfigurationDocument
         },
         data() {
             return {
                 configurationDescription: '',
-                hasError: false
+                hasError: false,
+                configuration: null,
+                isLoading: false
             };
+        },
+        created() {
+            this.isLoading = true;
+            this.initConfigurationData({
+                carModelId: this.$route.params.id,
+                onSuccess: () => {
+                    this.configuration = this.$store.state.configuration;
+                    this.isLoading = false;
+                }
+            });
         },
         inject: ['antiForgeryToken'],
         methods: {
+            ...mapActions([
+                'initConfigurationData'
+            ]),
             placeOrder: function () {
                 //extract configuration ids
                 const config = this.$store.state.configuration;
@@ -94,7 +107,7 @@
                 }).done(
                     (data) => {
                         console.debug('order successfully placed');
-                        //TODO route to next page
+                        this.$router.push({ name: this.$store.state.constants.routes.orderOverview, params: { guid: data } });
                     })
                     .fail((error) => {
                         console.error('failed to place order: ' + error.responseText + ' (' + error.statusText + ')');

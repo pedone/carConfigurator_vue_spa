@@ -41,12 +41,60 @@ namespace KFZ_Konfigurator.Controllers
 
             }
         }
-        
+
+        [HttpGet]
+        public JsonResult LoadOrder(string guid)
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var order = context.Orders.FirstOrDefault(cur => cur.Guid == guid);
+                if (order == null)
+                    throw new ArgumentException($"order {guid} was not found");
+
+                return Json(new OrderOverviewPageViewModel(order, "", false), JsonRequestBehavior.AllowGet);
+            }
+        }
+
         private int CalculatePageCount(int itemCount)
         {
             return (int)Math.Ceiling((double)itemCount / Constants.PageItemsCount); ;
         }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult DeleteOrder(int id, int pageIndex)
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var toDelete = context.Orders.Find(id);
+                if (toDelete != null)
+                {
+                    toDelete.Configuration.Accessories.Clear();
+                    context.Orders.Remove(toDelete);
+                    context.SaveChanges();
+                }
 
+                //return the item that's next in line because everything after the deleted item is moving up
+                var newOrderItem = context.Orders.ToList().ElementAtOrDefault(pageIndex * Constants.PageItemsCount + (Constants.PageItemsCount - 1));
+                return Json(new
+                {
+                    NewPageCount = CalculatePageCount(context.Orders.Count()),
+                    NewItem = (newOrderItem != null ? new OrderViewModel(newOrderItem, Url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = newOrderItem.Guid })) : null)
+                });
+            }
+        }
+        
+        [HttpGet]
+        public JsonResult LoadOrderPage(int pageIndex)
+        {
+            using (var context = new CarConfiguratorEntityContext())
+            {
+                var orders = context.Orders.ToList().Skip(Constants.PageItemsCount * pageIndex).Take(Constants.PageItemsCount).ToList()
+                .Select(cur => new OrderViewModel(cur))
+                .ToList();
+                return Json(orders, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpGet]
         public JsonResult ConfigurationData(int carModelId)
         {

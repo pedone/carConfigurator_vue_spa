@@ -1,4 +1,4 @@
 ﻿import setup from './setup';
-import { orderListRoutes } from './routes';
+import { getOrderListRoutes } from './routes';
 
-setup(orderListRoutes, window.vueRouterUrl.orderList);
+setup(getOrderListRoutes(window.vueRouterUrl.orderList));

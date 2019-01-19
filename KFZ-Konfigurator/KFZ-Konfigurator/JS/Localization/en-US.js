@@ -22,6 +22,15 @@
         basePriceHeader: 'Base Price',
         extrasPriceHeader: 'Extras',
         priceHeader: 'Price',
+        cancelConfirmTitle: 'Cancel Order',
+        cancelConfirmText: 'Are you sure you want to cancel this order?',
+    },
+    orderOverviewView: {
+        header: 'Your Order',
+        orderSuccessfulHeader: 'Order successfully placed',
+        orderSuccessfulDescription_2: 'You can also ',
+        orderSuccessfulDescription_3: ' to view it later',
+        copyOrderLinkButton: 'copy a link to your order',
     },
     configurationOverviewView: {
         header: 'Your Configuration',
@@ -97,5 +106,13 @@
 export const numberFormats = {
     currency: {
         style: 'currency', currency: 'EUR'
+    }
+};
+
+export const dateTimeFormats = {
+    long: {
+        year: 'numeric', month: 'short', day: 'numeric',
+        weekday: 'short', hour: 'numeric', minute: 'numeric',
+        hour12: false
     }
 };

@@ -41,7 +41,7 @@
 
 <script>
     import { getCarModelList } from '../Api/data.js';
-    import { map as _map, uniqBy as _uniqBy } from 'lodash';
+    import { map, uniqBy } from 'lodash';
     import { saveViewModel } from '../../Scripts/app/helper.js';
 
     export default {
@@ -55,7 +55,7 @@
         inject: ['antiForgeryToken'],
         created: function () {
             /** @param {{Series: string}} data */
-            this._buildSeriesList = (data) => _uniqBy(_map(data, cur => cur.Series), cur => cur);
+            this._buildSeriesList = (data) => uniqBy(map(data, cur => cur.Series), cur => cur);
             getCarModelList().then(data => {
                 this.modelList = data;
                 this.seriesList = this._buildSeriesList(data);

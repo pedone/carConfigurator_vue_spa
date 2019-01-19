@@ -42,7 +42,7 @@
 
     export default {
         created: function () {
-            this.loadConfigurationData(this.$route.params.id);
+            this.initConfigurationData({ carModelId: this.$route.params.id });
         },
         computed: {
             selectedAccessories: {
@@ -63,7 +63,7 @@
                 'toggleSelectedAccessory'
             ]),
             ...mapActions([
-                'loadConfigurationData'
+                'initConfigurationData'
             ]),
             getAccessoriesByCategory(category) {
                 return _.filter(this.$store.state.configurationData.accessories, cur => cur.Category === category);

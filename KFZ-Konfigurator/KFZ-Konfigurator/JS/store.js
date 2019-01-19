@@ -59,7 +59,7 @@ export default function () {
             }
         },
         actions: {
-            loadConfigurationData({ commit, state, getters }, carModelId) {
+            initConfigurationData({ commit, state, getters }, { carModelId, onSuccess }) {
                 if (carModelId !== state.carModelId) {
                     commit('setCarModelId', carModelId);
                     getConfigurationData(carModelId).then(data => {
@@ -68,7 +68,12 @@ export default function () {
                         commit('setEngineSettings', getters.orderedDataEngineSettings[0]);
                         commit('selectPaint', find(state.configurationData.paints, cur => cur.IsDefault) || state.configurationData.paints[0])
                         commit('selectRim', find(state.configurationData.rims, cur => cur.IsDefault) || state.configurationData.rims[0])
+                        if (onSuccess) {
+                            onSuccess();
+                        }
                     });
+                } else if (onSuccess) {
+                    onSuccess();
                 }
             }
         }

@@ -17,3 +17,11 @@ export const numberFormats = {
         style: 'currency', currency: 'EUR'
     }
 };
+
+export const dateTimeFormats = {
+    long: {
+        year: 'numeric', month: 'short', day: 'numeric',
+        weekday: 'short', hour: 'numeric', minute: 'numeric',
+        hour12: false
+    }
+};

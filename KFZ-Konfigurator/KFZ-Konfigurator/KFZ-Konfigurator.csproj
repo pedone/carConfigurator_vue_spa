@@ -375,8 +375,9 @@
     <Content Include="JS\EngineSettings\EngineSettings.vue" />
     <Content Include="JS\Accessories\Accessories.vue" />
     <Content Include="JS\ConfigurationOverview\ConfigurationOverview.vue" />
-    <Content Include="JS\ConfigurationOverview\ConfigurationDocument.vue" />
+    <Content Include="JS\ConfigurationDocument\ConfigurationDocument.vue" />
     <Content Include="JS\OrderList\OrderList.vue" />
+    <Content Include="JS\OrderOverview\OrderOverview.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

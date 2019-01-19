@@ -23,3 +23,11 @@ export function getConfigurationData(carModelId) {
         return response.json();
     });
 }
+
+export function getOrderData(guid) {
+    return fetch('/Data/LoadOrder?guid=' + guid, {
+        method: 'get',
+    }).then(function (response) {
+        return response.json();
+    });
+}

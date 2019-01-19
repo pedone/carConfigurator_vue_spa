@@ -8,7 +8,7 @@ import { getAntiForgeryToken } from './helper';
 import * as enUS from './Localization/en-US';
 import * as deDE from './Localization/de-DE';
 
-export default function (routes, routeBase) {
+export default function (routes) {
     Vue.config.productionTip = false;
     Vue.use(VueRouter);
     Vue.use(VueI18n);
@@ -16,7 +16,6 @@ export default function (routes, routeBase) {
 
     const router = new VueRouter({
         routes,
-        base: routeBase,
         mode: 'history'
     });
     router.beforeEach((to, _from, next) => {
@@ -36,6 +35,10 @@ export default function (routes, routeBase) {
         numberFormats: {
             enUS: enUS.numberFormats,
             deDE: deDE.numberFormats
+        },
+        dateTimeFormats: {
+            enUS: enUS.dateTimeFormats,
+            deDE: deDE.dateTimeFormats
         }
     });
 

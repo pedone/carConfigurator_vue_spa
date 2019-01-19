@@ -58,7 +58,7 @@
 
     export default {
         created: function () {
-            this.loadConfigurationData(this.$route.params.id);
+            this.initConfigurationData({ carModelId: this.$route.params.id });
         },
         computed: {
             ...mapGetters([
@@ -70,7 +70,7 @@
                 'setEngineSettings'
             ]),
             ...mapActions([
-                'loadConfigurationData'
+                'initConfigurationData'
             ])
         }
     }

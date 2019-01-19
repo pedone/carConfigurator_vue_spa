@@ -5,7 +5,8 @@
         accessories: 'accessories',
         exterior: 'exterior',
         configurationOverview: 'configurationOverview',
-        orderList: 'orderList'
+        orderList: 'orderList',
+        orderOverview: 'orderOverview'
     },
     wheelDriveKind: {
         front: 0,

@@ -1,4 +1,4 @@
 ﻿import setup from './setup';
-import routes from './routes';
+import getRoutes from './routes';
 
-setup(routes, window.vueRouterUrl.model);
+setup(getRoutes(window.vueRouterUrl.model));

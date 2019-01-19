@@ -90,7 +90,7 @@ namespace KFZ_Konfigurator.Controllers
                 Log.Info($"configuration for order {newOrder.Id} was created");
                 Log.Info($"a new order with id '{newOrder.Id}' was successfully placed");
 
-                return Url.RouteUrl(Constants.Routes.ViewOrderAfterPlaced, new { orderGuid = newOrder.Guid });
+                return newOrder.Guid;
             }
         }
     }
