@@ -130,7 +130,20 @@ namespace KFZ_Konfigurator.Controllers
                 //paintCategories
                 var paintCategories = context.Categories.OfType<PaintCategory>().Select(cur => cur.Name).ToList();
 
-                return Json(new { accessories, engineSettings, paints, rims, accessoryCategories, paintCategories }, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    model = new {
+                        series = carModel.SeriesCategory.Name,
+                        bodyType = carModel.BodyCategory.Name,
+                        year = carModel.Year
+                    },
+                    accessories,
+                    engineSettings,
+                    paints,
+                    rims,
+                    accessoryCategories,
+                    paintCategories
+                }, JsonRequestBehavior.AllowGet);
             }
         }
     }

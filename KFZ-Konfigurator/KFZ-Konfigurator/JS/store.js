@@ -28,6 +28,11 @@ export default function () {
             },
             orderedConfigurationAccessories(state) {
                 return orderBy(state.configuration.accessories, cur => cur.Category);
+            },
+            modelName(state) {
+                if (state.configurationData.model) {
+                    return state.configurationData.model.series + ' ' + state.configurationData.model.bodyType + ' ' + state.configurationData.model.year;
+                }
             }
         },
         mutations: {
