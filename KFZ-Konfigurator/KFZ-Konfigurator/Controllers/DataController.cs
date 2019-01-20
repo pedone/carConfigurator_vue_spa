@@ -53,7 +53,7 @@ namespace KFZ_Konfigurator.Controllers
                 if (order == null)
                     throw new ArgumentException($"order {guid} was not found");
 
-                return Json(new OrderOverviewPageViewModel(order, "", false), JsonRequestBehavior.AllowGet);
+                return Json(new OrderOverviewPageViewModel(order, false), JsonRequestBehavior.AllowGet);
             }
         }
 

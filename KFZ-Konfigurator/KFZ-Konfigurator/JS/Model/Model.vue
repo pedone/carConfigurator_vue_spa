@@ -42,7 +42,7 @@
 <script>
     import { getCarModelList } from '../Api/data.js';
     import { map, uniqBy } from 'lodash';
-    import { saveViewModel } from '../../Scripts/app/helper.js';
+    import { saveViewModel } from '../helper.js';
 
     export default {
         data: function () {

@@ -8,7 +8,6 @@ namespace KFZ_Konfigurator
     public static class Constants
     {
         public const double KW_to_PS = 1.35962f;
-        public const string CurrencyFormat = "{0:N0} EUR";
         public const int PageItemsCount = 10;
 
         public static class Routes
