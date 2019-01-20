@@ -278,7 +278,6 @@
     <Compile Include="ViewModels\OrderList\OrderViewModel.cs" />
     <Compile Include="ViewModels\RimViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\ConfigurationViewKind.cs" />
     <Compile Include="ViewModels\EngineSettings\EngineSettingsViewModel.cs" />
     <Compile Include="ViewModels\EngineSettings\EngineViewModel.cs" />
     <Compile Include="ViewModels\PaintViewModel.cs" />
@@ -421,14 +420,7 @@
     <Content Include="Scripts\umd\popper-utils.js.map" />
     <Content Include="Scripts\README.md" />
     <Content Include="Views\Model\Index.cshtml" />
-    <Content Include="Views\Shared\_ConfigurationLayout.cshtml" />
-    <Content Include="Views\EngineSettings\Index.cshtml" />
-    <Content Include="Views\Accessories\Index.cshtml" />
-    <Content Include="Views\Exterior\Index.cshtml" />
-    <Content Include="Views\ConfigurationOverview\Index.cshtml" />
     <Content Include="Views\OrderList\Index.cshtml" />
-    <Content Include="Views\OrderOverview\Index.cshtml" />
-    <Content Include="Views\ConfigurationOverview\_ConfigurationOverview.cshtml" />
     <Content Include="Views\Shared\_VueLayout.cshtml" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
