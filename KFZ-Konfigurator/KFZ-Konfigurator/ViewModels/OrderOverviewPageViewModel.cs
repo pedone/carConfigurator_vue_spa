@@ -1,6 +1,5 @@
 ﻿using KFZ_Konfigurator.Helper;
 using KFZ_Konfigurator.Models;
-using KFZ_Konfigurator.Resources.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

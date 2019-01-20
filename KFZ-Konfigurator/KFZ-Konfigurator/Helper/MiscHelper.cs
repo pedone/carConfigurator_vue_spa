@@ -11,11 +11,6 @@ namespace KFZ_Konfigurator.Helper
 {
     public static class MiscHelper
     {
-        public static string If(bool conditional, string data)
-        {
-            return conditional ? data : null;
-        }
-
         public static string GenerateShortGuid()
         {
             var result = new StringBuilder(Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
