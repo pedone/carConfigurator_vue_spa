@@ -28,31 +28,5 @@ namespace KFZ_Konfigurator.ViewModels
             RimId = -1;
             AccessoryIds = null;
         }
-
-        public bool IsValid(int? id, out string error)
-        {
-            error = null;
-            if (SessionData.ActiveConfiguration.CarModel == null)
-            {
-                error = "car model is not set";
-            }
-            else if (id.HasValue && SessionData.ActiveConfiguration.CarModel.Id != id.Value)
-            {
-                error = "selected car model does not match requested model";
-            }
-            else if (EngineSettingsId == -1)
-            {
-                error = "engine settings id not set";
-            }
-            else if (PaintId == -1)
-            {
-                error = "paint id not set";
-            }
-            else if (RimId == -1)
-            {
-                error = "rim id not set";
-            }
-            return error == null;
-        }
     }
 }

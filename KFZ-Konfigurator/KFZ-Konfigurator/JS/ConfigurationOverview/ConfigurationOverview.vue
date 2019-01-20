@@ -100,7 +100,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/ConfigurationOverview/PlaceOrder',
+                    url: '/Data/PlaceOrder',
                     data: data,
                     contentType: 'application/x-www-form-urlencoded',
                     dataType: 'text'

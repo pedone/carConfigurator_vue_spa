@@ -171,15 +171,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\AccessoriesController.cs" />
-    <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ConfigurationOverviewController.cs" />
-    <Compile Include="Controllers\ExteriorController.cs" />
-    <Compile Include="Controllers\ModelController.cs" />
-    <Compile Include="Controllers\EngineSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\OrderListController.cs" />
-    <Compile Include="Controllers\OrderOverviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,16 +256,10 @@
       <DependentUpon>en-US.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Localization\LocalizationManager.cs" />
-    <Compile Include="SessionData.cs" />
-    <Compile Include="ViewModels\Accessories\AccessoriesPageViewModel.cs" />
     <Compile Include="ViewModels\Accessories\AccessoryViewModel.cs" />
     <Compile Include="ViewModels\Model\CarModelPageViewModel.cs" />
     <Compile Include="ViewModels\Model\CarModelViewModel.cs" />
-    <Compile Include="ViewModels\ConfigurationBaseViewModel.cs" />
-    <Compile Include="ViewModels\ConfigurationOverview\ConfigurationOverviewPageViewModel.cs" />
     <Compile Include="ViewModels\ConfigurationOverview\ConfigurationViewModel.cs" />
-    <Compile Include="ViewModels\EngineSettings\EngineSettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\Exterior\ExteriorPageViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModelBase.cs" />
     <Compile Include="ViewModels\OrderList\OrderListPageViewModel.cs" />
     <Compile Include="ViewModels\OrderOverviewPageViewModel.cs" />

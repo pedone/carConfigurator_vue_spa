@@ -15,10 +15,9 @@ namespace KFZ_Konfigurator.ViewModels
         public string Description { get; }
         public double BasePrice { get; }
         public double ExtrasPrice { get; }
-        public string LinkUrl { get; }
         public string DateTime { get; }
 
-        public OrderViewModel(Order model, string orderLink = "")
+        public OrderViewModel(Order model)
             : base(model.Id, model.BasePrice + model.ExtrasPrice)
         {
             var carModel = model.Configuration.EngineSetting.CarModel;

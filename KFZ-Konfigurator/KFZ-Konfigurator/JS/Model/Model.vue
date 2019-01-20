@@ -16,10 +16,10 @@
             </div>
         </div>
         <div class="row container">
-            <a v-for="item in modelList"
-               class="card mb-2 col-md-4 rounded-0 car-model-link"
-               v-show="curModelFilter === item.Series || isModelFilterEmpty"
-               @click="selectCarModel(item.Id)">
+            <router-link v-for="item in modelList"
+                         class="card mb-2 col-md-4 rounded-0 car-model-link"
+                         v-show="curModelFilter === item.Series || isModelFilterEmpty"
+                         v-bind:to="{ name: $store.state.constants.routes.engineSettings, params: { id: item.Id }}">
                 <div class="card-body">
                     <h5 class="card-title">{{item.Series}} {{item.BodyType}} {{item.Year}}</h5>
                     <h6 class="card-subtitle">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </router-link>
         </div>
     </div>
 </template>
@@ -71,18 +71,6 @@
                 if (filter !== this.curModelFilter) {
                     this.curModelFilter = filter || '';
                 }
-            },
-            selectCarModel: function (id) {
-                saveViewModel('/Model/SetCarModel', id, this.antiForgeryToken)
-                    .done(() => {
-                        this.$router.push({ name: this.$store.state.constants.routes.engineSettings, params: { id: id } });
-                    })
-                    .fail((error) => {
-                        console.error('failed to set car model: ' + error.responseText + ' (' + error.statusText + ')');
-                        console.debug(JSON.stringify(error));
-                        // TODO randomly triggered, maybe because of antiForgeryValidation
-                        //alert('something went wrong. see console for details');
-                    });
             }
         }
     }
