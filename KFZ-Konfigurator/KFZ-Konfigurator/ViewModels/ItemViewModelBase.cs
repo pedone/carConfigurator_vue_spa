@@ -4,7 +4,6 @@ namespace KFZ_Konfigurator.ViewModels
 {
     public abstract class ItemViewModelBase : ViewModelBase
     {
-        [DisplayFormat(DataFormatString = Constants.CurrencyFormat)]
         public double Price { get; }
         public int Id { get; }
         public bool IsSelected { get; set; }

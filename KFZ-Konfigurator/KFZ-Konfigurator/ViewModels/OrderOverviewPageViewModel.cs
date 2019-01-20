@@ -16,11 +16,10 @@ namespace KFZ_Konfigurator.ViewModels
         public double ExtrasPrice { get; }
         public string Description { get; }
         public DateTime DateTime { get; }
-        public string OrderLink { get; }
         public bool OrderSuccess { get; }
         public ConfigurationViewModel Configuration { get; }
 
-        public OrderOverviewPageViewModel(Order model, string orderLink, bool orderSuccess = false)
+        public OrderOverviewPageViewModel(Order model, bool orderSuccess = false)
             : base(model.Id, model.BasePrice + model.ExtrasPrice)
         {
             var carModel = model.Configuration.EngineSetting.CarModel;
@@ -30,7 +29,6 @@ namespace KFZ_Konfigurator.ViewModels
             ExtrasPrice = model.ExtrasPrice;
             Description = model.Description;
             DateTime = model.DateTime;
-            OrderLink = orderLink;
             OrderSuccess = orderSuccess;
             Configuration = new ConfigurationViewModel(model.Configuration);
         }

@@ -25,11 +25,5 @@ namespace KFZ_Konfigurator.Helper
 
             return result.ToString().TrimEnd('=');
         }
-
-        public static string GenerateOrderLink(HttpRequestBase request, UrlHelper url, string guid)
-        {
-            var projectBaseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, url.Content("~"));
-            return new Uri(new Uri(projectBaseUrl), url.RouteUrl(Constants.Routes.ViewOrder, new { orderGuid = guid })).AbsoluteUri;
-        }
     }
 }
