@@ -98,19 +98,11 @@
         props: ['configuration'],
         computed: {
             ...mapGetters([
-                'orderedConfigurationAccessories'
-            ]),
-            basePrice() {
-                return this.configuration.engineSettings.Price;
-            },
-            extrasPrice() {
-                /** @type {number} */
-                const accessoriesPrice = _.reduce(this.configuration.accessories, (memo, cur) => memo + cur.Price, 0);
-                return accessoriesPrice + this.configuration.paint.Price + this.configuration.rims.Price;
-            },
-            fullPrice() {
-                return this.basePrice + this.extrasPrice;
-            },
+                'orderedConfigurationAccessories',
+                'basePrice',
+                'extrasPrice',
+                'fullPrice',
+            ])
         },
         methods: {
             ...mapActions([

@@ -1,7 +1,7 @@
 ﻿import Vuex from 'vuex';
 import { getConfigurationData } from './Api/data';
 import constants from './constants';
-import { orderBy, find } from 'lodash';
+import { orderBy, find, reduce } from 'lodash';
 
 export default function () {
     return new Vuex.Store({
@@ -33,6 +33,26 @@ export default function () {
                 if (state.configurationData.model) {
                     return state.configurationData.model.series + ' ' + state.configurationData.model.bodyType + ' ' + state.configurationData.model.year;
                 }
+            },
+            basePrice(state) {
+                return (state.configuration.engineSettings && state.configuration.engineSettings.Price) || 0;
+            },
+            extrasPrice(state) {
+                if (state.configuration.accessories.length === 0) {
+                    return 0;
+                }
+
+                /** @type {number} */
+                const accessoriesPrice = reduce(state.configuration.accessories, (memo, cur) => memo + cur.Price, 0);
+                return accessoriesPrice + state.configuration.paint.Price + state.configuration.rims.Price;
+            },
+            fullPrice(_state, getters) {
+                return getters.basePrice + getters.extrasPrice;
+            },
+            isConfigurationLoaded(state) {
+                return state.configuration.engineSettings &&
+                    state.configuration.paint &&
+                    state.configuration.rims;
             }
         },
         mutations: {

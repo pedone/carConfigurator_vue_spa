@@ -378,6 +378,7 @@
     <Content Include="JS\ConfigurationDocument\ConfigurationDocument.vue" />
     <Content Include="JS\OrderList\OrderList.vue" />
     <Content Include="JS\OrderOverview\OrderOverview.vue" />
+    <Content Include="JS\CartOverview\CartOverview.vue" />
     <None Include="Properties\PublishProfiles\KFZ-Konfigurator20181127095945 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

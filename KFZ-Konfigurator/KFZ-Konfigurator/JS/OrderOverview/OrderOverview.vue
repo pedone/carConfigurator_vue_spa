@@ -66,7 +66,7 @@
                     description: data.Description,
                     dateTime: new Date(parseInt(data.DateTime.substr(6))), // parse the format /Date(1547918048320)/
                     model: data.Model,
-                    link: this.$router.resolve({ to: this.$store.state.constants.routes.orderOverview }).href
+                    link: window.serverUrl + this.$router.resolve({ to: this.$store.state.constants.routes.orderOverview }).href.substr(1)
                 };
                 this.isLoading = false;
             });

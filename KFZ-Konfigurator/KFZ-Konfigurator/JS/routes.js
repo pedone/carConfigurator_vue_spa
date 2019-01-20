@@ -58,12 +58,18 @@ export default function (baseRoute) {
             ],
         },
         {
-            name: constants.routes.orderOverview,
-            path: '/orders/view/:guid',
-            component: OrderOverview,
-            meta: {
-                orderSuccess: true
-            }
+            path: '',
+            component: App,
+            children: [
+                {
+                    path: '/orders/view/:guid',
+                    name: constants.routes.orderOverview,
+                    component: OrderOverview,
+                    meta: {
+                        orderSuccess: true
+                    }
+                }
+            ]
         }
     ];
 };

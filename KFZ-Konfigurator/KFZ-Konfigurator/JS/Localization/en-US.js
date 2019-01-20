@@ -45,6 +45,15 @@
         header: 'Choose your model',
         filterAll: 'All',
     },
+    cartOverviewView: {
+        extrasHeader: 'Extras',
+        paintHeader: 'Paint',
+        rimsHeader: 'Rims',
+        basePriceLabel: 'Base Price',
+        extrasPriceLabel: 'Extras Price',
+        fullPriceLabel: 'Price',
+        goToOverview: 'Show Overview',
+    },
     exteriorView: {
         paintsHeader: 'Paint',
         rimsHeader: 'Rims',
@@ -63,6 +72,7 @@
         rimSizeUnit: 'inch',
         view: 'View',
         cancel: 'Cancel',
+        productTitle: 'Car Configurator',
     },
     technicalData: {
         consumption: 'Consumption',

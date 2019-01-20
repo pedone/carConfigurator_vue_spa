@@ -1,32 +1,47 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    var productTitle = LocalizationManager.Localize("General_ProductTitle");
 }
 
-@RenderBody()
-
-@section ConfigurationHeader {
-    @RenderSection("ConfigurationHeader", required: false)
-}
-
-@section CartOverview {
-    @RenderSection("CartOverview", required: false)
-}
-
-@section headerScripts {
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     @{
         var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
         var serverUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
         var controllerUrl = Url.Content("~") + controllerName;
     }
     <script type="text/javascript">
-        @*window.ServerUrl = '@serverUrl';*@
+        window.serverUrl = '@serverUrl';
         window.vueRouterUrl = {
             model: '@Url.RouteUrl(Constants.Routes.ModelOverview)',
             orderList: '@Url.RouteUrl(Constants.Routes.OrderList)',
         };
     </script>
-}
+</head>
+<body>
+    <nav class="navbar bg-light navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+            @Html.ActionLink(productTitle, "Index", "Home", null, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarToggleContent">
+                <a href="@Url.RouteUrl(Constants.Routes.Home)" class="nav-item nav-link active">@LocalizationManager.Localize("Layout_Home_Link")</a>
+                <a href="@Url.RouteUrl(Constants.Routes.OrderList)" class="nav-item nav-link">@LocalizationManager.Localize("Layout_OrderList_Link")</a>
+            </div>
+        </div>
+    </nav>
 
-@section scripts {
+    @Html.AntiForgeryToken()
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-}
+</body>
+</html>

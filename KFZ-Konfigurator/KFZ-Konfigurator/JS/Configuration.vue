@@ -42,14 +42,32 @@
                 </div>
             </div>
         </div>
-        <router-view></router-view>
+
+        <div class="container body-content">
+            <div class="row align-items-md-start">
+                <div class="col pt-2">
+                    <router-view></router-view>
+                </div>
+                <div class="col-md-auto sticky-top sticky-top-offset mt-2">
+                    <cart-overview v-if="$route.name !== $store.state.constants.routes.model && isConfigurationLoaded"></cart-overview>
+                </div>
+            </div>
+            <hr />
+            <footer>
+                <p>&copy; {{ new Date().getFullYear() + ' - ' + $t('general.productTitle') }}</p>
+            </footer>
+        </div>
     </div>
 </template>
 
 <script>
     import { mapGetters } from 'vuex';
+    import CartOverview from './CartOverview/CartOverview';
 
     export default {
+        components: {
+            'cart-overview': CartOverview
+        },
         data() {
             return {
                 headerImages: {
@@ -64,7 +82,8 @@
         },
         computed: {
             ...mapGetters([
-                'modelName'
+                'modelName',
+                'isConfigurationLoaded'
             ]),
             activeHeaderImage() {
                 return this.headerImages[this.$route.name] || Object.values(this.headerImages)[0];
